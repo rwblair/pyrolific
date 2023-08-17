@@ -30,7 +30,8 @@ class StudyShort:
         reward (Union[Unset, float]): How much are you going to pay the participants in cents. We use the currency of
             your account
         total_cost (Union[Unset, float]): Total cost of the study including fees
-        publish_at (Union[Unset, None, datetime.datetime]): Date time when the study was first published
+        published_at (Union[Unset, None, datetime.datetime]): Date time when the study was published.
+        publish_at (Union[Unset, None, datetime.datetime]): Date time when the study was scheduled to be published.
         date_created (Union[Unset, datetime.datetime]): Date time when the study was created
     """
 
@@ -44,6 +45,7 @@ class StudyShort:
     number_of_submissions: Union[Unset, float] = UNSET
     reward: Union[Unset, float] = UNSET
     total_cost: Union[Unset, float] = UNSET
+    published_at: Union[Unset, None, datetime.datetime] = UNSET
     publish_at: Union[Unset, None, datetime.datetime] = UNSET
     date_created: Union[Unset, datetime.datetime] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
@@ -65,6 +67,10 @@ class StudyShort:
         number_of_submissions = self.number_of_submissions
         reward = self.reward
         total_cost = self.total_cost
+        published_at: Union[Unset, None, str] = UNSET
+        if not isinstance(self.published_at, Unset):
+            published_at = self.published_at.isoformat() if self.published_at else None
+
         publish_at: Union[Unset, None, str] = UNSET
         if not isinstance(self.publish_at, Unset):
             publish_at = self.publish_at.isoformat() if self.publish_at else None
@@ -97,6 +103,8 @@ class StudyShort:
             field_dict["reward"] = reward
         if total_cost is not UNSET:
             field_dict["total_cost"] = total_cost
+        if published_at is not UNSET:
+            field_dict["published_at"] = published_at
         if publish_at is not UNSET:
             field_dict["publish_at"] = publish_at
         if date_created is not UNSET:
@@ -137,6 +145,15 @@ class StudyShort:
 
         total_cost = d.pop("total_cost", UNSET)
 
+        _published_at = d.pop("published_at", UNSET)
+        published_at: Union[Unset, None, datetime.datetime]
+        if _published_at is None:
+            published_at = None
+        elif isinstance(_published_at, Unset):
+            published_at = UNSET
+        else:
+            published_at = isoparse(_published_at)
+
         _publish_at = d.pop("publish_at", UNSET)
         publish_at: Union[Unset, None, datetime.datetime]
         if _publish_at is None:
@@ -164,6 +181,7 @@ class StudyShort:
             number_of_submissions=number_of_submissions,
             reward=reward,
             total_cost=total_cost,
+            published_at=published_at,
             publish_at=publish_at,
             date_created=date_created,
         )

@@ -20,6 +20,7 @@ class ParticipantGroup:
         project_id (Union[Unset, str]): The id of the project the participant group belongs to Example:
             5e9b9c9b0f9c9a0001b0b1f4.
         participant_count (Union[Unset, int]): The number of participants in the participant group Example: 10.
+        is_deleted (Union[Unset, bool]): Whether the participant group has been deleted
         feeder_studies (Union[Unset, List['ParticipantGroupFeederStudiesItem']]): Details of all studies which are
             configured to modify the participants in this group through completion codes.
     """
@@ -28,6 +29,7 @@ class ParticipantGroup:
     name: Union[Unset, str] = UNSET
     project_id: Union[Unset, str] = UNSET
     participant_count: Union[Unset, int] = UNSET
+    is_deleted: Union[Unset, bool] = UNSET
     feeder_studies: Union[Unset, List["ParticipantGroupFeederStudiesItem"]] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
@@ -36,6 +38,7 @@ class ParticipantGroup:
         name = self.name
         project_id = self.project_id
         participant_count = self.participant_count
+        is_deleted = self.is_deleted
         feeder_studies: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.feeder_studies, Unset):
             feeder_studies = []
@@ -55,6 +58,8 @@ class ParticipantGroup:
             field_dict["project_id"] = project_id
         if participant_count is not UNSET:
             field_dict["participant_count"] = participant_count
+        if is_deleted is not UNSET:
+            field_dict["is_deleted"] = is_deleted
         if feeder_studies is not UNSET:
             field_dict["feeder_studies"] = feeder_studies
 
@@ -73,6 +78,8 @@ class ParticipantGroup:
 
         participant_count = d.pop("participant_count", UNSET)
 
+        is_deleted = d.pop("is_deleted", UNSET)
+
         feeder_studies = []
         _feeder_studies = d.pop("feeder_studies", UNSET)
         for feeder_studies_item_data in _feeder_studies or []:
@@ -85,6 +92,7 @@ class ParticipantGroup:
             name=name,
             project_id=project_id,
             participant_count=participant_count,
+            is_deleted=is_deleted,
             feeder_studies=feeder_studies,
         )
 

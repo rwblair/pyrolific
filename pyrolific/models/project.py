@@ -5,7 +5,6 @@ import attr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.project_studies_item import ProjectStudiesItem
     from ..models.workspace_user import WorkspaceUser
 
 
@@ -18,8 +17,8 @@ class Project:
     Example:
         {'id': '62fce6fff0a78eb4f3ebc09c', 'title': 'My project', 'description': 'This project is for...', 'owner':
             '60a42f4c693c29420793cb73', 'users': [{'id': '60a42f4c693c29420793cb73', 'name': 'Joe Soap', 'email':
-            'joe.soap@gmail.com', 'roles': ['PROJECT_EDITOR']}], 'studies': [{'id': '60a42f4c693c29420793cb73', 'name':
-            'Study about Pokemon'}], 'workspace': '60a42f4c693c29420793cb73', 'naivety_distribution_rate': 0.5}
+            'joe.soap@gmail.com', 'roles': ['PROJECT_EDITOR']}], 'workspace': '60a42f4c693c29420793cb73',
+            'naivety_distribution_rate': 0.5}
 
     Attributes:
         id (str): Project id. It is created by Prolific.
@@ -27,7 +26,6 @@ class Project:
         description (Union[Unset, str]): What is this project used for
         owner (Union[Unset, str]): User id of the creator of the project. It is created by Prolific.
         users (Union[Unset, List['WorkspaceUser']]): Data for all users who have access to this project
-        studies (Union[Unset, List['ProjectStudiesItem']]): Data for all the studies in this project
         workspace (Union[Unset, str]): Id of the workspace this project is in. This is created by Prolific.
         naivety_distribution_rate (Union[Unset, None, float]): The rate at which the studies within this project are
             distributed.
@@ -38,7 +36,6 @@ class Project:
     description: Union[Unset, str] = UNSET
     owner: Union[Unset, str] = UNSET
     users: Union[Unset, List["WorkspaceUser"]] = UNSET
-    studies: Union[Unset, List["ProjectStudiesItem"]] = UNSET
     workspace: Union[Unset, str] = UNSET
     naivety_distribution_rate: Union[Unset, None, float] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
@@ -55,14 +52,6 @@ class Project:
                 users_item = users_item_data.to_dict()
 
                 users.append(users_item)
-
-        studies: Union[Unset, List[Dict[str, Any]]] = UNSET
-        if not isinstance(self.studies, Unset):
-            studies = []
-            for studies_item_data in self.studies:
-                studies_item = studies_item_data.to_dict()
-
-                studies.append(studies_item)
 
         workspace = self.workspace
         naivety_distribution_rate = self.naivety_distribution_rate
@@ -81,8 +70,6 @@ class Project:
             field_dict["owner"] = owner
         if users is not UNSET:
             field_dict["users"] = users
-        if studies is not UNSET:
-            field_dict["studies"] = studies
         if workspace is not UNSET:
             field_dict["workspace"] = workspace
         if naivety_distribution_rate is not UNSET:
@@ -92,7 +79,6 @@ class Project:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.project_studies_item import ProjectStudiesItem
         from ..models.workspace_user import WorkspaceUser
 
         d = src_dict.copy()
@@ -111,13 +97,6 @@ class Project:
 
             users.append(users_item)
 
-        studies = []
-        _studies = d.pop("studies", UNSET)
-        for studies_item_data in _studies or []:
-            studies_item = ProjectStudiesItem.from_dict(studies_item_data)
-
-            studies.append(studies_item)
-
         workspace = d.pop("workspace", UNSET)
 
         naivety_distribution_rate = d.pop("naivety_distribution_rate", UNSET)
@@ -128,7 +107,6 @@ class Project:
             description=description,
             owner=owner,
             users=users,
-            studies=studies,
             workspace=workspace,
             naivety_distribution_rate=naivety_distribution_rate,
         )

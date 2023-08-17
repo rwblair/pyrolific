@@ -15,11 +15,11 @@ if TYPE_CHECKING:
     from ..models.select_filter import SelectFilter
 
 
-T = TypeVar("T", bound="CreateStudy")
+T = TypeVar("T", bound="BaseStudy")
 
 
 @attr.s(auto_attribs=True)
-class CreateStudy:
+class BaseStudy:
     r"""
     Attributes:
         name (Union[Unset, str]): Public name or title of the study
@@ -352,7 +352,7 @@ class CreateStudy:
 
         metadata = d.pop("metadata", UNSET)
 
-        create_study = cls(
+        base_study = cls(
             name=name,
             internal_name=internal_name,
             description=description,
@@ -375,8 +375,8 @@ class CreateStudy:
             metadata=metadata,
         )
 
-        create_study.additional_properties = d
-        return create_study
+        base_study.additional_properties = d
+        return base_study
 
     @property
     def additional_keys(self) -> List[str]:

@@ -16,7 +16,7 @@ class CreateWorkspace:
             naivety of the participants.
 
             If not defined, by default Prolific calculates the best rate for most studies
-            taking into account the `eligibility_requirements` and the `total_available_places` needed for this study.
+            taking into account the `filters` and the `total_available_places` needed for this study.
 
             Use 0 if your priority is speed. When this property is set to 0 all eligible participants will have access
             to your study at the same time, without any prioritization.
