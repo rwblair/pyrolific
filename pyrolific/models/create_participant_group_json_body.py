@@ -1,30 +1,43 @@
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from ..types import UNSET, Unset
+from typing import cast, List
+
 
 T = TypeVar("T", bound="CreateParticipantGroupJsonBody")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class CreateParticipantGroupJsonBody:
     """
     Attributes:
-        project_id (str): The id of the project to create the participant group in Example: 5e9b9c9b0f9c9a0001b0b1f4.
+        workspace_id (str): The id of the workspace to create the participant group in
         name (str): The name of the participant group Example: Group 1.
+        description (Union[Unset, str]): A description of the participant group Example: Participants with confirmed
+            special dietary requirements..
         participant_ids (Union[Unset, List[str]]): The ids of participants to be initially added to the group Example:
             ['5e9b9c9b0f9c9a0001b0b1f4', '5e9b9c9b0f9c9a0001b0b1f5', '5e9b9c9b0f9c9a0001b0b1f6'].
     """
 
-    project_id: str
+    workspace_id: str
     name: str
+    description: Union[Unset, str] = UNSET
     participant_ids: Union[Unset, List[str]] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        project_id = self.project_id
+        workspace_id = self.workspace_id
         name = self.name
+        description = self.description
         participant_ids: Union[Unset, List[str]] = UNSET
         if not isinstance(self.participant_ids, Unset):
             participant_ids = self.participant_ids
@@ -33,10 +46,12 @@ class CreateParticipantGroupJsonBody:
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "project_id": project_id,
+                "workspace_id": workspace_id,
                 "name": name,
             }
         )
+        if description is not UNSET:
+            field_dict["description"] = description
         if participant_ids is not UNSET:
             field_dict["participant_ids"] = participant_ids
 
@@ -45,15 +60,18 @@ class CreateParticipantGroupJsonBody:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        project_id = d.pop("project_id")
+        workspace_id = d.pop("workspace_id")
 
         name = d.pop("name")
+
+        description = d.pop("description", UNSET)
 
         participant_ids = cast(List[str], d.pop("participant_ids", UNSET))
 
         create_participant_group_json_body = cls(
-            project_id=project_id,
+            workspace_id=workspace_id,
             name=name,
+            description=description,
             participant_ids=participant_ids,
         )
 

@@ -1,18 +1,26 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
 
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from typing import Dict
 from ..models.subscription_event_status import SubscriptionEventStatus
+from typing import Union
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    pass
+    from ..models.subscription_event_payload import SubscriptionEventPayload
 
 
 T = TypeVar("T", bound="SubscriptionEvent")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class SubscriptionEvent:
     """
     Attributes:
@@ -35,7 +43,7 @@ class SubscriptionEvent:
     status: Union[Unset, SubscriptionEventStatus] = UNSET
     target_url: Union[Unset, str] = UNSET
     payload: Union[Unset, None, "SubscriptionEventPayload"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id

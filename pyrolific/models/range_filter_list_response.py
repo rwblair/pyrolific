@@ -1,15 +1,26 @@
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
 
-from ..models.filter_list_attributes_type import FilterListAttributesType
-from ..models.range_filter_list_attributes_data_type import RangeFilterListAttributesDataType
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+from typing import Union
+from ..models.range_filter_list_attributes_data_type import (
+    RangeFilterListAttributesDataType,
+)
+from ..models.filter_list_attributes_type import FilterListAttributesType
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="RangeFilterListResponse")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class RangeFilterListResponse:
     """
     Attributes:
@@ -34,7 +45,7 @@ class RangeFilterListResponse:
     min_: Union[Unset, int, str] = UNSET
     max_: Union[Unset, int, str] = UNSET
     data_type: Union[Unset, RangeFilterListAttributesDataType] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         filter_id = self.filter_id

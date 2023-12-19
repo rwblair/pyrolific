@@ -1,17 +1,31 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
 
-from ..models.base_study_completion_codes_item_code_type import BaseStudyCompletionCodesItemCodeType
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+
+from typing import Union
+from typing import Dict
+from ..models.base_study_completion_codes_item_code_type import (
+    BaseStudyCompletionCodesItemCodeType,
+)
+from typing import List
 
 if TYPE_CHECKING:
-    pass
+    from ..models.automatically_approve import AutomaticallyApprove
+    from ..models.remove_from_participant_group import RemoveFromParticipantGroup
+    from ..models.manually_review import ManuallyReview
+    from ..models.request_return import RequestReturn
+    from ..models.add_to_participant_group import AddToParticipantGroup
 
 
 T = TypeVar("T", bound="BaseStudyCompletionCodesItem")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class BaseStudyCompletionCodesItem:
     """
     Attributes:
@@ -38,13 +52,13 @@ class BaseStudyCompletionCodesItem:
             "RequestReturn",
         ]
     ]
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        from ..models.add_to_participant_group import AddToParticipantGroup
         from ..models.automatically_approve import AutomaticallyApprove
-        from ..models.manually_review import ManuallyReview
         from ..models.remove_from_participant_group import RemoveFromParticipantGroup
+        from ..models.manually_review import ManuallyReview
+        from ..models.add_to_participant_group import AddToParticipantGroup
 
         code = self.code
         code_type = self.code_type.value
@@ -84,11 +98,11 @@ class BaseStudyCompletionCodesItem:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.add_to_participant_group import AddToParticipantGroup
         from ..models.automatically_approve import AutomaticallyApprove
-        from ..models.manually_review import ManuallyReview
         from ..models.remove_from_participant_group import RemoveFromParticipantGroup
+        from ..models.manually_review import ManuallyReview
         from ..models.request_return import RequestReturn
+        from ..models.add_to_participant_group import AddToParticipantGroup
 
         d = src_dict.copy()
         code = d.pop("code")

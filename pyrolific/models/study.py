@@ -1,22 +1,39 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
 
-from ..models.base_study_completion_option import BaseStudyCompletionOption
-from ..models.base_study_device_compatibility_item import BaseStudyDeviceCompatibilityItem
-from ..models.base_study_peripheral_requirements_item import BaseStudyPeripheralRequirementsItem
-from ..models.base_study_prolific_id_option import BaseStudyProlificIdOption
-from ..models.study_status import StudyStatus
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
 
+from typing import Union
+from typing import Dict
+from ..models.study_status import StudyStatus
+from typing import Union
+from ..models.base_study_completion_option import BaseStudyCompletionOption
+from ..models.base_study_peripheral_requirements_item import (
+    BaseStudyPeripheralRequirementsItem,
+)
+from typing import List
+from ..models.base_study_prolific_id_option import BaseStudyProlificIdOption
+from ..types import UNSET, Unset
+from ..models.base_study_device_compatibility_item import (
+    BaseStudyDeviceCompatibilityItem,
+)
+
 if TYPE_CHECKING:
-    pass
+    from ..models.range_filter import RangeFilter
+    from ..models.base_study_completion_codes_item import BaseStudyCompletionCodesItem
+    from ..models.select_filter import SelectFilter
+    from ..models.base_study_submissions_config import BaseStudySubmissionsConfig
 
 
 T = TypeVar("T", bound="Study")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class Study:
     r"""
     Example:
@@ -142,7 +159,9 @@ class Study:
     maximum_allowed_time: Union[Unset, float] = UNSET
     reward: Union[Unset, float] = UNSET
     device_compatibility: Union[Unset, List[BaseStudyDeviceCompatibilityItem]] = UNSET
-    peripheral_requirements: Union[Unset, List[BaseStudyPeripheralRequirementsItem]] = UNSET
+    peripheral_requirements: Union[
+        Unset, List[BaseStudyPeripheralRequirementsItem]
+    ] = UNSET
     filters: Union[Unset, None, List[Union["RangeFilter", "SelectFilter"]]] = UNSET
     filter_set_id: Union[Unset, None, str] = UNSET
     filter_set_version: Union[Unset, None, int] = UNSET
@@ -150,7 +169,7 @@ class Study:
     project: Union[Unset, str] = UNSET
     submissions_config: Union[Unset, "BaseStudySubmissionsConfig"] = UNSET
     metadata: Union[Unset, None, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         from ..models.select_filter import SelectFilter
@@ -278,10 +297,12 @@ class Study:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.base_study_completion_codes_item import BaseStudyCompletionCodesItem
-        from ..models.base_study_submissions_config import BaseStudySubmissionsConfig
         from ..models.range_filter import RangeFilter
+        from ..models.base_study_completion_codes_item import (
+            BaseStudyCompletionCodesItem,
+        )
         from ..models.select_filter import SelectFilter
+        from ..models.base_study_submissions_config import BaseStudySubmissionsConfig
 
         d = src_dict.copy()
         id = d.pop("id")
@@ -313,7 +334,9 @@ class Study:
         completion_codes = []
         _completion_codes = d.pop("completion_codes", UNSET)
         for completion_codes_item_data in _completion_codes or []:
-            completion_codes_item = BaseStudyCompletionCodesItem.from_dict(completion_codes_item_data)
+            completion_codes_item = BaseStudyCompletionCodesItem.from_dict(
+                completion_codes_item_data
+            )
 
             completion_codes.append(completion_codes_item)
 
@@ -328,14 +351,18 @@ class Study:
         device_compatibility = []
         _device_compatibility = d.pop("device_compatibility", UNSET)
         for device_compatibility_item_data in _device_compatibility or []:
-            device_compatibility_item = BaseStudyDeviceCompatibilityItem(device_compatibility_item_data)
+            device_compatibility_item = BaseStudyDeviceCompatibilityItem(
+                device_compatibility_item_data
+            )
 
             device_compatibility.append(device_compatibility_item)
 
         peripheral_requirements = []
         _peripheral_requirements = d.pop("peripheral_requirements", UNSET)
         for peripheral_requirements_item_data in _peripheral_requirements or []:
-            peripheral_requirements_item = BaseStudyPeripheralRequirementsItem(peripheral_requirements_item_data)
+            peripheral_requirements_item = BaseStudyPeripheralRequirementsItem(
+                peripheral_requirements_item_data
+            )
 
             peripheral_requirements.append(peripheral_requirements_item)
 
@@ -343,7 +370,9 @@ class Study:
         _filters = d.pop("filters", UNSET)
         for filters_item_data in _filters or []:
 
-            def _parse_filters_item(data: object) -> Union["RangeFilter", "SelectFilter"]:
+            def _parse_filters_item(
+                data: object,
+            ) -> Union["RangeFilter", "SelectFilter"]:
                 try:
                     if not isinstance(data, dict):
                         raise TypeError()
@@ -375,7 +404,9 @@ class Study:
         if isinstance(_submissions_config, Unset):
             submissions_config = UNSET
         else:
-            submissions_config = BaseStudySubmissionsConfig.from_dict(_submissions_config)
+            submissions_config = BaseStudySubmissionsConfig.from_dict(
+                _submissions_config
+            )
 
         metadata = d.pop("metadata", UNSET)
 

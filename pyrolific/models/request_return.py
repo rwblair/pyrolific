@@ -1,13 +1,19 @@
-from typing import Any, Dict, List, Type, TypeVar
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 
 from ..models.request_return_action import RequestReturnAction
+
 
 T = TypeVar("T", bound="RequestReturn")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class RequestReturn:
     """
     Attributes:
@@ -17,7 +23,7 @@ class RequestReturn:
 
     action: RequestReturnAction
     return_reason: str
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         action = self.action.value

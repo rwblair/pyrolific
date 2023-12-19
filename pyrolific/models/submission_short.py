@@ -1,16 +1,24 @@
-import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
 
-from ..models.submission_short_status import SubmissionShortStatus
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+import datetime
+from typing import Union
+from ..models.submission_short_status import SubmissionShortStatus
+from dateutil.parser import isoparse
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="SubmissionShort")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class SubmissionShort:
     """
     Example:
@@ -35,7 +43,7 @@ class SubmissionShort:
     has_siblings: bool
     completed_at: Union[Unset, None, datetime.datetime] = UNSET
     study_code: Union[Unset, None, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id

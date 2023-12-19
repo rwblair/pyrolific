@@ -1,16 +1,24 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
 
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from typing import Union
+from ..types import UNSET, Unset
 from ..models.participant_group_feeder_studies_item_feeder_completion_codes_item_action import (
     ParticipantGroupFeederStudiesItemFeederCompletionCodesItemAction,
 )
-from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="ParticipantGroupFeederStudiesItemFeederCompletionCodesItem")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ParticipantGroupFeederStudiesItemFeederCompletionCodesItem:
     """The code within this study that interacts with the participant group.
 
@@ -24,8 +32,10 @@ class ParticipantGroupFeederStudiesItemFeederCompletionCodesItem:
 
     code: Union[Unset, str] = UNSET
     code_type: Union[Unset, str] = UNSET
-    action: Union[Unset, ParticipantGroupFeederStudiesItemFeederCompletionCodesItemAction] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    action: Union[
+        Unset, ParticipantGroupFeederStudiesItemFeederCompletionCodesItemAction
+    ] = UNSET
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         code = self.code
@@ -54,11 +64,15 @@ class ParticipantGroupFeederStudiesItemFeederCompletionCodesItem:
         code_type = d.pop("code_type", UNSET)
 
         _action = d.pop("action", UNSET)
-        action: Union[Unset, ParticipantGroupFeederStudiesItemFeederCompletionCodesItemAction]
+        action: Union[
+            Unset, ParticipantGroupFeederStudiesItemFeederCompletionCodesItemAction
+        ]
         if isinstance(_action, Unset):
             action = UNSET
         else:
-            action = ParticipantGroupFeederStudiesItemFeederCompletionCodesItemAction(_action)
+            action = ParticipantGroupFeederStudiesItemFeederCompletionCodesItemAction(
+                _action
+            )
 
         participant_group_feeder_studies_item_feeder_completion_codes_item = cls(
             code=code,

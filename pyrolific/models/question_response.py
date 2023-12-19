@@ -1,15 +1,23 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+
+from typing import Dict
+from typing import List
 
 if TYPE_CHECKING:
-    pass
+    from ..models.response_answer import ResponseAnswer
 
 
 T = TypeVar("T", bound="QuestionResponse")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class QuestionResponse:
     """Responsible for defining an answer to a survey question
 
@@ -22,7 +30,7 @@ class QuestionResponse:
     answers: List["ResponseAnswer"]
     question_id: str
     question_title: str
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         answers = []

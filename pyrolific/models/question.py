@@ -1,18 +1,27 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
 
-from ..models.question_type import QuestionType
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
 
+from typing import Dict
+from typing import Union
+from typing import List
+from ..types import UNSET, Unset
+from ..models.question_type import QuestionType
+
 if TYPE_CHECKING:
-    pass
+    from ..models.answer_option import AnswerOption
 
 
 T = TypeVar("T", bound="Question")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class Question:
     """Responsible for defining a question within a survey.
 
@@ -34,7 +43,7 @@ class Question:
     title: str
     type: QuestionType
     id: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         answers = []

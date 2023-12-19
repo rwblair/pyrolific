@@ -1,7 +1,7 @@
 # pyrolific
 An unoffical client library for accessing Prolific API for researchers.
 
-Generated with https://github.com/openapi-generators/openapi-python-client from https://docs.prolific.co/docs/api-docs/public-openapi.
+Generated with https://github.com/openapi-generators/openapi-python-client from https://docs.prolific.com/docs/api-docs/public-openapi.
 
 ## Usage
 First, create a client:
@@ -9,7 +9,7 @@ First, create a client:
 ```python
 from pyrolific import Client
 
-client = Client(base_url="https://api.prolific.co")
+client = Client(base_url="https://api.prolific.com")
 ```
 
 If the endpoints you're going to hit require authentication, use `AuthenticatedClient` instead:
@@ -17,7 +17,7 @@ If the endpoints you're going to hit require authentication, use `AuthenticatedC
 ```python
 from pyrolific import AuthenticatedClient
 
-client = AuthenticatedClient(base_url="https://https://api.prolific.co", token="SuperSecretToken")
+client = AuthenticatedClient(base_url="https://https://api.prolific.com", token="SuperSecretToken")
 ```
 
 AuthenticatedClient doen't seem to work with the api, you still have to include an authorization kwarg on endpoint calls.

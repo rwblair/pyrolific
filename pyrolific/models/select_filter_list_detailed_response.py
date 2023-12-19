@@ -1,19 +1,33 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
 
-from ..models.filter_list_attributes_type import FilterListAttributesType
-from ..models.select_filter_list_attributes_data_type import SelectFilterListAttributesDataType
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
 
+from typing import Dict
+from typing import Union
+from typing import cast
+from ..models.filter_list_attributes_type import FilterListAttributesType
+from ..types import UNSET, Unset
+from ..models.select_filter_list_attributes_data_type import (
+    SelectFilterListAttributesDataType,
+)
+from typing import cast, List
+
 if TYPE_CHECKING:
-    pass
+    from ..models.select_filter_list_attributes_choices import (
+        SelectFilterListAttributesChoices,
+    )
 
 
 T = TypeVar("T", bound="SelectFilterListDetailedResponse")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class SelectFilterListDetailedResponse:
     """
     Attributes:
@@ -55,7 +69,7 @@ class SelectFilterListDetailedResponse:
     subcategory: Union[Unset, None, str] = UNSET
     display_order: Union[Unset, None, int] = UNSET
     tags: Union[Unset, None, List[str]] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         filter_id = self.filter_id
@@ -120,7 +134,9 @@ class SelectFilterListDetailedResponse:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.select_filter_list_attributes_choices import SelectFilterListAttributesChoices
+        from ..models.select_filter_list_attributes_choices import (
+            SelectFilterListAttributesChoices,
+        )
 
         d = src_dict.copy()
         filter_id = d.pop("filter_id", UNSET)

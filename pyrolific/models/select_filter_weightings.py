@@ -1,11 +1,16 @@
-from typing import Any, Dict, List, Type, TypeVar
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 
 T = TypeVar("T", bound="SelectFilterWeightings")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class SelectFilterWeightings:
     """Ratios to control the distribution of participants across the selected values.
 
@@ -13,7 +18,7 @@ class SelectFilterWeightings:
 
     """
 
-    additional_properties: Dict[str, float] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, float] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         field_dict: Dict[str, Any] = {}

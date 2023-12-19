@@ -1,40 +1,38 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.submission import Submission
 from ...types import Response
+from ... import errors
+
+from ...models.submission_detail import SubmissionDetail
+from typing import Dict
 
 
 def _get_kwargs(
     id: str,
     *,
-    client: AuthenticatedClient,
     authorization: str,
 ) -> Dict[str, Any]:
-    url = "{}/api/v1/submissions/{id}/".format(client.base_url, id=id)
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
-
+    headers = {}
     headers["Authorization"] = authorization
 
     return {
         "method": "get",
-        "url": url,
+        "url": "/api/v1/submissions/{id}/".format(
+            id=id,
+        ),
         "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
     }
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Submission]:
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[SubmissionDetail]:
     if response.status_code == HTTPStatus.OK:
-        response_200 = Submission.from_dict(response.json())
+        response_200 = SubmissionDetail.from_dict(response.json())
 
         return response_200
     if client.raise_on_unexpected_status:
@@ -43,7 +41,9 @@ def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Sub
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[Submission]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[SubmissionDetail]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -57,7 +57,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     authorization: str,
-) -> Response[Submission]:
+) -> Response[SubmissionDetail]:
     """Retrieve a submission
 
      Returns the detailed information of a submission, including the
@@ -72,17 +72,15 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Submission]
+        Response[SubmissionDetail]
     """
 
     kwargs = _get_kwargs(
         id=id,
-        client=client,
         authorization=authorization,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -94,7 +92,7 @@ def sync(
     *,
     client: AuthenticatedClient,
     authorization: str,
-) -> Optional[Submission]:
+) -> Optional[SubmissionDetail]:
     """Retrieve a submission
 
      Returns the detailed information of a submission, including the
@@ -109,7 +107,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Submission
+        SubmissionDetail
     """
 
     return sync_detailed(
@@ -124,7 +122,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     authorization: str,
-) -> Response[Submission]:
+) -> Response[SubmissionDetail]:
     """Retrieve a submission
 
      Returns the detailed information of a submission, including the
@@ -139,17 +137,15 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Submission]
+        Response[SubmissionDetail]
     """
 
     kwargs = _get_kwargs(
         id=id,
-        client=client,
         authorization=authorization,
     )
 
-    async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
 
@@ -159,7 +155,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     authorization: str,
-) -> Optional[Submission]:
+) -> Optional[SubmissionDetail]:
     """Retrieve a submission
 
      Returns the detailed information of a submission, including the
@@ -174,7 +170,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Submission
+        SubmissionDetail
     """
 
     return (

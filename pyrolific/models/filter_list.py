@@ -1,17 +1,36 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from typing import Union
+from typing import Dict
+from typing import Union
+from ..types import UNSET, Unset
+from typing import List
+
 if TYPE_CHECKING:
-    pass
+    from ..models.select_filter_list_response import SelectFilterListResponse
+    from ..models.filter_list_meta import FilterListMeta
+    from ..models.filter_list_links import FilterListLinks
+    from ..models.range_filter_list_detailed_response import (
+        RangeFilterListDetailedResponse,
+    )
+    from ..models.range_filter_list_response import RangeFilterListResponse
+    from ..models.select_filter_list_detailed_response import (
+        SelectFilterListDetailedResponse,
+    )
 
 
 T = TypeVar("T", bound="FilterList")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class FilterList:
     """
     Attributes:
@@ -34,12 +53,14 @@ class FilterList:
     ] = UNSET
     field_links: Union[Unset, "FilterListLinks"] = UNSET
     meta: Union[Unset, "FilterListMeta"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        from ..models.range_filter_list_response import RangeFilterListResponse
-        from ..models.select_filter_list_detailed_response import SelectFilterListDetailedResponse
         from ..models.select_filter_list_response import SelectFilterListResponse
+        from ..models.range_filter_list_response import RangeFilterListResponse
+        from ..models.select_filter_list_detailed_response import (
+            SelectFilterListDetailedResponse,
+        )
 
         results: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.results, Unset):
@@ -83,12 +104,16 @@ class FilterList:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.filter_list_links import FilterListLinks
-        from ..models.filter_list_meta import FilterListMeta
-        from ..models.range_filter_list_detailed_response import RangeFilterListDetailedResponse
-        from ..models.range_filter_list_response import RangeFilterListResponse
-        from ..models.select_filter_list_detailed_response import SelectFilterListDetailedResponse
         from ..models.select_filter_list_response import SelectFilterListResponse
+        from ..models.filter_list_meta import FilterListMeta
+        from ..models.filter_list_links import FilterListLinks
+        from ..models.range_filter_list_detailed_response import (
+            RangeFilterListDetailedResponse,
+        )
+        from ..models.range_filter_list_response import RangeFilterListResponse
+        from ..models.select_filter_list_detailed_response import (
+            SelectFilterListDetailedResponse,
+        )
 
         d = src_dict.copy()
         results = []
@@ -114,7 +139,9 @@ class FilterList:
                 try:
                     if not isinstance(data, dict):
                         raise TypeError()
-                    results_item_type_1 = SelectFilterListDetailedResponse.from_dict(data)
+                    results_item_type_1 = SelectFilterListDetailedResponse.from_dict(
+                        data
+                    )
 
                     return results_item_type_1
                 except:  # noqa: E722

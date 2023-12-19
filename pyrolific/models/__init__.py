@@ -10,7 +10,9 @@ from .automatically_approve import AutomaticallyApprove
 from .automatically_approve_action import AutomaticallyApproveAction
 from .base_study import BaseStudy
 from .base_study_completion_codes_item import BaseStudyCompletionCodesItem
-from .base_study_completion_codes_item_code_type import BaseStudyCompletionCodesItemCodeType
+from .base_study_completion_codes_item_code_type import (
+    BaseStudyCompletionCodesItemCodeType,
+)
 from .base_study_completion_option import BaseStudyCompletionOption
 from .base_study_device_compatibility_item import BaseStudyDeviceCompatibilityItem
 from .base_study_peripheral_requirements_item import BaseStudyPeripheralRequirementsItem
@@ -34,8 +36,6 @@ from .duplicate_study_json_body import DuplicateStudyJsonBody
 from .event_type import EventType
 from .event_type_list import EventTypeList
 from .export_study_method import ExportStudyMethod
-from .export_study_response_200 import ExportStudyResponse200
-from .export_study_response_200_status import ExportStudyResponse200Status
 from .filter_list import FilterList
 from .filter_list_attributes import FilterListAttributes
 from .filter_list_attributes_type import FilterListAttributesType
@@ -56,6 +56,30 @@ from .manually_review import ManuallyReview
 from .manually_review_action import ManuallyReviewAction
 from .message import Message
 from .messages import Messages
+from .mutually_exclusive_study_collection_create import (
+    MutuallyExclusiveStudyCollectionCreate,
+)
+from .mutually_exclusive_study_collection_created import (
+    MutuallyExclusiveStudyCollectionCreated,
+)
+from .mutually_exclusive_study_collection_created_status import (
+    MutuallyExclusiveStudyCollectionCreatedStatus,
+)
+from .mutually_exclusive_study_collection_detail import (
+    MutuallyExclusiveStudyCollectionDetail,
+)
+from .mutually_exclusive_study_collection_list import (
+    MutuallyExclusiveStudyCollectionList,
+)
+from .mutually_exclusive_study_collection_patch import (
+    MutuallyExclusiveStudyCollectionPatch,
+)
+from .mutually_exclusive_study_collection_studies import (
+    MutuallyExclusiveStudyCollectionStudies,
+)
+from .mutually_exclusive_study_collections_response import (
+    MutuallyExclusiveStudyCollectionsResponse,
+)
 from .participant_group import ParticipantGroup
 from .participant_group_feeder_studies_item import ParticipantGroupFeederStudiesItem
 from .participant_group_feeder_studies_item_feeder_completion_codes_item import (
@@ -66,11 +90,14 @@ from .participant_group_feeder_studies_item_feeder_completion_codes_item_action 
 )
 from .participant_group_list_response import ParticipantGroupListResponse
 from .participant_group_membership import ParticipantGroupMembership
-from .participant_group_membership_list_response import ParticipantGroupMembershipListResponse
+from .participant_group_membership_list_response import (
+    ParticipantGroupMembershipListResponse,
+)
 from .participant_group_update import ParticipantGroupUpdate
 from .participant_i_ds import ParticipantIDs
 from .participant_id_list import ParticipantIDList
 from .project import Project
+from .project_id import ProjectID
 from .project_short import ProjectShort
 from .project_short_list_response import ProjectShortListResponse
 from .question import Question
@@ -107,6 +134,7 @@ from .select_filter_list_attributes_data_type import SelectFilterListAttributesD
 from .select_filter_list_detailed_response import SelectFilterListDetailedResponse
 from .select_filter_list_response import SelectFilterListResponse
 from .select_filter_weightings import SelectFilterWeightings
+from .send_bulk_message import SendBulkMessage
 from .send_message import SendMessage
 from .studies_list_response import StudiesListResponse
 from .study import Study
@@ -118,6 +146,8 @@ from .study_short_study_type import StudyShortStudyType
 from .study_status import StudyStatus
 from .study_transition import StudyTransition
 from .submission import Submission
+from .submission_detail import SubmissionDetail
+from .submission_detail_status import SubmissionDetailStatus
 from .submission_i_ds import SubmissionIDs
 from .submission_list_response import SubmissionListResponse
 from .submission_short import SubmissionShort
@@ -125,7 +155,9 @@ from .submission_short_status import SubmissionShortStatus
 from .submission_status import SubmissionStatus
 from .submission_transition import SubmissionTransition
 from .submission_transition_action import SubmissionTransitionAction
-from .submission_transition_rejection_category import SubmissionTransitionRejectionCategory
+from .submission_transition_rejection_category import (
+    SubmissionTransitionRejectionCategory,
+)
 from .subscription_detail import SubscriptionDetail
 from .subscription_event import SubscriptionEvent
 from .subscription_event_list import SubscriptionEventList
@@ -136,14 +168,23 @@ from .subscription_update_detail import SubscriptionUpdateDetail
 from .summary import Summary
 from .summary_answer import SummaryAnswer
 from .summary_question import SummaryQuestion
+from .transition_mutually_exclusive_study_collection_json_body import (
+    TransitionMutuallyExclusiveStudyCollectionJsonBody,
+)
+from .transition_mutually_exclusive_study_collection_json_body_action import (
+    TransitionMutuallyExclusiveStudyCollectionJsonBodyAction,
+)
 from .unlock_filter_set_response_200 import UnlockFilterSetResponse200
 from .update_filter_set import UpdateFilterSet
 from .update_filter_set_response_200 import UpdateFilterSetResponse200
 from .user import User
 from .workspace import Workspace
 from .workspace_balance import WorkspaceBalance
-from .workspace_balance_available_balance_breakdown import WorkspaceBalanceAvailableBalanceBreakdown
+from .workspace_balance_available_balance_breakdown import (
+    WorkspaceBalanceAvailableBalanceBreakdown,
+)
 from .workspace_balance_balance_breakdown import WorkspaceBalanceBalanceBreakdown
+from .workspace_id import WorkspaceID
 from .workspace_short import WorkspaceShort
 from .workspace_user import WorkspaceUser
 from .workspaces_list_response import WorkspacesListResponse
@@ -183,8 +224,6 @@ __all__ = (
     "EventType",
     "EventTypeList",
     "ExportStudyMethod",
-    "ExportStudyResponse200",
-    "ExportStudyResponse200Status",
     "FilterList",
     "FilterListAttributes",
     "FilterListAttributesType",
@@ -205,6 +244,14 @@ __all__ = (
     "ManuallyReviewAction",
     "Message",
     "Messages",
+    "MutuallyExclusiveStudyCollectionCreate",
+    "MutuallyExclusiveStudyCollectionCreated",
+    "MutuallyExclusiveStudyCollectionCreatedStatus",
+    "MutuallyExclusiveStudyCollectionDetail",
+    "MutuallyExclusiveStudyCollectionList",
+    "MutuallyExclusiveStudyCollectionPatch",
+    "MutuallyExclusiveStudyCollectionsResponse",
+    "MutuallyExclusiveStudyCollectionStudies",
     "ParticipantGroup",
     "ParticipantGroupFeederStudiesItem",
     "ParticipantGroupFeederStudiesItemFeederCompletionCodesItem",
@@ -216,6 +263,7 @@ __all__ = (
     "ParticipantIDList",
     "ParticipantIDs",
     "Project",
+    "ProjectID",
     "ProjectShort",
     "ProjectShortListResponse",
     "Question",
@@ -252,6 +300,7 @@ __all__ = (
     "SelectFilterListDetailedResponse",
     "SelectFilterListResponse",
     "SelectFilterWeightings",
+    "SendBulkMessage",
     "SendMessage",
     "StudiesListResponse",
     "Study",
@@ -263,6 +312,8 @@ __all__ = (
     "StudyStatus",
     "StudyTransition",
     "Submission",
+    "SubmissionDetail",
+    "SubmissionDetailStatus",
     "SubmissionIDs",
     "SubmissionListResponse",
     "SubmissionShort",
@@ -281,6 +332,8 @@ __all__ = (
     "Summary",
     "SummaryAnswer",
     "SummaryQuestion",
+    "TransitionMutuallyExclusiveStudyCollectionJsonBody",
+    "TransitionMutuallyExclusiveStudyCollectionJsonBodyAction",
     "UnlockFilterSetResponse200",
     "UpdateFilterSet",
     "UpdateFilterSetResponse200",
@@ -289,6 +342,7 @@ __all__ = (
     "WorkspaceBalance",
     "WorkspaceBalanceAvailableBalanceBreakdown",
     "WorkspaceBalanceBalanceBreakdown",
+    "WorkspaceID",
     "WorkspaceShort",
     "WorkspacesListResponse",
     "WorkspaceUser",

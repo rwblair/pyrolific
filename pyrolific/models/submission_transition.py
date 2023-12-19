@@ -1,15 +1,25 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
 
 from ..models.submission_transition_action import SubmissionTransitionAction
-from ..models.submission_transition_rejection_category import SubmissionTransitionRejectionCategory
+from typing import Union
 from ..types import UNSET, Unset
+from ..models.submission_transition_rejection_category import (
+    SubmissionTransitionRejectionCategory,
+)
+
 
 T = TypeVar("T", bound="SubmissionTransition")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class SubmissionTransition:
     """
     Attributes:
@@ -25,7 +35,7 @@ class SubmissionTransition:
     action: SubmissionTransitionAction
     message: Union[Unset, str] = UNSET
     rejection_category: Union[Unset, SubmissionTransitionRejectionCategory] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         action = self.action.value
@@ -61,7 +71,9 @@ class SubmissionTransition:
         if isinstance(_rejection_category, Unset):
             rejection_category = UNSET
         else:
-            rejection_category = SubmissionTransitionRejectionCategory(_rejection_category)
+            rejection_category = SubmissionTransitionRejectionCategory(
+                _rejection_category
+            )
 
         submission_transition = cls(
             action=action,

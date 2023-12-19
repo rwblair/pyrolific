@@ -1,17 +1,25 @@
-import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
 
-from ..models.study_short_status import StudyShortStatus
-from ..models.study_short_study_type import StudyShortStudyType
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+import datetime
+from ..models.study_short_status import StudyShortStatus
+from typing import Union
+from ..models.study_short_study_type import StudyShortStudyType
+from dateutil.parser import isoparse
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="StudyShort")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class StudyShort:
     """
     Example:
@@ -48,7 +56,7 @@ class StudyShort:
     published_at: Union[Unset, None, datetime.datetime] = UNSET
     publish_at: Union[Unset, None, datetime.datetime] = UNSET
     date_created: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id

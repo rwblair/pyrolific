@@ -1,19 +1,29 @@
-import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from typing import Dict
+import datetime
+from typing import Union
+from dateutil.parser import isoparse
+from ..types import UNSET, Unset
+from typing import List
+
 if TYPE_CHECKING:
-    pass
+    from ..models.question_response import QuestionResponse
+    from ..models.section import Section
 
 
 T = TypeVar("T", bound="ResponseOut")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ResponseOut:
     """The model used to create a serialised representation a `Response`.
 
@@ -36,7 +46,7 @@ class ResponseOut:
     date_modified: Union[Unset, datetime.datetime] = UNSET
     sections: Union[Unset, List["Section"]] = UNSET
     questions: Union[Unset, List["QuestionResponse"]] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         participant_id = self.participant_id

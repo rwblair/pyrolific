@@ -1,17 +1,26 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from typing import Dict
+from typing import Union
+from ..types import UNSET, Unset
+from typing import List
+
 if TYPE_CHECKING:
-    pass
+    from ..models.summary_answer import SummaryAnswer
 
 
 T = TypeVar("T", bound="SummaryQuestion")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class SummaryQuestion:
     """Responsible for housing the questions we want to aggregate for the summary.
 
@@ -26,7 +35,7 @@ class SummaryQuestion:
     question_id: Union[Unset, str] = UNSET
     total_answers: Union[Unset, int] = 0
     answers: Union[Unset, List["SummaryAnswer"]] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         question = self.question

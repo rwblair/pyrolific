@@ -1,17 +1,27 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from typing import Dict
+from typing import Union
+from ..types import UNSET, Unset
+from typing import List
+
 if TYPE_CHECKING:
-    pass
+    from ..models.project_short import ProjectShort
+    from ..models.workspace_user import WorkspaceUser
 
 
 T = TypeVar("T", bound="Workspace")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class Workspace:
     """
     Example:
@@ -40,7 +50,7 @@ class Workspace:
     projects: Union[Unset, List["ProjectShort"]] = UNSET
     wallet: Union[Unset, str] = UNSET
     naivety_distribution_rate: Union[Unset, None, float] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id

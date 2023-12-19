@@ -1,42 +1,38 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.bulk_bonus import BulkBonus
-from ...models.create_bonus_payments_json_body import CreateBonusPaymentsJsonBody
 from ...types import Response
+from ... import errors
+
+from ...models.bulk_bonus import BulkBonus
+from typing import Dict
+from ...models.create_bonus_payments_json_body import CreateBonusPaymentsJsonBody
 
 
 def _get_kwargs(
     *,
-    client: AuthenticatedClient,
     json_body: CreateBonusPaymentsJsonBody,
     authorization: str,
 ) -> Dict[str, Any]:
-    url = "{}/api/v1/submissions/bonus-payments/".format(client.base_url)
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
-
+    headers = {}
     headers["Authorization"] = authorization
 
     json_json_body = json_body.to_dict()
 
     return {
         "method": "post",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/api/v1/submissions/bonus-payments/",
         "json": json_json_body,
+        "headers": headers,
     }
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[BulkBonus]:
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[BulkBonus]:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = BulkBonus.from_dict(response.json())
 
@@ -47,7 +43,9 @@ def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Bul
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[BulkBonus]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[BulkBonus]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -95,13 +93,11 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        client=client,
         json_body=json_body,
         authorization=authorization,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -192,13 +188,11 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        client=client,
         json_body=json_body,
         authorization=authorization,
     )
 
-    async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
 

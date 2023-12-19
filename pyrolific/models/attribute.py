@@ -1,17 +1,30 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, Optional, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from typing import cast, Union
+from typing import Dict
+from typing import Union
+from typing import cast
+from typing import Optional
+from ..types import UNSET, Unset
+from typing import cast, List
+
 if TYPE_CHECKING:
-    pass
+    from ..models.attribute_value_type_1_item_type_1 import AttributeValueType1ItemType1
+    from ..models.attribute_value_type_0 import AttributeValueType0
 
 
 T = TypeVar("T", bound="Attribute")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class Attribute:
     """
     Attributes:
@@ -24,14 +37,22 @@ class Attribute:
             like AgeRangeEligibilityRequirement.
     """
 
-    value: Union["AttributeValueType0", List[Union["AttributeValueType1ItemType1", str]], bool, float, str]
+    value: Union[
+        "AttributeValueType0",
+        List[Union["AttributeValueType1ItemType1", str]],
+        bool,
+        float,
+        str,
+    ]
     index: Union[Unset, float] = UNSET
     name: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.attribute_value_type_1_item_type_1 import (
+            AttributeValueType1ItemType1,
+        )
         from ..models.attribute_value_type_0 import AttributeValueType0
-        from ..models.attribute_value_type_1_item_type_1 import AttributeValueType1ItemType1
 
         value: Union[Dict[str, Any], List[Union[Dict[str, Any], str]], bool, float, str]
 
@@ -76,14 +97,22 @@ class Attribute:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        from ..models.attribute_value_type_1_item_type_1 import (
+            AttributeValueType1ItemType1,
+        )
         from ..models.attribute_value_type_0 import AttributeValueType0
-        from ..models.attribute_value_type_1_item_type_1 import AttributeValueType1ItemType1
 
         d = src_dict.copy()
 
         def _parse_value(
             data: object,
-        ) -> Union["AttributeValueType0", List[Union["AttributeValueType1ItemType1", str]], bool, float, str]:
+        ) -> Union[
+            "AttributeValueType0",
+            List[Union["AttributeValueType1ItemType1", str]],
+            bool,
+            float,
+            str,
+        ]:
             try:
                 if not isinstance(data, dict):
                     raise TypeError()
@@ -104,11 +133,15 @@ class Attribute:
                 _value_type_1 = data
                 for value_type_1_item_data in _value_type_1 or []:
 
-                    def _parse_value_type_1_item(data: object) -> Union["AttributeValueType1ItemType1", str]:
+                    def _parse_value_type_1_item(
+                        data: object,
+                    ) -> Union["AttributeValueType1ItemType1", str]:
                         try:
                             if not isinstance(data, dict):
                                 raise TypeError()
-                            value_type_1_item_type_1 = AttributeValueType1ItemType1.from_dict(data)
+                            value_type_1_item_type_1 = (
+                                AttributeValueType1ItemType1.from_dict(data)
+                            )
 
                             return value_type_1_item_type_1
                         except:  # noqa: E722
@@ -123,7 +156,14 @@ class Attribute:
             except:  # noqa: E722
                 pass
             return cast(
-                Union["AttributeValueType0", List[Union["AttributeValueType1ItemType1", str]], bool, float, str], data
+                Union[
+                    "AttributeValueType0",
+                    List[Union["AttributeValueType1ItemType1", str]],
+                    bool,
+                    float,
+                    str,
+                ],
+                data,
             )
 
         value = _parse_value(d.pop("value"))

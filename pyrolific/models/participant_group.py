@@ -1,24 +1,38 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from typing import Dict
+from typing import Union
+from ..types import UNSET, Unset
+from typing import List
+
 if TYPE_CHECKING:
-    pass
+    from ..models.participant_group_feeder_studies_item import (
+        ParticipantGroupFeederStudiesItem,
+    )
 
 
 T = TypeVar("T", bound="ParticipantGroup")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ParticipantGroup:
     """
     Attributes:
         id (Union[Unset, str]): The id of the participant group Example: 5e9b9c9b0f9c9a0001b0b1f5.
         name (Union[Unset, str]): The name of the participant group Example: Group 1.
-        project_id (Union[Unset, str]): The id of the project the participant group belongs to Example:
-            5e9b9c9b0f9c9a0001b0b1f4.
+        project_id (Union[Unset, None, str]): The id of the project the participant group belongs to
+        workspace_id (Union[Unset, None, str]): The id of the workspace the participant group belongs to Example:
+            5e9b9c9b0f9c9a0001b1ca2f.
+        description (Union[Unset, None, str]): The user-provided description of the participant group Example: My first
+            participant group.
         participant_count (Union[Unset, int]): The number of participants in the participant group Example: 10.
         is_deleted (Union[Unset, bool]): Whether the participant group has been deleted
         feeder_studies (Union[Unset, List['ParticipantGroupFeederStudiesItem']]): Details of all studies which are
@@ -27,16 +41,20 @@ class ParticipantGroup:
 
     id: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
-    project_id: Union[Unset, str] = UNSET
+    project_id: Union[Unset, None, str] = UNSET
+    workspace_id: Union[Unset, None, str] = UNSET
+    description: Union[Unset, None, str] = UNSET
     participant_count: Union[Unset, int] = UNSET
     is_deleted: Union[Unset, bool] = UNSET
     feeder_studies: Union[Unset, List["ParticipantGroupFeederStudiesItem"]] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
         name = self.name
         project_id = self.project_id
+        workspace_id = self.workspace_id
+        description = self.description
         participant_count = self.participant_count
         is_deleted = self.is_deleted
         feeder_studies: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -56,6 +74,10 @@ class ParticipantGroup:
             field_dict["name"] = name
         if project_id is not UNSET:
             field_dict["project_id"] = project_id
+        if workspace_id is not UNSET:
+            field_dict["workspace_id"] = workspace_id
+        if description is not UNSET:
+            field_dict["description"] = description
         if participant_count is not UNSET:
             field_dict["participant_count"] = participant_count
         if is_deleted is not UNSET:
@@ -67,7 +89,9 @@ class ParticipantGroup:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.participant_group_feeder_studies_item import ParticipantGroupFeederStudiesItem
+        from ..models.participant_group_feeder_studies_item import (
+            ParticipantGroupFeederStudiesItem,
+        )
 
         d = src_dict.copy()
         id = d.pop("id", UNSET)
@@ -76,6 +100,10 @@ class ParticipantGroup:
 
         project_id = d.pop("project_id", UNSET)
 
+        workspace_id = d.pop("workspace_id", UNSET)
+
+        description = d.pop("description", UNSET)
+
         participant_count = d.pop("participant_count", UNSET)
 
         is_deleted = d.pop("is_deleted", UNSET)
@@ -83,7 +111,9 @@ class ParticipantGroup:
         feeder_studies = []
         _feeder_studies = d.pop("feeder_studies", UNSET)
         for feeder_studies_item_data in _feeder_studies or []:
-            feeder_studies_item = ParticipantGroupFeederStudiesItem.from_dict(feeder_studies_item_data)
+            feeder_studies_item = ParticipantGroupFeederStudiesItem.from_dict(
+                feeder_studies_item_data
+            )
 
             feeder_studies.append(feeder_studies_item)
 
@@ -91,6 +121,8 @@ class ParticipantGroup:
             id=id,
             name=name,
             project_id=project_id,
+            workspace_id=workspace_id,
+            description=description,
             participant_count=participant_count,
             is_deleted=is_deleted,
             feeder_studies=feeder_studies,

@@ -1,16 +1,24 @@
+from typing import Any, Dict, Type, TypeVar
+
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
 import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
-
-import attr
+from typing import Union
 from dateutil.parser import isoparse
-
 from ..models.return_requested_response_status import ReturnRequestedResponseStatus
 from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="ReturnRequestedResponse")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ReturnRequestedResponse:
     """
     Attributes:
@@ -25,7 +33,7 @@ class ReturnRequestedResponse:
     status: Union[Unset, ReturnRequestedResponseStatus] = UNSET
     participant: Union[Unset, str] = UNSET
     return_requested: Union[Unset, None, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
@@ -36,7 +44,9 @@ class ReturnRequestedResponse:
         participant = self.participant
         return_requested: Union[Unset, None, str] = UNSET
         if not isinstance(self.return_requested, Unset):
-            return_requested = self.return_requested.isoformat() if self.return_requested else None
+            return_requested = (
+                self.return_requested.isoformat() if self.return_requested else None
+            )
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)

@@ -1,15 +1,23 @@
-import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+import datetime
+from typing import Union
+from dateutil.parser import isoparse
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="Message")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class Message:
     """
     Attributes:
@@ -26,7 +34,7 @@ class Message:
     sent_at: datetime.datetime
     channel_id: str
     type: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         sender_id = self.sender_id

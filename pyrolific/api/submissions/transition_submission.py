@@ -1,43 +1,41 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.submission import Submission
-from ...models.submission_transition import SubmissionTransition
 from ...types import Response
+from ... import errors
+
+from ...models.submission_transition import SubmissionTransition
+from typing import Dict
+from ...models.submission import Submission
 
 
 def _get_kwargs(
     id: str,
     *,
-    client: AuthenticatedClient,
     json_body: SubmissionTransition,
     authorization: str,
 ) -> Dict[str, Any]:
-    url = "{}/api/v1/submissions/{id}/transition/".format(client.base_url, id=id)
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
-
+    headers = {}
     headers["Authorization"] = authorization
 
     json_json_body = json_body.to_dict()
 
     return {
         "method": "post",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/api/v1/submissions/{id}/transition/".format(
+            id=id,
+        ),
         "json": json_json_body,
+        "headers": headers,
     }
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Submission]:
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Submission]:
     if response.status_code == HTTPStatus.OK:
         response_200 = Submission.from_dict(response.json())
 
@@ -48,7 +46,9 @@ def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Sub
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[Submission]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Submission]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -75,6 +75,8 @@ def sync_detailed(
     types~1/get) for a status transition to
     `AWAITING_REVIEW` before making the approval request. Our system is currently unable to process
     approvals before this transition.
+    Note this endpoint is idempotent, so if you make the same request twice, the second request will be
+    ignored.
 
     Args:
         id (str):
@@ -91,13 +93,11 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        client=client,
         json_body=json_body,
         authorization=authorization,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -122,6 +122,8 @@ def sync(
     types~1/get) for a status transition to
     `AWAITING_REVIEW` before making the approval request. Our system is currently unable to process
     approvals before this transition.
+    Note this endpoint is idempotent, so if you make the same request twice, the second request will be
+    ignored.
 
     Args:
         id (str):
@@ -162,6 +164,8 @@ async def asyncio_detailed(
     types~1/get) for a status transition to
     `AWAITING_REVIEW` before making the approval request. Our system is currently unable to process
     approvals before this transition.
+    Note this endpoint is idempotent, so if you make the same request twice, the second request will be
+    ignored.
 
     Args:
         id (str):
@@ -178,13 +182,11 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        client=client,
         json_body=json_body,
         authorization=authorization,
     )
 
-    async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
 
@@ -207,6 +209,8 @@ async def asyncio(
     types~1/get) for a status transition to
     `AWAITING_REVIEW` before making the approval request. Our system is currently unable to process
     approvals before this transition.
+    Note this endpoint is idempotent, so if you make the same request twice, the second request will be
+    ignored.
 
     Args:
         id (str):

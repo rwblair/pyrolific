@@ -1,13 +1,21 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="BaseStudySubmissionsConfig")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class BaseStudySubmissionsConfig:
     """**BETA**: This is a beta feature and is currently only available to selected workspaces.
     It is being tested and evaluated for effectiveness and user experience before being released to all users.
@@ -35,7 +43,7 @@ class BaseStudySubmissionsConfig:
 
     max_submissions_per_participant: Union[Unset, None, int] = 1
     max_concurrent_submissions: Union[Unset, None, int] = -1
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         max_submissions_per_participant = self.max_submissions_per_participant
@@ -45,7 +53,9 @@ class BaseStudySubmissionsConfig:
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if max_submissions_per_participant is not UNSET:
-            field_dict["max_submissions_per_participant"] = max_submissions_per_participant
+            field_dict[
+                "max_submissions_per_participant"
+            ] = max_submissions_per_participant
         if max_concurrent_submissions is not UNSET:
             field_dict["max_concurrent_submissions"] = max_concurrent_submissions
 
@@ -54,7 +64,9 @@ class BaseStudySubmissionsConfig:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        max_submissions_per_participant = d.pop("max_submissions_per_participant", UNSET)
+        max_submissions_per_participant = d.pop(
+            "max_submissions_per_participant", UNSET
+        )
 
         max_concurrent_submissions = d.pop("max_concurrent_submissions", UNSET)
 

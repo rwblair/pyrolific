@@ -3,23 +3,22 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.send_message import SendMessage
-from ...types import UNSET, Response, Unset
+from typing import Dict
+from typing import Union
+from ...types import UNSET, Unset
 
 
 def _get_kwargs(
     *,
-    client: AuthenticatedClient,
     json_body: SendMessage,
     authorization: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    url = "{}/api/v1/messages/".format(client.base_url)
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
-
+    headers = {}
     if not isinstance(authorization, Unset):
         headers["Authorization"] = authorization
 
@@ -27,16 +26,15 @@ def _get_kwargs(
 
     return {
         "method": "post",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/api/v1/messages/",
         "json": json_json_body,
+        "headers": headers,
     }
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Any]:
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Any]:
     if response.status_code == HTTPStatus.NO_CONTENT:
         return None
     if client.raise_on_unexpected_status:
@@ -45,7 +43,9 @@ def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Any
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[Any]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -77,13 +77,11 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        client=client,
         json_body=json_body,
         authorization=authorization,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -113,12 +111,10 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        client=client,
         json_body=json_body,
         authorization=authorization,
     )
 
-    async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)

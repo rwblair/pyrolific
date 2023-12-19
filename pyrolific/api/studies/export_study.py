@@ -3,25 +3,23 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import Optional
+from typing import Union
+from ...types import UNSET, Unset
 from ...models.export_study_method import ExportStudyMethod
-from ...models.export_study_response_200 import ExportStudyResponse200
-from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     id: str,
     *,
-    client: AuthenticatedClient,
     method: Union[Unset, None, ExportStudyMethod] = UNSET,
     authorization: str,
 ) -> Dict[str, Any]:
-    url = "{}/api/v1/studies/{id}/export/".format(client.base_url, id=id)
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
-
+    headers = {}
     headers["Authorization"] = authorization
 
     params: Dict[str, Any] = {}
@@ -35,19 +33,19 @@ def _get_kwargs(
 
     return {
         "method": "get",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/api/v1/studies/{id}/export/".format(
+            id=id,
+        ),
         "params": params,
+        "headers": headers,
     }
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[ExportStudyResponse200]:
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[str]:
     if response.status_code == HTTPStatus.OK:
-        response_200 = ExportStudyResponse200.from_dict(response.json())
-
+        response_200 = response.text
         return response_200
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
@@ -55,7 +53,9 @@ def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Exp
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[ExportStudyResponse200]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[str]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -70,7 +70,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     method: Union[Unset, None, ExportStudyMethod] = UNSET,
     authorization: str,
-) -> Response[ExportStudyResponse200]:
+) -> Response[str]:
     """Download demographic data
 
      __This is an evolving feature and the exact content of such exports is subject to change, so use at
@@ -121,18 +121,16 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[ExportStudyResponse200]
+        Response[str]
     """
 
     kwargs = _get_kwargs(
         id=id,
-        client=client,
         method=method,
         authorization=authorization,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -145,7 +143,7 @@ def sync(
     client: AuthenticatedClient,
     method: Union[Unset, None, ExportStudyMethod] = UNSET,
     authorization: str,
-) -> Optional[ExportStudyResponse200]:
+) -> Optional[str]:
     """Download demographic data
 
      __This is an evolving feature and the exact content of such exports is subject to change, so use at
@@ -196,7 +194,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        ExportStudyResponse200
+        str
     """
 
     return sync_detailed(
@@ -213,7 +211,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     method: Union[Unset, None, ExportStudyMethod] = UNSET,
     authorization: str,
-) -> Response[ExportStudyResponse200]:
+) -> Response[str]:
     """Download demographic data
 
      __This is an evolving feature and the exact content of such exports is subject to change, so use at
@@ -264,18 +262,16 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[ExportStudyResponse200]
+        Response[str]
     """
 
     kwargs = _get_kwargs(
         id=id,
-        client=client,
         method=method,
         authorization=authorization,
     )
 
-    async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
 
@@ -286,7 +282,7 @@ async def asyncio(
     client: AuthenticatedClient,
     method: Union[Unset, None, ExportStudyMethod] = UNSET,
     authorization: str,
-) -> Optional[ExportStudyResponse200]:
+) -> Optional[str]:
     """Download demographic data
 
      __This is an evolving feature and the exact content of such exports is subject to change, so use at
@@ -337,7 +333,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        ExportStudyResponse200
+        str
     """
 
     return (

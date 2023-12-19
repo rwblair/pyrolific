@@ -3,24 +3,24 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import Dict
+from typing import Union
 from ...models.get_filter_set_response_200 import GetFilterSetResponse200
-from ...types import UNSET, Response, Unset
+from typing import Optional
+from ...types import UNSET, Unset
 
 
 def _get_kwargs(
     id: str,
     *,
-    client: AuthenticatedClient,
     version_number: Union[Unset, None, int] = UNSET,
     authorization: str,
 ) -> Dict[str, Any]:
-    url = "{}/api/v1/filter-sets/{id}/".format(client.base_url, id=id)
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
-
+    headers = {}
     headers["Authorization"] = authorization
 
     params: Dict[str, Any] = {}
@@ -30,16 +30,17 @@ def _get_kwargs(
 
     return {
         "method": "get",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/api/v1/filter-sets/{id}/".format(
+            id=id,
+        ),
         "params": params,
+        "headers": headers,
     }
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[GetFilterSetResponse200]:
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[GetFilterSetResponse200]:
     if response.status_code == HTTPStatus.OK:
         response_200 = GetFilterSetResponse200.from_dict(response.json())
 
@@ -50,7 +51,9 @@ def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Get
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[GetFilterSetResponse200]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[GetFilterSetResponse200]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -85,13 +88,11 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        client=client,
         version_number=version_number,
         authorization=authorization,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -156,13 +157,11 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        client=client,
         version_number=version_number,
         authorization=authorization,
     )
 
-    async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
 

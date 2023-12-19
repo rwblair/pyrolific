@@ -1,17 +1,28 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from typing import Union
+from typing import Dict
+from typing import Union
+from ..types import UNSET, Unset
+from typing import List
+
 if TYPE_CHECKING:
-    pass
+    from ..models.range_filter import RangeFilter
+    from ..models.select_filter import SelectFilter
 
 
 T = TypeVar("T", bound="UpdateFilterSet")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class UpdateFilterSet:
     """
     Example:
@@ -26,7 +37,7 @@ class UpdateFilterSet:
 
     name: Union[Unset, str] = UNSET
     filters: Union[Unset, List[Union["RangeFilter", "SelectFilter"]]] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         from ..models.select_filter import SelectFilter
@@ -68,7 +79,9 @@ class UpdateFilterSet:
         _filters = d.pop("filters", UNSET)
         for filters_item_data in _filters or []:
 
-            def _parse_filters_item(data: object) -> Union["RangeFilter", "SelectFilter"]:
+            def _parse_filters_item(
+                data: object,
+            ) -> Union["RangeFilter", "SelectFilter"]:
                 try:
                     if not isinstance(data, dict):
                         raise TypeError()

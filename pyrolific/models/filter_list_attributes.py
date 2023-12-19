@@ -1,14 +1,22 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
 
-from ..models.filter_list_attributes_type import FilterListAttributesType
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from typing import Union
+from ..types import UNSET, Unset
+from ..models.filter_list_attributes_type import FilterListAttributesType
+
 
 T = TypeVar("T", bound="FilterListAttributes")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class FilterListAttributes:
     """
     Attributes:
@@ -25,7 +33,7 @@ class FilterListAttributes:
     description: Union[Unset, str] = UNSET
     type: Union[Unset, FilterListAttributesType] = UNSET
     question: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         filter_id = self.filter_id

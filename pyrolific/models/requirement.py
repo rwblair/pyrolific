@@ -1,17 +1,27 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from typing import Dict
+from typing import Union
+from ..types import UNSET, Unset
+from typing import List
+
 if TYPE_CHECKING:
-    pass
+    from ..models.requirement_query import RequirementQuery
+    from ..models.attribute import Attribute
 
 
 T = TypeVar("T", bound="Requirement")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class Requirement:
     """
     Attributes:
@@ -24,7 +34,7 @@ class Requirement:
     field_cls: str
     attributes: List["Attribute"]
     query: Union[Unset, "RequirementQuery"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         field_cls = self.field_cls
@@ -53,8 +63,8 @@ class Requirement:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.attribute import Attribute
         from ..models.requirement_query import RequirementQuery
+        from ..models.attribute import Attribute
 
         d = src_dict.copy()
         field_cls = d.pop("_cls")

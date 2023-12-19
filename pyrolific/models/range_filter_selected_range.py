@@ -1,13 +1,22 @@
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+from typing import Union
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="RangeFilterSelectedRange")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class RangeFilterSelectedRange:
     r"""This schema applies for filters of the `range` type, as defined in the [filter list
     response](\#tag/Filters/paths/~1api~1v1~1filters~1/get).
@@ -29,7 +38,7 @@ class RangeFilterSelectedRange:
 
     lower: Union[Unset, int, str] = UNSET
     upper: Union[Unset, int, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         lower: Union[Unset, int, str]
