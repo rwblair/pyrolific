@@ -5,7 +5,7 @@ import attr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.filter_set import FilterSet
+    pass
 
 
 T = TypeVar("T", bound="FilterSetList")

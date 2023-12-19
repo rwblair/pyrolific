@@ -6,7 +6,7 @@ from ..models.question_type import QuestionType
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.answer_option import AnswerOption
+    pass
 
 
 T = TypeVar("T", bound="Question")

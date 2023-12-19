@@ -5,7 +5,7 @@ import attr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.event_type import EventType
+    pass
 
 
 T = TypeVar("T", bound="EventTypeList")

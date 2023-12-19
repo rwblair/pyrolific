@@ -5,7 +5,7 @@ import attr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.select_filter_weightings import SelectFilterWeightings
+    pass
 
 
 T = TypeVar("T", bound="SelectFilter")

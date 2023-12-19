@@ -5,8 +5,7 @@ import attr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.attribute_value_type_0 import AttributeValueType0
-    from ..models.attribute_value_type_1_item_type_1 import AttributeValueType1ItemType1
+    pass
 
 
 T = TypeVar("T", bound="Attribute")

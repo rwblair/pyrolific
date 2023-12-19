@@ -71,7 +71,7 @@ def sync_detailed(
 
     We __strongly__ recommend that, when giving approval to a submission through the API, you first
     observe the `submission.status.change`
-    [event](https://docs.prolific.co/docs/api-docs/public/#tag/Hooks/paths/~1api~1v1~1hooks~1event-
+    [event](https://docs.prolific.com/docs/api-docs/public/#tag/Hooks/paths/~1api~1v1~1hooks~1event-
     types~1/get) for a status transition to
     `AWAITING_REVIEW` before making the approval request. Our system is currently unable to process
     approvals before this transition.
@@ -118,7 +118,7 @@ def sync(
 
     We __strongly__ recommend that, when giving approval to a submission through the API, you first
     observe the `submission.status.change`
-    [event](https://docs.prolific.co/docs/api-docs/public/#tag/Hooks/paths/~1api~1v1~1hooks~1event-
+    [event](https://docs.prolific.com/docs/api-docs/public/#tag/Hooks/paths/~1api~1v1~1hooks~1event-
     types~1/get) for a status transition to
     `AWAITING_REVIEW` before making the approval request. Our system is currently unable to process
     approvals before this transition.
@@ -158,7 +158,7 @@ async def asyncio_detailed(
 
     We __strongly__ recommend that, when giving approval to a submission through the API, you first
     observe the `submission.status.change`
-    [event](https://docs.prolific.co/docs/api-docs/public/#tag/Hooks/paths/~1api~1v1~1hooks~1event-
+    [event](https://docs.prolific.com/docs/api-docs/public/#tag/Hooks/paths/~1api~1v1~1hooks~1event-
     types~1/get) for a status transition to
     `AWAITING_REVIEW` before making the approval request. Our system is currently unable to process
     approvals before this transition.
@@ -203,7 +203,7 @@ async def asyncio(
 
     We __strongly__ recommend that, when giving approval to a submission through the API, you first
     observe the `submission.status.change`
-    [event](https://docs.prolific.co/docs/api-docs/public/#tag/Hooks/paths/~1api~1v1~1hooks~1event-
+    [event](https://docs.prolific.com/docs/api-docs/public/#tag/Hooks/paths/~1api~1v1~1hooks~1event-
     types~1/get) for a status transition to
     `AWAITING_REVIEW` before making the approval request. Our system is currently unable to process
     approvals before this transition.

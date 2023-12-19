@@ -5,8 +5,7 @@ import attr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.question_response import QuestionResponse
-    from ..models.section import Section
+    pass
 
 
 T = TypeVar("T", bound="ResponseIn")

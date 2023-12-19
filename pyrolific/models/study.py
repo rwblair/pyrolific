@@ -10,10 +10,7 @@ from ..models.study_status import StudyStatus
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.base_study_completion_codes_item import BaseStudyCompletionCodesItem
-    from ..models.base_study_submissions_config import BaseStudySubmissionsConfig
-    from ..models.range_filter import RangeFilter
-    from ..models.select_filter import SelectFilter
+    pass
 
 
 T = TypeVar("T", bound="Study")
@@ -60,7 +57,7 @@ class Study:
         completion_option (Union[Unset, BaseStudyCompletionOption]): Use 'url' if you will redirect the user back to
             prolific using a url,
             the url you will use in your experiment
-            or survey to go back is https://app.prolific.co/submissions/complete?cc={code}
+            or survey to go back is https://app.prolific.com/submissions/complete?cc={code}
 
             Use 'code' when the participants will manually input the code, at the
             end of the experiment you will tell the participants the code. Note that

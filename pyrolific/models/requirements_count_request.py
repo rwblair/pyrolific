@@ -3,8 +3,7 @@ from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 import attr
 
 if TYPE_CHECKING:
-    from ..models.range_filter import RangeFilter
-    from ..models.select_filter import SelectFilter
+    pass
 
 
 T = TypeVar("T", bound="RequirementsCountRequest")

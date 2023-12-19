@@ -5,7 +5,7 @@ import attr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.message import Message
+    pass
 
 
 T = TypeVar("T", bound="Messages")

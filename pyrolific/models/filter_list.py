@@ -5,12 +5,7 @@ import attr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.filter_list_links import FilterListLinks
-    from ..models.filter_list_meta import FilterListMeta
-    from ..models.range_filter_list_detailed_response import RangeFilterListDetailedResponse
-    from ..models.range_filter_list_response import RangeFilterListResponse
-    from ..models.select_filter_list_detailed_response import SelectFilterListDetailedResponse
-    from ..models.select_filter_list_response import SelectFilterListResponse
+    pass
 
 
 T = TypeVar("T", bound="FilterList")

@@ -5,8 +5,7 @@ import attr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.range_filter import RangeFilter
-    from ..models.select_filter import SelectFilter
+    pass
 
 
 T = TypeVar("T", bound="CreateFilterSetResponse201")

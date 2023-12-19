@@ -6,7 +6,7 @@ from ..models.invitation_status import InvitationStatus
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.invitation_invitee import InvitationInvitee
+    pass
 
 
 T = TypeVar("T", bound="Invitation")

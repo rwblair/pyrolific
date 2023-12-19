@@ -5,11 +5,7 @@ import attr
 from ..models.base_study_completion_codes_item_code_type import BaseStudyCompletionCodesItemCodeType
 
 if TYPE_CHECKING:
-    from ..models.add_to_participant_group import AddToParticipantGroup
-    from ..models.automatically_approve import AutomaticallyApprove
-    from ..models.manually_review import ManuallyReview
-    from ..models.remove_from_participant_group import RemoveFromParticipantGroup
-    from ..models.request_return import RequestReturn
+    pass
 
 
 T = TypeVar("T", bound="BaseStudyCompletionCodesItem")

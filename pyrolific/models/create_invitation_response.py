@@ -5,7 +5,7 @@ import attr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.invitation import Invitation
+    pass
 
 
 T = TypeVar("T", bound="CreateInvitationResponse")

@@ -16,7 +16,6 @@ from .base_study_device_compatibility_item import BaseStudyDeviceCompatibilityIt
 from .base_study_peripheral_requirements_item import BaseStudyPeripheralRequirementsItem
 from .base_study_prolific_id_option import BaseStudyProlificIdOption
 from .base_study_submissions_config import BaseStudySubmissionsConfig
-from .bulk_approve_submissions_json_body import BulkApproveSubmissionsJsonBody
 from .bulk_bonus import BulkBonus
 from .clone_filter_set_json_body import CloneFilterSetJsonBody
 from .clone_filter_set_response_201 import CloneFilterSetResponse201
@@ -69,6 +68,7 @@ from .participant_group_list_response import ParticipantGroupListResponse
 from .participant_group_membership import ParticipantGroupMembership
 from .participant_group_membership_list_response import ParticipantGroupMembershipListResponse
 from .participant_group_update import ParticipantGroupUpdate
+from .participant_i_ds import ParticipantIDs
 from .participant_id_list import ParticipantIDList
 from .project import Project
 from .project_short import ProjectShort
@@ -118,6 +118,7 @@ from .study_short_study_type import StudyShortStudyType
 from .study_status import StudyStatus
 from .study_transition import StudyTransition
 from .submission import Submission
+from .submission_i_ds import SubmissionIDs
 from .submission_list_response import SubmissionListResponse
 from .submission_short import SubmissionShort
 from .submission_short_status import SubmissionShortStatus
@@ -164,7 +165,6 @@ __all__ = (
     "BaseStudyPeripheralRequirementsItem",
     "BaseStudyProlificIdOption",
     "BaseStudySubmissionsConfig",
-    "BulkApproveSubmissionsJsonBody",
     "BulkBonus",
     "CloneFilterSetJsonBody",
     "CloneFilterSetResponse201",
@@ -214,6 +214,7 @@ __all__ = (
     "ParticipantGroupMembershipListResponse",
     "ParticipantGroupUpdate",
     "ParticipantIDList",
+    "ParticipantIDs",
     "Project",
     "ProjectShort",
     "ProjectShortListResponse",
@@ -262,6 +263,7 @@ __all__ = (
     "StudyStatus",
     "StudyTransition",
     "Submission",
+    "SubmissionIDs",
     "SubmissionListResponse",
     "SubmissionShort",
     "SubmissionShortStatus",

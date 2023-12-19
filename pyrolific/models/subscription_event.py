@@ -6,7 +6,7 @@ from ..models.subscription_event_status import SubscriptionEventStatus
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.subscription_event_payload import SubscriptionEventPayload
+    pass
 
 
 T = TypeVar("T", bound="SubscriptionEvent")

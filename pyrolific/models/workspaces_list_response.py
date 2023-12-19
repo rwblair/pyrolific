@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
 import attr
 
 if TYPE_CHECKING:
-    from ..models.workspace_short import WorkspaceShort
+    pass
 
 
 T = TypeVar("T", bound="WorkspacesListResponse")

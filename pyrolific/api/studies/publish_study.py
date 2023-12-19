@@ -74,7 +74,7 @@ def sync_detailed(
     - STOP: Stop a study completely, to make it active again you will need to increase the number of
     places
 
-    To learn more about it check out [help center](https://researcher-help.prolific.co/hc/en-
+    To learn more about it check out [help center](https://researcher-help.prolific.com/hc/en-
     gb/articles/360010963354)
 
     Args:
@@ -122,7 +122,7 @@ def sync(
     - STOP: Stop a study completely, to make it active again you will need to increase the number of
     places
 
-    To learn more about it check out [help center](https://researcher-help.prolific.co/hc/en-
+    To learn more about it check out [help center](https://researcher-help.prolific.com/hc/en-
     gb/articles/360010963354)
 
     Args:
@@ -163,7 +163,7 @@ async def asyncio_detailed(
     - STOP: Stop a study completely, to make it active again you will need to increase the number of
     places
 
-    To learn more about it check out [help center](https://researcher-help.prolific.co/hc/en-
+    To learn more about it check out [help center](https://researcher-help.prolific.com/hc/en-
     gb/articles/360010963354)
 
     Args:
@@ -209,7 +209,7 @@ async def asyncio(
     - STOP: Stop a study completely, to make it active again you will need to increase the number of
     places
 
-    To learn more about it check out [help center](https://researcher-help.prolific.co/hc/en-
+    To learn more about it check out [help center](https://researcher-help.prolific.com/hc/en-
     gb/articles/360010963354)
 
     Args:

@@ -1,36 +1,28 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
+from typing import Any, Dict, List, Type, TypeVar, cast
 
 import attr
 
-if TYPE_CHECKING:
-    pass
-
-
-T = TypeVar("T", bound="SubscriptionList")
+T = TypeVar("T", bound="SubmissionIDs")
 
 
 @attr.s(auto_attribs=True)
-class SubscriptionList:
+class SubmissionIDs:
     """
     Attributes:
-        results (List['SubscriptionDetail']): List of all subscriptions.
+        submission_ids (List[str]):
     """
 
-    results: List["SubscriptionDetail"]
+    submission_ids: List[str]
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        results = []
-        for results_item_data in self.results:
-            results_item = results_item_data.to_dict()
-
-            results.append(results_item)
+        submission_ids = self.submission_ids
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "results": results,
+                "submission_ids": submission_ids,
             }
         )
 
@@ -38,22 +30,15 @@ class SubscriptionList:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.subscription_detail import SubscriptionDetail
-
         d = src_dict.copy()
-        results = []
-        _results = d.pop("results")
-        for results_item_data in _results:
-            results_item = SubscriptionDetail.from_dict(results_item_data)
+        submission_ids = cast(List[str], d.pop("submission_ids"))
 
-            results.append(results_item)
-
-        subscription_list = cls(
-            results=results,
+        submission_i_ds = cls(
+            submission_ids=submission_ids,
         )
 
-        subscription_list.additional_properties = d
-        return subscription_list
+        submission_i_ds.additional_properties = d
+        return submission_i_ds
 
     @property
     def additional_keys(self) -> List[str]:

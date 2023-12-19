@@ -72,7 +72,7 @@ def sync_detailed(
     - internal_name: Internal name of the study, not shown to participants
     - total_available_places: Only increasing is allowed. A completed study will become active again and
     resume recruiting of participants. For more information, check the [guide](https://researcher-
-    help.prolific.co/hc/en-gb/articles/360009222553)
+    help.prolific.com/hc/en-gb/articles/360009222553)
 
     Args:
         id (str):
@@ -117,7 +117,7 @@ def sync(
     - internal_name: Internal name of the study, not shown to participants
     - total_available_places: Only increasing is allowed. A completed study will become active again and
     resume recruiting of participants. For more information, check the [guide](https://researcher-
-    help.prolific.co/hc/en-gb/articles/360009222553)
+    help.prolific.com/hc/en-gb/articles/360009222553)
 
     Args:
         id (str):
@@ -155,7 +155,7 @@ async def asyncio_detailed(
     - internal_name: Internal name of the study, not shown to participants
     - total_available_places: Only increasing is allowed. A completed study will become active again and
     resume recruiting of participants. For more information, check the [guide](https://researcher-
-    help.prolific.co/hc/en-gb/articles/360009222553)
+    help.prolific.com/hc/en-gb/articles/360009222553)
 
     Args:
         id (str):
@@ -198,7 +198,7 @@ async def asyncio(
     - internal_name: Internal name of the study, not shown to participants
     - total_available_places: Only increasing is allowed. A completed study will become active again and
     resume recruiting of participants. For more information, check the [guide](https://researcher-
-    help.prolific.co/hc/en-gb/articles/360009222553)
+    help.prolific.com/hc/en-gb/articles/360009222553)
 
     Args:
         id (str):

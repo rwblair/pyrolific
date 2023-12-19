@@ -5,7 +5,7 @@ import attr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.participant_group_feeder_studies_item import ParticipantGroupFeederStudiesItem
+    pass
 
 
 T = TypeVar("T", bound="ParticipantGroup")

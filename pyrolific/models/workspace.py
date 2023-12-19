@@ -5,8 +5,7 @@ import attr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.project_short import ProjectShort
-    from ..models.workspace_user import WorkspaceUser
+    pass
 
 
 T = TypeVar("T", bound="Workspace")

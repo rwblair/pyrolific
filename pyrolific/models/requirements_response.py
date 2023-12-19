@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
 import attr
 
 if TYPE_CHECKING:
-    from ..models.requirement import Requirement
+    pass
 
 
 T = TypeVar("T", bound="RequirementsResponse")

@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
 import attr
 
 if TYPE_CHECKING:
-    from ..models.project_short import ProjectShort
+    pass
 
 
 T = TypeVar("T", bound="ProjectShortListResponse")

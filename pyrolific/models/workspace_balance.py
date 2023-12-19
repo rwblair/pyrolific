@@ -5,8 +5,7 @@ import attr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.workspace_balance_available_balance_breakdown import WorkspaceBalanceAvailableBalanceBreakdown
-    from ..models.workspace_balance_balance_breakdown import WorkspaceBalanceBalanceBreakdown
+    pass
 
 
 T = TypeVar("T", bound="WorkspaceBalance")

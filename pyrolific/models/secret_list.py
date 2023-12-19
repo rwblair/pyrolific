@@ -5,7 +5,7 @@ import attr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.secret_detail import SecretDetail
+    pass
 
 
 T = TypeVar("T", bound="SecretList")

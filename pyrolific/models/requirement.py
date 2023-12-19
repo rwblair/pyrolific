@@ -5,8 +5,7 @@ import attr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.attribute import Attribute
-    from ..models.requirement_query import RequirementQuery
+    pass
 
 
 T = TypeVar("T", bound="Requirement")

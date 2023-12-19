@@ -7,7 +7,7 @@ from ..models.select_filter_list_attributes_data_type import SelectFilterListAtt
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.select_filter_list_attributes_choices import SelectFilterListAttributesChoices
+    pass
 
 
 T = TypeVar("T", bound="SelectFilterListResponse")

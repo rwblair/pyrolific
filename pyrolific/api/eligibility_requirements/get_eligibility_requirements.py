@@ -59,7 +59,7 @@ def sync_detailed(
 ) -> Response[RequirementsResponse]:
     """Get list of all requirements.
 
-     This endpoint is deprecated - please use [Filters](https://docs.prolific.co/docs/api-
+     This endpoint is deprecated - please use [Filters](https://docs.prolific.com/docs/api-
     docs/public/#tag/Filters) instead.
 
     Get a list of all the requirements defined by Prolific that can
@@ -96,7 +96,7 @@ def sync(
 ) -> Optional[RequirementsResponse]:
     """Get list of all requirements.
 
-     This endpoint is deprecated - please use [Filters](https://docs.prolific.co/docs/api-
+     This endpoint is deprecated - please use [Filters](https://docs.prolific.com/docs/api-
     docs/public/#tag/Filters) instead.
 
     Get a list of all the requirements defined by Prolific that can
@@ -126,7 +126,7 @@ async def asyncio_detailed(
 ) -> Response[RequirementsResponse]:
     """Get list of all requirements.
 
-     This endpoint is deprecated - please use [Filters](https://docs.prolific.co/docs/api-
+     This endpoint is deprecated - please use [Filters](https://docs.prolific.com/docs/api-
     docs/public/#tag/Filters) instead.
 
     Get a list of all the requirements defined by Prolific that can
@@ -161,7 +161,7 @@ async def asyncio(
 ) -> Optional[RequirementsResponse]:
     """Get list of all requirements.
 
-     This endpoint is deprecated - please use [Filters](https://docs.prolific.co/docs/api-
+     This endpoint is deprecated - please use [Filters](https://docs.prolific.com/docs/api-
     docs/public/#tag/Filters) instead.
 
     Get a list of all the requirements defined by Prolific that can

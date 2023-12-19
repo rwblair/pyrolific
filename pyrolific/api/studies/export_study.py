@@ -108,7 +108,7 @@ def sync_detailed(
       * ISO 8601 formatted
     * Completion code ('entered code')
 
-    Learn more on [Exporting Prolific demographic data](https://researcher-help.prolific.co/hc/en-
+    Learn more on [Exporting Prolific demographic data](https://researcher-help.prolific.com/hc/en-
     gb/articles/360009391633-Exporting-Prolific-demographic-data).
 
     Args:
@@ -183,7 +183,7 @@ def sync(
       * ISO 8601 formatted
     * Completion code ('entered code')
 
-    Learn more on [Exporting Prolific demographic data](https://researcher-help.prolific.co/hc/en-
+    Learn more on [Exporting Prolific demographic data](https://researcher-help.prolific.com/hc/en-
     gb/articles/360009391633-Exporting-Prolific-demographic-data).
 
     Args:
@@ -251,7 +251,7 @@ async def asyncio_detailed(
       * ISO 8601 formatted
     * Completion code ('entered code')
 
-    Learn more on [Exporting Prolific demographic data](https://researcher-help.prolific.co/hc/en-
+    Learn more on [Exporting Prolific demographic data](https://researcher-help.prolific.com/hc/en-
     gb/articles/360009391633-Exporting-Prolific-demographic-data).
 
     Args:
@@ -324,7 +324,7 @@ async def asyncio(
       * ISO 8601 formatted
     * Completion code ('entered code')
 
-    Learn more on [Exporting Prolific demographic data](https://researcher-help.prolific.co/hc/en-
+    Learn more on [Exporting Prolific demographic data](https://researcher-help.prolific.com/hc/en-
     gb/articles/360009391633-Exporting-Prolific-demographic-data).
 
     Args:

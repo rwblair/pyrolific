@@ -1,18 +1,18 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, cast
+from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.bulk_approve_submissions_json_body import BulkApproveSubmissionsJsonBody
+from ...models.participant_i_ds import ParticipantIDs
 from ...types import Response
 
 
 def _get_kwargs(
     *,
     client: AuthenticatedClient,
-    json_body: BulkApproveSubmissionsJsonBody,
+    json_body: Union["ParticipantIDs", "SubmissionIDs"],
     authorization: str,
 ) -> Dict[str, Any]:
     url = "{}/api/v1/submissions/bulk-approve/".format(client.base_url)
@@ -22,7 +22,13 @@ def _get_kwargs(
 
     headers["Authorization"] = authorization
 
-    json_json_body = json_body.to_dict()
+    json_json_body: Dict[str, Any]
+
+    if isinstance(json_body, ParticipantIDs):
+        json_json_body = json_body.to_dict()
+
+    else:
+        json_json_body = json_body.to_dict()
 
     return {
         "method": "post",
@@ -57,18 +63,21 @@ def _build_response(*, client: Client, response: httpx.Response) -> Response[str
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: BulkApproveSubmissionsJsonBody,
+    json_body: Union["ParticipantIDs", "SubmissionIDs"],
     authorization: str,
 ) -> Response[str]:
     """Bulk approve submissions
 
      Bulk approve study submissions to pay participants after they have
-    completed your survey or experiment. You need the list of the participant
-    IDs you want to approve and the study id.
+    completed your survey or experiment. There are two variant payloads to
+    this request.
+
+    1. You can supply a Study ID, and a list of participant IDs, or
+    2. You can provide a list of submission IDs
 
     Args:
         authorization (str):
-        json_body (BulkApproveSubmissionsJsonBody):
+        json_body (Union['ParticipantIDs', 'SubmissionIDs']):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -95,18 +104,21 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    json_body: BulkApproveSubmissionsJsonBody,
+    json_body: Union["ParticipantIDs", "SubmissionIDs"],
     authorization: str,
 ) -> Optional[str]:
     """Bulk approve submissions
 
      Bulk approve study submissions to pay participants after they have
-    completed your survey or experiment. You need the list of the participant
-    IDs you want to approve and the study id.
+    completed your survey or experiment. There are two variant payloads to
+    this request.
+
+    1. You can supply a Study ID, and a list of participant IDs, or
+    2. You can provide a list of submission IDs
 
     Args:
         authorization (str):
-        json_body (BulkApproveSubmissionsJsonBody):
+        json_body (Union['ParticipantIDs', 'SubmissionIDs']):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -126,18 +138,21 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: BulkApproveSubmissionsJsonBody,
+    json_body: Union["ParticipantIDs", "SubmissionIDs"],
     authorization: str,
 ) -> Response[str]:
     """Bulk approve submissions
 
      Bulk approve study submissions to pay participants after they have
-    completed your survey or experiment. You need the list of the participant
-    IDs you want to approve and the study id.
+    completed your survey or experiment. There are two variant payloads to
+    this request.
+
+    1. You can supply a Study ID, and a list of participant IDs, or
+    2. You can provide a list of submission IDs
 
     Args:
         authorization (str):
-        json_body (BulkApproveSubmissionsJsonBody):
+        json_body (Union['ParticipantIDs', 'SubmissionIDs']):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -162,18 +177,21 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    json_body: BulkApproveSubmissionsJsonBody,
+    json_body: Union["ParticipantIDs", "SubmissionIDs"],
     authorization: str,
 ) -> Optional[str]:
     """Bulk approve submissions
 
      Bulk approve study submissions to pay participants after they have
-    completed your survey or experiment. You need the list of the participant
-    IDs you want to approve and the study id.
+    completed your survey or experiment. There are two variant payloads to
+    this request.
+
+    1. You can supply a Study ID, and a list of participant IDs, or
+    2. You can provide a list of submission IDs
 
     Args:
         authorization (str):
-        json_body (BulkApproveSubmissionsJsonBody):
+        json_body (Union['ParticipantIDs', 'SubmissionIDs']):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

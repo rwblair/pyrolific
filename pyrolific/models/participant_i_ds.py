@@ -1,54 +1,51 @@
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, List, Type, TypeVar, cast
 
 import attr
 
-from ..types import UNSET, Unset
-
-T = TypeVar("T", bound="BulkApproveSubmissionsJsonBody")
+T = TypeVar("T", bound="ParticipantIDs")
 
 
 @attr.s(auto_attribs=True)
-class BulkApproveSubmissionsJsonBody:
+class ParticipantIDs:
     """
     Attributes:
-        study_id (Union[Unset, str]):
-        participant_ids (Union[Unset, List[str]]):
+        study_id (str):
+        participant_ids (List[str]):
     """
 
-    study_id: Union[Unset, str] = UNSET
-    participant_ids: Union[Unset, List[str]] = UNSET
+    study_id: str
+    participant_ids: List[str]
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         study_id = self.study_id
-        participant_ids: Union[Unset, List[str]] = UNSET
-        if not isinstance(self.participant_ids, Unset):
-            participant_ids = self.participant_ids
+        participant_ids = self.participant_ids
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
-        if study_id is not UNSET:
-            field_dict["study_id"] = study_id
-        if participant_ids is not UNSET:
-            field_dict["participant_ids"] = participant_ids
+        field_dict.update(
+            {
+                "study_id": study_id,
+                "participant_ids": participant_ids,
+            }
+        )
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        study_id = d.pop("study_id", UNSET)
+        study_id = d.pop("study_id")
 
-        participant_ids = cast(List[str], d.pop("participant_ids", UNSET))
+        participant_ids = cast(List[str], d.pop("participant_ids"))
 
-        bulk_approve_submissions_json_body = cls(
+        participant_i_ds = cls(
             study_id=study_id,
             participant_ids=participant_ids,
         )
 
-        bulk_approve_submissions_json_body.additional_properties = d
-        return bulk_approve_submissions_json_body
+        participant_i_ds.additional_properties = d
+        return participant_i_ds
 
     @property
     def additional_keys(self) -> List[str]:

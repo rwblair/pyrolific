@@ -5,7 +5,7 @@ import attr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.summary_question import SummaryQuestion
+    pass
 
 
 T = TypeVar("T", bound="Summary")
