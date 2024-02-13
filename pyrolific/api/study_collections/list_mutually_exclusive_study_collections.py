@@ -7,10 +7,10 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from typing import Dict
 from ...models.mutually_exclusive_study_collections_response import (
     MutuallyExclusiveStudyCollectionsResponse,
 )
+from typing import Dict
 
 
 def _get_kwargs(

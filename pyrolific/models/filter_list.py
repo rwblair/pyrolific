@@ -8,23 +8,23 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from typing import Dict
+from ..types import UNSET, Unset
 from typing import List
 from typing import Union
-from ..types import UNSET, Unset
+from typing import Dict
+from typing import Union
 
 if TYPE_CHECKING:
-    from ..models.filter_list_meta import FilterListMeta
+    from ..models.range_filter_list_response import RangeFilterListResponse
+    from ..models.select_filter_list_response import SelectFilterListResponse
+    from ..models.filter_list_links import FilterListLinks
     from ..models.select_filter_list_detailed_response import (
         SelectFilterListDetailedResponse,
     )
-    from ..models.filter_list_links import FilterListLinks
-    from ..models.select_filter_list_response import SelectFilterListResponse
     from ..models.range_filter_list_detailed_response import (
         RangeFilterListDetailedResponse,
     )
-    from ..models.range_filter_list_response import RangeFilterListResponse
+    from ..models.filter_list_meta import FilterListMeta
 
 
 T = TypeVar("T", bound="FilterList")
@@ -56,11 +56,11 @@ class FilterList:
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.range_filter_list_response import RangeFilterListResponse
+        from ..models.select_filter_list_response import SelectFilterListResponse
         from ..models.select_filter_list_detailed_response import (
             SelectFilterListDetailedResponse,
         )
-        from ..models.select_filter_list_response import SelectFilterListResponse
-        from ..models.range_filter_list_response import RangeFilterListResponse
 
         results: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.results, Unset):
@@ -104,16 +104,16 @@ class FilterList:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.filter_list_meta import FilterListMeta
+        from ..models.range_filter_list_response import RangeFilterListResponse
+        from ..models.select_filter_list_response import SelectFilterListResponse
+        from ..models.filter_list_links import FilterListLinks
         from ..models.select_filter_list_detailed_response import (
             SelectFilterListDetailedResponse,
         )
-        from ..models.filter_list_links import FilterListLinks
-        from ..models.select_filter_list_response import SelectFilterListResponse
         from ..models.range_filter_list_detailed_response import (
             RangeFilterListDetailedResponse,
         )
-        from ..models.range_filter_list_response import RangeFilterListResponse
+        from ..models.filter_list_meta import FilterListMeta
 
         d = src_dict.copy()
         results = []

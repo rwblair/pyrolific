@@ -7,13 +7,13 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from typing import Dict
-from ...models.transition_mutually_exclusive_study_collection_json_body import (
-    TransitionMutuallyExclusiveStudyCollectionJsonBody,
-)
 from ...models.mutually_exclusive_study_collection_update import (
     MutuallyExclusiveStudyCollectionUpdate,
 )
+from ...models.transition_mutually_exclusive_study_collection_json_body import (
+    TransitionMutuallyExclusiveStudyCollectionJsonBody,
+)
+from typing import Dict
 
 
 def _get_kwargs(

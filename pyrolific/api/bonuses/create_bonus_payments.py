@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
+from ...models.create_bonus_payments_json_body import CreateBonusPaymentsJsonBody
 from typing import Dict
 from ...models.bulk_bonus import BulkBonus
-from ...models.create_bonus_payments_json_body import CreateBonusPaymentsJsonBody
 
 
 def _get_kwargs(

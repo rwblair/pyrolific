@@ -8,10 +8,10 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from ..models.submission_detail_status import SubmissionDetailStatus
 from typing import cast, List
 from typing import Union
-from ..models.submission_detail_status import SubmissionDetailStatus
-from ..types import UNSET, Unset
 
 
 T = TypeVar("T", bound="SubmissionDetail")

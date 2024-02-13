@@ -1586,6 +1586,25 @@ paths:
                       weightings:
                         0: 0.5
                         1: 0.5
+              study_labelled_as_interview:
+                value:
+                  name: "Video Interview"
+                  description: "In this study you will join a video call where we'll ask you some questions."
+                  external_study_url: "https://google.com"
+                  reward: 100
+                  total_available_places: 500
+                  prolific_id_option: "question"
+                  completion_option: "url"
+                  completion_codes:
+                    - code: "ABC123"
+                      code_type: "COMPLETED"
+                      actions:
+                        - action: "MANUALLY_REVIEW"
+                  device_compatibility: ["mobile", "desktop", "tablet"]
+                  peripheral_requirements: []
+                  estimated_completion_time: 1
+                  filters: []
+                  study_labels: ["interview"]
 
       responses:
         "201":
@@ -1747,6 +1766,9 @@ paths:
                         - action: "AUTOMATICALLY_APPROVE"
                         - action: "ADD_TO_PARTICIPANT_GROUP"
                           participant_group: "619e049f7648a4e1f8f3645b"
+              label_study_as_interview:
+                value:
+                  study_labels: ["interview"]
             schema:
               $ref: "#/components/schemas/BaseStudy"
         required: false
@@ -4737,7 +4759,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionCreate"
+                $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionList"
         "4XX":
           description: Error
           content:
@@ -4801,7 +4823,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionPatch"
+              $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionUpdate"
             examples:
               update_name:
                 value:
@@ -4820,7 +4842,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionCreate"
+                $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionDetail"
         "4XX":
           description: Error
           content:
@@ -4871,6 +4893,8 @@ paths:
         - Publish a study collection
         - Cancel publish a study collection
         - Schedule publish a study collection
+          - This can be done by setting the publish_at on the study collection at create or patch, then transitioning with the "SCHEDULE_PUBLISH" action
+          - Or optionally the publish_at can be provided directly in the body of the transition request
       parameters:
         - name: Authorization
           in: header
@@ -4894,6 +4918,9 @@ paths:
                     - PUBLISH
                     - SCHEDULE_PUBLISH
                     - CANCEL_PUBLISH
+                publish_at:
+                  type: string
+                  description: Optional parameter for scheduling publish, indicating the datetime and timezone the study collection should be scheduled to be published at
             examples:
               publish:
                 value:
@@ -4901,13 +4928,20 @@ paths:
               cancel_publish:
                 value:
                   action: CANCEL_PUBLISH
+              schedule_publish_time_already_set_on_collection:
+                value:
+                  action: SCHEDULE_PUBLISH
+              schedule_publish_time_set_in_request:
+                value:
+                  action: SCHEDULE_PUBLISH
+                  publish_at: 2050-02-28T13:45:00 Europe/London
       responses:
         "200":
           description: Mutually exclusive study collection
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionCreate"
+                $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionDetail"
         "4XX":
           description: Error
           content:
@@ -5540,6 +5574,32 @@ components:
               description: |-
                 - **-1** is the default value, meaning unlimited concurrent active/reserved submissions per study.
                 - **1+** limits the number of concurrent active/reserved submissions a study can have at one time.
+        study_labels:
+          type: array
+          description: |-
+            This field allows you to tag studies with information about the type/topic of the study and the kind of work involved in completing it.
+
+            We plan to make this information available to participants for easier self-selection. At present these options are mutually exclusive and only a single option can be selected, however in the future available categories will expand.
+          items:
+            type: string
+            enum:
+              - survey
+              - writing_task
+              - annotation
+              - interview
+              - other
+        content_warnings:
+          type: array
+          items:
+            type: string
+            enum:
+              - sensitive
+              - explicit
+          description: |-
+            Allow researchers to define content warnings for their study
+
+            We plan to make this information available to participants for easier self-selection. At present these options are mutually exclusive and only a single option can be selected, however in the future available warnings will expand.
+
         metadata:
           type: string
           nullable: true
@@ -5622,6 +5682,8 @@ components:
         filter_set_id: null
         filter_set_version: null
         status: UNPUBLISHED
+        study_labels: ["interview"]
+        content_warnings: ["sensitive"]
     StudyTransition:
       required:
         - action
@@ -6069,6 +6131,26 @@ components:
           type: string
           description: The channel ID, for linking back to a thread in the Prolific app.
           example: d45c8a5e812ff990fc6546beaf888c9820f4c184f7200a45d900cf0f321f7f38
+        data:
+          type: object
+          description: Metadata for a message
+          properties:
+            study_id:
+              type: string
+              description: What study the message relates to. In case this is not automatically filled for the participant, they can choose which study their message relates to.
+              example: 620ca2735fcbba4fa2b3211a
+            category:
+              type: string
+              description: Participants can self-categorise their message before sending it.
+              example: feedback
+              enum:
+                - payment-timing
+                - payment-issues
+                - technical-issues
+                - feedback
+                - rejections
+                - other
+
     SubscriptionList:
       additionalProperties: true
       required:
@@ -7275,18 +7357,10 @@ components:
           description: List of all mutually exclusive study collections in a project
           items:
             $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionList"
-    MutuallyExclusiveStudyCollectionList:
+    MutuallyExclusiveStudyCollectionUpdate:
       additionalProperties: false
       type: object
-      required:
-        - name
-        - description
-        - project_id
       properties:
-        id:
-          type: string
-          description: Mutually exclusive study collection id
-          example: 6527ffc7fcc2e63a7a555488
         name:
           type: string
           description: Mutually exclusive study collection name
@@ -7295,24 +7369,39 @@ components:
           type: string
           description: A description of the study collection
           example: This is a description of my mutually exclusive study collection
+        publish_at:
+          type: string
+          description: Datetime and timezone the study collection should be scheduled to be published at
+          example: "2050-02-28T13:45:00 Europe/London"
+          nullable: true
+        study_ids:
+          type: array
+          description: List of study ids you wish to include in the collection. Note, this will overwrite the current list of studies in the collection
+          items:
+            type: string
+            example: 5f7b9a7b5f7b9a7b5f7b9a7b
+    MutuallyExclusiveStudyCollectionCreate:
+      additionalProperties: false
+      type: object
+      required:
+        - name
+        - description
+        - project_id
+      properties:
         project_id:
           type: string
           description: Project id
           example: 5f7b9a7b5f7b9a7b5f7b9a7b
-    MutuallyExclusiveStudyCollectionStudies:
+      allOf:
+        - $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionUpdate"
+    MutuallyExclusiveStudyCollectionList:
       additionalProperties: false
       type: object
       properties:
-        study_ids:
-          type: array
-          description: List of study ids you wish to add to the collection
-          items:
-            type: string
-            example: 5f7b9a7b5f7b9a7b5f7b9a7b
-    MutuallyExclusiveStudyCollectionCreated:
-      additionalProperties: false
-      type: object
-      properties:
+        id:
+          type: string
+          description: Mutually exclusive study collection id
+          example: 6527ffc7fcc2e63a7a555488
         status:
           type: string
           description: Status of the study collection
@@ -7324,6 +7413,12 @@ components:
             - PUBLISHING
             - AWAITING_REVIEW
             - SCHEDULED
+      allOf:
+        - $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionUpdate"
+    MutuallyExclusiveStudyCollectionDetail:
+      additionalProperties: false
+      type: object
+      properties:
         estimated_cost:
           type: string
           description: Estimated cost of the study collection
@@ -7334,20 +7429,8 @@ components:
           description: Estimated cost of the study collection
           example: "£0.00"
           nullable: true
-
-    MutuallyExclusiveStudyCollectionCreate:
       allOf:
         - $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionList"
-        - $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionStudies"
-    MutuallyExclusiveStudyCollectionPatch:
-      allOf:
-        - $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionList"
-        - $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionStudies"
-    MutuallyExclusiveStudyCollectionDetail:
-      allOf:
-        - $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionList"
-        - $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionCreated"
-        - $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionStudies"
 
   securitySchemes:
     token:

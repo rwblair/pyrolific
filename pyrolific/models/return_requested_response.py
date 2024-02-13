@@ -8,11 +8,11 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-import datetime
-from ..models.return_requested_response_status import ReturnRequestedResponseStatus
-from dateutil.parser import isoparse
-from typing import Union
 from ..types import UNSET, Unset
+from dateutil.parser import isoparse
+from ..models.return_requested_response_status import ReturnRequestedResponseStatus
+import datetime
+from typing import Union
 
 
 T = TypeVar("T", bound="ReturnRequestedResponse")

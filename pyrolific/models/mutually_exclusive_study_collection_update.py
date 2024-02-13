@@ -5,9 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
 from typing import cast, List
 from typing import Union
-from ..types import UNSET, Unset
 
 
 T = TypeVar("T", bound="MutuallyExclusiveStudyCollectionUpdate")

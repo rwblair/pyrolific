@@ -8,9 +8,9 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
 from ..models.message_data_category import MessageDataCategory
 from typing import Union
-from ..types import UNSET, Unset
 
 
 T = TypeVar("T", bound="MessageData")

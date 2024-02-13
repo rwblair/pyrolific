@@ -7,12 +7,12 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from typing import Dict
-from typing import Union
+from ...models.get_studies_state import GetStudiesState
+from typing import Optional
 from ...models.studies_list_response import StudiesListResponse
 from ...types import UNSET, Unset
-from typing import Optional
-from ...models.get_studies_state import GetStudiesState
+from typing import Dict
+from typing import Union
 
 
 def _get_kwargs(

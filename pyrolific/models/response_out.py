@@ -8,12 +8,12 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import Dict
-import datetime
-from typing import List
-from dateutil.parser import isoparse
-from typing import Union
 from ..types import UNSET, Unset
+from dateutil.parser import isoparse
+from typing import List
+import datetime
+from typing import Dict
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.section import Section

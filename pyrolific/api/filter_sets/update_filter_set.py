@@ -8,8 +8,8 @@ from ...types import Response
 from ... import errors
 
 from typing import Dict
-from ...models.update_filter_set import UpdateFilterSet
 from ...models.update_filter_set_response_200 import UpdateFilterSetResponse200
+from ...models.update_filter_set import UpdateFilterSet
 
 
 def _get_kwargs(

@@ -8,11 +8,11 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
 from ..models.participant_group_feeder_studies_item_feeder_completion_codes_item_action import (
     ParticipantGroupFeederStudiesItemFeederCompletionCodesItemAction,
 )
 from typing import Union
-from ..types import UNSET, Unset
 
 
 T = TypeVar("T", bound="ParticipantGroupFeederStudiesItemFeederCompletionCodesItem")

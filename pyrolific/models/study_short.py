@@ -8,12 +8,12 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..models.study_short_status import StudyShortStatus
-import datetime
-from dateutil.parser import isoparse
-from typing import Union
-from ..models.study_short_study_type import StudyShortStudyType
 from ..types import UNSET, Unset
+from dateutil.parser import isoparse
+from ..models.study_short_study_type import StudyShortStudyType
+import datetime
+from typing import Union
+from ..models.study_short_status import StudyShortStatus
 
 
 T = TypeVar("T", bound="StudyShort")

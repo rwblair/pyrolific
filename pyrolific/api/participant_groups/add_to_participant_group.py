@@ -8,10 +8,10 @@ from ...types import Response
 from ... import errors
 
 from typing import Dict
+from ...models.participant_id_list import ParticipantIDList
 from ...models.participant_group_membership_list_response import (
     ParticipantGroupMembershipListResponse,
 )
-from ...models.participant_id_list import ParticipantIDList
 
 
 def _get_kwargs(

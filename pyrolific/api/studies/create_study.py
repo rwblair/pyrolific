@@ -8,8 +8,8 @@ from ...types import Response
 from ... import errors
 
 from typing import Dict
-from ...models.create_study import CreateStudy
 from ...models.study import Study
+from ...models.create_study import CreateStudy
 
 
 def _get_kwargs(

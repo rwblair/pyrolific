@@ -9,8 +9,8 @@ from ... import errors
 
 from typing import Optional
 from ...types import UNSET, Unset
-from typing import Union
 from ...models.export_study_method import ExportStudyMethod
+from typing import Union
 
 
 def _get_kwargs(
