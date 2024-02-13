@@ -8,15 +8,15 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
 from typing import List
-from typing import Union
 from typing import Dict
 from typing import Union
+from typing import Union
+from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.select_filter import SelectFilter
     from ..models.range_filter import RangeFilter
+    from ..models.select_filter import SelectFilter
 
 
 T = TypeVar("T", bound="LockFilterSetResponse200")
@@ -98,8 +98,8 @@ class LockFilterSetResponse200:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.select_filter import SelectFilter
         from ..models.range_filter import RangeFilter
+        from ..models.select_filter import SelectFilter
 
         d = src_dict.copy()
         id = d.pop("id", UNSET)

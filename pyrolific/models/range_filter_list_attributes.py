@@ -12,8 +12,8 @@ from ..types import UNSET, Unset
 from ..models.range_filter_list_attributes_data_type import (
     RangeFilterListAttributesDataType,
 )
-from typing import Union
 from typing import cast, Union
+from typing import Union
 
 
 T = TypeVar("T", bound="RangeFilterListAttributes")

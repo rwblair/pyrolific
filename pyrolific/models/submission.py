@@ -8,8 +8,8 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
 from ..models.submission_status import SubmissionStatus
+from ..types import UNSET, Unset
 from typing import Union
 
 

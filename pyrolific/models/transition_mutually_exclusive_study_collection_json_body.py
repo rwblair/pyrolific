@@ -9,10 +9,10 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import Union
 from ..models.transition_mutually_exclusive_study_collection_json_body_action import (
     TransitionMutuallyExclusiveStudyCollectionJsonBodyAction,
 )
+from typing import Union
 
 
 T = TypeVar("T", bound="TransitionMutuallyExclusiveStudyCollectionJsonBody")

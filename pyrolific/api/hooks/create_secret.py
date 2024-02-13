@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.secret_detail import SecretDetail
-from typing import Dict
 from ...models.create_secret import CreateSecret
+from typing import Dict
+from ...models.secret_detail import SecretDetail
 
 
 def _get_kwargs(

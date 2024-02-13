@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from typing import Dict
 from ...models.study import Study
+from typing import Dict
 from ...models.base_study import BaseStudy
 
 

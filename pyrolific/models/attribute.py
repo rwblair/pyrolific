@@ -8,17 +8,17 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from typing import cast, List
+from typing import Dict
+from typing import cast, Union
+from typing import Union
 from ..types import UNSET, Unset
 from typing import Optional
-from typing import cast, List
-from typing import cast, Union
 from typing import cast
-from typing import Dict
-from typing import Union
 
 if TYPE_CHECKING:
-    from ..models.attribute_value_type_1_item_type_1 import AttributeValueType1ItemType1
     from ..models.attribute_value_type_0 import AttributeValueType0
+    from ..models.attribute_value_type_1_item_type_1 import AttributeValueType1ItemType1
 
 
 T = TypeVar("T", bound="Attribute")
@@ -49,10 +49,10 @@ class Attribute:
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.attribute_value_type_0 import AttributeValueType0
         from ..models.attribute_value_type_1_item_type_1 import (
             AttributeValueType1ItemType1,
         )
-        from ..models.attribute_value_type_0 import AttributeValueType0
 
         value: Union[Dict[str, Any], List[Union[Dict[str, Any], str]], bool, float, str]
 
@@ -97,10 +97,10 @@ class Attribute:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        from ..models.attribute_value_type_0 import AttributeValueType0
         from ..models.attribute_value_type_1_item_type_1 import (
             AttributeValueType1ItemType1,
         )
-        from ..models.attribute_value_type_0 import AttributeValueType0
 
         d = src_dict.copy()
 

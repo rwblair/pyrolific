@@ -8,26 +8,26 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from ..models.base_study_study_labels_item import BaseStudyStudyLabelsItem
-from ..models.base_study_completion_option import BaseStudyCompletionOption
-from ..models.base_study_content_warnings_item import BaseStudyContentWarningsItem
 from ..models.base_study_peripheral_requirements_item import (
     BaseStudyPeripheralRequirementsItem,
 )
-from typing import List
-from ..models.base_study_prolific_id_option import BaseStudyProlificIdOption
-from typing import Union
+from ..models.base_study_completion_option import BaseStudyCompletionOption
 from ..models.base_study_device_compatibility_item import (
     BaseStudyDeviceCompatibilityItem,
 )
+from ..models.base_study_content_warnings_item import BaseStudyContentWarningsItem
+from ..models.base_study_prolific_id_option import BaseStudyProlificIdOption
+from typing import List
+from typing import Union
 from typing import Dict
 from typing import Union
+from ..models.base_study_study_labels_item import BaseStudyStudyLabelsItem
+from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.select_filter import SelectFilter
     from ..models.range_filter import RangeFilter
     from ..models.base_study_completion_codes_item import BaseStudyCompletionCodesItem
+    from ..models.select_filter import SelectFilter
     from ..models.base_study_submissions_config import BaseStudySubmissionsConfig
 
 
@@ -307,11 +307,11 @@ class CreateStudy:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.select_filter import SelectFilter
         from ..models.range_filter import RangeFilter
         from ..models.base_study_completion_codes_item import (
             BaseStudyCompletionCodesItem,
         )
+        from ..models.select_filter import SelectFilter
         from ..models.base_study_submissions_config import BaseStudySubmissionsConfig
 
         d = src_dict.copy()

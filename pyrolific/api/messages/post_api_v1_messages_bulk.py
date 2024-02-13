@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.send_bulk_message import SendBulkMessage
 from ...types import UNSET, Unset
 from typing import Dict
+from ...models.send_bulk_message import SendBulkMessage
 from typing import Union
 
 

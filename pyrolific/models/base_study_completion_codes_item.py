@@ -11,14 +11,14 @@ from ..models.base_study_completion_codes_item_code_type import (
     BaseStudyCompletionCodesItemCodeType,
 )
 from typing import List
-from typing import Union
 from typing import Dict
+from typing import Union
 
 if TYPE_CHECKING:
-    from ..models.request_return import RequestReturn
-    from ..models.add_to_participant_group import AddToParticipantGroup
-    from ..models.remove_from_participant_group import RemoveFromParticipantGroup
     from ..models.manually_review import ManuallyReview
+    from ..models.request_return import RequestReturn
+    from ..models.remove_from_participant_group import RemoveFromParticipantGroup
+    from ..models.add_to_participant_group import AddToParticipantGroup
     from ..models.automatically_approve import AutomaticallyApprove
 
 
@@ -55,9 +55,9 @@ class BaseStudyCompletionCodesItem:
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        from ..models.add_to_participant_group import AddToParticipantGroup
-        from ..models.remove_from_participant_group import RemoveFromParticipantGroup
         from ..models.manually_review import ManuallyReview
+        from ..models.remove_from_participant_group import RemoveFromParticipantGroup
+        from ..models.add_to_participant_group import AddToParticipantGroup
         from ..models.automatically_approve import AutomaticallyApprove
 
         code = self.code
@@ -98,10 +98,10 @@ class BaseStudyCompletionCodesItem:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.request_return import RequestReturn
-        from ..models.add_to_participant_group import AddToParticipantGroup
-        from ..models.remove_from_participant_group import RemoveFromParticipantGroup
         from ..models.manually_review import ManuallyReview
+        from ..models.request_return import RequestReturn
+        from ..models.remove_from_participant_group import RemoveFromParticipantGroup
+        from ..models.add_to_participant_group import AddToParticipantGroup
         from ..models.automatically_approve import AutomaticallyApprove
 
         d = src_dict.copy()

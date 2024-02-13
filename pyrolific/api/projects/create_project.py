@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.create_project import CreateProject
 from ...models.project import Project
 from typing import Dict
+from ...models.create_project import CreateProject
 
 
 def _get_kwargs(

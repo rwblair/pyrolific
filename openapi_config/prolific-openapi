@@ -5726,7 +5726,7 @@ components:
           enum:
             - RESERVED
             - ACTIVE
-            - TIME-OUT
+            - TIMED-OUT
             - AWAITING REVIEW
             - APPROVED
             - RETURNED

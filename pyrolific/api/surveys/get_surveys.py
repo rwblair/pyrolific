@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from typing import Optional
 from ...types import UNSET, Unset
+from typing import Optional
 from typing import Union
 
 

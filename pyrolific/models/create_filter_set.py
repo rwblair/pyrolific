@@ -8,15 +8,15 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
 from typing import List
-from typing import Union
 from typing import Dict
 from typing import Union
+from typing import Union
+from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.select_filter import SelectFilter
     from ..models.range_filter import RangeFilter
+    from ..models.select_filter import SelectFilter
 
 
 T = TypeVar("T", bound="CreateFilterSet")
@@ -74,8 +74,8 @@ class CreateFilterSet:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.select_filter import SelectFilter
         from ..models.range_filter import RangeFilter
+        from ..models.select_filter import SelectFilter
 
         d = src_dict.copy()
         workspace_id = d.pop("workspace_id", UNSET)

@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.requirements_response import RequirementsResponse
 from ...types import UNSET, Unset
 from typing import Dict
+from ...models.requirements_response import RequirementsResponse
 from typing import Union
 
 

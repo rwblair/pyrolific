@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.filter_set_list import FilterSetList
 from typing import Dict
+from ...models.filter_set_list import FilterSetList
 
 
 def _get_kwargs(

@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
+from ...models.subscription_update_detail import SubscriptionUpdateDetail
 from typing import Dict
 from ...models.subscription_detail import SubscriptionDetail
-from ...models.subscription_update_detail import SubscriptionUpdateDetail
 
 
 def _get_kwargs(

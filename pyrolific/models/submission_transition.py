@@ -12,8 +12,8 @@ from ..types import UNSET, Unset
 from ..models.submission_transition_rejection_category import (
     SubmissionTransitionRejectionCategory,
 )
-from typing import Union
 from ..models.submission_transition_action import SubmissionTransitionAction
+from typing import Union
 
 
 T = TypeVar("T", bound="SubmissionTransition")

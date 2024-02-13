@@ -7,11 +7,11 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from typing import Optional
-from ...models.subscription_event_list import SubscriptionEventList
 from ...types import UNSET, Unset
+from ...models.subscription_event_list import SubscriptionEventList
 from typing import Dict
 from typing import Union
+from typing import Optional
 
 
 def _get_kwargs(

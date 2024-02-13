@@ -8,12 +8,12 @@ from attrs import field as _attrs_field
 
 
 from typing import Dict
-from typing import List
 from typing import Union
+from typing import List
 
 if TYPE_CHECKING:
-    from ..models.select_filter import SelectFilter
     from ..models.range_filter import RangeFilter
+    from ..models.select_filter import SelectFilter
 
 
 T = TypeVar("T", bound="RequirementsCountRequest")
@@ -69,8 +69,8 @@ class RequirementsCountRequest:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.select_filter import SelectFilter
         from ..models.range_filter import RangeFilter
+        from ..models.select_filter import SelectFilter
 
         d = src_dict.copy()
         filters = []

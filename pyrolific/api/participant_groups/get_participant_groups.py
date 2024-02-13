@@ -7,15 +7,15 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from typing import Optional
-from ...models.project_id import ProjectID
-from ...models.get_participant_groups_active import GetParticipantGroupsActive
-from ...models.workspace_id import WorkspaceID
-from typing import Union
-from ...models.participant_group_list_response import ParticipantGroupListResponse
 from ...types import UNSET, Unset
+from ...models.participant_group_list_response import ParticipantGroupListResponse
+from ...models.workspace_id import WorkspaceID
 from typing import Dict
 from typing import Union
+from typing import Union
+from ...models.get_participant_groups_active import GetParticipantGroupsActive
+from typing import Optional
+from ...models.project_id import ProjectID
 
 
 def _get_kwargs(

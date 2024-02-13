@@ -8,11 +8,11 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
 from typing import List
-from ..models.question_type import QuestionType
 from typing import Dict
 from typing import Union
+from ..types import UNSET, Unset
+from ..models.question_type import QuestionType
 
 if TYPE_CHECKING:
     from ..models.answer_option import AnswerOption

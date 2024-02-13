@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from typing import Dict
 from ...models.workspaces_list_response import WorkspacesListResponse
+from typing import Dict
 
 
 def _get_kwargs(
