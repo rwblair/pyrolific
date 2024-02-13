@@ -8,8 +8,8 @@ from typing import Dict
 from typing import List
 
 if TYPE_CHECKING:
-    from ..models.mutually_exclusive_study_collection_list import (
-        MutuallyExclusiveStudyCollectionList,
+    from ..models.mutually_exclusive_study_collection_update import (
+        MutuallyExclusiveStudyCollectionUpdate,
     )
 
 
@@ -20,11 +20,11 @@ T = TypeVar("T", bound="MutuallyExclusiveStudyCollectionsResponse")
 class MutuallyExclusiveStudyCollectionsResponse:
     """
     Attributes:
-        results (List['MutuallyExclusiveStudyCollectionList']): List of all mutually exclusive study collections in a
+        results (List['MutuallyExclusiveStudyCollectionUpdate']): List of all mutually exclusive study collections in a
             project
     """
 
-    results: List["MutuallyExclusiveStudyCollectionList"]
+    results: List["MutuallyExclusiveStudyCollectionUpdate"]
 
     def to_dict(self) -> Dict[str, Any]:
         results = []
@@ -44,15 +44,15 @@ class MutuallyExclusiveStudyCollectionsResponse:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.mutually_exclusive_study_collection_list import (
-            MutuallyExclusiveStudyCollectionList,
+        from ..models.mutually_exclusive_study_collection_update import (
+            MutuallyExclusiveStudyCollectionUpdate,
         )
 
         d = src_dict.copy()
         results = []
         _results = d.pop("results")
         for results_item_data in _results:
-            results_item = MutuallyExclusiveStudyCollectionList.from_dict(
+            results_item = MutuallyExclusiveStudyCollectionUpdate.from_dict(
                 results_item_data
             )
 

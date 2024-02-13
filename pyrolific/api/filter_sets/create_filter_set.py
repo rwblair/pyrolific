@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.create_filter_set import CreateFilterSet
 from typing import Dict
+from ...models.create_filter_set import CreateFilterSet
 from ...models.create_filter_set_response_201 import CreateFilterSetResponse201
 
 

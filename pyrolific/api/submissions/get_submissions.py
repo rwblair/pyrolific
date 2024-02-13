@@ -10,8 +10,8 @@ from ... import errors
 from ...models.submission_list_response import SubmissionListResponse
 from typing import Dict
 from typing import Union
-from typing import Optional
 from ...types import UNSET, Unset
+from typing import Optional
 
 
 def _get_kwargs(

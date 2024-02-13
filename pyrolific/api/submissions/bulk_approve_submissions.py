@@ -8,10 +8,10 @@ from ...types import Response
 from ... import errors
 
 from typing import cast, Union
-from typing import Dict
-from ...models.participant_i_ds import ParticipantIDs
-from typing import cast
 from ...models.submission_i_ds import SubmissionIDs
+from ...models.participant_i_ds import ParticipantIDs
+from typing import Dict
+from typing import cast
 
 
 def _get_kwargs(

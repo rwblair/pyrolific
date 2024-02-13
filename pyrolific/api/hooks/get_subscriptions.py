@@ -7,10 +7,10 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from typing import Dict
-from typing import Union
 from ...models.subscription_list import SubscriptionList
+from typing import Dict
 from typing import Optional
+from typing import Union
 from ...types import UNSET, Unset
 
 

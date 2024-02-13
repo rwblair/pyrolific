@@ -9,11 +9,11 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from typing import Dict
-from typing import Union
-from ..types import UNSET, Unset
 from ..models.select_filter_list_attributes_data_type import (
     SelectFilterListAttributesDataType,
 )
+from typing import Union
+from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.select_filter_list_attributes_choices import (

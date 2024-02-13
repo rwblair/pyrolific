@@ -8,10 +8,10 @@ from ...types import Response, UNSET
 from ... import errors
 
 from typing import Dict
-from typing import Union
-from ...models.get_filter_set_response_200 import GetFilterSetResponse200
 from typing import Optional
+from typing import Union
 from ...types import UNSET, Unset
+from ...models.get_filter_set_response_200 import GetFilterSetResponse200
 
 
 def _get_kwargs(

@@ -7,12 +7,12 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
+from typing import Dict
 from ...models.transition_mutually_exclusive_study_collection_json_body import (
     TransitionMutuallyExclusiveStudyCollectionJsonBody,
 )
-from typing import Dict
-from ...models.mutually_exclusive_study_collection_create import (
-    MutuallyExclusiveStudyCollectionCreate,
+from ...models.mutually_exclusive_study_collection_update import (
+    MutuallyExclusiveStudyCollectionUpdate,
 )
 
 
@@ -39,9 +39,9 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[MutuallyExclusiveStudyCollectionCreate]:
+) -> Optional[MutuallyExclusiveStudyCollectionUpdate]:
     if response.status_code == HTTPStatus.OK:
-        response_200 = MutuallyExclusiveStudyCollectionCreate.from_dict(response.json())
+        response_200 = MutuallyExclusiveStudyCollectionUpdate.from_dict(response.json())
 
         return response_200
     if client.raise_on_unexpected_status:
@@ -52,7 +52,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[MutuallyExclusiveStudyCollectionCreate]:
+) -> Response[MutuallyExclusiveStudyCollectionUpdate]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -67,13 +67,16 @@ def sync_detailed(
     client: AuthenticatedClient,
     json_body: TransitionMutuallyExclusiveStudyCollectionJsonBody,
     authorization: str,
-) -> Response[MutuallyExclusiveStudyCollectionCreate]:
-    """Transition a mutually exclusive study collection
+) -> Response[MutuallyExclusiveStudyCollectionUpdate]:
+    r"""Transition a mutually exclusive study collection
 
      Transition a mutually exclusive study collection. This is used to:
     - Publish a study collection
     - Cancel publish a study collection
     - Schedule publish a study collection
+      - This can be done by setting the publish_at on the study collection at create or patch, then
+    transitioning with the \"SCHEDULE_PUBLISH\" action
+      - Or optionally the publish_at can be provided directly in the body of the transition request
 
     Args:
         id (str):
@@ -85,7 +88,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[MutuallyExclusiveStudyCollectionCreate]
+        Response[MutuallyExclusiveStudyCollectionUpdate]
     """
 
     kwargs = _get_kwargs(
@@ -107,13 +110,16 @@ def sync(
     client: AuthenticatedClient,
     json_body: TransitionMutuallyExclusiveStudyCollectionJsonBody,
     authorization: str,
-) -> Optional[MutuallyExclusiveStudyCollectionCreate]:
-    """Transition a mutually exclusive study collection
+) -> Optional[MutuallyExclusiveStudyCollectionUpdate]:
+    r"""Transition a mutually exclusive study collection
 
      Transition a mutually exclusive study collection. This is used to:
     - Publish a study collection
     - Cancel publish a study collection
     - Schedule publish a study collection
+      - This can be done by setting the publish_at on the study collection at create or patch, then
+    transitioning with the \"SCHEDULE_PUBLISH\" action
+      - Or optionally the publish_at can be provided directly in the body of the transition request
 
     Args:
         id (str):
@@ -125,7 +131,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        MutuallyExclusiveStudyCollectionCreate
+        MutuallyExclusiveStudyCollectionUpdate
     """
 
     return sync_detailed(
@@ -142,13 +148,16 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     json_body: TransitionMutuallyExclusiveStudyCollectionJsonBody,
     authorization: str,
-) -> Response[MutuallyExclusiveStudyCollectionCreate]:
-    """Transition a mutually exclusive study collection
+) -> Response[MutuallyExclusiveStudyCollectionUpdate]:
+    r"""Transition a mutually exclusive study collection
 
      Transition a mutually exclusive study collection. This is used to:
     - Publish a study collection
     - Cancel publish a study collection
     - Schedule publish a study collection
+      - This can be done by setting the publish_at on the study collection at create or patch, then
+    transitioning with the \"SCHEDULE_PUBLISH\" action
+      - Or optionally the publish_at can be provided directly in the body of the transition request
 
     Args:
         id (str):
@@ -160,7 +169,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[MutuallyExclusiveStudyCollectionCreate]
+        Response[MutuallyExclusiveStudyCollectionUpdate]
     """
 
     kwargs = _get_kwargs(
@@ -180,13 +189,16 @@ async def asyncio(
     client: AuthenticatedClient,
     json_body: TransitionMutuallyExclusiveStudyCollectionJsonBody,
     authorization: str,
-) -> Optional[MutuallyExclusiveStudyCollectionCreate]:
-    """Transition a mutually exclusive study collection
+) -> Optional[MutuallyExclusiveStudyCollectionUpdate]:
+    r"""Transition a mutually exclusive study collection
 
      Transition a mutually exclusive study collection. This is used to:
     - Publish a study collection
     - Cancel publish a study collection
     - Schedule publish a study collection
+      - This can be done by setting the publish_at on the study collection at create or patch, then
+    transitioning with the \"SCHEDULE_PUBLISH\" action
+      - Or optionally the publish_at can be provided directly in the body of the transition request
 
     Args:
         id (str):
@@ -198,7 +210,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        MutuallyExclusiveStudyCollectionCreate
+        MutuallyExclusiveStudyCollectionUpdate
     """
 
     return (

@@ -8,11 +8,11 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-import datetime
 from ..models.study_short_status import StudyShortStatus
+import datetime
+from dateutil.parser import isoparse
 from typing import Union
 from ..models.study_short_study_type import StudyShortStudyType
-from dateutil.parser import isoparse
 from ..types import UNSET, Unset
 
 

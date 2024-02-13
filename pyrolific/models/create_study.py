@@ -8,24 +8,26 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..models.base_study_prolific_id_option import BaseStudyProlificIdOption
 from typing import Union
+from ..models.base_study_study_labels_item import BaseStudyStudyLabelsItem
+from ..models.base_study_content_warnings_item import BaseStudyContentWarningsItem
 from typing import Dict
-from typing import Union
-from ..models.base_study_completion_option import BaseStudyCompletionOption
 from ..models.base_study_peripheral_requirements_item import (
     BaseStudyPeripheralRequirementsItem,
 )
 from typing import List
-from ..models.base_study_prolific_id_option import BaseStudyProlificIdOption
-from ..types import UNSET, Unset
 from ..models.base_study_device_compatibility_item import (
     BaseStudyDeviceCompatibilityItem,
 )
+from typing import Union
+from ..models.base_study_completion_option import BaseStudyCompletionOption
+from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.range_filter import RangeFilter
     from ..models.base_study_completion_codes_item import BaseStudyCompletionCodesItem
     from ..models.select_filter import SelectFilter
+    from ..models.range_filter import RangeFilter
     from ..models.base_study_submissions_config import BaseStudySubmissionsConfig
 
 
@@ -119,6 +121,18 @@ class CreateStudy:
 
             Configuration related to study submissions. The purpose of this field is to capture any configuration options
             that impact the submissions made by participants in a study.
+        study_labels (Union[Unset, List[BaseStudyStudyLabelsItem]]): This field allows you to tag studies with
+            information about the type/topic of the study and the kind of work involved in completing it.
+
+            We plan to make this information available to participants for easier self-selection. At present these options
+            are mutually exclusive and only a single option can be selected, however in the future available categories will
+            expand.
+        content_warnings (Union[Unset, List[BaseStudyContentWarningsItem]]): Allow researchers to define content
+            warnings for their study
+
+            We plan to make this information available to participants for easier self-selection. At present these options
+            are mutually exclusive and only a single option can be selected, however in the future available warnings will
+            expand.
         metadata (Union[Unset, None, str]): This field can be used to store extra information required for a system
             integration.
             For example, it could be some JSON, XML, an integer, or a string.
@@ -150,6 +164,8 @@ class CreateStudy:
     naivety_distribution_rate: Union[Unset, None, float] = UNSET
     project: Union[Unset, str] = UNSET
     submissions_config: Union[Unset, "BaseStudySubmissionsConfig"] = UNSET
+    study_labels: Union[Unset, List[BaseStudyStudyLabelsItem]] = UNSET
+    content_warnings: Union[Unset, List[BaseStudyContentWarningsItem]] = UNSET
     metadata: Union[Unset, None, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -221,6 +237,22 @@ class CreateStudy:
         if not isinstance(self.submissions_config, Unset):
             submissions_config = self.submissions_config.to_dict()
 
+        study_labels: Union[Unset, List[str]] = UNSET
+        if not isinstance(self.study_labels, Unset):
+            study_labels = []
+            for study_labels_item_data in self.study_labels:
+                study_labels_item = study_labels_item_data.value
+
+                study_labels.append(study_labels_item)
+
+        content_warnings: Union[Unset, List[str]] = UNSET
+        if not isinstance(self.content_warnings, Unset):
+            content_warnings = []
+            for content_warnings_item_data in self.content_warnings:
+                content_warnings_item = content_warnings_item_data.value
+
+                content_warnings.append(content_warnings_item)
+
         metadata = self.metadata
 
         field_dict: Dict[str, Any] = {}
@@ -264,6 +296,10 @@ class CreateStudy:
             field_dict["project"] = project
         if submissions_config is not UNSET:
             field_dict["submissions_config"] = submissions_config
+        if study_labels is not UNSET:
+            field_dict["study_labels"] = study_labels
+        if content_warnings is not UNSET:
+            field_dict["content_warnings"] = content_warnings
         if metadata is not UNSET:
             field_dict["metadata"] = metadata
 
@@ -271,11 +307,11 @@ class CreateStudy:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.range_filter import RangeFilter
         from ..models.base_study_completion_codes_item import (
             BaseStudyCompletionCodesItem,
         )
         from ..models.select_filter import SelectFilter
+        from ..models.range_filter import RangeFilter
         from ..models.base_study_submissions_config import BaseStudySubmissionsConfig
 
         d = src_dict.copy()
@@ -378,6 +414,22 @@ class CreateStudy:
                 _submissions_config
             )
 
+        study_labels = []
+        _study_labels = d.pop("study_labels", UNSET)
+        for study_labels_item_data in _study_labels or []:
+            study_labels_item = BaseStudyStudyLabelsItem(study_labels_item_data)
+
+            study_labels.append(study_labels_item)
+
+        content_warnings = []
+        _content_warnings = d.pop("content_warnings", UNSET)
+        for content_warnings_item_data in _content_warnings or []:
+            content_warnings_item = BaseStudyContentWarningsItem(
+                content_warnings_item_data
+            )
+
+            content_warnings.append(content_warnings_item)
+
         metadata = d.pop("metadata", UNSET)
 
         create_study = cls(
@@ -400,6 +452,8 @@ class CreateStudy:
             naivety_distribution_rate=naivety_distribution_rate,
             project=project,
             submissions_config=submissions_config,
+            study_labels=study_labels,
+            content_warnings=content_warnings,
             metadata=metadata,
         )
 

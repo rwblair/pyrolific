@@ -14,9 +14,11 @@ from .base_study_completion_codes_item_code_type import (
     BaseStudyCompletionCodesItemCodeType,
 )
 from .base_study_completion_option import BaseStudyCompletionOption
+from .base_study_content_warnings_item import BaseStudyContentWarningsItem
 from .base_study_device_compatibility_item import BaseStudyDeviceCompatibilityItem
 from .base_study_peripheral_requirements_item import BaseStudyPeripheralRequirementsItem
 from .base_study_prolific_id_option import BaseStudyProlificIdOption
+from .base_study_study_labels_item import BaseStudyStudyLabelsItem
 from .base_study_submissions_config import BaseStudySubmissionsConfig
 from .bulk_bonus import BulkBonus
 from .clone_filter_set_json_body import CloneFilterSetJsonBody
@@ -55,27 +57,11 @@ from .lock_filter_set_response_200 import LockFilterSetResponse200
 from .manually_review import ManuallyReview
 from .manually_review_action import ManuallyReviewAction
 from .message import Message
+from .message_data import MessageData
+from .message_data_category import MessageDataCategory
 from .messages import Messages
-from .mutually_exclusive_study_collection_create import (
-    MutuallyExclusiveStudyCollectionCreate,
-)
-from .mutually_exclusive_study_collection_created import (
-    MutuallyExclusiveStudyCollectionCreated,
-)
-from .mutually_exclusive_study_collection_created_status import (
-    MutuallyExclusiveStudyCollectionCreatedStatus,
-)
-from .mutually_exclusive_study_collection_detail import (
-    MutuallyExclusiveStudyCollectionDetail,
-)
-from .mutually_exclusive_study_collection_list import (
-    MutuallyExclusiveStudyCollectionList,
-)
-from .mutually_exclusive_study_collection_patch import (
-    MutuallyExclusiveStudyCollectionPatch,
-)
-from .mutually_exclusive_study_collection_studies import (
-    MutuallyExclusiveStudyCollectionStudies,
+from .mutually_exclusive_study_collection_update import (
+    MutuallyExclusiveStudyCollectionUpdate,
 )
 from .mutually_exclusive_study_collections_response import (
     MutuallyExclusiveStudyCollectionsResponse,
@@ -202,9 +188,11 @@ __all__ = (
     "BaseStudyCompletionCodesItem",
     "BaseStudyCompletionCodesItemCodeType",
     "BaseStudyCompletionOption",
+    "BaseStudyContentWarningsItem",
     "BaseStudyDeviceCompatibilityItem",
     "BaseStudyPeripheralRequirementsItem",
     "BaseStudyProlificIdOption",
+    "BaseStudyStudyLabelsItem",
     "BaseStudySubmissionsConfig",
     "BulkBonus",
     "CloneFilterSetJsonBody",
@@ -243,15 +231,11 @@ __all__ = (
     "ManuallyReview",
     "ManuallyReviewAction",
     "Message",
+    "MessageData",
+    "MessageDataCategory",
     "Messages",
-    "MutuallyExclusiveStudyCollectionCreate",
-    "MutuallyExclusiveStudyCollectionCreated",
-    "MutuallyExclusiveStudyCollectionCreatedStatus",
-    "MutuallyExclusiveStudyCollectionDetail",
-    "MutuallyExclusiveStudyCollectionList",
-    "MutuallyExclusiveStudyCollectionPatch",
     "MutuallyExclusiveStudyCollectionsResponse",
-    "MutuallyExclusiveStudyCollectionStudies",
+    "MutuallyExclusiveStudyCollectionUpdate",
     "ParticipantGroup",
     "ParticipantGroupFeederStudiesItem",
     "ParticipantGroupFeederStudiesItemFeederCompletionCodesItem",

@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
+from typing import Dict
 from ...models.create_participant_group_json_body import CreateParticipantGroupJsonBody
 from ...models.participant_group import ParticipantGroup
-from typing import Dict
 
 
 def _get_kwargs(

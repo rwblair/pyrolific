@@ -9,8 +9,8 @@ from ... import errors
 
 from typing import Dict
 from typing import Union
-from ...types import UNSET, Unset
 from ...models.send_bulk_message import SendBulkMessage
+from ...types import UNSET, Unset
 
 
 def _get_kwargs(

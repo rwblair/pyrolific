@@ -8,8 +8,8 @@ from ...types import Response
 from ... import errors
 
 from typing import Dict
-from ...models.mutually_exclusive_study_collection_detail import (
-    MutuallyExclusiveStudyCollectionDetail,
+from ...models.mutually_exclusive_study_collection_update import (
+    MutuallyExclusiveStudyCollectionUpdate,
 )
 
 
@@ -32,9 +32,9 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[MutuallyExclusiveStudyCollectionDetail]:
+) -> Optional[MutuallyExclusiveStudyCollectionUpdate]:
     if response.status_code == HTTPStatus.OK:
-        response_200 = MutuallyExclusiveStudyCollectionDetail.from_dict(response.json())
+        response_200 = MutuallyExclusiveStudyCollectionUpdate.from_dict(response.json())
 
         return response_200
     if client.raise_on_unexpected_status:
@@ -45,7 +45,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[MutuallyExclusiveStudyCollectionDetail]:
+) -> Response[MutuallyExclusiveStudyCollectionUpdate]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -59,7 +59,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     authorization: str,
-) -> Response[MutuallyExclusiveStudyCollectionDetail]:
+) -> Response[MutuallyExclusiveStudyCollectionUpdate]:
     """Get a mutually exclusive study collection
 
      Get a mutually exclusive study collection
@@ -73,7 +73,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[MutuallyExclusiveStudyCollectionDetail]
+        Response[MutuallyExclusiveStudyCollectionUpdate]
     """
 
     kwargs = _get_kwargs(
@@ -93,7 +93,7 @@ def sync(
     *,
     client: AuthenticatedClient,
     authorization: str,
-) -> Optional[MutuallyExclusiveStudyCollectionDetail]:
+) -> Optional[MutuallyExclusiveStudyCollectionUpdate]:
     """Get a mutually exclusive study collection
 
      Get a mutually exclusive study collection
@@ -107,7 +107,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        MutuallyExclusiveStudyCollectionDetail
+        MutuallyExclusiveStudyCollectionUpdate
     """
 
     return sync_detailed(
@@ -122,7 +122,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     authorization: str,
-) -> Response[MutuallyExclusiveStudyCollectionDetail]:
+) -> Response[MutuallyExclusiveStudyCollectionUpdate]:
     """Get a mutually exclusive study collection
 
      Get a mutually exclusive study collection
@@ -136,7 +136,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[MutuallyExclusiveStudyCollectionDetail]
+        Response[MutuallyExclusiveStudyCollectionUpdate]
     """
 
     kwargs = _get_kwargs(
@@ -154,7 +154,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     authorization: str,
-) -> Optional[MutuallyExclusiveStudyCollectionDetail]:
+) -> Optional[MutuallyExclusiveStudyCollectionUpdate]:
     """Get a mutually exclusive study collection
 
      Get a mutually exclusive study collection
@@ -168,7 +168,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        MutuallyExclusiveStudyCollectionDetail
+        MutuallyExclusiveStudyCollectionUpdate
     """
 
     return (

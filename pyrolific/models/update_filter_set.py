@@ -10,13 +10,13 @@ from ..types import UNSET, Unset
 
 from typing import Union
 from typing import Dict
+from typing import List
 from typing import Union
 from ..types import UNSET, Unset
-from typing import List
 
 if TYPE_CHECKING:
-    from ..models.range_filter import RangeFilter
     from ..models.select_filter import SelectFilter
+    from ..models.range_filter import RangeFilter
 
 
 T = TypeVar("T", bound="UpdateFilterSet")
@@ -69,8 +69,8 @@ class UpdateFilterSet:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.range_filter import RangeFilter
         from ..models.select_filter import SelectFilter
+        from ..models.range_filter import RangeFilter
 
         d = src_dict.copy()
         name = d.pop("name", UNSET)

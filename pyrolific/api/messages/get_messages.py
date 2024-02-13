@@ -8,10 +8,10 @@ from ...types import Response, UNSET
 from ... import errors
 
 from typing import Dict
-from typing import Union
 from ...models.messages import Messages
-from typing import Optional
+from typing import Union
 from ...types import UNSET, Unset
+from typing import Optional
 
 
 def _get_kwargs(

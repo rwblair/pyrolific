@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.send_message import SendMessage
 from typing import Dict
+from ...models.send_message import SendMessage
 from typing import Union
 from ...types import UNSET, Unset
 

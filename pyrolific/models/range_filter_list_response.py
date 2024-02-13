@@ -8,12 +8,12 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..models.filter_list_attributes_type import FilterListAttributesType
 from typing import cast, Union
-from typing import Union
 from ..models.range_filter_list_attributes_data_type import (
     RangeFilterListAttributesDataType,
 )
-from ..models.filter_list_attributes_type import FilterListAttributesType
+from typing import Union
 from ..types import UNSET, Unset
 
 

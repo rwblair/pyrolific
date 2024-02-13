@@ -10,11 +10,11 @@ from ..types import UNSET, Unset
 
 from typing import cast, Union
 from typing import Dict
-from typing import Union
+from typing import cast, List
 from typing import cast
+from typing import Union
 from typing import Optional
 from ..types import UNSET, Unset
-from typing import cast, List
 
 if TYPE_CHECKING:
     from ..models.attribute_value_type_1_item_type_1 import AttributeValueType1ItemType1

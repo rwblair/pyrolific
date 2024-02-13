@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.create_invitation_request import CreateInvitationRequest
 from typing import Dict
+from ...models.create_invitation_request import CreateInvitationRequest
 from ...models.create_invitation_response import CreateInvitationResponse
 
 

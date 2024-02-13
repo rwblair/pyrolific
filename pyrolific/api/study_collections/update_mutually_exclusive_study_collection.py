@@ -8,18 +8,15 @@ from ...types import Response
 from ... import errors
 
 from typing import Dict
-from ...models.mutually_exclusive_study_collection_create import (
-    MutuallyExclusiveStudyCollectionCreate,
-)
-from ...models.mutually_exclusive_study_collection_patch import (
-    MutuallyExclusiveStudyCollectionPatch,
+from ...models.mutually_exclusive_study_collection_update import (
+    MutuallyExclusiveStudyCollectionUpdate,
 )
 
 
 def _get_kwargs(
     id: str,
     *,
-    json_body: MutuallyExclusiveStudyCollectionPatch,
+    json_body: MutuallyExclusiveStudyCollectionUpdate,
     authorization: str,
 ) -> Dict[str, Any]:
     headers = {}
@@ -39,9 +36,9 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[MutuallyExclusiveStudyCollectionCreate]:
+) -> Optional[MutuallyExclusiveStudyCollectionUpdate]:
     if response.status_code == HTTPStatus.OK:
-        response_200 = MutuallyExclusiveStudyCollectionCreate.from_dict(response.json())
+        response_200 = MutuallyExclusiveStudyCollectionUpdate.from_dict(response.json())
 
         return response_200
     if client.raise_on_unexpected_status:
@@ -52,7 +49,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[MutuallyExclusiveStudyCollectionCreate]:
+) -> Response[MutuallyExclusiveStudyCollectionUpdate]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -65,9 +62,9 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: MutuallyExclusiveStudyCollectionPatch,
+    json_body: MutuallyExclusiveStudyCollectionUpdate,
     authorization: str,
-) -> Response[MutuallyExclusiveStudyCollectionCreate]:
+) -> Response[MutuallyExclusiveStudyCollectionUpdate]:
     """Update a mutually exclusive study collection
 
      Update a mutually exclusive study collection
@@ -75,14 +72,14 @@ def sync_detailed(
     Args:
         id (str):
         authorization (str):
-        json_body (MutuallyExclusiveStudyCollectionPatch):
+        json_body (MutuallyExclusiveStudyCollectionUpdate):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[MutuallyExclusiveStudyCollectionCreate]
+        Response[MutuallyExclusiveStudyCollectionUpdate]
     """
 
     kwargs = _get_kwargs(
@@ -102,9 +99,9 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: MutuallyExclusiveStudyCollectionPatch,
+    json_body: MutuallyExclusiveStudyCollectionUpdate,
     authorization: str,
-) -> Optional[MutuallyExclusiveStudyCollectionCreate]:
+) -> Optional[MutuallyExclusiveStudyCollectionUpdate]:
     """Update a mutually exclusive study collection
 
      Update a mutually exclusive study collection
@@ -112,14 +109,14 @@ def sync(
     Args:
         id (str):
         authorization (str):
-        json_body (MutuallyExclusiveStudyCollectionPatch):
+        json_body (MutuallyExclusiveStudyCollectionUpdate):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        MutuallyExclusiveStudyCollectionCreate
+        MutuallyExclusiveStudyCollectionUpdate
     """
 
     return sync_detailed(
@@ -134,9 +131,9 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: MutuallyExclusiveStudyCollectionPatch,
+    json_body: MutuallyExclusiveStudyCollectionUpdate,
     authorization: str,
-) -> Response[MutuallyExclusiveStudyCollectionCreate]:
+) -> Response[MutuallyExclusiveStudyCollectionUpdate]:
     """Update a mutually exclusive study collection
 
      Update a mutually exclusive study collection
@@ -144,14 +141,14 @@ async def asyncio_detailed(
     Args:
         id (str):
         authorization (str):
-        json_body (MutuallyExclusiveStudyCollectionPatch):
+        json_body (MutuallyExclusiveStudyCollectionUpdate):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[MutuallyExclusiveStudyCollectionCreate]
+        Response[MutuallyExclusiveStudyCollectionUpdate]
     """
 
     kwargs = _get_kwargs(
@@ -169,9 +166,9 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: MutuallyExclusiveStudyCollectionPatch,
+    json_body: MutuallyExclusiveStudyCollectionUpdate,
     authorization: str,
-) -> Optional[MutuallyExclusiveStudyCollectionCreate]:
+) -> Optional[MutuallyExclusiveStudyCollectionUpdate]:
     """Update a mutually exclusive study collection
 
      Update a mutually exclusive study collection
@@ -179,14 +176,14 @@ async def asyncio(
     Args:
         id (str):
         authorization (str):
-        json_body (MutuallyExclusiveStudyCollectionPatch):
+        json_body (MutuallyExclusiveStudyCollectionUpdate):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        MutuallyExclusiveStudyCollectionCreate
+        MutuallyExclusiveStudyCollectionUpdate
     """
 
     return (

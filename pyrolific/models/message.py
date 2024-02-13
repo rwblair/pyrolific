@@ -1,4 +1,4 @@
-from typing import Any, Dict, Type, TypeVar
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
 from typing import List
 
@@ -8,10 +8,14 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from typing import Dict
 import datetime
-from typing import Union
 from dateutil.parser import isoparse
+from typing import Union
 from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.message_data import MessageData
 
 
 T = TypeVar("T", bound="Message")
@@ -27,6 +31,7 @@ class Message:
         channel_id (str): The channel ID, for linking back to a thread in the Prolific app. Example:
             d45c8a5e812ff990fc6546beaf888c9820f4c184f7200a45d900cf0f321f7f38.
         type (Union[Unset, str]): Will only me message for now
+        data (Union[Unset, MessageData]): Metadata for a message
     """
 
     sender_id: str
@@ -34,6 +39,7 @@ class Message:
     sent_at: datetime.datetime
     channel_id: str
     type: Union[Unset, str] = UNSET
+    data: Union[Unset, "MessageData"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -43,6 +49,9 @@ class Message:
 
         channel_id = self.channel_id
         type = self.type
+        data: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.data, Unset):
+            data = self.data.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -56,11 +65,15 @@ class Message:
         )
         if type is not UNSET:
             field_dict["type"] = type
+        if data is not UNSET:
+            field_dict["data"] = data
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        from ..models.message_data import MessageData
+
         d = src_dict.copy()
         sender_id = d.pop("sender_id")
 
@@ -72,12 +85,20 @@ class Message:
 
         type = d.pop("type", UNSET)
 
+        _data = d.pop("data", UNSET)
+        data: Union[Unset, MessageData]
+        if isinstance(_data, Unset):
+            data = UNSET
+        else:
+            data = MessageData.from_dict(_data)
+
         message = cls(
             sender_id=sender_id,
             body=body,
             sent_at=sent_at,
             channel_id=channel_id,
             type=type,
+            data=data,
         )
 
         message.additional_properties = d

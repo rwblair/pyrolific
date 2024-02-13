@@ -8,11 +8,11 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from ..types import UNSET, Unset
 from ..models.transition_mutually_exclusive_study_collection_json_body_action import (
     TransitionMutuallyExclusiveStudyCollectionJsonBodyAction,
 )
+from typing import Union
+from ..types import UNSET, Unset
 
 
 T = TypeVar("T", bound="TransitionMutuallyExclusiveStudyCollectionJsonBody")
@@ -23,11 +23,14 @@ class TransitionMutuallyExclusiveStudyCollectionJsonBody:
     """
     Attributes:
         action (Union[Unset, TransitionMutuallyExclusiveStudyCollectionJsonBodyAction]):
+        publish_at (Union[Unset, str]): Optional parameter for scheduling publish, indicating the datetime and timezone
+            the study collection should be scheduled to be published at
     """
 
     action: Union[
         Unset, TransitionMutuallyExclusiveStudyCollectionJsonBodyAction
     ] = UNSET
+    publish_at: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -35,11 +38,15 @@ class TransitionMutuallyExclusiveStudyCollectionJsonBody:
         if not isinstance(self.action, Unset):
             action = self.action.value
 
+        publish_at = self.publish_at
+
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if action is not UNSET:
             field_dict["action"] = action
+        if publish_at is not UNSET:
+            field_dict["publish_at"] = publish_at
 
         return field_dict
 
@@ -53,8 +60,11 @@ class TransitionMutuallyExclusiveStudyCollectionJsonBody:
         else:
             action = TransitionMutuallyExclusiveStudyCollectionJsonBodyAction(_action)
 
+        publish_at = d.pop("publish_at", UNSET)
+
         transition_mutually_exclusive_study_collection_json_body = cls(
             action=action,
+            publish_at=publish_at,
         )
 
         transition_mutually_exclusive_study_collection_json_body.additional_properties = d

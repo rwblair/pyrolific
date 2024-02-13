@@ -9,8 +9,8 @@ from ... import errors
 
 from typing import Dict
 from typing import Union
-from typing import Optional
 from ...models.subscription_event_list import SubscriptionEventList
+from typing import Optional
 from ...types import UNSET, Unset
 
 

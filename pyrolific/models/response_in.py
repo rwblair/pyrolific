@@ -9,13 +9,13 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from typing import Dict
+from typing import List
 from typing import Union
 from ..types import UNSET, Unset
-from typing import List
 
 if TYPE_CHECKING:
-    from ..models.question_response import QuestionResponse
     from ..models.section import Section
+    from ..models.question_response import QuestionResponse
 
 
 T = TypeVar("T", bound="ResponseIn")
@@ -75,8 +75,8 @@ class ResponseIn:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.question_response import QuestionResponse
         from ..models.section import Section
+        from ..models.question_response import QuestionResponse
 
         d = src_dict.copy()
         participant_id = d.pop("participant_id")
