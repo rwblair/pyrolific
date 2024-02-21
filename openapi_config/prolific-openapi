@@ -5412,6 +5412,16 @@ components:
             Use 'code' when the participants will manually input the code, at the
             end of the experiment you will tell the participants the code. Note that
             the {code} you have to give is one of the completion codes you define below in the `completion_codes` argument.
+        completion_code:
+            description: |-
+                This field has been added by pyrolific to work around issues with the completion code api.
+                https://github.com/rwblair/pyrolific/issues/3
+            type: string
+        completion_code_action:
+            description: |-
+                This field has been added by pyrolific to work around issues with the completion code api.
+                https://github.com/rwblair/pyrolific/issues/3
+            type: string
         completion_codes:
           description: |-
             Specify at least one completion code for your study. A participant will enter one of these codes when they complete your study.
@@ -5619,7 +5629,6 @@ components:
             - description
             - external_study_url
             - prolific_id_option
-            - completion_codes
             - completion_option
             - estimated_completion_time
             - reward
