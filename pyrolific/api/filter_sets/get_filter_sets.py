@@ -7,13 +7,17 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from typing import Dict
 from ...models.filter_set_list import FilterSetList
+from ...types import UNSET, Unset
+from typing import Union
+from typing import Optional
+from typing import Dict
 
 
 def _get_kwargs(
     *,
-    workspace_id: str,
+    workspace_id: Union[Unset, None, str] = UNSET,
+    organisation_id: Union[Unset, None, str] = UNSET,
     authorization: str,
 ) -> Dict[str, Any]:
     headers = {}
@@ -21,6 +25,8 @@ def _get_kwargs(
 
     params: Dict[str, Any] = {}
     params["workspace_id"] = workspace_id
+
+    params["organisation_id"] = organisation_id
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
@@ -59,7 +65,8 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    workspace_id: str,
+    workspace_id: Union[Unset, None, str] = UNSET,
+    organisation_id: Union[Unset, None, str] = UNSET,
     authorization: str,
 ) -> Response[FilterSetList]:
     """List all filter sets
@@ -67,7 +74,8 @@ def sync_detailed(
      List of all filter sets in the specified workspace.
 
     Args:
-        workspace_id (str):
+        workspace_id (Union[Unset, None, str]):
+        organisation_id (Union[Unset, None, str]):
         authorization (str):
 
     Raises:
@@ -80,6 +88,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         workspace_id=workspace_id,
+        organisation_id=organisation_id,
         authorization=authorization,
     )
 
@@ -93,7 +102,8 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    workspace_id: str,
+    workspace_id: Union[Unset, None, str] = UNSET,
+    organisation_id: Union[Unset, None, str] = UNSET,
     authorization: str,
 ) -> Optional[FilterSetList]:
     """List all filter sets
@@ -101,7 +111,8 @@ def sync(
      List of all filter sets in the specified workspace.
 
     Args:
-        workspace_id (str):
+        workspace_id (Union[Unset, None, str]):
+        organisation_id (Union[Unset, None, str]):
         authorization (str):
 
     Raises:
@@ -115,6 +126,7 @@ def sync(
     return sync_detailed(
         client=client,
         workspace_id=workspace_id,
+        organisation_id=organisation_id,
         authorization=authorization,
     ).parsed
 
@@ -122,7 +134,8 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    workspace_id: str,
+    workspace_id: Union[Unset, None, str] = UNSET,
+    organisation_id: Union[Unset, None, str] = UNSET,
     authorization: str,
 ) -> Response[FilterSetList]:
     """List all filter sets
@@ -130,7 +143,8 @@ async def asyncio_detailed(
      List of all filter sets in the specified workspace.
 
     Args:
-        workspace_id (str):
+        workspace_id (Union[Unset, None, str]):
+        organisation_id (Union[Unset, None, str]):
         authorization (str):
 
     Raises:
@@ -143,6 +157,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         workspace_id=workspace_id,
+        organisation_id=organisation_id,
         authorization=authorization,
     )
 
@@ -154,7 +169,8 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    workspace_id: str,
+    workspace_id: Union[Unset, None, str] = UNSET,
+    organisation_id: Union[Unset, None, str] = UNSET,
     authorization: str,
 ) -> Optional[FilterSetList]:
     """List all filter sets
@@ -162,7 +178,8 @@ async def asyncio(
      List of all filter sets in the specified workspace.
 
     Args:
-        workspace_id (str):
+        workspace_id (Union[Unset, None, str]):
+        organisation_id (Union[Unset, None, str]):
         authorization (str):
 
     Raises:
@@ -177,6 +194,7 @@ async def asyncio(
         await asyncio_detailed(
             client=client,
             workspace_id=workspace_id,
+            organisation_id=organisation_id,
             authorization=authorization,
         )
     ).parsed

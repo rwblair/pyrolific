@@ -8,27 +8,27 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..models.base_study_prolific_id_option import BaseStudyProlificIdOption
+from typing import Union
+from ..models.base_study_content_warnings_item import BaseStudyContentWarningsItem
+from ..models.base_study_study_labels_item import BaseStudyStudyLabelsItem
+from ..models.base_study_completion_option import BaseStudyCompletionOption
 from ..models.base_study_peripheral_requirements_item import (
     BaseStudyPeripheralRequirementsItem,
 )
-from ..models.base_study_completion_option import BaseStudyCompletionOption
+from typing import Union
+from typing import List
+from ..types import UNSET, Unset
 from ..models.base_study_device_compatibility_item import (
     BaseStudyDeviceCompatibilityItem,
 )
-from ..models.base_study_content_warnings_item import BaseStudyContentWarningsItem
-from ..models.base_study_prolific_id_option import BaseStudyProlificIdOption
-from typing import List
-from typing import Union
 from typing import Dict
-from typing import Union
-from ..models.base_study_study_labels_item import BaseStudyStudyLabelsItem
-from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.range_filter import RangeFilter
     from ..models.base_study_completion_codes_item import BaseStudyCompletionCodesItem
-    from ..models.select_filter import SelectFilter
+    from ..models.range_filter import RangeFilter
     from ..models.base_study_submissions_config import BaseStudySubmissionsConfig
+    from ..models.select_filter import SelectFilter
 
 
 T = TypeVar("T", bound="BaseStudy")
@@ -65,6 +65,12 @@ class BaseStudy:
             Use 'code' when the participants will manually input the code, at the
             end of the experiment you will tell the participants the code. Note that
             the {code} you have to give is one of the completion codes you define below in the `completion_codes` argument.
+        completion_code (Union[Unset, str]): This field has been added by pyrolific to work around issues with the
+            completion code api.
+            https://github.com/rwblair/pyrolific/issues/3
+        completion_code_action (Union[Unset, str]): This field has been added by pyrolific to work around issues with
+            the completion code api.
+            https://github.com/rwblair/pyrolific/issues/3
         completion_codes (Union[Unset, List['BaseStudyCompletionCodesItem']]): Specify at least one completion code for
             your study. A participant will enter one of these codes when they complete your study.
 
@@ -128,11 +134,10 @@ class BaseStudy:
             are mutually exclusive and only a single option can be selected, however in the future available categories will
             expand.
         content_warnings (Union[Unset, List[BaseStudyContentWarningsItem]]): Allow researchers to define content
-            warnings for their study
+            warnings for their study.
 
-            We plan to make this information available to participants for easier self-selection. At present these options
-            are mutually exclusive and only a single option can be selected, however in the future available warnings will
-            expand.
+            At present these options are mutually exclusive and only a single option can be selected, however in the future
+            available warnings will expand.
         metadata (Union[Unset, None, str]): This field can be used to store extra information required for a system
             integration.
             For example, it could be some JSON, XML, an integer, or a string.
@@ -149,6 +154,8 @@ class BaseStudy:
     external_study_url: Union[Unset, str] = UNSET
     prolific_id_option: Union[Unset, BaseStudyProlificIdOption] = UNSET
     completion_option: Union[Unset, BaseStudyCompletionOption] = UNSET
+    completion_code: Union[Unset, str] = UNSET
+    completion_code_action: Union[Unset, str] = UNSET
     completion_codes: Union[Unset, List["BaseStudyCompletionCodesItem"]] = UNSET
     total_available_places: Union[Unset, float] = UNSET
     estimated_completion_time: Union[Unset, float] = UNSET
@@ -184,6 +191,8 @@ class BaseStudy:
         if not isinstance(self.completion_option, Unset):
             completion_option = self.completion_option.value
 
+        completion_code = self.completion_code
+        completion_code_action = self.completion_code_action
         completion_codes: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.completion_codes, Unset):
             completion_codes = []
@@ -270,6 +279,10 @@ class BaseStudy:
             field_dict["prolific_id_option"] = prolific_id_option
         if completion_option is not UNSET:
             field_dict["completion_option"] = completion_option
+        if completion_code is not UNSET:
+            field_dict["completion_code"] = completion_code
+        if completion_code_action is not UNSET:
+            field_dict["completion_code_action"] = completion_code_action
         if completion_codes is not UNSET:
             field_dict["completion_codes"] = completion_codes
         if total_available_places is not UNSET:
@@ -307,12 +320,12 @@ class BaseStudy:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.range_filter import RangeFilter
         from ..models.base_study_completion_codes_item import (
             BaseStudyCompletionCodesItem,
         )
-        from ..models.select_filter import SelectFilter
+        from ..models.range_filter import RangeFilter
         from ..models.base_study_submissions_config import BaseStudySubmissionsConfig
+        from ..models.select_filter import SelectFilter
 
         d = src_dict.copy()
         name = d.pop("name", UNSET)
@@ -336,6 +349,10 @@ class BaseStudy:
             completion_option = UNSET
         else:
             completion_option = BaseStudyCompletionOption(_completion_option)
+
+        completion_code = d.pop("completion_code", UNSET)
+
+        completion_code_action = d.pop("completion_code_action", UNSET)
 
         completion_codes = []
         _completion_codes = d.pop("completion_codes", UNSET)
@@ -439,6 +456,8 @@ class BaseStudy:
             external_study_url=external_study_url,
             prolific_id_option=prolific_id_option,
             completion_option=completion_option,
+            completion_code=completion_code,
+            completion_code_action=completion_code_action,
             completion_codes=completion_codes,
             total_available_places=total_available_places,
             estimated_completion_time=estimated_completion_time,

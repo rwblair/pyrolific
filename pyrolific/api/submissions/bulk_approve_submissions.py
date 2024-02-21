@@ -7,11 +7,11 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from typing import Dict
+from typing import cast
+from ...models.participant_i_ds import ParticipantIDs
 from typing import cast, Union
 from ...models.submission_i_ds import SubmissionIDs
-from ...models.participant_i_ds import ParticipantIDs
-from typing import cast
+from typing import Dict
 
 
 def _get_kwargs(

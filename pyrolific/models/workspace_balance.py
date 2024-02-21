@@ -8,16 +8,16 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import Dict
 from typing import Union
+from typing import Dict
+from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.workspace_balance_balance_breakdown import (
-        WorkspaceBalanceBalanceBreakdown,
-    )
     from ..models.workspace_balance_available_balance_breakdown import (
         WorkspaceBalanceAvailableBalanceBreakdown,
+    )
+    from ..models.workspace_balance_balance_breakdown import (
+        WorkspaceBalanceBalanceBreakdown,
     )
 
 
@@ -90,11 +90,11 @@ class WorkspaceBalance:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.workspace_balance_balance_breakdown import (
-            WorkspaceBalanceBalanceBreakdown,
-        )
         from ..models.workspace_balance_available_balance_breakdown import (
             WorkspaceBalanceAvailableBalanceBreakdown,
+        )
+        from ..models.workspace_balance_balance_breakdown import (
+            WorkspaceBalanceBalanceBreakdown,
         )
 
         d = src_dict.copy()

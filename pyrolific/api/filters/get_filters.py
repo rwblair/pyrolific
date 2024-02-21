@@ -7,11 +7,11 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...types import UNSET, Unset
 from ...models.filter_list import FilterList
-from typing import Dict
+from ...types import UNSET, Unset
 from typing import Union
 from typing import Optional
+from typing import Dict
 
 
 def _get_kwargs(

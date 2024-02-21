@@ -8,14 +8,14 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import List
-from typing import Dict
 from typing import Union
+from typing import List
 from ..types import UNSET, Unset
+from typing import Dict
 
 if TYPE_CHECKING:
-    from ..models.project_short import ProjectShort
     from ..models.workspace_user import WorkspaceUser
+    from ..models.project_short import ProjectShort
 
 
 T = TypeVar("T", bound="Workspace")
@@ -101,8 +101,8 @@ class Workspace:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.project_short import ProjectShort
         from ..models.workspace_user import WorkspaceUser
+        from ..models.project_short import ProjectShort
 
         d = src_dict.copy()
         id = d.pop("id")

@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.study import Study
-from typing import Dict
 from ...models.study_transition import StudyTransition
+from typing import Dict
+from ...models.study import Study
 
 
 def _get_kwargs(

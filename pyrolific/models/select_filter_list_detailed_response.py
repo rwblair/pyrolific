@@ -8,15 +8,15 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast, List
+from typing import cast
+from typing import Union
 from ..models.select_filter_list_attributes_data_type import (
     SelectFilterListAttributesDataType,
 )
-from typing import Dict
-from ..types import UNSET, Unset
-from typing import Union
 from ..models.filter_list_attributes_type import FilterListAttributesType
-from typing import cast
+from typing import cast, List
+from ..types import UNSET, Unset
+from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.select_filter_list_attributes_choices import (

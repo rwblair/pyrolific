@@ -8,10 +8,10 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import List
-from typing import Dict
 from typing import Union
+from typing import List
 from ..types import UNSET, Unset
+from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.participant_group_feeder_studies_item import (
@@ -29,8 +29,10 @@ class ParticipantGroup:
         id (Union[Unset, str]): The id of the participant group Example: 5e9b9c9b0f9c9a0001b0b1f5.
         name (Union[Unset, str]): The name of the participant group Example: Group 1.
         project_id (Union[Unset, None, str]): The id of the project the participant group belongs to
-        workspace_id (Union[Unset, None, str]): The id of the workspace the participant group belongs to Example:
-            5e9b9c9b0f9c9a0001b1ca2f.
+        workspace_id (Union[Unset, None, str]): The id of the workspace the participant group belongs to. A participant
+            group can only belong to either a workspace or an organisation. Example: 5e9b9c9b0f9c9a0001b1ca2f.
+        organisation_id (Union[Unset, None, str]): The id of the organisation the participant group belongs to. A
+            participant group can only belong to either a workspace or an organisation. Example: 5e9b9c9b0f9c9a0001b1ca2f.
         description (Union[Unset, None, str]): The user-provided description of the participant group Example: My first
             participant group.
         participant_count (Union[Unset, int]): The number of participants in the participant group Example: 10.
@@ -43,6 +45,7 @@ class ParticipantGroup:
     name: Union[Unset, str] = UNSET
     project_id: Union[Unset, None, str] = UNSET
     workspace_id: Union[Unset, None, str] = UNSET
+    organisation_id: Union[Unset, None, str] = UNSET
     description: Union[Unset, None, str] = UNSET
     participant_count: Union[Unset, int] = UNSET
     is_deleted: Union[Unset, bool] = UNSET
@@ -54,6 +57,7 @@ class ParticipantGroup:
         name = self.name
         project_id = self.project_id
         workspace_id = self.workspace_id
+        organisation_id = self.organisation_id
         description = self.description
         participant_count = self.participant_count
         is_deleted = self.is_deleted
@@ -76,6 +80,8 @@ class ParticipantGroup:
             field_dict["project_id"] = project_id
         if workspace_id is not UNSET:
             field_dict["workspace_id"] = workspace_id
+        if organisation_id is not UNSET:
+            field_dict["organisation_id"] = organisation_id
         if description is not UNSET:
             field_dict["description"] = description
         if participant_count is not UNSET:
@@ -102,6 +108,8 @@ class ParticipantGroup:
 
         workspace_id = d.pop("workspace_id", UNSET)
 
+        organisation_id = d.pop("organisation_id", UNSET)
+
         description = d.pop("description", UNSET)
 
         participant_count = d.pop("participant_count", UNSET)
@@ -122,6 +130,7 @@ class ParticipantGroup:
             name=name,
             project_id=project_id,
             workspace_id=workspace_id,
+            organisation_id=organisation_id,
             description=description,
             participant_count=participant_count,
             is_deleted=is_deleted,

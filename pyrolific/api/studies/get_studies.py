@@ -8,11 +8,11 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...types import UNSET, Unset
-from ...models.get_studies_state import GetStudiesState
-from typing import Dict
-from ...models.studies_list_response import StudiesListResponse
 from typing import Union
+from ...models.studies_list_response import StudiesListResponse
+from ...models.get_studies_state import GetStudiesState
 from typing import Optional
+from typing import Dict
 
 
 def _get_kwargs(

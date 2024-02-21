@@ -8,12 +8,12 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
 from ..models.submission_transition_rejection_category import (
     SubmissionTransitionRejectionCategory,
 )
-from ..models.submission_transition_action import SubmissionTransitionAction
 from typing import Union
+from ..models.submission_transition_action import SubmissionTransitionAction
+from ..types import UNSET, Unset
 
 
 T = TypeVar("T", bound="SubmissionTransition")

@@ -8,9 +8,9 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...types import UNSET, Unset
+from typing import Union
 from ...models.send_message import SendMessage
 from typing import Dict
-from typing import Union
 
 
 def _get_kwargs(

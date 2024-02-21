@@ -8,9 +8,9 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from typing import cast, List
 from typing import Union
 from ..types import UNSET, Unset
-from typing import cast, List
 
 
 T = TypeVar("T", bound="CreateParticipantGroupJsonBody")
@@ -20,23 +20,28 @@ T = TypeVar("T", bound="CreateParticipantGroupJsonBody")
 class CreateParticipantGroupJsonBody:
     """
     Attributes:
-        workspace_id (str): The id of the workspace to create the participant group in
         name (str): The name of the participant group Example: Group 1.
+        workspace_id (Union[Unset, str]): The id of the workspace to create the participant group in. Either a workspace
+            or organisation ID must be specified.
+        organisation_id (Union[Unset, str]): The id of the organisation to create the participant group in. Either a
+            workspace or organisation ID must be specified.
         description (Union[Unset, str]): A description of the participant group Example: Participants with confirmed
             special dietary requirements..
         participant_ids (Union[Unset, List[str]]): The ids of participants to be initially added to the group Example:
             ['5e9b9c9b0f9c9a0001b0b1f4', '5e9b9c9b0f9c9a0001b0b1f5', '5e9b9c9b0f9c9a0001b0b1f6'].
     """
 
-    workspace_id: str
     name: str
+    workspace_id: Union[Unset, str] = UNSET
+    organisation_id: Union[Unset, str] = UNSET
     description: Union[Unset, str] = UNSET
     participant_ids: Union[Unset, List[str]] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        workspace_id = self.workspace_id
         name = self.name
+        workspace_id = self.workspace_id
+        organisation_id = self.organisation_id
         description = self.description
         participant_ids: Union[Unset, List[str]] = UNSET
         if not isinstance(self.participant_ids, Unset):
@@ -46,10 +51,13 @@ class CreateParticipantGroupJsonBody:
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "workspace_id": workspace_id,
                 "name": name,
             }
         )
+        if workspace_id is not UNSET:
+            field_dict["workspace_id"] = workspace_id
+        if organisation_id is not UNSET:
+            field_dict["organisation_id"] = organisation_id
         if description is not UNSET:
             field_dict["description"] = description
         if participant_ids is not UNSET:
@@ -60,17 +68,20 @@ class CreateParticipantGroupJsonBody:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        workspace_id = d.pop("workspace_id")
-
         name = d.pop("name")
+
+        workspace_id = d.pop("workspace_id", UNSET)
+
+        organisation_id = d.pop("organisation_id", UNSET)
 
         description = d.pop("description", UNSET)
 
         participant_ids = cast(List[str], d.pop("participant_ids", UNSET))
 
         create_participant_group_json_body = cls(
-            workspace_id=workspace_id,
             name=name,
+            workspace_id=workspace_id,
+            organisation_id=organisation_id,
             description=description,
             participant_ids=participant_ids,
         )

@@ -9,11 +9,11 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..models.study_short_study_type import StudyShortStudyType
+from typing import Union
 import datetime
+from ..types import UNSET, Unset
 from ..models.study_short_status import StudyShortStatus
 from dateutil.parser import isoparse
-from typing import Union
-from ..types import UNSET, Unset
 
 
 T = TypeVar("T", bound="StudyShort")

@@ -8,10 +8,10 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..models.subscription_event_status import SubscriptionEventStatus
-from typing import Dict
 from typing import Union
+from ..models.subscription_event_status import SubscriptionEventStatus
 from ..types import UNSET, Unset
+from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.subscription_event_payload import SubscriptionEventPayload

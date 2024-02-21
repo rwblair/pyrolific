@@ -8,10 +8,10 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...types import UNSET, Unset
-from ...models.requirements_count import RequirementsCount
-from typing import Dict
 from typing import Union
+from ...models.requirements_count import RequirementsCount
 from ...models.requirements_count_request import RequirementsCountRequest
+from typing import Dict
 
 
 def _get_kwargs(

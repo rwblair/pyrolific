@@ -6,10 +6,13 @@ from typing import List
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
 
-from typing import Dict
+from typing import Union
 from typing import Union
 from typing import List
+from ..types import UNSET, Unset
+from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.range_filter import RangeFilter
@@ -26,17 +29,19 @@ class RequirementsCountRequest:
         filters (List[Union['RangeFilter', 'SelectFilter']]): List of filters to apply to the count. This parameter uses
             the new, simplified
             filters schema for interacting with eligibility.
-        workspace_id (str): The ID of the workspace you will be creating a study in.
+        workspace_id (Union[Unset, str]): The ID of the workspace you will be creating a study in.
 
             Due to US tax laws, non US residents may not participate in studies created by US researchers.
             For this reason, we use the country specified in the workspace to determine eligibility.
 
             If you do not specify a workspace ID, we will use the current workspace ID of the user making the request.
             Your eligibility count may not be accurate if you do not specify a workspace ID.
+        organisation_id (Union[Unset, str]): The ID of the workspace you will be creating a filterset in.
     """
 
     filters: List[Union["RangeFilter", "SelectFilter"]]
-    workspace_id: str
+    workspace_id: Union[Unset, str] = UNSET
+    organisation_id: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -55,15 +60,19 @@ class RequirementsCountRequest:
             filters.append(filters_item)
 
         workspace_id = self.workspace_id
+        organisation_id = self.organisation_id
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
                 "filters": filters,
-                "workspace_id": workspace_id,
             }
         )
+        if workspace_id is not UNSET:
+            field_dict["workspace_id"] = workspace_id
+        if organisation_id is not UNSET:
+            field_dict["organisation_id"] = organisation_id
 
         return field_dict
 
@@ -98,11 +107,14 @@ class RequirementsCountRequest:
 
             filters.append(filters_item)
 
-        workspace_id = d.pop("workspace_id")
+        workspace_id = d.pop("workspace_id", UNSET)
+
+        organisation_id = d.pop("organisation_id", UNSET)
 
         requirements_count_request = cls(
             filters=filters,
             workspace_id=workspace_id,
+            organisation_id=organisation_id,
         )
 
         requirements_count_request.additional_properties = d

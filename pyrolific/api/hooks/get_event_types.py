@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from typing import Dict
 from ...models.event_type_list import EventTypeList
+from typing import Dict
 
 
 def _get_kwargs(

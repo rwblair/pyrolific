@@ -7,11 +7,11 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.return_requested_response import ReturnRequestedResponse
 from ...models.request_submission_return_json_body import (
     RequestSubmissionReturnJsonBody,
 )
 from typing import Dict
+from ...models.return_requested_response import ReturnRequestedResponse
 
 
 def _get_kwargs(

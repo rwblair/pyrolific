@@ -8,11 +8,11 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from typing import Union
+from typing import Union
 from typing import List
-from typing import Dict
-from typing import Union
-from typing import Union
 from ..types import UNSET, Unset
+from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.range_filter import RangeFilter
@@ -30,7 +30,8 @@ class UnlockFilterSetResponse200:
         version (Union[Unset, int]): An incrementing integer indicating the version of the filter set.
         is_deleted (Union[Unset, bool]): Whether the filter set has been deleted.
         is_locked (Union[Unset, bool]): Whether the filter set has been locked.
-        workspace_id (Union[Unset, str]): ID of the workspace where the filter set can be used.
+        workspace_id (Union[Unset, None, str]): ID of the workspace where the filter set can be used.
+        organisation_id (Union[Unset, None, str]): ID of the workspace where the filter set can be used.
         name (Union[Unset, str]): Name of the filter set.
         filters (Union[Unset, List[Union['RangeFilter', 'SelectFilter']]]): List of all filters contained in the filter
             set.
@@ -43,7 +44,8 @@ class UnlockFilterSetResponse200:
     version: Union[Unset, int] = UNSET
     is_deleted: Union[Unset, bool] = UNSET
     is_locked: Union[Unset, bool] = UNSET
-    workspace_id: Union[Unset, str] = UNSET
+    workspace_id: Union[Unset, None, str] = UNSET
+    organisation_id: Union[Unset, None, str] = UNSET
     name: Union[Unset, str] = UNSET
     filters: Union[Unset, List[Union["RangeFilter", "SelectFilter"]]] = UNSET
     eligible_participant_count: Union[Unset, int] = UNSET
@@ -57,6 +59,7 @@ class UnlockFilterSetResponse200:
         is_deleted = self.is_deleted
         is_locked = self.is_locked
         workspace_id = self.workspace_id
+        organisation_id = self.organisation_id
         name = self.name
         filters: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.filters, Unset):
@@ -87,6 +90,8 @@ class UnlockFilterSetResponse200:
             field_dict["is_locked"] = is_locked
         if workspace_id is not UNSET:
             field_dict["workspace_id"] = workspace_id
+        if organisation_id is not UNSET:
+            field_dict["organisation_id"] = organisation_id
         if name is not UNSET:
             field_dict["name"] = name
         if filters is not UNSET:
@@ -111,6 +116,8 @@ class UnlockFilterSetResponse200:
         is_locked = d.pop("is_locked", UNSET)
 
         workspace_id = d.pop("workspace_id", UNSET)
+
+        organisation_id = d.pop("organisation_id", UNSET)
 
         name = d.pop("name", UNSET)
 
@@ -147,6 +154,7 @@ class UnlockFilterSetResponse200:
             is_deleted=is_deleted,
             is_locked=is_locked,
             workspace_id=workspace_id,
+            organisation_id=organisation_id,
             name=name,
             filters=filters,
             eligible_participant_count=eligible_participant_count,

@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
+from ...models.clone_filter_set_response_201 import CloneFilterSetResponse201
 from ...models.clone_filter_set_json_body import CloneFilterSetJsonBody
 from typing import Dict
-from ...models.clone_filter_set_response_201 import CloneFilterSetResponse201
 
 
 def _get_kwargs(

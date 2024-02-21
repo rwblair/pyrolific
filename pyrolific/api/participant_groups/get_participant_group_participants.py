@@ -7,10 +7,10 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
+from typing import Dict
 from ...models.participant_group_membership_list_response import (
     ParticipantGroupMembershipListResponse,
 )
-from typing import Dict
 
 
 def _get_kwargs(

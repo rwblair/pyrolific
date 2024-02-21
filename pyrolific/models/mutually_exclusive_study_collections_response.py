@@ -4,8 +4,8 @@ from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 from attrs import define as _attrs_define
 
 
-from typing import Dict
 from typing import List
+from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.mutually_exclusive_study_collection_update import (

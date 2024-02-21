@@ -8,16 +8,16 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from typing import Union
 import datetime
 from typing import List
-from typing import Dict
-from dateutil.parser import isoparse
-from typing import Union
 from ..types import UNSET, Unset
+from dateutil.parser import isoparse
+from typing import Dict
 
 if TYPE_CHECKING:
-    from ..models.question_response import QuestionResponse
     from ..models.section import Section
+    from ..models.question_response import QuestionResponse
 
 
 T = TypeVar("T", bound="ResponseOut")
@@ -99,8 +99,8 @@ class ResponseOut:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.question_response import QuestionResponse
         from ..models.section import Section
+        from ..models.question_response import QuestionResponse
 
         d = src_dict.copy()
         participant_id = d.pop("participant_id")

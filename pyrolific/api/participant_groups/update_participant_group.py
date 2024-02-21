@@ -8,8 +8,8 @@ from ...types import Response
 from ... import errors
 
 from ...models.participant_group import ParticipantGroup
-from typing import Dict
 from ...models.participant_group_update import ParticipantGroupUpdate
+from typing import Dict
 
 
 def _get_kwargs(
