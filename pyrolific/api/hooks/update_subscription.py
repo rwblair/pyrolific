@@ -3,34 +3,34 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
-from ...models.subscription_update_detail import SubscriptionUpdateDetail
+from ...client import AuthenticatedClient, Client
 from ...models.subscription_detail import SubscriptionDetail
-from typing import Dict
+from ...models.subscription_update_detail import SubscriptionUpdateDetail
+from ...types import Response
 
 
 def _get_kwargs(
     subscription_id: str,
     *,
-    json_body: SubscriptionUpdateDetail,
+    body: SubscriptionUpdateDetail,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "patch",
-        "url": "/api/v1/hooks/subscriptions/{subscription_id}/".format(
-            subscription_id=subscription_id,
-        ),
-        "json": json_json_body,
-        "headers": headers,
+        "url": f"/api/v1/hooks/subscriptions/{subscription_id}/",
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -61,7 +61,7 @@ def sync_detailed(
     subscription_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: SubscriptionUpdateDetail,
+    body: SubscriptionUpdateDetail,
     authorization: str,
 ) -> Response[SubscriptionDetail]:
     """Update a subscription
@@ -72,7 +72,7 @@ def sync_detailed(
     Args:
         subscription_id (str):
         authorization (str):
-        json_body (SubscriptionUpdateDetail):
+        body (SubscriptionUpdateDetail):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -84,7 +84,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         subscription_id=subscription_id,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -99,7 +99,7 @@ def sync(
     subscription_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: SubscriptionUpdateDetail,
+    body: SubscriptionUpdateDetail,
     authorization: str,
 ) -> Optional[SubscriptionDetail]:
     """Update a subscription
@@ -110,7 +110,7 @@ def sync(
     Args:
         subscription_id (str):
         authorization (str):
-        json_body (SubscriptionUpdateDetail):
+        body (SubscriptionUpdateDetail):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -123,7 +123,7 @@ def sync(
     return sync_detailed(
         subscription_id=subscription_id,
         client=client,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     ).parsed
 
@@ -132,7 +132,7 @@ async def asyncio_detailed(
     subscription_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: SubscriptionUpdateDetail,
+    body: SubscriptionUpdateDetail,
     authorization: str,
 ) -> Response[SubscriptionDetail]:
     """Update a subscription
@@ -143,7 +143,7 @@ async def asyncio_detailed(
     Args:
         subscription_id (str):
         authorization (str):
-        json_body (SubscriptionUpdateDetail):
+        body (SubscriptionUpdateDetail):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -155,7 +155,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         subscription_id=subscription_id,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -168,7 +168,7 @@ async def asyncio(
     subscription_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: SubscriptionUpdateDetail,
+    body: SubscriptionUpdateDetail,
     authorization: str,
 ) -> Optional[SubscriptionDetail]:
     """Update a subscription
@@ -179,7 +179,7 @@ async def asyncio(
     Args:
         subscription_id (str):
         authorization (str):
-        json_body (SubscriptionUpdateDetail):
+        body (SubscriptionUpdateDetail):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -193,7 +193,7 @@ async def asyncio(
         await asyncio_detailed(
             subscription_id=subscription_id,
             client=client,
-            json_body=json_body,
+            body=body,
             authorization=authorization,
         )
     ).parsed

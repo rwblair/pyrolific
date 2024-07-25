@@ -1,16 +1,9 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
 
 from attrs import define as _attrs_define
 
-
-from typing import List
-from typing import Dict
-
 if TYPE_CHECKING:
-    from ..models.mutually_exclusive_study_collection_update import (
-        MutuallyExclusiveStudyCollectionUpdate,
-    )
+    from ..models.mutually_exclusive_study_collection_update import MutuallyExclusiveStudyCollectionUpdate
 
 
 T = TypeVar("T", bound="MutuallyExclusiveStudyCollectionsResponse")
@@ -30,7 +23,6 @@ class MutuallyExclusiveStudyCollectionsResponse:
         results = []
         for results_item_data in self.results:
             results_item = results_item_data.to_dict()
-
             results.append(results_item)
 
         field_dict: Dict[str, Any] = {}
@@ -44,17 +36,13 @@ class MutuallyExclusiveStudyCollectionsResponse:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.mutually_exclusive_study_collection_update import (
-            MutuallyExclusiveStudyCollectionUpdate,
-        )
+        from ..models.mutually_exclusive_study_collection_update import MutuallyExclusiveStudyCollectionUpdate
 
         d = src_dict.copy()
         results = []
         _results = d.pop("results")
         for results_item_data in _results:
-            results_item = MutuallyExclusiveStudyCollectionUpdate.from_dict(
-                results_item_data
-            )
+            results_item = MutuallyExclusiveStudyCollectionUpdate.from_dict(results_item_data)
 
             results.append(results_item)
 

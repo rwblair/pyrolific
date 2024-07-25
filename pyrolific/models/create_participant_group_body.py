@@ -1,23 +1,15 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast, List
-from typing import Union
-from ..types import UNSET, Unset
-
-
-T = TypeVar("T", bound="CreateParticipantGroupJsonBody")
+T = TypeVar("T", bound="CreateParticipantGroupBody")
 
 
 @_attrs_define
-class CreateParticipantGroupJsonBody:
+class CreateParticipantGroupBody:
     """
     Attributes:
         name (str): The name of the participant group Example: Group 1.
@@ -40,9 +32,13 @@ class CreateParticipantGroupJsonBody:
 
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
+
         workspace_id = self.workspace_id
+
         organisation_id = self.organisation_id
+
         description = self.description
+
         participant_ids: Union[Unset, List[str]] = UNSET
         if not isinstance(self.participant_ids, Unset):
             participant_ids = self.participant_ids
@@ -78,7 +74,7 @@ class CreateParticipantGroupJsonBody:
 
         participant_ids = cast(List[str], d.pop("participant_ids", UNSET))
 
-        create_participant_group_json_body = cls(
+        create_participant_group_body = cls(
             name=name,
             workspace_id=workspace_id,
             organisation_id=organisation_id,
@@ -86,8 +82,8 @@ class CreateParticipantGroupJsonBody:
             participant_ids=participant_ids,
         )
 
-        create_participant_group_json_body.additional_properties = d
-        return create_participant_group_json_body
+        create_participant_group_body.additional_properties = d
+        return create_participant_group_body
 
     @property
     def additional_keys(self) -> List[str]:

@@ -1,13 +1,7 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
-
-from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.range_filter_selected_range import RangeFilterSelectedRange
@@ -42,6 +36,7 @@ class RangeFilter:
 
     def to_dict(self) -> Dict[str, Any]:
         filter_id = self.filter_id
+
         selected_range = self.selected_range.to_dict()
 
         field_dict: Dict[str, Any] = {}

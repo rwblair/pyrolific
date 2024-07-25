@@ -1,17 +1,9 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import Union
-from typing import List
-from ..types import UNSET, Unset
-from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.summary_answer import SummaryAnswer
@@ -27,7 +19,7 @@ class SummaryQuestion:
     Attributes:
         question (str): The title of the question.
         question_id (Union[Unset, str]): The question ID.
-        total_answers (Union[Unset, int]): The total number of answered responses for a given question.
+        total_answers (Union[Unset, int]): The total number of answered responses for a given question. Default: 0.
         answers (Union[Unset, List['SummaryAnswer']]): A list of aggregated answer information.
     """
 
@@ -39,14 +31,16 @@ class SummaryQuestion:
 
     def to_dict(self) -> Dict[str, Any]:
         question = self.question
+
         question_id = self.question_id
+
         total_answers = self.total_answers
+
         answers: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.answers, Unset):
             answers = []
             for answers_item_data in self.answers:
                 answers_item = answers_item_data.to_dict()
-
                 answers.append(answers_item)
 
         field_dict: Dict[str, Any] = {}

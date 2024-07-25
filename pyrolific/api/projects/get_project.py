@@ -3,12 +3,10 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.project import Project
-from typing import Dict
+from ...types import Response
 
 
 def _get_kwargs(
@@ -16,21 +14,19 @@ def _get_kwargs(
     *,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/api/v1/projects/{project_id}/".format(
-            project_id=project_id,
-        ),
-        "headers": headers,
+        "url": f"/api/v1/projects/{project_id}/",
     }
 
+    _kwargs["headers"] = headers
+    return _kwargs
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Project]:
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Project]:
     if response.status_code == HTTPStatus.OK:
         response_200 = Project.from_dict(response.json())
 
@@ -41,9 +37,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Project]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Project]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

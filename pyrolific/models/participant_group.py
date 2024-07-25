@@ -1,22 +1,12 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from typing import List
-from ..types import UNSET, Unset
-from typing import Dict
-
 if TYPE_CHECKING:
-    from ..models.participant_group_feeder_studies_item import (
-        ParticipantGroupFeederStudiesItem,
-    )
+    from ..models.participant_group_feeder_studies_item import ParticipantGroupFeederStudiesItem
 
 
 T = TypeVar("T", bound="ParticipantGroup")
@@ -28,12 +18,12 @@ class ParticipantGroup:
     Attributes:
         id (Union[Unset, str]): The id of the participant group Example: 5e9b9c9b0f9c9a0001b0b1f5.
         name (Union[Unset, str]): The name of the participant group Example: Group 1.
-        project_id (Union[Unset, None, str]): The id of the project the participant group belongs to
-        workspace_id (Union[Unset, None, str]): The id of the workspace the participant group belongs to. A participant
+        project_id (Union[None, Unset, str]): The id of the project the participant group belongs to
+        workspace_id (Union[None, Unset, str]): The id of the workspace the participant group belongs to. A participant
             group can only belong to either a workspace or an organisation. Example: 5e9b9c9b0f9c9a0001b1ca2f.
-        organisation_id (Union[Unset, None, str]): The id of the organisation the participant group belongs to. A
+        organisation_id (Union[None, Unset, str]): The id of the organisation the participant group belongs to. A
             participant group can only belong to either a workspace or an organisation. Example: 5e9b9c9b0f9c9a0001b1ca2f.
-        description (Union[Unset, None, str]): The user-provided description of the participant group Example: My first
+        description (Union[None, Unset, str]): The user-provided description of the participant group Example: My first
             participant group.
         participant_count (Union[Unset, int]): The number of participants in the participant group Example: 10.
         is_deleted (Union[Unset, bool]): Whether the participant group has been deleted
@@ -43,10 +33,10 @@ class ParticipantGroup:
 
     id: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
-    project_id: Union[Unset, None, str] = UNSET
-    workspace_id: Union[Unset, None, str] = UNSET
-    organisation_id: Union[Unset, None, str] = UNSET
-    description: Union[Unset, None, str] = UNSET
+    project_id: Union[None, Unset, str] = UNSET
+    workspace_id: Union[None, Unset, str] = UNSET
+    organisation_id: Union[None, Unset, str] = UNSET
+    description: Union[None, Unset, str] = UNSET
     participant_count: Union[Unset, int] = UNSET
     is_deleted: Union[Unset, bool] = UNSET
     feeder_studies: Union[Unset, List["ParticipantGroupFeederStudiesItem"]] = UNSET
@@ -54,19 +44,42 @@ class ParticipantGroup:
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         name = self.name
-        project_id = self.project_id
-        workspace_id = self.workspace_id
-        organisation_id = self.organisation_id
-        description = self.description
+
+        project_id: Union[None, Unset, str]
+        if isinstance(self.project_id, Unset):
+            project_id = UNSET
+        else:
+            project_id = self.project_id
+
+        workspace_id: Union[None, Unset, str]
+        if isinstance(self.workspace_id, Unset):
+            workspace_id = UNSET
+        else:
+            workspace_id = self.workspace_id
+
+        organisation_id: Union[None, Unset, str]
+        if isinstance(self.organisation_id, Unset):
+            organisation_id = UNSET
+        else:
+            organisation_id = self.organisation_id
+
+        description: Union[None, Unset, str]
+        if isinstance(self.description, Unset):
+            description = UNSET
+        else:
+            description = self.description
+
         participant_count = self.participant_count
+
         is_deleted = self.is_deleted
+
         feeder_studies: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.feeder_studies, Unset):
             feeder_studies = []
             for feeder_studies_item_data in self.feeder_studies:
                 feeder_studies_item = feeder_studies_item_data.to_dict()
-
                 feeder_studies.append(feeder_studies_item)
 
         field_dict: Dict[str, Any] = {}
@@ -95,22 +108,48 @@ class ParticipantGroup:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.participant_group_feeder_studies_item import (
-            ParticipantGroupFeederStudiesItem,
-        )
+        from ..models.participant_group_feeder_studies_item import ParticipantGroupFeederStudiesItem
 
         d = src_dict.copy()
         id = d.pop("id", UNSET)
 
         name = d.pop("name", UNSET)
 
-        project_id = d.pop("project_id", UNSET)
+        def _parse_project_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        workspace_id = d.pop("workspace_id", UNSET)
+        project_id = _parse_project_id(d.pop("project_id", UNSET))
 
-        organisation_id = d.pop("organisation_id", UNSET)
+        def _parse_workspace_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        description = d.pop("description", UNSET)
+        workspace_id = _parse_workspace_id(d.pop("workspace_id", UNSET))
+
+        def _parse_organisation_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        organisation_id = _parse_organisation_id(d.pop("organisation_id", UNSET))
+
+        def _parse_description(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        description = _parse_description(d.pop("description", UNSET))
 
         participant_count = d.pop("participant_count", UNSET)
 
@@ -119,9 +158,7 @@ class ParticipantGroup:
         feeder_studies = []
         _feeder_studies = d.pop("feeder_studies", UNSET)
         for feeder_studies_item_data in _feeder_studies or []:
-            feeder_studies_item = ParticipantGroupFeederStudiesItem.from_dict(
-                feeder_studies_item_data
-            )
+            feeder_studies_item = ParticipantGroupFeederStudiesItem.from_dict(feeder_studies_item_data)
 
             feeder_studies.append(feeder_studies_item)
 

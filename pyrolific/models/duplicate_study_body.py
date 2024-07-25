@@ -1,22 +1,15 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from ..types import UNSET, Unset
-
-
-T = TypeVar("T", bound="DuplicateStudyJsonBody")
+T = TypeVar("T", bound="DuplicateStudyBody")
 
 
 @_attrs_define
-class DuplicateStudyJsonBody:
+class DuplicateStudyBody:
     """
     Attributes:
         block_previous_participants (Union[Unset, bool]): Controls whether the block list is added or not. Default:
@@ -42,12 +35,12 @@ class DuplicateStudyJsonBody:
         d = src_dict.copy()
         block_previous_participants = d.pop("block_previous_participants", UNSET)
 
-        duplicate_study_json_body = cls(
+        duplicate_study_body = cls(
             block_previous_participants=block_previous_participants,
         )
 
-        duplicate_study_json_body.additional_properties = d
-        return duplicate_study_json_body
+        duplicate_study_body.additional_properties = d
+        return duplicate_study_body
 
     @property
     def additional_keys(self) -> List[str]:

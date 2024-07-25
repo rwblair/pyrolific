@@ -3,30 +3,25 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.response_out import ResponseOut
-from typing import Dict
+from ...types import Response
 
 
 def _get_kwargs(
     survey_id: str,
     response_id: str,
 ) -> Dict[str, Any]:
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/api/v1/surveys/{survey_id}/responses/{response_id}".format(
-            survey_id=survey_id,
-            response_id=response_id,
-        ),
+        "url": f"/api/v1/surveys/{survey_id}/responses/{response_id}",
     }
 
+    return _kwargs
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[ResponseOut]:
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[ResponseOut]:
     if response.status_code == HTTPStatus.OK:
         response_200 = ResponseOut.from_dict(response.json())
 
@@ -37,9 +32,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[ResponseOut]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[ResponseOut]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

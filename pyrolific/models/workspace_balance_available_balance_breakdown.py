@@ -1,11 +1,7 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
 
 T = TypeVar("T", bound="WorkspaceBalanceAvailableBalanceBreakdown")
 
@@ -15,7 +11,7 @@ class WorkspaceBalanceAvailableBalanceBreakdown:
     """A breakdown of the available balance of the workspace into:
     - Funds available to pay to participants
     - Funds pre-paid to Prolific for our services
-    - Funds for any VAT applied to our service fees
+    - Funds for any VAT applied to our Platform fees
 
     """
 
@@ -24,7 +20,6 @@ class WorkspaceBalanceAvailableBalanceBreakdown:
     def to_dict(self) -> Dict[str, Any]:
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
 
         return field_dict
 

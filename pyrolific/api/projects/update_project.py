@@ -3,38 +3,36 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.project import Project
-from typing import Dict
+from ...types import Response
 
 
 def _get_kwargs(
     project_id: str,
     *,
-    json_body: Project,
+    body: Project,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "patch",
-        "url": "/api/v1/projects/{project_id}/".format(
-            project_id=project_id,
-        ),
-        "json": json_json_body,
-        "headers": headers,
+        "url": f"/api/v1/projects/{project_id}/",
     }
 
+    _body = body.to_dict()
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Project]:
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
+
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Project]:
     if response.status_code == HTTPStatus.OK:
         response_200 = Project.from_dict(response.json())
 
@@ -45,9 +43,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Project]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Project]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -60,7 +56,7 @@ def sync_detailed(
     project_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: Project,
+    body: Project,
     authorization: str,
 ) -> Response[Project]:
     """Update a project
@@ -70,7 +66,7 @@ def sync_detailed(
     Args:
         project_id (str):
         authorization (str):
-        json_body (Project):  Example: {'id': '62fce6fff0a78eb4f3ebc09c', 'title': 'My project',
+        body (Project):  Example: {'id': '62fce6fff0a78eb4f3ebc09c', 'title': 'My project',
             'description': 'This project is for...', 'owner': '60a42f4c693c29420793cb73', 'users':
             [{'id': '60a42f4c693c29420793cb73', 'name': 'Joe Soap', 'email': 'joe.soap@gmail.com',
             'roles': ['PROJECT_EDITOR']}], 'workspace': '60a42f4c693c29420793cb73',
@@ -86,7 +82,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         project_id=project_id,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -101,7 +97,7 @@ def sync(
     project_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: Project,
+    body: Project,
     authorization: str,
 ) -> Optional[Project]:
     """Update a project
@@ -111,7 +107,7 @@ def sync(
     Args:
         project_id (str):
         authorization (str):
-        json_body (Project):  Example: {'id': '62fce6fff0a78eb4f3ebc09c', 'title': 'My project',
+        body (Project):  Example: {'id': '62fce6fff0a78eb4f3ebc09c', 'title': 'My project',
             'description': 'This project is for...', 'owner': '60a42f4c693c29420793cb73', 'users':
             [{'id': '60a42f4c693c29420793cb73', 'name': 'Joe Soap', 'email': 'joe.soap@gmail.com',
             'roles': ['PROJECT_EDITOR']}], 'workspace': '60a42f4c693c29420793cb73',
@@ -128,7 +124,7 @@ def sync(
     return sync_detailed(
         project_id=project_id,
         client=client,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     ).parsed
 
@@ -137,7 +133,7 @@ async def asyncio_detailed(
     project_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: Project,
+    body: Project,
     authorization: str,
 ) -> Response[Project]:
     """Update a project
@@ -147,7 +143,7 @@ async def asyncio_detailed(
     Args:
         project_id (str):
         authorization (str):
-        json_body (Project):  Example: {'id': '62fce6fff0a78eb4f3ebc09c', 'title': 'My project',
+        body (Project):  Example: {'id': '62fce6fff0a78eb4f3ebc09c', 'title': 'My project',
             'description': 'This project is for...', 'owner': '60a42f4c693c29420793cb73', 'users':
             [{'id': '60a42f4c693c29420793cb73', 'name': 'Joe Soap', 'email': 'joe.soap@gmail.com',
             'roles': ['PROJECT_EDITOR']}], 'workspace': '60a42f4c693c29420793cb73',
@@ -163,7 +159,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         project_id=project_id,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -176,7 +172,7 @@ async def asyncio(
     project_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: Project,
+    body: Project,
     authorization: str,
 ) -> Optional[Project]:
     """Update a project
@@ -186,7 +182,7 @@ async def asyncio(
     Args:
         project_id (str):
         authorization (str):
-        json_body (Project):  Example: {'id': '62fce6fff0a78eb4f3ebc09c', 'title': 'My project',
+        body (Project):  Example: {'id': '62fce6fff0a78eb4f3ebc09c', 'title': 'My project',
             'description': 'This project is for...', 'owner': '60a42f4c693c29420793cb73', 'users':
             [{'id': '60a42f4c693c29420793cb73', 'name': 'Joe Soap', 'email': 'joe.soap@gmail.com',
             'roles': ['PROJECT_EDITOR']}], 'workspace': '60a42f4c693c29420793cb73',
@@ -204,7 +200,7 @@ async def asyncio(
         await asyncio_detailed(
             project_id=project_id,
             client=client,
-            json_body=json_body,
+            body=body,
             authorization=authorization,
         )
     ).parsed

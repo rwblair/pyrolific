@@ -1,17 +1,9 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import Union
-from typing import List
-from ..types import UNSET, Unset
-from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.summary_question import SummaryQuestion
@@ -27,8 +19,8 @@ class Summary:
     Example:
         {'survey_id': '63346b3a4fd1fe7b39f192e9', 'questions': [{'question_id': '02dee012-25e4-449e-8f2f-a552b9007d92',
             'question': 'Do you feel that this will all be alright on the night?', 'total_answers': 10, 'answers':
-            [{'answer_id': '4c69011b-9b6b-46c6-8ba2-da80761131dc', 'answer': True, 'count': 4}, {'answer_id':
-            'f3c8d38f-842c-49d9-a0bb-e17b7803b240', 'answer': False, 'count': 6}]}]}
+            [{'answer_id': '4c69011b-9b6b-46c6-8ba2-da80761131dc', 'answer': 'Yes', 'count': 4}, {'answer_id':
+            'f3c8d38f-842c-49d9-a0bb-e17b7803b240', 'answer': 'No', 'count': 6}]}]}
 
     Attributes:
         survey_id (str): The survey ID.
@@ -41,12 +33,12 @@ class Summary:
 
     def to_dict(self) -> Dict[str, Any]:
         survey_id = self.survey_id
+
         questions: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.questions, Unset):
             questions = []
             for questions_item_data in self.questions:
                 questions_item = questions_item_data.to_dict()
-
                 questions.append(questions_item)
 
         field_dict: Dict[str, Any] = {}

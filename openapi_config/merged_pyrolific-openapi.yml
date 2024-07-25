@@ -117,8 +117,39 @@ tags:
       A user is associated with an account, their credentials and their API
       token.
 
+  - name: Taskflow
+    externalDocs:
+      description: To get started with Taskflow, see the Create Study Documentation
+      url: https://docs.prolific.com/docs/api-docs/public/studies#tag/Studies/operation/CreateStudy
+    description: |-
+      Taskflow is designed to facilitate the creation and management of single studies with varied configurations. By utilizing Taskflow, you can seamlessly implement A/B testing with different external URLs and distribution strategies, ensuring comprehensive data collection and analysis from your participants.
+
+      - **Key Features**:
+        - **Flexible Study Creation:** Easily set up studies with multiple variations in external URLs, enabling targeted testing and comparison.
+        - **A/B Testing:** Conduct robust A/B testing to evaluate different versions of your study, allowing for precise measurement of participant responses and behaviors.
+        - **Granular Distribution:** Fine grained control over the distribution of your URLs to a subsection of participants.
+        - **Task Assignment Efficiency:** Ideal for scenarios where you need to assign small numbers of participants to specific unique tasks. This streamlines the management process by handling a single study rather than managing multiple small studies.
+
+      Below is an example of how Taskflow reduces the study management complexity:
+      ![Taskflow Example](https://assets.prolific.com/assets/img/api/taskflow-example.png)
+
   - name: Studies
     description: |-
+      <div style="padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 4px; color: #a94442; background-color: #f2dede; border-color: #ebccd1; display:flex; flex-direction:column;">
+        <div style="padding-top: 10px">
+          <span style="font-size: x-large;"><strong>Important<strong></span>
+        </div>
+        <div style="padding-top: 10px">
+          The Studies API has rate limits in place to prevent researchers from launching too many studies with low numbers of participants.<br>
+        </div>
+        <div style="padding-top: 10px">
+          If your study URLs each represent a variant of the same task, with a specified number of participants accessing each variant, please consider using our Taskflow product, which is tailored for this and does not have a publishing limit.
+        </div>
+        <a href="https://researcher-help.prolific.com/hc/en-gb/articles/13888500244380-Taskflow-AI-Dataset-Annotation" style="margin-top:10px; display: inline-block; font-weight: 400; color: #fff; text-align: center; vertical-align: middle; user-select: none; background-color: #007bff; border: 1px solid #007bff; padding: .375rem .75rem; font-size: 1rem; line-height: 1.5; border-radius: .25rem; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;">
+          Take me to the taskflow documentation
+        </a>
+      </div>
+
       To recruit participants for your research, you create a draft study with your audience filters and cost and then publish the study to start recruiting.
 
       This is a two step process because publishing a study to participants requires many different and complex steps.
@@ -1271,8 +1302,15 @@ paths:
       tags:
         - Studies
       summary: Create a draft study
+      externalDocs:
+        description: Publish your study
+        url: http://127.0.0.1:8080/docs/studies#tag/Studies/operation/PublishStudy
       description: |-
         Create a draft study. Publishing a study is a two step process, first create a draft study then publish it.
+
+        ## Taskflow Studies:
+        Taskflow studies are created in the same manner as regular studies, however instead of providing an **external_study_url**, you should
+        provide an access_details array with **access_detail** objects instead, containing an external_url field and a total_allocation field.
       parameters:
         - name: Authorization
           in: header
@@ -1292,7 +1330,6 @@ paths:
                   description: This study aims to determine how to make a good public API
                   external_study_url: https://eggs-experriment.com?participant={{%PROLIFIC_PID%}}
                   prolific_id_option: url_parameters
-                  completion_option: url
                   completion_codes:
                     - code: "ABC123"
                       code_type: "COMPLETED"
@@ -1318,7 +1355,6 @@ paths:
                   description: This study aims to determine how to make a good public API
                   external_study_url: https://eggs-experriment.com?participant={{%PROLIFIC_PID%}}
                   prolific_id_option: question
-                  completion_option: url
                   completion_codes:
                     - code: "ABC123"
                       code_type: "COMPLETED"
@@ -1345,7 +1381,6 @@ paths:
                     This study is not accessible to participants of studies 319e049f7648a4e1f8f3645a and 919e049f7648a4e1f8f3645d
                   external_study_url: https://eggs-experriment.com?participant={{%PROLIFIC_PID%}}
                   prolific_id_option: question
-                  completion_option: url
                   completion_codes:
                     - code: "ABC123"
                       code_type: "COMPLETED"
@@ -1373,7 +1408,6 @@ paths:
                   reward: 100
                   total_available_places: 500
                   prolific_id_option: "question"
-                  completion_option: "url"
                   completion_codes:
                     - code: "ABC123"
                       code_type: "COMPLETED"
@@ -1391,7 +1425,6 @@ paths:
                   reward: 100
                   total_available_places: 500
                   prolific_id_option: "question"
-                  completion_option: "url"
                   completion_codes:
                     - code: "ABC123"
                       code_type: "COMPLETED"
@@ -1415,7 +1448,6 @@ paths:
                   description: This study aims to determine how to make a good public API
                   external_study_url: https://eggs-experriment.com?participant={{%PROLIFIC_PID%}}
                   prolific_id_option: question
-                  completion_option: url
                   completion_codes:
                     - code: "ABC123"
                       code_type: "COMPLETED"
@@ -1442,7 +1474,6 @@ paths:
                   description: A participant can be in either of these groups to gain study access
                   external_study_url: https://eggs-experriment.com?participant={{%PROLIFIC_PID%}}
                   prolific_id_option: question
-                  completion_option: url
                   completion_codes:
                     - code: "ABC123"
                       code_type: "COMPLETED"
@@ -1464,7 +1495,6 @@ paths:
                   description: A participant has to be in both groups to gain study access
                   external_study_url: https://eggs-experriment.com?participant={{%PROLIFIC_PID%}}
                   prolific_id_option: question
-                  completion_option: url
                   completion_codes:
                     - code: "ABC123"
                       code_type: "COMPLETED"
@@ -1493,7 +1523,6 @@ paths:
                   reward: 13
                   total_available_places: 500
                   prolific_id_option: "question"
-                  completion_option: "url"
                   device_compatibility: ["mobile", "desktop", "tablet"]
                   peripheral_requirements: []
                   estimated_completion_time: 1
@@ -1508,7 +1537,6 @@ paths:
                   reward: 13
                   total_available_places: 500
                   prolific_id_option: "question"
-                  completion_option: "url"
                   completion_codes:
                     - code: "ABC123"
                       code_type: "COMPLETED"
@@ -1529,7 +1557,6 @@ paths:
                   reward: 13
                   total_available_places: 500
                   prolific_id_option: "question"
-                  completion_option: "url"
                   completion_codes:
                     - code: "ABC123"
                       code_type: "COMPLETED"
@@ -1551,7 +1578,6 @@ paths:
                   reward: 13
                   total_available_places: 500
                   prolific_id_option: "question"
-                  completion_option: "url"
                   completion_codes:
                     - code: "ABC123"
                       code_type: "COMPLETED"
@@ -1569,7 +1595,6 @@ paths:
                   reward: 13
                   total_available_places: 500
                   prolific_id_option: "question"
-                  completion_option: "url"
                   completion_codes:
                     - code: "ABC123"
                       code_type: "COMPLETED"
@@ -1594,7 +1619,6 @@ paths:
                   reward: 100
                   total_available_places: 500
                   prolific_id_option: "question"
-                  completion_option: "url"
                   completion_codes:
                     - code: "ABC123"
                       code_type: "COMPLETED"
@@ -1605,6 +1629,28 @@ paths:
                   estimated_completion_time: 1
                   filters: []
                   study_labels: ["interview"]
+              study_with_taskflow:
+                value:
+                  name: "Test"
+                  description: "test"
+                  reward: 10
+                  total_available_places: 50
+                  prolific_id_option: "question"
+                  completion_codes:
+                    - code: "ABC123"
+                      code_type: "COMPLETED"
+                      actions:
+                        - action: "MANUALLY_REVIEW"
+                  device_compatibility: ["mobile", "desktop", "tablet"]
+                  peripheral_requirements: []
+                  estimated_completion_time: 1
+                  access_details:
+                    - external_url: "https://google.com"
+                      total_allocation: 20
+                    - external_url: "https://bing.com"
+                      total_allocation: 20
+                    - external_url: "https://yahoo.com"
+                      total_allocation: 10
 
       responses:
         "201":
@@ -1731,6 +1777,7 @@ paths:
         Once the study has been published only the following fields can be updated with some restrictions:
         - internal_name: Internal name of the study, not shown to participants
         - total_available_places: Only increasing is allowed. A completed study will become active again and resume recruiting of participants. For more information, check the [guide](https://researcher-help.prolific.com/hc/en-gb/articles/360009222553)
+        - access_details: Sending an access_detail will add a new task and increase overall study places by the number in the total_allocation field. Sending both access_details and total_available_places will increase places on existing URLs by the number specified on the access_detail.
       parameters:
         - name: Authorization
           in: header
@@ -1769,6 +1816,17 @@ paths:
               label_study_as_interview:
                 value:
                   study_labels: ["interview"]
+              taskflow_add_new:
+                value:
+                  access_details:
+                    - external_url: "https://bing.com"
+                      total_allocation: 30
+              taskflow_increase_places:
+                value:
+                  total_available_places: 200
+                  access_details:
+                    - external_url: "https://google.com"
+                      total_allocation: 30
             schema:
               $ref: "#/components/schemas/BaseStudy"
         required: false
@@ -1821,6 +1879,120 @@ paths:
         - token: []
       x-codegen-request-body-name: study
     x-summary: Actions on one study
+  /api/v1/studies/{id}/access-details-progress/:
+    get:
+      tags:
+        - Studies
+      summary: Get taskflow progress
+      description: |-
+        Get progress for each acess_detail of a taskflow study.
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: Study id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Duplicated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StudyAccessDetailsProgress"
+        "4XX":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      operationId: GetStudyAccessDetailsProgress
+      security:
+        - token: []
+  /api/v1/studies/{id}/cost/:
+    get:
+      tags:
+        - Studies
+      summary: Show Study cost
+      description: Returns cost information about the study. Default behaviour is to return cost at the time of the request, but projected cost can be requested via a query parameter.
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: Study id
+          required: true
+          schema:
+            type: string
+        - name: is_projected
+          in: query
+          description: Return the projected cost of the study
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        "200":
+          description: Return the total cost for the study
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StudyTotalCost"
+        "4XX":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDetail"
+      operationId: GetStudyCost
+      security:
+        - token: []
+    x-summary: Get Study Cost
+  /api/v1/studies/{study_id}/predicted-recruitment-time/:
+    get:
+      tags:
+        - Studies
+      summary: Show Study predicted reqruitment time
+      description: |-
+        Returns the predicted recruitment time for the study if it was published right now, based on a machine learning model.
+        The recruitment time is the time from publish to the time when the final participant starts their submission.
+        It does not account for the time to complete the submission.
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: study_id
+          in: path
+          description: Study id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Return the predicted recruitment time for the study
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StudyPredictedRecruitmentTime"
+        "4XX":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDetail"
+      operationId: GetStudyPredictedRecruitmentTime
+      security:
+        - token: []
   /api/v1/studies/{id}/submissions/:
     get:
       tags:
@@ -2106,11 +2278,8 @@ paths:
         - Submissions
       summary: Approve or reject a submission
       description: |-
-        Transition a submission to `APPROVED` or `REJECTED`. Once the status is changed, it can not be restored to its previous value.
+        Transition a submission to `APPROVED`, `REJECTED` or `AWAITING_REVIEW`. Once the status is changed, it can not be restored to its previous value.
 
-        We __strongly__ recommend that, when giving approval to a submission through the API, you first observe the `submission.status.change`
-        [event](https://docs.prolific.com/docs/api-docs/public/#tag/Hooks/paths/~1api~1v1~1hooks~1event-types~1/get) for a status transition to
-        `AWAITING_REVIEW` before making the approval request. Our system is currently unable to process approvals before this transition.
         Note this endpoint is idempotent, so if you make the same request twice, the second request will be ignored.
       parameters:
         - name: Authorization
@@ -2140,6 +2309,10 @@ paths:
                   action: REJECT
                   message: More than 100 chars long message to amuse the participant with my knowledge of the english language in this funny example
                   rejection_category: FAILED_INSTRUCTIONS
+              complete_submission:
+                value:
+                  action: COMPLETE
+                  completion_code: CODE1290
         required: false
       responses:
         "200":
@@ -2243,6 +2416,9 @@ paths:
 
         1. You can supply a Study ID, and a list of participant IDs, or
         2. You can provide a list of submission IDs
+
+        We strongly recommend that you provide a list of submission IDs.
+        These submissions do not need to be from the same study.
       parameters:
         - name: Authorization
           in: header
@@ -2304,6 +2480,62 @@ paths:
         - token: []
       x-codegen-request-body-name: user
     x-summary: Bulk approve submissions
+  /api/v1/submissions/bulk-screen-out/{id}/:
+    post:
+      tags:
+        - Submissions
+      summary: Bulk screen out submissions
+      description: |-
+        This endpoint is designed to be used as part of a custom screening study.
+        If a participant has taken part in a study where you have asked screening questions
+        and has not met your screening requirements, this endpoint allows you to screen out
+        multiple participants at once.
+        The endpoint accepts a list of submission ID's and a bonus amount and will perform the following actions:
+        - Change the status of the submission to `SCREENED_OUT` which is equivalent to returning the submission.
+        - Pay the participant a bonus, specified by you.
+        - Send the participant a message explaining that they have been screened out and showing their bonus amount.
+        All submission ID's must belong to the specified study. Bonus per submission is a decimal value in your study
+        currency, e.g. 1.50 for £1.50.
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: Study id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BulkScreenOutRequest"
+      responses:
+        "202":
+          description: Bulk screen out in progress
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: The request to bulk screen out has been made successfully.
+                additionalProperties: true
+        "4XX":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDetail"
+      operationId: BulkScreenOutSubmissions
+      security:
+        - token: []
+      x-codegen-request-body-name: user
+    x-summary: Bulk screen out submissions
   /api/v1/submissions/bonus-payments/:
     post:
       tags:
@@ -5405,6 +5637,7 @@ components:
             **Recommended** Use 'url_parameters' if your survey or experiment can retrieve and store those parameters for your analysis.
 
             Use 'not_required' if you don't need to record them
+<<<<<<< ./merged_pyrolific-openapi.yml
         completion_option:
           type: string
           enum:
@@ -5428,6 +5661,8 @@ components:
                 This field has been added by pyrolific to work around issues with the completion code api.
                 https://github.com/rwblair/pyrolific/issues/3
             type: string
+=======
+>>>>>>> ./current_public-openapi.yml
         completion_codes:
           description: |-
             Specify at least one completion code for your study. A participant will enter one of these codes when they complete your study.
@@ -5445,7 +5680,18 @@ components:
             properties:
               code:
                 type: string
-                description: The code the participant will either enter manually at the end of your study or be redirected as part of the return URL.
+                nullable: true
+                description: |
+                  The code the participant will either enter manually at the end of your study or be redirected as part of the return URL.
+
+                  If the code is null, then the participant will not be asked to submit a completion code when they return to Prolific.
+                  Null codes can only be provided when:
+                    - The actor is "participant"
+                    - There are no other completion codes with the "participant" actor
+                    - The actions array is empty
+
+                  The code must be unique within the study.
+
               code_type:
                 type: string
                 description: A name for your code to make it easier to understand its intention. Either use one of the predefined options or any other free text.
@@ -5470,6 +5716,13 @@ components:
                     - $ref: "#/components/schemas/RemoveFromParticipantGroup"
                     - $ref: "#/components/schemas/ManuallyReview"
                     - $ref: "#/components/schemas/RequestReturn"
+              actor:
+                type: string
+                enum:
+                  - "participant"
+                  - "researcher"
+                default: participant
+                description: The actor that can provide this completion code.
         total_available_places:
           type: number
           description: How many participants are you looking to recruit
@@ -5563,9 +5816,6 @@ components:
         submissions_config:
           type: object
           description: |-
-            **BETA**: This is a beta feature and is currently only available to selected workspaces.
-            It is being tested and evaluated for effectiveness and user experience before being released to all users.
-
             **Advanced**: This helps with faster data collection. Your survey system will need to handle providing a
             unique experience each time the participant takes the study.
 
@@ -5615,7 +5865,10 @@ components:
             Allow researchers to define content warnings for their study.
 
             At present these options are mutually exclusive and only a single option can be selected, however in the future available warnings will expand.
-
+        content_warning_details:
+          type: string
+          description: |-
+            Allow researchers to add further details about their content warning.
         metadata:
           type: string
           nullable: true
@@ -5627,6 +5880,18 @@ components:
 
               - `123345` - An ID from your system, that helps with linkage when returning the study.
               - `{ \"id\": \"45\", \"type\": \"finance\"}` - Some JSON that you want to store.
+        access_details:
+          type: array
+          nullable: true
+          description: |-
+            Array of access_details, which integrates with taskflow.
+
+            While this field is nullable, you must provide one of `access_details` or `external_study_url`.
+
+            The sum of all access_details must add to the `total_available_places` field, however the values can be different for an individual access_detail.
+          items:
+            anyOf:
+              - $ref: "#/components/schemas/AccessDetail"
     CreateStudy:
       allOf:
         - $ref: "#/components/schemas/BaseStudy"
@@ -5635,7 +5900,11 @@ components:
             - description
             - external_study_url
             - prolific_id_option
+<<<<<<< ./merged_pyrolific-openapi.yml
             - completion_option
+=======
+            - completion_codes
+>>>>>>> ./current_public-openapi.yml
             - estimated_completion_time
             - reward
             - total_available_places
@@ -5674,7 +5943,6 @@ components:
         description: This study aims to determine how to make a good public API
         external_study_url: https://eggs-experriment.com?participant={{%PROLIFIC_PID%}}
         prolific_id_option: url_parameters
-        completion_option: url
         completion_codes:
           - code: "ABC123"
             code_type: "COMPLETED"
@@ -5699,6 +5967,7 @@ components:
         status: UNPUBLISHED
         study_labels: ["interview"]
         content_warnings: ["sensitive"]
+        content_warning_details: Experiences with hateful activities, experiences with self-injury and harmful behaviour
     StudyTransition:
       required:
         - action
@@ -5746,6 +6015,7 @@ components:
             - APPROVED
             - RETURNED
             - REJECTED
+            - SCREENED OUT
           readOnly: true
           description: Status of the submission.
         started_at:
@@ -5808,6 +6078,7 @@ components:
             - RESERVED
             - RETURNED
             - TIMED-OUT
+            - SCREENED OUT
             - UNKNOWN
         study_id:
           type: string
@@ -5858,6 +6129,7 @@ components:
             - RESERVED
             - RETURNED
             - TIMED-OUT
+            - SCREENED OUT
             - UNKNOWN
         study_id:
           type: string
@@ -5886,6 +6158,7 @@ components:
           enum:
             - APPROVE
             - REJECT
+            - COMPLETE
           description: Action to execute.
           example: APPROVE
         message:
@@ -5914,6 +6187,9 @@ components:
             Required if action is 'REJECT', it sums as the category of
             the rejection.
           example: LOW_EFFORT
+        completion_code:
+          type: string
+          description: Required if the action is 'COMPLETE'. The completion code must match a value provided when creating the study, and the actor must have been set to `researcher`. Any actions that were provided during the set up of the completion code (e.g. automatically approve) will then be carried out.
     ReturnRequestedResponse:
       type: object
       additionalProperties: true
@@ -5928,6 +6204,7 @@ components:
             - ACTIVE
             - APPROVED
             - AWAITING REVIEW
+            - SCREENED OUT
             - REJECTED
             - RESERVED
             - RETURNED
@@ -6048,6 +6325,72 @@ components:
           example: 56
       required:
         - total_cost
+    AmountAndCurrency:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: Amount in subcurrency. £1 will return 100
+          example: 100
+        currency:
+          type: string
+          description: Currency Code
+          example: USD
+    StudyCostBreakdown:
+      type: object
+      properties:
+        rewards:
+          allOf:
+            - "$ref": "#/components/schemas/AmountAndCurrency"
+        fees:
+          allOf:
+            - "$ref": "#/components/schemas/AmountAndCurrency"
+        tax:
+          allOf:
+            - "$ref": "#/components/schemas/AmountAndCurrency"
+    StudyCostRepSampleBreakdown:
+      type: object
+      properties:
+        rep_sample_fees:
+          allOf:
+            - "$ref": "#/components/schemas/AmountAndCurrency"
+        rep_sample_tax:
+          allOf:
+            - "$ref": "#/components/schemas/AmountAndCurrency"
+    StudyTotalCost:
+      type: object
+      properties:
+        rewards:
+          allOf:
+            - "$ref": "#/components/schemas/StudyCostBreakdown"
+            - "$ref": "#/components/schemas/StudyCostRepSampleBreakdown"
+        bonuses:
+          allOf:
+            - "$ref": "#/components/schemas/StudyCostBreakdown"
+        _links:
+          type: object
+          additionalProperties: true
+    StudyAccessDetailsProgress:
+      type: array
+      properties:
+        id:
+          type: string
+          description: The access details collection ID. Informational field.
+        access_details:
+          allOf:
+            - "$ref": "#/components/schemas/AccessDetailProgress"
+        _links:
+          type: object
+          additionalProperties: true
+      example:
+        id: 42a9f01f-3cd8-4zf0-b79a-9b2cd50a1e85
+        progress:
+          - external_url: "https://google.com"
+            total_allocation: 10
+            allocated: 5
+          - external_url: "https://bing.com"
+            total_allocation: 10
+            allocated: 4
     BulkBonus:
       type: object
       required:
@@ -6945,7 +7288,7 @@ components:
             A breakdown of the total balance of the workspace into:
             - Funds available to pay to participants
             - Funds pre-paid to Prolific for our services
-            - Funds for any VAT applied to our service fees
+            - Funds for any VAT applied to our Platform fees
         available_balance:
           type: integer
           description: |-
@@ -6956,7 +7299,7 @@ components:
             A breakdown of the available balance of the workspace into:
             - Funds available to pay to participants
             - Funds pre-paid to Prolific for our services
-            - Funds for any VAT applied to our service fees
+            - Funds for any VAT applied to our Platform fees
       example:
         currency_code: "GBP"
         total_balance: 630
@@ -7217,6 +7560,33 @@ components:
                 - type: integer
                 - type: string
               description: Your selected upper bound for the range.
+    AccessDetail:
+      type: object
+      required:
+        - external_url
+        - total_allocation
+      properties:
+        external_url:
+          type: string
+          description: URL of the task you want to send the participant to. You can pass URL search parameters as in `external_study_url`.
+        total_allocation:
+          type: number
+          description: The number of places you want to be sent to this URL for taskflow.
+    AccessDetailProgress:
+      type: object
+      required:
+        - external_url
+        - total_allocation
+      properties:
+        external_url:
+          type: string
+          description: URL of the task you want to send the participant to. You can pass URL search parameters as in `external_study_url`.
+        total_allocation:
+          type: number
+          description: The number of places you want to be sent to this URL for taskflow.
+        allocated:
+          type: number
+          description: The number of places that have been allocated to participants.
     UpdateFilterSet:
       type: object
       properties:
@@ -7419,10 +7789,24 @@ components:
         - description
         - project_id
       properties:
+        name:
+          type: string
+          description: Mutually exclusive study collection name
+          example: My Mutually Exclusive Study Collection
+        description:
+          type: string
+          description: A description of the study collection
+          example: This is a description of my mutually exclusive study collection
         project_id:
           type: string
           description: Project id
           example: 5f7b9a7b5f7b9a7b5f7b9a7b
+        study_ids:
+          type: array
+          description: List of study ids you wish to include in the collection
+          items:
+            type: string
+            example: 5f7b9a7b5f7b9a7b5f7b9a7b
       allOf:
         - $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionUpdate"
     MutuallyExclusiveStudyCollectionList:
@@ -7462,6 +7846,49 @@ components:
           nullable: true
       allOf:
         - $ref: "#/components/schemas/MutuallyExclusiveStudyCollectionList"
+    BulkScreenOutRequest:
+      type: object
+      required:
+        - submission_ids
+        - bonus_per_submission
+      properties:
+        submission_ids:
+          type: array
+          description: List of submission ids to screen out, must belong to the study.
+          items:
+            type: string
+            example: 5f7b9a7b5f7b9a7b5f7b9a7b
+        bonus_per_submission:
+          type: number
+          description: The bonus amount to pay per submission, in your study currency. Minimum £0.10 or $0.14.
+          example: 0.5
+    StudyPredictedRecruitmentTime:
+      additionalProperties: true
+      type: object
+      properties:
+        precise_recruitment_time_hours:
+          type: number
+          description: The predicted recruitment time in hours
+          example: 2.13
+        lower_bound_hours:
+          type: number
+          description: The lower bound of the predicted recruitment time in hours
+          example: 1.5
+        upper_bound_hours:
+          type: number
+          description: The upper bound of the predicted recruitment time in hours
+          example: 2.5
+        display_string:
+          type: string
+          description: A human-readable string representing the predicted recruitment time
+          example: "1 hour 23 minutes"
+        limit_at:
+          type: number
+          description: |-
+            The limit at which the accuracy of the prediction becomes unstable.
+            This should be used when rendering the recruitment times in a GUI. For example if the limit_at is 10,
+            and the predicted recruitment time is 12 hours, the display string should be "10 hours+". This
+            has been done for you in the display_string field.
 
   securitySchemes:
     token:

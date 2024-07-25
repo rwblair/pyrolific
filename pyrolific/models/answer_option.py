@@ -1,16 +1,9 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import Union
-from ..types import UNSET, Unset
-
 
 T = TypeVar("T", bound="AnswerOption")
 
@@ -30,6 +23,7 @@ class AnswerOption:
 
     def to_dict(self) -> Dict[str, Any]:
         value = self.value
+
         id = self.id
 
         field_dict: Dict[str, Any] = {}

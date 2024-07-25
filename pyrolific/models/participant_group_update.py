@@ -1,17 +1,9 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import cast, List
-from typing import Union
-from ..types import UNSET, Unset
-
 
 T = TypeVar("T", bound="ParticipantGroupUpdate")
 
@@ -35,6 +27,7 @@ class ParticipantGroupUpdate:
 
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
+
         participant_ids: Union[Unset, List[str]] = UNSET
         if not isinstance(self.participant_ids, Unset):
             participant_ids = self.participant_ids

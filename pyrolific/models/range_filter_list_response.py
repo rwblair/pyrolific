@@ -1,21 +1,11 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
-from ..models.range_filter_list_attributes_data_type import (
-    RangeFilterListAttributesDataType,
-)
-from typing import Union
 from ..models.filter_list_attributes_type import FilterListAttributesType
-from typing import cast, Union
+from ..models.range_filter_list_attributes_data_type import RangeFilterListAttributesDataType
 from ..types import UNSET, Unset
-
 
 T = TypeVar("T", bound="RangeFilterListResponse")
 
@@ -49,24 +39,26 @@ class RangeFilterListResponse:
 
     def to_dict(self) -> Dict[str, Any]:
         filter_id = self.filter_id
+
         title = self.title
+
         description = self.description
+
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
         question = self.question
+
         min_: Union[Unset, int, str]
         if isinstance(self.min_, Unset):
             min_ = UNSET
-
         else:
             min_ = self.min_
 
         max_: Union[Unset, int, str]
         if isinstance(self.max_, Unset):
             max_ = UNSET
-
         else:
             max_ = self.max_
 

@@ -1,16 +1,9 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import Union
-from ..types import UNSET, Unset
-
 
 T = TypeVar("T", bound="InvitationInvitee")
 
@@ -19,19 +12,29 @@ T = TypeVar("T", bound="InvitationInvitee")
 class InvitationInvitee:
     """
     Attributes:
-        id (Union[Unset, None, str]): The unique ID of the invitee.
-        name (Union[Unset, None, str]): The name of the invitee.
+        id (Union[None, Unset, str]): The unique ID of the invitee.
+        name (Union[None, Unset, str]): The name of the invitee.
         email (Union[Unset, str]): The email address of the invitee.
     """
 
-    id: Union[Unset, None, str] = UNSET
-    name: Union[Unset, None, str] = UNSET
+    id: Union[None, Unset, str] = UNSET
+    name: Union[None, Unset, str] = UNSET
     email: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        id = self.id
-        name = self.name
+        id: Union[None, Unset, str]
+        if isinstance(self.id, Unset):
+            id = UNSET
+        else:
+            id = self.id
+
+        name: Union[None, Unset, str]
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
+
         email = self.email
 
         field_dict: Dict[str, Any] = {}
@@ -49,9 +52,24 @@ class InvitationInvitee:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        id = d.pop("id", UNSET)
 
-        name = d.pop("name", UNSET)
+        def _parse_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        id = _parse_id(d.pop("id", UNSET))
+
+        def _parse_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        name = _parse_name(d.pop("name", UNSET))
 
         email = d.pop("email", UNSET)
 

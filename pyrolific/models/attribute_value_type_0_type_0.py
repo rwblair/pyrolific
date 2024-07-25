@@ -1,55 +1,30 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-
-from typing import cast, List
-
-
-T = TypeVar("T", bound="RequestSubmissionReturnJsonBody")
+T = TypeVar("T", bound="AttributeValueType0Type0")
 
 
 @_attrs_define
-class RequestSubmissionReturnJsonBody:
-    """
-    Example:
-        {'request_return_reasons': ['Withdrew consent.', 'Did not finish study.']}
+class AttributeValueType0Type0:
+    """ """
 
-    Attributes:
-        request_return_reasons (List[str]):
-    """
-
-    request_return_reasons: List[str]
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        request_return_reasons = self.request_return_reasons
-
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "request_return_reasons": request_return_reasons,
-            }
-        )
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        request_return_reasons = cast(List[str], d.pop("request_return_reasons"))
+        attribute_value_type_0_type_0 = cls()
 
-        request_submission_return_json_body = cls(
-            request_return_reasons=request_return_reasons,
-        )
-
-        request_submission_return_json_body.additional_properties = d
-        return request_submission_return_json_body
+        attribute_value_type_0_type_0.additional_properties = d
+        return attribute_value_type_0_type_0
 
     @property
     def additional_keys(self) -> List[str]:

@@ -1,21 +1,13 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from typing import List
-from ..types import UNSET, Unset
-from typing import Dict
-
 if TYPE_CHECKING:
-    from ..models.section import Section
     from ..models.question_response import QuestionResponse
+    from ..models.section import Section
 
 
 T = TypeVar("T", bound="ResponseIn")
@@ -41,13 +33,14 @@ class ResponseIn:
 
     def to_dict(self) -> Dict[str, Any]:
         participant_id = self.participant_id
+
         submission_id = self.submission_id
+
         sections: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.sections, Unset):
             sections = []
             for sections_item_data in self.sections:
                 sections_item = sections_item_data.to_dict()
-
                 sections.append(sections_item)
 
         questions: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -55,7 +48,6 @@ class ResponseIn:
             questions = []
             for questions_item_data in self.questions:
                 questions_item = questions_item_data.to_dict()
-
                 questions.append(questions_item)
 
         field_dict: Dict[str, Any] = {}
@@ -75,8 +67,8 @@ class ResponseIn:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.section import Section
         from ..models.question_response import QuestionResponse
+        from ..models.section import Section
 
         d = src_dict.copy()
         participant_id = d.pop("participant_id")

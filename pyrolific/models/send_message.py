@@ -1,11 +1,7 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
 
 T = TypeVar("T", bound="SendMessage")
 
@@ -26,7 +22,9 @@ class SendMessage:
 
     def to_dict(self) -> Dict[str, Any]:
         recipient_id = self.recipient_id
+
         body = self.body
+
         study_id = self.study_id
 
         field_dict: Dict[str, Any] = {}

@@ -3,39 +3,37 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.create_project import CreateProject
 from ...models.project import Project
-from typing import Dict
+from ...types import Response
 
 
 def _get_kwargs(
     workspace_id: str,
     *,
-    json_body: CreateProject,
+    body: CreateProject,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/api/v1/workspaces/{workspace_id}/projects/".format(
-            workspace_id=workspace_id,
-        ),
-        "json": json_json_body,
-        "headers": headers,
+        "url": f"/api/v1/workspaces/{workspace_id}/projects/",
     }
 
+    _body = body.to_dict()
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Project]:
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
+
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Project]:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = Project.from_dict(response.json())
 
@@ -46,9 +44,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Project]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Project]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -61,7 +57,7 @@ def sync_detailed(
     workspace_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: CreateProject,
+    body: CreateProject,
     authorization: str,
 ) -> Response[Project]:
     """Create a project
@@ -72,7 +68,7 @@ def sync_detailed(
     Args:
         workspace_id (str):
         authorization (str):
-        json_body (CreateProject):
+        body (CreateProject):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -84,7 +80,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         workspace_id=workspace_id,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -99,7 +95,7 @@ def sync(
     workspace_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: CreateProject,
+    body: CreateProject,
     authorization: str,
 ) -> Optional[Project]:
     """Create a project
@@ -110,7 +106,7 @@ def sync(
     Args:
         workspace_id (str):
         authorization (str):
-        json_body (CreateProject):
+        body (CreateProject):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -123,7 +119,7 @@ def sync(
     return sync_detailed(
         workspace_id=workspace_id,
         client=client,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     ).parsed
 
@@ -132,7 +128,7 @@ async def asyncio_detailed(
     workspace_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: CreateProject,
+    body: CreateProject,
     authorization: str,
 ) -> Response[Project]:
     """Create a project
@@ -143,7 +139,7 @@ async def asyncio_detailed(
     Args:
         workspace_id (str):
         authorization (str):
-        json_body (CreateProject):
+        body (CreateProject):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -155,7 +151,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         workspace_id=workspace_id,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -168,7 +164,7 @@ async def asyncio(
     workspace_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: CreateProject,
+    body: CreateProject,
     authorization: str,
 ) -> Optional[Project]:
     """Create a project
@@ -179,7 +175,7 @@ async def asyncio(
     Args:
         workspace_id (str):
         authorization (str):
-        json_body (CreateProject):
+        body (CreateProject):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -193,7 +189,7 @@ async def asyncio(
         await asyncio_detailed(
             workspace_id=workspace_id,
             client=client,
-            json_body=json_body,
+            body=body,
             authorization=authorization,
         )
     ).parsed

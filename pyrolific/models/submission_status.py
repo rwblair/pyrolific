@@ -8,6 +8,7 @@ class SubmissionStatus(str, Enum):
     REJECTED = "REJECTED"
     RESERVED = "RESERVED"
     RETURNED = "RETURNED"
+    SCREENED_OUT = "SCREENED OUT"
     TIMED_OUT = "TIMED-OUT"
     UNKNOWN = "UNKNOWN"
 

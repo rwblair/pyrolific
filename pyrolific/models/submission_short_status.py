@@ -8,7 +8,8 @@ class SubmissionShortStatus(str, Enum):
     REJECTED = "REJECTED"
     RESERVED = "RESERVED"
     RETURNED = "RETURNED"
-    TIMED_OUT = "TIMED-OUT"
+    SCREENED_OUT = "SCREENED OUT"
+    TIME_OUT = "TIME-OUT"
 
     def __str__(self) -> str:
         return str(self.value)

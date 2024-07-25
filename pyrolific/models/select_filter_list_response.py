@@ -1,25 +1,14 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
-from typing import Union
-from ..models.select_filter_list_attributes_data_type import (
-    SelectFilterListAttributesDataType,
-)
 from ..models.filter_list_attributes_type import FilterListAttributesType
+from ..models.select_filter_list_attributes_data_type import SelectFilterListAttributesDataType
 from ..types import UNSET, Unset
-from typing import Dict
 
 if TYPE_CHECKING:
-    from ..models.select_filter_list_attributes_choices import (
-        SelectFilterListAttributesChoices,
-    )
+    from ..models.select_filter_list_attributes_choices import SelectFilterListAttributesChoices
 
 
 T = TypeVar("T", bound="SelectFilterListResponse")
@@ -54,13 +43,17 @@ class SelectFilterListResponse:
 
     def to_dict(self) -> Dict[str, Any]:
         filter_id = self.filter_id
+
         title = self.title
+
         description = self.description
+
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
         question = self.question
+
         choices: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.choices, Unset):
             choices = self.choices.to_dict()
@@ -91,9 +84,7 @@ class SelectFilterListResponse:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.select_filter_list_attributes_choices import (
-            SelectFilterListAttributesChoices,
-        )
+        from ..models.select_filter_list_attributes_choices import SelectFilterListAttributesChoices
 
         d = src_dict.copy()
         filter_id = d.pop("filter_id", UNSET)

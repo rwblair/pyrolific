@@ -1,16 +1,9 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import Union
-from ..types import UNSET, Unset
-
 
 T = TypeVar("T", bound="SubscriptionDetail")
 
@@ -35,9 +28,13 @@ class SubscriptionDetail:
 
     def to_dict(self) -> Dict[str, Any]:
         event_type = self.event_type
+
         target_url = self.target_url
+
         workspace_id = self.workspace_id
+
         id = self.id
+
         is_enabled = self.is_enabled
 
         field_dict: Dict[str, Any] = {}

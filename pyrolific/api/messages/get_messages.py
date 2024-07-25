@@ -3,44 +3,40 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
-from ...types import UNSET, Unset
+from ...client import AuthenticatedClient, Client
 from ...models.messages import Messages
-from typing import Union
-from typing import Optional
-from typing import Dict
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     *,
-    user_id: Union[Unset, None, str] = UNSET,
-    created_after: Union[Unset, None, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    created_after: Union[Unset, str] = UNSET,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
     params: Dict[str, Any] = {}
+
     params["user_id"] = user_id
 
     params["created_after"] = created_after
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/api/v1/messages/",
         "params": params,
-        "headers": headers,
     }
 
+    _kwargs["headers"] = headers
+    return _kwargs
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Messages]:
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Messages]:
     if response.status_code == HTTPStatus.OK:
         response_200 = Messages.from_dict(response.json())
 
@@ -51,9 +47,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Messages]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Messages]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -65,8 +59,8 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    created_after: Union[Unset, None, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    created_after: Union[Unset, str] = UNSET,
     authorization: str,
 ) -> Response[Messages]:
     """Retrieve messages
@@ -74,8 +68,8 @@ def sync_detailed(
      Get messages between you and another user or your messages with all users.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        created_after (Union[Unset, None, str]):
+        user_id (Union[Unset, str]):
+        created_after (Union[Unset, str]):
         authorization (str):
 
     Raises:
@@ -102,8 +96,8 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    created_after: Union[Unset, None, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    created_after: Union[Unset, str] = UNSET,
     authorization: str,
 ) -> Optional[Messages]:
     """Retrieve messages
@@ -111,8 +105,8 @@ def sync(
      Get messages between you and another user or your messages with all users.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        created_after (Union[Unset, None, str]):
+        user_id (Union[Unset, str]):
+        created_after (Union[Unset, str]):
         authorization (str):
 
     Raises:
@@ -134,8 +128,8 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    created_after: Union[Unset, None, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    created_after: Union[Unset, str] = UNSET,
     authorization: str,
 ) -> Response[Messages]:
     """Retrieve messages
@@ -143,8 +137,8 @@ async def asyncio_detailed(
      Get messages between you and another user or your messages with all users.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        created_after (Union[Unset, None, str]):
+        user_id (Union[Unset, str]):
+        created_after (Union[Unset, str]):
         authorization (str):
 
     Raises:
@@ -169,8 +163,8 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    created_after: Union[Unset, None, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    created_after: Union[Unset, str] = UNSET,
     authorization: str,
 ) -> Optional[Messages]:
     """Retrieve messages
@@ -178,8 +172,8 @@ async def asyncio(
      Get messages between you and another user or your messages with all users.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        created_after (Union[Unset, None, str]):
+        user_id (Union[Unset, str]):
+        created_after (Union[Unset, str]):
         authorization (str):
 
     Raises:

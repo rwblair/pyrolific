@@ -3,36 +3,36 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
-from typing import Dict
+from ...client import AuthenticatedClient, Client
 from ...models.create_study import CreateStudy
 from ...models.study import Study
+from ...types import Response
 
 
 def _get_kwargs(
     *,
-    json_body: CreateStudy,
+    body: CreateStudy,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/api/v1/studies/",
-        "json": json_json_body,
-        "headers": headers,
     }
 
+    _body = body.to_dict()
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Study]:
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
+
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Study]:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = Study.from_dict(response.json())
 
@@ -43,9 +43,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Study]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Study]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -57,7 +55,7 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: CreateStudy,
+    body: CreateStudy,
     authorization: str,
 ) -> Response[Study]:
     """Create a draft study
@@ -65,9 +63,15 @@ def sync_detailed(
      Create a draft study. Publishing a study is a two step process, first create a draft study then
     publish it.
 
+    ## Taskflow Studies:
+    Taskflow studies are created in the same manner as regular studies, however instead of providing an
+    **external_study_url**, you should
+    provide an access_details array with **access_detail** objects instead, containing an external_url
+    field and a total_allocation field.
+
     Args:
         authorization (str):
-        json_body (CreateStudy):
+        body (CreateStudy):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -78,7 +82,7 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -92,7 +96,7 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    json_body: CreateStudy,
+    body: CreateStudy,
     authorization: str,
 ) -> Optional[Study]:
     """Create a draft study
@@ -100,9 +104,15 @@ def sync(
      Create a draft study. Publishing a study is a two step process, first create a draft study then
     publish it.
 
+    ## Taskflow Studies:
+    Taskflow studies are created in the same manner as regular studies, however instead of providing an
+    **external_study_url**, you should
+    provide an access_details array with **access_detail** objects instead, containing an external_url
+    field and a total_allocation field.
+
     Args:
         authorization (str):
-        json_body (CreateStudy):
+        body (CreateStudy):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -114,7 +124,7 @@ def sync(
 
     return sync_detailed(
         client=client,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     ).parsed
 
@@ -122,7 +132,7 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: CreateStudy,
+    body: CreateStudy,
     authorization: str,
 ) -> Response[Study]:
     """Create a draft study
@@ -130,9 +140,15 @@ async def asyncio_detailed(
      Create a draft study. Publishing a study is a two step process, first create a draft study then
     publish it.
 
+    ## Taskflow Studies:
+    Taskflow studies are created in the same manner as regular studies, however instead of providing an
+    **external_study_url**, you should
+    provide an access_details array with **access_detail** objects instead, containing an external_url
+    field and a total_allocation field.
+
     Args:
         authorization (str):
-        json_body (CreateStudy):
+        body (CreateStudy):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -143,7 +159,7 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -155,7 +171,7 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    json_body: CreateStudy,
+    body: CreateStudy,
     authorization: str,
 ) -> Optional[Study]:
     """Create a draft study
@@ -163,9 +179,15 @@ async def asyncio(
      Create a draft study. Publishing a study is a two step process, first create a draft study then
     publish it.
 
+    ## Taskflow Studies:
+    Taskflow studies are created in the same manner as regular studies, however instead of providing an
+    **external_study_url**, you should
+    provide an access_details array with **access_detail** objects instead, containing an external_url
+    field and a total_allocation field.
+
     Args:
         authorization (str):
-        json_body (CreateStudy):
+        body (CreateStudy):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -178,7 +200,7 @@ async def asyncio(
     return (
         await asyncio_detailed(
             client=client,
-            json_body=json_body,
+            body=body,
             authorization=authorization,
         )
     ).parsed

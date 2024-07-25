@@ -3,25 +3,21 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
-from typing import Dict
-from ...models.participant_group_membership_list_response import (
-    ParticipantGroupMembershipListResponse,
-)
+from ...client import AuthenticatedClient, Client
+from ...models.participant_group_membership_list_response import ParticipantGroupMembershipListResponse
+from ...types import Response
 
 
 def _get_kwargs(
     id: str,
 ) -> Dict[str, Any]:
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/api/v1/participant-groups/{id}/participants/".format(
-            id=id,
-        ),
+        "url": f"/api/v1/participant-groups/{id}/participants/",
     }
+
+    return _kwargs
 
 
 def _parse_response(

@@ -1,21 +1,13 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from typing import List
-from ..types import UNSET, Unset
-from typing import Dict
-
 if TYPE_CHECKING:
-    from ..models.workspace_user import WorkspaceUser
     from ..models.project_short import ProjectShort
+    from ..models.workspace_user import WorkspaceUser
 
 
 T = TypeVar("T", bound="Workspace")
@@ -38,7 +30,7 @@ class Workspace:
         users (Union[Unset, List['WorkspaceUser']]): Data for a user related to a workspace
         projects (Union[Unset, List['ProjectShort']]): Data for a project related to a workspace
         wallet (Union[Unset, str]): Wallet tied to workspace
-        naivety_distribution_rate (Union[Unset, None, float]): The rate at which the studies within this workspace are
+        naivety_distribution_rate (Union[None, Unset, float]): The rate at which the studies within this workspace are
             distributed.
     """
 
@@ -49,20 +41,23 @@ class Workspace:
     users: Union[Unset, List["WorkspaceUser"]] = UNSET
     projects: Union[Unset, List["ProjectShort"]] = UNSET
     wallet: Union[Unset, str] = UNSET
-    naivety_distribution_rate: Union[Unset, None, float] = UNSET
+    naivety_distribution_rate: Union[None, Unset, float] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         title = self.title
+
         description = self.description
+
         owner = self.owner
+
         users: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.users, Unset):
             users = []
             for users_item_data in self.users:
                 users_item = users_item_data.to_dict()
-
                 users.append(users_item)
 
         projects: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -70,11 +65,15 @@ class Workspace:
             projects = []
             for projects_item_data in self.projects:
                 projects_item = projects_item_data.to_dict()
-
                 projects.append(projects_item)
 
         wallet = self.wallet
-        naivety_distribution_rate = self.naivety_distribution_rate
+
+        naivety_distribution_rate: Union[None, Unset, float]
+        if isinstance(self.naivety_distribution_rate, Unset):
+            naivety_distribution_rate = UNSET
+        else:
+            naivety_distribution_rate = self.naivety_distribution_rate
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -101,8 +100,8 @@ class Workspace:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.workspace_user import WorkspaceUser
         from ..models.project_short import ProjectShort
+        from ..models.workspace_user import WorkspaceUser
 
         d = src_dict.copy()
         id = d.pop("id")
@@ -129,7 +128,14 @@ class Workspace:
 
         wallet = d.pop("wallet", UNSET)
 
-        naivety_distribution_rate = d.pop("naivety_distribution_rate", UNSET)
+        def _parse_naivety_distribution_rate(data: object) -> Union[None, Unset, float]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, float], data)
+
+        naivety_distribution_rate = _parse_naivety_distribution_rate(d.pop("naivety_distribution_rate", UNSET))
 
         workspace = cls(
             id=id,

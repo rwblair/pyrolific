@@ -3,12 +3,10 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
-from typing import Dict
+from ...client import AuthenticatedClient, Client
 from ...models.studies_list_response import StudiesListResponse
+from ...types import Response
 
 
 def _get_kwargs(
@@ -16,16 +14,16 @@ def _get_kwargs(
     *,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/api/v1/projects/{project_id}/studies/".format(
-            project_id=project_id,
-        ),
-        "headers": headers,
+        "url": f"/api/v1/projects/{project_id}/studies/",
     }
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(

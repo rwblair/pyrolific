@@ -1,14 +1,7 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
-
-from typing import List
-from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.question_response import QuestionResponse
@@ -36,7 +29,6 @@ class Section:
         questions = []
         for questions_item_data in self.questions:
             questions_item = questions_item_data.to_dict()
-
             questions.append(questions_item)
 
         section_id = self.section_id

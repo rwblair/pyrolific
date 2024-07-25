@@ -3,31 +3,29 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.messages import Messages
-from typing import Dict
+from ...types import Response
 
 
 def _get_kwargs(
     *,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/api/v1/messages/unread/",
-        "headers": headers,
     }
 
+    _kwargs["headers"] = headers
+    return _kwargs
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Messages]:
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Messages]:
     if response.status_code == HTTPStatus.OK:
         response_200 = Messages.from_dict(response.json())
 
@@ -38,9 +36,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Messages]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Messages]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

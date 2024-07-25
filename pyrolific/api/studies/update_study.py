@@ -3,39 +3,37 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
-from typing import Dict
+from ...client import AuthenticatedClient, Client
 from ...models.base_study import BaseStudy
 from ...models.study import Study
+from ...types import Response
 
 
 def _get_kwargs(
     id: str,
     *,
-    json_body: BaseStudy,
+    body: BaseStudy,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "patch",
-        "url": "/api/v1/studies/{id}/".format(
-            id=id,
-        ),
-        "json": json_json_body,
-        "headers": headers,
+        "url": f"/api/v1/studies/{id}/",
     }
 
+    _body = body.to_dict()
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Study]:
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
+
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Study]:
     if response.status_code == HTTPStatus.OK:
         response_200 = Study.from_dict(response.json())
 
@@ -46,9 +44,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Study]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Study]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -61,7 +57,7 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: BaseStudy,
+    body: BaseStudy,
     authorization: str,
 ) -> Response[Study]:
     """Update a study
@@ -73,11 +69,14 @@ def sync_detailed(
     - total_available_places: Only increasing is allowed. A completed study will become active again and
     resume recruiting of participants. For more information, check the [guide](https://researcher-
     help.prolific.com/hc/en-gb/articles/360009222553)
+    - access_details: Sending an access_detail will add a new task and increase overall study places by
+    the number in the total_allocation field. Sending both access_details and total_available_places
+    will increase places on existing URLs by the number specified on the access_detail.
 
     Args:
         id (str):
         authorization (str):
-        json_body (BaseStudy):
+        body (BaseStudy):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -89,7 +88,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -104,7 +103,7 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: BaseStudy,
+    body: BaseStudy,
     authorization: str,
 ) -> Optional[Study]:
     """Update a study
@@ -116,11 +115,14 @@ def sync(
     - total_available_places: Only increasing is allowed. A completed study will become active again and
     resume recruiting of participants. For more information, check the [guide](https://researcher-
     help.prolific.com/hc/en-gb/articles/360009222553)
+    - access_details: Sending an access_detail will add a new task and increase overall study places by
+    the number in the total_allocation field. Sending both access_details and total_available_places
+    will increase places on existing URLs by the number specified on the access_detail.
 
     Args:
         id (str):
         authorization (str):
-        json_body (BaseStudy):
+        body (BaseStudy):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -133,7 +135,7 @@ def sync(
     return sync_detailed(
         id=id,
         client=client,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     ).parsed
 
@@ -142,7 +144,7 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: BaseStudy,
+    body: BaseStudy,
     authorization: str,
 ) -> Response[Study]:
     """Update a study
@@ -154,11 +156,14 @@ async def asyncio_detailed(
     - total_available_places: Only increasing is allowed. A completed study will become active again and
     resume recruiting of participants. For more information, check the [guide](https://researcher-
     help.prolific.com/hc/en-gb/articles/360009222553)
+    - access_details: Sending an access_detail will add a new task and increase overall study places by
+    the number in the total_allocation field. Sending both access_details and total_available_places
+    will increase places on existing URLs by the number specified on the access_detail.
 
     Args:
         id (str):
         authorization (str):
-        json_body (BaseStudy):
+        body (BaseStudy):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -170,7 +175,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -183,7 +188,7 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: BaseStudy,
+    body: BaseStudy,
     authorization: str,
 ) -> Optional[Study]:
     """Update a study
@@ -195,11 +200,14 @@ async def asyncio(
     - total_available_places: Only increasing is allowed. A completed study will become active again and
     resume recruiting of participants. For more information, check the [guide](https://researcher-
     help.prolific.com/hc/en-gb/articles/360009222553)
+    - access_details: Sending an access_detail will add a new task and increase overall study places by
+    the number in the total_allocation field. Sending both access_details and total_available_places
+    will increase places on existing URLs by the number specified on the access_detail.
 
     Args:
         id (str):
         authorization (str):
-        json_body (BaseStudy):
+        body (BaseStudy):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -213,7 +221,7 @@ async def asyncio(
         await asyncio_detailed(
             id=id,
             client=client,
-            json_body=json_body,
+            body=body,
             authorization=authorization,
         )
     ).parsed

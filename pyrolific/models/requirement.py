@@ -1,17 +1,9 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import Union
-from typing import List
-from ..types import UNSET, Unset
-from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.attribute import Attribute
@@ -38,10 +30,10 @@ class Requirement:
 
     def to_dict(self) -> Dict[str, Any]:
         field_cls = self.field_cls
+
         attributes = []
         for attributes_item_data in self.attributes:
             attributes_item = attributes_item_data.to_dict()
-
             attributes.append(attributes_item)
 
         query: Union[Unset, Dict[str, Any]] = UNSET

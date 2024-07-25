@@ -1,20 +1,13 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+import datetime
+from typing import Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
-from ..types import UNSET, Unset
-
-from ..models.study_short_study_type import StudyShortStudyType
-from typing import Union
-import datetime
-from ..types import UNSET, Unset
-from ..models.study_short_status import StudyShortStatus
 from dateutil.parser import isoparse
 
+from ..models.study_short_status import StudyShortStatus
+from ..models.study_short_study_type import StudyShortStudyType
+from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="StudyShort")
 
@@ -28,7 +21,7 @@ class StudyShort:
     Attributes:
         id (str): Study id. It is created by Prolific.
         name (str): Public name or title of the study
-        internal_name (Union[Unset, None, str]): Internal name of the study, not shown to participants
+        internal_name (Union[None, Unset, str]): Internal name of the study, not shown to participants
         status (Union[Unset, StudyShortStatus]): Status of the study.
         study_type (Union[Unset, StudyShortStudyType]): Deprecated. Type of study.
         total_available_places (Union[Unset, float]): How many participants are you looking to recruit
@@ -38,14 +31,14 @@ class StudyShort:
         reward (Union[Unset, float]): How much are you going to pay the participants in cents. We use the currency of
             your account
         total_cost (Union[Unset, float]): Total cost of the study including fees
-        published_at (Union[Unset, None, datetime.datetime]): Date time when the study was published.
-        publish_at (Union[Unset, None, datetime.datetime]): Date time when the study was scheduled to be published.
+        published_at (Union[None, Unset, datetime.datetime]): Date time when the study was published.
+        publish_at (Union[None, Unset, datetime.datetime]): Date time when the study was scheduled to be published.
         date_created (Union[Unset, datetime.datetime]): Date time when the study was created
     """
 
     id: str
     name: str
-    internal_name: Union[Unset, None, str] = UNSET
+    internal_name: Union[None, Unset, str] = UNSET
     status: Union[Unset, StudyShortStatus] = UNSET
     study_type: Union[Unset, StudyShortStudyType] = UNSET
     total_available_places: Union[Unset, float] = UNSET
@@ -53,15 +46,22 @@ class StudyShort:
     number_of_submissions: Union[Unset, float] = UNSET
     reward: Union[Unset, float] = UNSET
     total_cost: Union[Unset, float] = UNSET
-    published_at: Union[Unset, None, datetime.datetime] = UNSET
-    publish_at: Union[Unset, None, datetime.datetime] = UNSET
+    published_at: Union[None, Unset, datetime.datetime] = UNSET
+    publish_at: Union[None, Unset, datetime.datetime] = UNSET
     date_created: Union[Unset, datetime.datetime] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         name = self.name
-        internal_name = self.internal_name
+
+        internal_name: Union[None, Unset, str]
+        if isinstance(self.internal_name, Unset):
+            internal_name = UNSET
+        else:
+            internal_name = self.internal_name
+
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
             status = self.status.value
@@ -71,17 +71,30 @@ class StudyShort:
             study_type = self.study_type.value
 
         total_available_places = self.total_available_places
-        places_taken = self.places_taken
-        number_of_submissions = self.number_of_submissions
-        reward = self.reward
-        total_cost = self.total_cost
-        published_at: Union[Unset, None, str] = UNSET
-        if not isinstance(self.published_at, Unset):
-            published_at = self.published_at.isoformat() if self.published_at else None
 
-        publish_at: Union[Unset, None, str] = UNSET
-        if not isinstance(self.publish_at, Unset):
-            publish_at = self.publish_at.isoformat() if self.publish_at else None
+        places_taken = self.places_taken
+
+        number_of_submissions = self.number_of_submissions
+
+        reward = self.reward
+
+        total_cost = self.total_cost
+
+        published_at: Union[None, Unset, str]
+        if isinstance(self.published_at, Unset):
+            published_at = UNSET
+        elif isinstance(self.published_at, datetime.datetime):
+            published_at = self.published_at.isoformat()
+        else:
+            published_at = self.published_at
+
+        publish_at: Union[None, Unset, str]
+        if isinstance(self.publish_at, Unset):
+            publish_at = UNSET
+        elif isinstance(self.publish_at, datetime.datetime):
+            publish_at = self.publish_at.isoformat()
+        else:
+            publish_at = self.publish_at
 
         date_created: Union[Unset, str] = UNSET
         if not isinstance(self.date_created, Unset):
@@ -127,7 +140,14 @@ class StudyShort:
 
         name = d.pop("name")
 
-        internal_name = d.pop("internal_name", UNSET)
+        def _parse_internal_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        internal_name = _parse_internal_name(d.pop("internal_name", UNSET))
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, StudyShortStatus]
@@ -153,23 +173,39 @@ class StudyShort:
 
         total_cost = d.pop("total_cost", UNSET)
 
-        _published_at = d.pop("published_at", UNSET)
-        published_at: Union[Unset, None, datetime.datetime]
-        if _published_at is None:
-            published_at = None
-        elif isinstance(_published_at, Unset):
-            published_at = UNSET
-        else:
-            published_at = isoparse(_published_at)
+        def _parse_published_at(data: object) -> Union[None, Unset, datetime.datetime]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                published_at_type_0 = isoparse(data)
 
-        _publish_at = d.pop("publish_at", UNSET)
-        publish_at: Union[Unset, None, datetime.datetime]
-        if _publish_at is None:
-            publish_at = None
-        elif isinstance(_publish_at, Unset):
-            publish_at = UNSET
-        else:
-            publish_at = isoparse(_publish_at)
+                return published_at_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, datetime.datetime], data)
+
+        published_at = _parse_published_at(d.pop("published_at", UNSET))
+
+        def _parse_publish_at(data: object) -> Union[None, Unset, datetime.datetime]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                publish_at_type_0 = isoparse(data)
+
+                return publish_at_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, datetime.datetime], data)
+
+        publish_at = _parse_publish_at(d.pop("publish_at", UNSET))
 
         _date_created = d.pop("date_created", UNSET)
         date_created: Union[Unset, datetime.datetime]

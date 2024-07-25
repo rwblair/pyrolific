@@ -1,22 +1,15 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from ..types import UNSET, Unset
-
-
-T = TypeVar("T", bound="CreateBonusPaymentsJsonBody")
+T = TypeVar("T", bound="CreateBonusPaymentsBody")
 
 
 @_attrs_define
-class CreateBonusPaymentsJsonBody:
+class CreateBonusPaymentsBody:
     r"""
     Example:
         {'study_id': '60f6acb180a7b59ac0621f9e', 'csv_bonuses':
@@ -33,6 +26,7 @@ class CreateBonusPaymentsJsonBody:
 
     def to_dict(self) -> Dict[str, Any]:
         study_id = self.study_id
+
         csv_bonuses = self.csv_bonuses
 
         field_dict: Dict[str, Any] = {}
@@ -52,13 +46,13 @@ class CreateBonusPaymentsJsonBody:
 
         csv_bonuses = d.pop("csv_bonuses", UNSET)
 
-        create_bonus_payments_json_body = cls(
+        create_bonus_payments_body = cls(
             study_id=study_id,
             csv_bonuses=csv_bonuses,
         )
 
-        create_bonus_payments_json_body.additional_properties = d
-        return create_bonus_payments_json_body
+        create_bonus_payments_body.additional_properties = d
+        return create_bonus_payments_body
 
     @property
     def additional_keys(self) -> List[str]:

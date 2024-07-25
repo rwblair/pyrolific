@@ -3,41 +3,39 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
-from ...types import UNSET, Unset
-from typing import Union
-from ...models.studies_list_response import StudiesListResponse
+from ...client import AuthenticatedClient, Client
 from ...models.get_studies_state import GetStudiesState
-from typing import Optional
-from typing import Dict
+from ...models.studies_list_response import StudiesListResponse
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     *,
-    state: Union[Unset, None, GetStudiesState] = UNSET,
+    state: Union[Unset, GetStudiesState] = UNSET,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
     params: Dict[str, Any] = {}
-    json_state: Union[Unset, None, str] = UNSET
+
+    json_state: Union[Unset, str] = UNSET
     if not isinstance(state, Unset):
-        json_state = state.value if state else None
+        json_state = state.value
 
     params["state"] = json_state
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/api/v1/studies/",
         "params": params,
-        "headers": headers,
     }
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -67,7 +65,7 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    state: Union[Unset, None, GetStudiesState] = UNSET,
+    state: Union[Unset, GetStudiesState] = UNSET,
     authorization: str,
 ) -> Response[StudiesListResponse]:
     """List all studies
@@ -75,7 +73,7 @@ def sync_detailed(
      List all studies, with the option to filter by study status.
 
     Args:
-        state (Union[Unset, None, GetStudiesState]):
+        state (Union[Unset, GetStudiesState]):
         authorization (str):
 
     Raises:
@@ -101,7 +99,7 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    state: Union[Unset, None, GetStudiesState] = UNSET,
+    state: Union[Unset, GetStudiesState] = UNSET,
     authorization: str,
 ) -> Optional[StudiesListResponse]:
     """List all studies
@@ -109,7 +107,7 @@ def sync(
      List all studies, with the option to filter by study status.
 
     Args:
-        state (Union[Unset, None, GetStudiesState]):
+        state (Union[Unset, GetStudiesState]):
         authorization (str):
 
     Raises:
@@ -130,7 +128,7 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    state: Union[Unset, None, GetStudiesState] = UNSET,
+    state: Union[Unset, GetStudiesState] = UNSET,
     authorization: str,
 ) -> Response[StudiesListResponse]:
     """List all studies
@@ -138,7 +136,7 @@ async def asyncio_detailed(
      List all studies, with the option to filter by study status.
 
     Args:
-        state (Union[Unset, None, GetStudiesState]):
+        state (Union[Unset, GetStudiesState]):
         authorization (str):
 
     Raises:
@@ -162,7 +160,7 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    state: Union[Unset, None, GetStudiesState] = UNSET,
+    state: Union[Unset, GetStudiesState] = UNSET,
     authorization: str,
 ) -> Optional[StudiesListResponse]:
     """List all studies
@@ -170,7 +168,7 @@ async def asyncio(
      List all studies, with the option to filter by study status.
 
     Args:
-        state (Union[Unset, None, GetStudiesState]):
+        state (Union[Unset, GetStudiesState]):
         authorization (str):
 
     Raises:

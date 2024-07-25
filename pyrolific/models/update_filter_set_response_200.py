@@ -1,18 +1,9 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import Union
-from typing import Union
-from typing import List
-from ..types import UNSET, Unset
-from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.range_filter import RangeFilter
@@ -30,8 +21,8 @@ class UpdateFilterSetResponse200:
         version (Union[Unset, int]): An incrementing integer indicating the version of the filter set.
         is_deleted (Union[Unset, bool]): Whether the filter set has been deleted.
         is_locked (Union[Unset, bool]): Whether the filter set has been locked.
-        workspace_id (Union[Unset, None, str]): ID of the workspace where the filter set can be used.
-        organisation_id (Union[Unset, None, str]): ID of the workspace where the filter set can be used.
+        workspace_id (Union[None, Unset, str]): ID of the workspace where the filter set can be used.
+        organisation_id (Union[None, Unset, str]): ID of the workspace where the filter set can be used.
         name (Union[Unset, str]): Name of the filter set.
         filters (Union[Unset, List[Union['RangeFilter', 'SelectFilter']]]): List of all filters contained in the filter
             set.
@@ -44,8 +35,8 @@ class UpdateFilterSetResponse200:
     version: Union[Unset, int] = UNSET
     is_deleted: Union[Unset, bool] = UNSET
     is_locked: Union[Unset, bool] = UNSET
-    workspace_id: Union[Unset, None, str] = UNSET
-    organisation_id: Union[Unset, None, str] = UNSET
+    workspace_id: Union[None, Unset, str] = UNSET
+    organisation_id: Union[None, Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
     filters: Union[Unset, List[Union["RangeFilter", "SelectFilter"]]] = UNSET
     eligible_participant_count: Union[Unset, int] = UNSET
@@ -55,21 +46,34 @@ class UpdateFilterSetResponse200:
         from ..models.select_filter import SelectFilter
 
         id = self.id
+
         version = self.version
+
         is_deleted = self.is_deleted
+
         is_locked = self.is_locked
-        workspace_id = self.workspace_id
-        organisation_id = self.organisation_id
+
+        workspace_id: Union[None, Unset, str]
+        if isinstance(self.workspace_id, Unset):
+            workspace_id = UNSET
+        else:
+            workspace_id = self.workspace_id
+
+        organisation_id: Union[None, Unset, str]
+        if isinstance(self.organisation_id, Unset):
+            organisation_id = UNSET
+        else:
+            organisation_id = self.organisation_id
+
         name = self.name
+
         filters: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.filters, Unset):
             filters = []
             for filters_item_data in self.filters:
                 filters_item: Dict[str, Any]
-
                 if isinstance(filters_item_data, SelectFilter):
                     filters_item = filters_item_data.to_dict()
-
                 else:
                     filters_item = filters_item_data.to_dict()
 
@@ -115,9 +119,23 @@ class UpdateFilterSetResponse200:
 
         is_locked = d.pop("is_locked", UNSET)
 
-        workspace_id = d.pop("workspace_id", UNSET)
+        def _parse_workspace_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        organisation_id = d.pop("organisation_id", UNSET)
+        workspace_id = _parse_workspace_id(d.pop("workspace_id", UNSET))
+
+        def _parse_organisation_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        organisation_id = _parse_organisation_id(d.pop("organisation_id", UNSET))
 
         name = d.pop("name", UNSET)
 
@@ -125,9 +143,7 @@ class UpdateFilterSetResponse200:
         _filters = d.pop("filters", UNSET)
         for filters_item_data in _filters or []:
 
-            def _parse_filters_item(
-                data: object,
-            ) -> Union["RangeFilter", "SelectFilter"]:
+            def _parse_filters_item(data: object) -> Union["RangeFilter", "SelectFilter"]:
                 try:
                     if not isinstance(data, dict):
                         raise TypeError()

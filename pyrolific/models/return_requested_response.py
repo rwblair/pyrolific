@@ -1,19 +1,12 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+import datetime
+from typing import Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
-from ..types import UNSET, Unset
-
-from typing import Union
-import datetime
-from ..models.return_requested_response_status import ReturnRequestedResponseStatus
-from ..types import UNSET, Unset
 from dateutil.parser import isoparse
 
+from ..models.return_requested_response_status import ReturnRequestedResponseStatus
+from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ReturnRequestedResponse")
 
@@ -25,28 +18,32 @@ class ReturnRequestedResponse:
         id (Union[Unset, str]): the database id of the submission instance
         status (Union[Unset, ReturnRequestedResponseStatus]): The current status of the submission
         participant (Union[Unset, str]): The participant who took part in the study.
-        return_requested (Union[Unset, None, datetime.datetime]): The date and time when a request was made to return a
+        return_requested (Union[None, Unset, datetime.datetime]): The date and time when a request was made to return a
             submission.
     """
 
     id: Union[Unset, str] = UNSET
     status: Union[Unset, ReturnRequestedResponseStatus] = UNSET
     participant: Union[Unset, str] = UNSET
-    return_requested: Union[Unset, None, datetime.datetime] = UNSET
+    return_requested: Union[None, Unset, datetime.datetime] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
             status = self.status.value
 
         participant = self.participant
-        return_requested: Union[Unset, None, str] = UNSET
-        if not isinstance(self.return_requested, Unset):
-            return_requested = (
-                self.return_requested.isoformat() if self.return_requested else None
-            )
+
+        return_requested: Union[None, Unset, str]
+        if isinstance(self.return_requested, Unset):
+            return_requested = UNSET
+        elif isinstance(self.return_requested, datetime.datetime):
+            return_requested = self.return_requested.isoformat()
+        else:
+            return_requested = self.return_requested
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -76,14 +73,22 @@ class ReturnRequestedResponse:
 
         participant = d.pop("participant", UNSET)
 
-        _return_requested = d.pop("return_requested", UNSET)
-        return_requested: Union[Unset, None, datetime.datetime]
-        if _return_requested is None:
-            return_requested = None
-        elif isinstance(_return_requested, Unset):
-            return_requested = UNSET
-        else:
-            return_requested = isoparse(_return_requested)
+        def _parse_return_requested(data: object) -> Union[None, Unset, datetime.datetime]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                return_requested_type_0 = isoparse(data)
+
+                return return_requested_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, datetime.datetime], data)
+
+        return_requested = _parse_return_requested(d.pop("return_requested", UNSET))
 
         return_requested_response = cls(
             id=id,

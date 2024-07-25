@@ -1,17 +1,10 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.filter_list_attributes_type import FilterListAttributesType
-from typing import Union
 from ..types import UNSET, Unset
-
 
 T = TypeVar("T", bound="FilterListAttributes")
 
@@ -37,8 +30,11 @@ class FilterListAttributes:
 
     def to_dict(self) -> Dict[str, Any]:
         filter_id = self.filter_id
+
         title = self.title
+
         description = self.description
+
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value

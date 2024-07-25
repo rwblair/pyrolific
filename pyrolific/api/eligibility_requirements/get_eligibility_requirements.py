@@ -3,29 +3,27 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
-from ...types import UNSET, Unset
-from typing import Union
+from ...client import AuthenticatedClient, Client
 from ...models.requirements_response import RequirementsResponse
-from typing import Dict
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     *,
     authorization: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     if not isinstance(authorization, Unset):
         headers["Authorization"] = authorization
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/api/v1/eligibility-requirements/",
-        "headers": headers,
     }
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(

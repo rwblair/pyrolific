@@ -1,16 +1,9 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import Union
-from ..types import UNSET, Unset
-
 
 T = TypeVar("T", bound="RequirementQuery")
 
@@ -20,16 +13,21 @@ class RequirementQuery:
     """
     Attributes:
         id (Union[Unset, str]): Id of the question Example: 54ac6ea9fdf99b2204feb899.
-        question (Union[Unset, None, str]): Question asked to the participant Example: What is your first language?.
+        question (Union[None, Unset, str]): Question asked to the participant Example: What is your first language?.
     """
 
     id: Union[Unset, str] = UNSET
-    question: Union[Unset, None, str] = UNSET
+    question: Union[None, Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
-        question = self.question
+
+        question: Union[None, Unset, str]
+        if isinstance(self.question, Unset):
+            question = UNSET
+        else:
+            question = self.question
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -46,7 +44,14 @@ class RequirementQuery:
         d = src_dict.copy()
         id = d.pop("id", UNSET)
 
-        question = d.pop("question", UNSET)
+        def _parse_question(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        question = _parse_question(d.pop("question", UNSET))
 
         requirement_query = cls(
             id=id,

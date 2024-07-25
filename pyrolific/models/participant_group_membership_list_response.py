@@ -1,17 +1,9 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import Union
-from typing import List
-from ..types import UNSET, Unset
-from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.participant_group_membership import ParticipantGroupMembership
@@ -36,7 +28,6 @@ class ParticipantGroupMembershipListResponse:
             results = []
             for results_item_data in self.results:
                 results_item = results_item_data.to_dict()
-
                 results.append(results_item)
 
         field_dict: Dict[str, Any] = {}

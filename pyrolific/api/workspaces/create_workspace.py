@@ -3,36 +3,36 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.create_workspace import CreateWorkspace
 from ...models.workspace import Workspace
-from typing import Dict
+from ...types import Response
 
 
 def _get_kwargs(
     *,
-    json_body: CreateWorkspace,
+    body: CreateWorkspace,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/api/v1/workspaces/",
-        "json": json_json_body,
-        "headers": headers,
     }
 
+    _body = body.to_dict()
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Workspace]:
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
+
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Workspace]:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = Workspace.from_dict(response.json())
 
@@ -43,9 +43,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Workspace]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Workspace]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -57,7 +55,7 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: CreateWorkspace,
+    body: CreateWorkspace,
     authorization: str,
 ) -> Response[Workspace]:
     """Create a workspace
@@ -66,7 +64,7 @@ def sync_detailed(
 
     Args:
         authorization (str):
-        json_body (CreateWorkspace):
+        body (CreateWorkspace):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -77,7 +75,7 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -91,7 +89,7 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    json_body: CreateWorkspace,
+    body: CreateWorkspace,
     authorization: str,
 ) -> Optional[Workspace]:
     """Create a workspace
@@ -100,7 +98,7 @@ def sync(
 
     Args:
         authorization (str):
-        json_body (CreateWorkspace):
+        body (CreateWorkspace):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -112,7 +110,7 @@ def sync(
 
     return sync_detailed(
         client=client,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     ).parsed
 
@@ -120,7 +118,7 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: CreateWorkspace,
+    body: CreateWorkspace,
     authorization: str,
 ) -> Response[Workspace]:
     """Create a workspace
@@ -129,7 +127,7 @@ async def asyncio_detailed(
 
     Args:
         authorization (str):
-        json_body (CreateWorkspace):
+        body (CreateWorkspace):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -140,7 +138,7 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -152,7 +150,7 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    json_body: CreateWorkspace,
+    body: CreateWorkspace,
     authorization: str,
 ) -> Optional[Workspace]:
     """Create a workspace
@@ -161,7 +159,7 @@ async def asyncio(
 
     Args:
         authorization (str):
-        json_body (CreateWorkspace):
+        body (CreateWorkspace):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -174,7 +172,7 @@ async def asyncio(
     return (
         await asyncio_detailed(
             client=client,
-            json_body=json_body,
+            body=body,
             authorization=authorization,
         )
     ).parsed

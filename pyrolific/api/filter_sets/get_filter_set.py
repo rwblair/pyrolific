@@ -3,39 +3,35 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
-from ...types import UNSET, Unset
-from typing import Union
+from ...client import AuthenticatedClient, Client
 from ...models.get_filter_set_response_200 import GetFilterSetResponse200
-from typing import Optional
-from typing import Dict
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     id: str,
     *,
-    version_number: Union[Unset, None, int] = UNSET,
+    version_number: Union[Unset, int] = UNSET,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
     params: Dict[str, Any] = {}
+
     params["version_number"] = version_number
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/api/v1/filter-sets/{id}/".format(
-            id=id,
-        ),
+        "url": f"/api/v1/filter-sets/{id}/",
         "params": params,
-        "headers": headers,
     }
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -66,7 +62,7 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    version_number: Union[Unset, None, int] = UNSET,
+    version_number: Union[Unset, int] = UNSET,
     authorization: str,
 ) -> Response[GetFilterSetResponse200]:
     """Get filter set
@@ -75,7 +71,7 @@ def sync_detailed(
 
     Args:
         id (str):
-        version_number (Union[Unset, None, int]):
+        version_number (Union[Unset, int]):
         authorization (str):
 
     Raises:
@@ -103,7 +99,7 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-    version_number: Union[Unset, None, int] = UNSET,
+    version_number: Union[Unset, int] = UNSET,
     authorization: str,
 ) -> Optional[GetFilterSetResponse200]:
     """Get filter set
@@ -112,7 +108,7 @@ def sync(
 
     Args:
         id (str):
-        version_number (Union[Unset, None, int]):
+        version_number (Union[Unset, int]):
         authorization (str):
 
     Raises:
@@ -135,7 +131,7 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    version_number: Union[Unset, None, int] = UNSET,
+    version_number: Union[Unset, int] = UNSET,
     authorization: str,
 ) -> Response[GetFilterSetResponse200]:
     """Get filter set
@@ -144,7 +140,7 @@ async def asyncio_detailed(
 
     Args:
         id (str):
-        version_number (Union[Unset, None, int]):
+        version_number (Union[Unset, int]):
         authorization (str):
 
     Raises:
@@ -170,7 +166,7 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-    version_number: Union[Unset, None, int] = UNSET,
+    version_number: Union[Unset, int] = UNSET,
     authorization: str,
 ) -> Optional[GetFilterSetResponse200]:
     """Get filter set
@@ -179,7 +175,7 @@ async def asyncio(
 
     Args:
         id (str):
-        version_number (Union[Unset, None, int]):
+        version_number (Union[Unset, int]):
         authorization (str):
 
     Raises:

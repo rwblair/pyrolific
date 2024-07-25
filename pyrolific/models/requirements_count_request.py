@@ -1,18 +1,9 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import Union
-from typing import Union
-from typing import List
-from ..types import UNSET, Unset
-from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.range_filter import RangeFilter
@@ -50,16 +41,15 @@ class RequirementsCountRequest:
         filters = []
         for filters_item_data in self.filters:
             filters_item: Dict[str, Any]
-
             if isinstance(filters_item_data, SelectFilter):
                 filters_item = filters_item_data.to_dict()
-
             else:
                 filters_item = filters_item_data.to_dict()
 
             filters.append(filters_item)
 
         workspace_id = self.workspace_id
+
         organisation_id = self.organisation_id
 
         field_dict: Dict[str, Any] = {}
@@ -86,9 +76,7 @@ class RequirementsCountRequest:
         _filters = d.pop("filters")
         for filters_item_data in _filters:
 
-            def _parse_filters_item(
-                data: object,
-            ) -> Union["RangeFilter", "SelectFilter"]:
+            def _parse_filters_item(data: object) -> Union["RangeFilter", "SelectFilter"]:
                 try:
                     if not isinstance(data, dict):
                         raise TypeError()

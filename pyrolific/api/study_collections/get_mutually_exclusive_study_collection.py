@@ -3,14 +3,10 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
-from ...models.mutually_exclusive_study_collection_update import (
-    MutuallyExclusiveStudyCollectionUpdate,
-)
-from typing import Dict
+from ...client import AuthenticatedClient, Client
+from ...models.mutually_exclusive_study_collection_update import MutuallyExclusiveStudyCollectionUpdate
+from ...types import Response
 
 
 def _get_kwargs(
@@ -18,16 +14,16 @@ def _get_kwargs(
     *,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/api/v1/study-collections/mutually-exclusive/{id}/".format(
-            id=id,
-        ),
-        "headers": headers,
+        "url": f"/api/v1/study-collections/mutually-exclusive/{id}/",
     }
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(

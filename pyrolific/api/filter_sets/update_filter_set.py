@@ -3,34 +3,34 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.update_filter_set import UpdateFilterSet
-from typing import Dict
 from ...models.update_filter_set_response_200 import UpdateFilterSetResponse200
+from ...types import Response
 
 
 def _get_kwargs(
     id: str,
     *,
-    json_body: UpdateFilterSet,
+    body: UpdateFilterSet,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "patch",
-        "url": "/api/v1/filter-sets/{id}/".format(
-            id=id,
-        ),
-        "json": json_json_body,
-        "headers": headers,
+        "url": f"/api/v1/filter-sets/{id}/",
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -61,7 +61,7 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: UpdateFilterSet,
+    body: UpdateFilterSet,
     authorization: str,
 ) -> Response[UpdateFilterSetResponse200]:
     """Update filter set
@@ -71,7 +71,7 @@ def sync_detailed(
     Args:
         id (str):
         authorization (str):
-        json_body (UpdateFilterSet):  Example: [{'name': 'Left-handed 30-somethings', 'filters':
+        body (UpdateFilterSet):  Example: [{'name': 'Left-handed 30-somethings', 'filters':
             [{'id': 'handedness', 'selected_values': ['1']}, {'id': 'age', 'selected_range': {'lower':
             30, 'upper': 39}}]}].
 
@@ -85,7 +85,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -100,7 +100,7 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: UpdateFilterSet,
+    body: UpdateFilterSet,
     authorization: str,
 ) -> Optional[UpdateFilterSetResponse200]:
     """Update filter set
@@ -110,7 +110,7 @@ def sync(
     Args:
         id (str):
         authorization (str):
-        json_body (UpdateFilterSet):  Example: [{'name': 'Left-handed 30-somethings', 'filters':
+        body (UpdateFilterSet):  Example: [{'name': 'Left-handed 30-somethings', 'filters':
             [{'id': 'handedness', 'selected_values': ['1']}, {'id': 'age', 'selected_range': {'lower':
             30, 'upper': 39}}]}].
 
@@ -125,7 +125,7 @@ def sync(
     return sync_detailed(
         id=id,
         client=client,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     ).parsed
 
@@ -134,7 +134,7 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: UpdateFilterSet,
+    body: UpdateFilterSet,
     authorization: str,
 ) -> Response[UpdateFilterSetResponse200]:
     """Update filter set
@@ -144,7 +144,7 @@ async def asyncio_detailed(
     Args:
         id (str):
         authorization (str):
-        json_body (UpdateFilterSet):  Example: [{'name': 'Left-handed 30-somethings', 'filters':
+        body (UpdateFilterSet):  Example: [{'name': 'Left-handed 30-somethings', 'filters':
             [{'id': 'handedness', 'selected_values': ['1']}, {'id': 'age', 'selected_range': {'lower':
             30, 'upper': 39}}]}].
 
@@ -158,7 +158,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -171,7 +171,7 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: UpdateFilterSet,
+    body: UpdateFilterSet,
     authorization: str,
 ) -> Optional[UpdateFilterSetResponse200]:
     """Update filter set
@@ -181,7 +181,7 @@ async def asyncio(
     Args:
         id (str):
         authorization (str):
-        json_body (UpdateFilterSet):  Example: [{'name': 'Left-handed 30-somethings', 'filters':
+        body (UpdateFilterSet):  Example: [{'name': 'Left-handed 30-somethings', 'filters':
             [{'id': 'handedness', 'selected_values': ['1']}, {'id': 'age', 'selected_range': {'lower':
             30, 'upper': 39}}]}].
 
@@ -197,7 +197,7 @@ async def asyncio(
         await asyncio_detailed(
             id=id,
             client=client,
-            json_body=json_body,
+            body=body,
             authorization=authorization,
         )
     ).parsed

@@ -3,31 +3,32 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
-from ...models.request_submission_return_json_body import (
-    RequestSubmissionReturnJsonBody,
-)
-from typing import Dict
+from ...client import AuthenticatedClient, Client
+from ...models.request_submission_return_body import RequestSubmissionReturnBody
 from ...models.return_requested_response import ReturnRequestedResponse
+from ...types import Response
 
 
 def _get_kwargs(
     id: str,
     *,
-    json_body: RequestSubmissionReturnJsonBody,
+    body: RequestSubmissionReturnBody,
 ) -> Dict[str, Any]:
-    json_json_body = json_body.to_dict()
+    headers: Dict[str, Any] = {}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/api/v1/submissions/{id}/request-return/".format(
-            id=id,
-        ),
-        "json": json_json_body,
+        "url": f"/api/v1/submissions/{id}/request-return/",
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -58,7 +59,7 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: RequestSubmissionReturnJsonBody,
+    body: RequestSubmissionReturnBody,
 ) -> Response[ReturnRequestedResponse]:
     r"""Request the participant who submitted the response to return their response
 
@@ -77,8 +78,8 @@ def sync_detailed(
 
     Args:
         id (str):
-        json_body (RequestSubmissionReturnJsonBody):  Example: {'request_return_reasons':
-            ['Withdrew consent.', 'Did not finish study.']}.
+        body (RequestSubmissionReturnBody):  Example: {'request_return_reasons': ['Withdrew
+            consent.', 'Did not finish study.']}.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -90,7 +91,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -104,7 +105,7 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: RequestSubmissionReturnJsonBody,
+    body: RequestSubmissionReturnBody,
 ) -> Optional[ReturnRequestedResponse]:
     r"""Request the participant who submitted the response to return their response
 
@@ -123,8 +124,8 @@ def sync(
 
     Args:
         id (str):
-        json_body (RequestSubmissionReturnJsonBody):  Example: {'request_return_reasons':
-            ['Withdrew consent.', 'Did not finish study.']}.
+        body (RequestSubmissionReturnBody):  Example: {'request_return_reasons': ['Withdrew
+            consent.', 'Did not finish study.']}.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -137,7 +138,7 @@ def sync(
     return sync_detailed(
         id=id,
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
@@ -145,7 +146,7 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: RequestSubmissionReturnJsonBody,
+    body: RequestSubmissionReturnBody,
 ) -> Response[ReturnRequestedResponse]:
     r"""Request the participant who submitted the response to return their response
 
@@ -164,8 +165,8 @@ async def asyncio_detailed(
 
     Args:
         id (str):
-        json_body (RequestSubmissionReturnJsonBody):  Example: {'request_return_reasons':
-            ['Withdrew consent.', 'Did not finish study.']}.
+        body (RequestSubmissionReturnBody):  Example: {'request_return_reasons': ['Withdrew
+            consent.', 'Did not finish study.']}.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -177,7 +178,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -189,7 +190,7 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: RequestSubmissionReturnJsonBody,
+    body: RequestSubmissionReturnBody,
 ) -> Optional[ReturnRequestedResponse]:
     r"""Request the participant who submitted the response to return their response
 
@@ -208,8 +209,8 @@ async def asyncio(
 
     Args:
         id (str):
-        json_body (RequestSubmissionReturnJsonBody):  Example: {'request_return_reasons':
-            ['Withdrew consent.', 'Did not finish study.']}.
+        body (RequestSubmissionReturnBody):  Example: {'request_return_reasons': ['Withdrew
+            consent.', 'Did not finish study.']}.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -223,6 +224,6 @@ async def asyncio(
         await asyncio_detailed(
             id=id,
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

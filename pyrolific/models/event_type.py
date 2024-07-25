@@ -1,16 +1,9 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import Union
-from ..types import UNSET, Unset
-
 
 T = TypeVar("T", bound="EventType")
 
@@ -32,6 +25,7 @@ class EventType:
 
     def to_dict(self) -> Dict[str, Any]:
         event_type = self.event_type
+
         description = self.description
 
         field_dict: Dict[str, Any] = {}

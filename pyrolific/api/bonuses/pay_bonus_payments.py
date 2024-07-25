@@ -3,9 +3,9 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
+from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...types import Response
-from ... import errors
 
 
 def _get_kwargs(
@@ -13,21 +13,19 @@ def _get_kwargs(
     *,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/api/v1/bulk-bonus-payments/{id}/pay/".format(
-            id=id,
-        ),
-        "headers": headers,
+        "url": f"/api/v1/bulk-bonus-payments/{id}/pay/",
     }
 
+    _kwargs["headers"] = headers
+    return _kwargs
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[str]:
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[str]:
     if response.status_code == HTTPStatus.ACCEPTED:
         response_202 = cast(str, response.json())
         return response_202
@@ -37,9 +35,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[str]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[str]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

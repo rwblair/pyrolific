@@ -1,17 +1,9 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import cast, List
-from typing import Union
-from ..types import UNSET, Unset
-
 
 T = TypeVar("T", bound="FilterListDetailedAttributes")
 
@@ -20,39 +12,66 @@ T = TypeVar("T", bound="FilterListDetailedAttributes")
 class FilterListDetailedAttributes:
     """
     Attributes:
-        researcher_help_text (Union[Unset, None, str]): Some help text to be displayed to researchers in the
+        researcher_help_text (Union[None, Unset, str]): Some help text to be displayed to researchers in the
             prescreening modal.
-        participant_help_text (Union[Unset, None, str]): Some help text to be displayed to participants in the About You
+        participant_help_text (Union[None, Unset, str]): Some help text to be displayed to participants in the About You
             section.
-        category (Union[Unset, None, str]): The category the filter is displayed in in About You and the prescreening
+        category (Union[None, Unset, str]): The category the filter is displayed in in About You and the prescreening
             modal.
-        subcategory (Union[Unset, None, str]): The sub-category the filter is displayed in in the prescreening modal.
-        display_order (Union[Unset, None, int]): The order in which the filter is displayed within its sub-category in
+        subcategory (Union[None, Unset, str]): The sub-category the filter is displayed in in the prescreening modal.
+        display_order (Union[None, Unset, int]): The order in which the filter is displayed within its sub-category in
             the prescreening modal.
-        tags (Union[Unset, None, List[str]]): Some additional tags that can be used to display the filter in a specific
+        tags (Union[List[str], None, Unset]): Some additional tags that can be used to display the filter in a specific
             way, e.g. recommended, new, expiring.
     """
 
-    researcher_help_text: Union[Unset, None, str] = UNSET
-    participant_help_text: Union[Unset, None, str] = UNSET
-    category: Union[Unset, None, str] = UNSET
-    subcategory: Union[Unset, None, str] = UNSET
-    display_order: Union[Unset, None, int] = UNSET
-    tags: Union[Unset, None, List[str]] = UNSET
+    researcher_help_text: Union[None, Unset, str] = UNSET
+    participant_help_text: Union[None, Unset, str] = UNSET
+    category: Union[None, Unset, str] = UNSET
+    subcategory: Union[None, Unset, str] = UNSET
+    display_order: Union[None, Unset, int] = UNSET
+    tags: Union[List[str], None, Unset] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        researcher_help_text = self.researcher_help_text
-        participant_help_text = self.participant_help_text
-        category = self.category
-        subcategory = self.subcategory
-        display_order = self.display_order
-        tags: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.tags, Unset):
-            if self.tags is None:
-                tags = None
-            else:
-                tags = self.tags
+        researcher_help_text: Union[None, Unset, str]
+        if isinstance(self.researcher_help_text, Unset):
+            researcher_help_text = UNSET
+        else:
+            researcher_help_text = self.researcher_help_text
+
+        participant_help_text: Union[None, Unset, str]
+        if isinstance(self.participant_help_text, Unset):
+            participant_help_text = UNSET
+        else:
+            participant_help_text = self.participant_help_text
+
+        category: Union[None, Unset, str]
+        if isinstance(self.category, Unset):
+            category = UNSET
+        else:
+            category = self.category
+
+        subcategory: Union[None, Unset, str]
+        if isinstance(self.subcategory, Unset):
+            subcategory = UNSET
+        else:
+            subcategory = self.subcategory
+
+        display_order: Union[None, Unset, int]
+        if isinstance(self.display_order, Unset):
+            display_order = UNSET
+        else:
+            display_order = self.display_order
+
+        tags: Union[List[str], None, Unset]
+        if isinstance(self.tags, Unset):
+            tags = UNSET
+        elif isinstance(self.tags, list):
+            tags = self.tags
+
+        else:
+            tags = self.tags
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -75,17 +94,68 @@ class FilterListDetailedAttributes:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        researcher_help_text = d.pop("researcher_help_text", UNSET)
 
-        participant_help_text = d.pop("participant_help_text", UNSET)
+        def _parse_researcher_help_text(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        category = d.pop("category", UNSET)
+        researcher_help_text = _parse_researcher_help_text(d.pop("researcher_help_text", UNSET))
 
-        subcategory = d.pop("subcategory", UNSET)
+        def _parse_participant_help_text(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        display_order = d.pop("display_order", UNSET)
+        participant_help_text = _parse_participant_help_text(d.pop("participant_help_text", UNSET))
 
-        tags = cast(List[str], d.pop("tags", UNSET))
+        def _parse_category(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        category = _parse_category(d.pop("category", UNSET))
+
+        def _parse_subcategory(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        subcategory = _parse_subcategory(d.pop("subcategory", UNSET))
+
+        def _parse_display_order(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        display_order = _parse_display_order(d.pop("display_order", UNSET))
+
+        def _parse_tags(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                tags_type_0 = cast(List[str], data)
+
+                return tags_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        tags = _parse_tags(d.pop("tags", UNSET))
 
         filter_list_detailed_attributes = cls(
             researcher_help_text=researcher_help_text,

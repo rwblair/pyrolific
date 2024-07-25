@@ -3,34 +3,34 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.participant_group import ParticipantGroup
 from ...models.participant_group_update import ParticipantGroupUpdate
-from typing import Dict
+from ...types import Response
 
 
 def _get_kwargs(
     id: str,
     *,
-    json_body: ParticipantGroupUpdate,
+    body: ParticipantGroupUpdate,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "patch",
-        "url": "/api/v1/participant-groups/{id}/".format(
-            id=id,
-        ),
-        "json": json_json_body,
-        "headers": headers,
+        "url": f"/api/v1/participant-groups/{id}/",
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -61,7 +61,7 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: ParticipantGroupUpdate,
+    body: ParticipantGroupUpdate,
     authorization: str,
 ) -> Response[ParticipantGroup]:
     """Update a participant group
@@ -69,7 +69,7 @@ def sync_detailed(
     Args:
         id (str):
         authorization (str):
-        json_body (ParticipantGroupUpdate):
+        body (ParticipantGroupUpdate):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -81,7 +81,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -96,7 +96,7 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: ParticipantGroupUpdate,
+    body: ParticipantGroupUpdate,
     authorization: str,
 ) -> Optional[ParticipantGroup]:
     """Update a participant group
@@ -104,7 +104,7 @@ def sync(
     Args:
         id (str):
         authorization (str):
-        json_body (ParticipantGroupUpdate):
+        body (ParticipantGroupUpdate):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -117,7 +117,7 @@ def sync(
     return sync_detailed(
         id=id,
         client=client,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     ).parsed
 
@@ -126,7 +126,7 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: ParticipantGroupUpdate,
+    body: ParticipantGroupUpdate,
     authorization: str,
 ) -> Response[ParticipantGroup]:
     """Update a participant group
@@ -134,7 +134,7 @@ async def asyncio_detailed(
     Args:
         id (str):
         authorization (str):
-        json_body (ParticipantGroupUpdate):
+        body (ParticipantGroupUpdate):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -146,7 +146,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -159,7 +159,7 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: ParticipantGroupUpdate,
+    body: ParticipantGroupUpdate,
     authorization: str,
 ) -> Optional[ParticipantGroup]:
     """Update a participant group
@@ -167,7 +167,7 @@ async def asyncio(
     Args:
         id (str):
         authorization (str):
-        json_body (ParticipantGroupUpdate):
+        body (ParticipantGroupUpdate):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -181,7 +181,7 @@ async def asyncio(
         await asyncio_detailed(
             id=id,
             client=client,
-            json_body=json_body,
+            body=body,
             authorization=authorization,
         )
     ).parsed

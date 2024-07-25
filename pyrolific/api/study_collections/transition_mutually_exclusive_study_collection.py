@@ -3,38 +3,34 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
-from ...models.transition_mutually_exclusive_study_collection_json_body import (
-    TransitionMutuallyExclusiveStudyCollectionJsonBody,
-)
-from ...models.mutually_exclusive_study_collection_update import (
-    MutuallyExclusiveStudyCollectionUpdate,
-)
-from typing import Dict
+from ...client import AuthenticatedClient, Client
+from ...models.mutually_exclusive_study_collection_update import MutuallyExclusiveStudyCollectionUpdate
+from ...models.transition_mutually_exclusive_study_collection_body import TransitionMutuallyExclusiveStudyCollectionBody
+from ...types import Response
 
 
 def _get_kwargs(
     id: str,
     *,
-    json_body: TransitionMutuallyExclusiveStudyCollectionJsonBody,
+    body: TransitionMutuallyExclusiveStudyCollectionBody,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/api/v1/study-collections/mutually-exclusive/{id}/transition/".format(
-            id=id,
-        ),
-        "json": json_json_body,
-        "headers": headers,
+        "url": f"/api/v1/study-collections/mutually-exclusive/{id}/transition/",
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -65,7 +61,7 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: TransitionMutuallyExclusiveStudyCollectionJsonBody,
+    body: TransitionMutuallyExclusiveStudyCollectionBody,
     authorization: str,
 ) -> Response[MutuallyExclusiveStudyCollectionUpdate]:
     r"""Transition a mutually exclusive study collection
@@ -81,7 +77,7 @@ def sync_detailed(
     Args:
         id (str):
         authorization (str):
-        json_body (TransitionMutuallyExclusiveStudyCollectionJsonBody):
+        body (TransitionMutuallyExclusiveStudyCollectionBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -93,7 +89,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -108,7 +104,7 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: TransitionMutuallyExclusiveStudyCollectionJsonBody,
+    body: TransitionMutuallyExclusiveStudyCollectionBody,
     authorization: str,
 ) -> Optional[MutuallyExclusiveStudyCollectionUpdate]:
     r"""Transition a mutually exclusive study collection
@@ -124,7 +120,7 @@ def sync(
     Args:
         id (str):
         authorization (str):
-        json_body (TransitionMutuallyExclusiveStudyCollectionJsonBody):
+        body (TransitionMutuallyExclusiveStudyCollectionBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -137,7 +133,7 @@ def sync(
     return sync_detailed(
         id=id,
         client=client,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     ).parsed
 
@@ -146,7 +142,7 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: TransitionMutuallyExclusiveStudyCollectionJsonBody,
+    body: TransitionMutuallyExclusiveStudyCollectionBody,
     authorization: str,
 ) -> Response[MutuallyExclusiveStudyCollectionUpdate]:
     r"""Transition a mutually exclusive study collection
@@ -162,7 +158,7 @@ async def asyncio_detailed(
     Args:
         id (str):
         authorization (str):
-        json_body (TransitionMutuallyExclusiveStudyCollectionJsonBody):
+        body (TransitionMutuallyExclusiveStudyCollectionBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -174,7 +170,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -187,7 +183,7 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: TransitionMutuallyExclusiveStudyCollectionJsonBody,
+    body: TransitionMutuallyExclusiveStudyCollectionBody,
     authorization: str,
 ) -> Optional[MutuallyExclusiveStudyCollectionUpdate]:
     r"""Transition a mutually exclusive study collection
@@ -203,7 +199,7 @@ async def asyncio(
     Args:
         id (str):
         authorization (str):
-        json_body (TransitionMutuallyExclusiveStudyCollectionJsonBody):
+        body (TransitionMutuallyExclusiveStudyCollectionBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -217,7 +213,7 @@ async def asyncio(
         await asyncio_detailed(
             id=id,
             client=client,
-            json_body=json_body,
+            body=body,
             authorization=authorization,
         )
     ).parsed

@@ -1,35 +1,45 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
 
-T = TypeVar("T", bound="AttributeValueType0")
+T = TypeVar("T", bound="CloneFilterSetBody")
 
 
 @_attrs_define
-class AttributeValueType0:
-    """ """
+class CloneFilterSetBody:
+    """
+    Attributes:
+        new_name (Union[Unset, str]): A new name for the cloned filter set.
+    """
 
+    new_name: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
+        new_name = self.new_name
+
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if new_name is not UNSET:
+            field_dict["new_name"] = new_name
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        attribute_value_type_0 = cls()
+        new_name = d.pop("new_name", UNSET)
 
-        attribute_value_type_0.additional_properties = d
-        return attribute_value_type_0
+        clone_filter_set_body = cls(
+            new_name=new_name,
+        )
+
+        clone_filter_set_body.additional_properties = d
+        return clone_filter_set_body
 
     @property
     def additional_keys(self) -> List[str]:

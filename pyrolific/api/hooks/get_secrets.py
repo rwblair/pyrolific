@@ -3,12 +3,10 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.secret_list import SecretList
-from typing import Dict
+from ...types import UNSET, Response
 
 
 def _get_kwargs(
@@ -16,25 +14,26 @@ def _get_kwargs(
     workspace_id: str,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
     params: Dict[str, Any] = {}
+
     params["workspace_id"] = workspace_id
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/api/v1/hooks/secrets/",
         "params": params,
-        "headers": headers,
     }
 
+    _kwargs["headers"] = headers
+    return _kwargs
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[SecretList]:
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[SecretList]:
     if response.status_code == HTTPStatus.OK:
         response_200 = SecretList.from_dict(response.json())
 
@@ -45,9 +44,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[SecretList]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[SecretList]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

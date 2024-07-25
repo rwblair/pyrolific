@@ -3,47 +3,42 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
-from ...types import UNSET, Unset
-from typing import Optional
-from typing import Union
+from ...client import AuthenticatedClient, Client
 from ...models.export_study_method import ExportStudyMethod
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     id: str,
     *,
-    method: Union[Unset, None, ExportStudyMethod] = UNSET,
+    method: Union[Unset, ExportStudyMethod] = UNSET,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
     params: Dict[str, Any] = {}
-    json_method: Union[Unset, None, str] = UNSET
+
+    json_method: Union[Unset, str] = UNSET
     if not isinstance(method, Unset):
-        json_method = method.value if method else None
+        json_method = method.value
 
     params["method"] = json_method
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/api/v1/studies/{id}/export/".format(
-            id=id,
-        ),
+        "url": f"/api/v1/studies/{id}/export/",
         "params": params,
-        "headers": headers,
     }
 
+    _kwargs["headers"] = headers
+    return _kwargs
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[str]:
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[str]:
     if response.status_code == HTTPStatus.OK:
         response_200 = response.text
         return response_200
@@ -53,9 +48,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[str]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[str]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -68,7 +61,7 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    method: Union[Unset, None, ExportStudyMethod] = UNSET,
+    method: Union[Unset, ExportStudyMethod] = UNSET,
     authorization: str,
 ) -> Response[str]:
     """Download demographic data
@@ -113,7 +106,7 @@ def sync_detailed(
 
     Args:
         id (str):
-        method (Union[Unset, None, ExportStudyMethod]):
+        method (Union[Unset, ExportStudyMethod]):
         authorization (str):
 
     Raises:
@@ -141,7 +134,7 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-    method: Union[Unset, None, ExportStudyMethod] = UNSET,
+    method: Union[Unset, ExportStudyMethod] = UNSET,
     authorization: str,
 ) -> Optional[str]:
     """Download demographic data
@@ -186,7 +179,7 @@ def sync(
 
     Args:
         id (str):
-        method (Union[Unset, None, ExportStudyMethod]):
+        method (Union[Unset, ExportStudyMethod]):
         authorization (str):
 
     Raises:
@@ -209,7 +202,7 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    method: Union[Unset, None, ExportStudyMethod] = UNSET,
+    method: Union[Unset, ExportStudyMethod] = UNSET,
     authorization: str,
 ) -> Response[str]:
     """Download demographic data
@@ -254,7 +247,7 @@ async def asyncio_detailed(
 
     Args:
         id (str):
-        method (Union[Unset, None, ExportStudyMethod]):
+        method (Union[Unset, ExportStudyMethod]):
         authorization (str):
 
     Raises:
@@ -280,7 +273,7 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-    method: Union[Unset, None, ExportStudyMethod] = UNSET,
+    method: Union[Unset, ExportStudyMethod] = UNSET,
     authorization: str,
 ) -> Optional[str]:
     """Download demographic data
@@ -325,7 +318,7 @@ async def asyncio(
 
     Args:
         id (str):
-        method (Union[Unset, None, ExportStudyMethod]):
+        method (Union[Unset, ExportStudyMethod]):
         authorization (str):
 
     Raises:

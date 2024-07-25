@@ -1,19 +1,12 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.participant_group_feeder_studies_item_feeder_completion_codes_item_action import (
     ParticipantGroupFeederStudiesItemFeederCompletionCodesItemAction,
 )
-from typing import Union
 from ..types import UNSET, Unset
-
 
 T = TypeVar("T", bound="ParticipantGroupFeederStudiesItemFeederCompletionCodesItem")
 
@@ -32,14 +25,14 @@ class ParticipantGroupFeederStudiesItemFeederCompletionCodesItem:
 
     code: Union[Unset, str] = UNSET
     code_type: Union[Unset, str] = UNSET
-    action: Union[
-        Unset, ParticipantGroupFeederStudiesItemFeederCompletionCodesItemAction
-    ] = UNSET
+    action: Union[Unset, ParticipantGroupFeederStudiesItemFeederCompletionCodesItemAction] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         code = self.code
+
         code_type = self.code_type
+
         action: Union[Unset, str] = UNSET
         if not isinstance(self.action, Unset):
             action = self.action.value
@@ -64,15 +57,11 @@ class ParticipantGroupFeederStudiesItemFeederCompletionCodesItem:
         code_type = d.pop("code_type", UNSET)
 
         _action = d.pop("action", UNSET)
-        action: Union[
-            Unset, ParticipantGroupFeederStudiesItemFeederCompletionCodesItemAction
-        ]
+        action: Union[Unset, ParticipantGroupFeederStudiesItemFeederCompletionCodesItemAction]
         if isinstance(_action, Unset):
             action = UNSET
         else:
-            action = ParticipantGroupFeederStudiesItemFeederCompletionCodesItemAction(
-                _action
-            )
+            action = ParticipantGroupFeederStudiesItemFeederCompletionCodesItemAction(_action)
 
         participant_group_feeder_studies_item_feeder_completion_codes_item = cls(
             code=code,

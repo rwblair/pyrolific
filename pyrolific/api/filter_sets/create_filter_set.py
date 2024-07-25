@@ -3,31 +3,33 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
-from ...models.create_filter_set_response_201 import CreateFilterSetResponse201
-from typing import Dict
+from ...client import AuthenticatedClient, Client
 from ...models.create_filter_set import CreateFilterSet
+from ...models.create_filter_set_response_201 import CreateFilterSetResponse201
+from ...types import Response
 
 
 def _get_kwargs(
     *,
-    json_body: CreateFilterSet,
+    body: CreateFilterSet,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/api/v1/filter-sets/",
-        "json": json_json_body,
-        "headers": headers,
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -57,7 +59,7 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: CreateFilterSet,
+    body: CreateFilterSet,
     authorization: str,
 ) -> Response[CreateFilterSetResponse201]:
     """Create filter set
@@ -66,9 +68,9 @@ def sync_detailed(
 
     Args:
         authorization (str):
-        json_body (CreateFilterSet):  Example: [{'workspace_id': '644aaabfaf6bbc363b9d47c6',
-            'name': 'Ambidextrous teenagers', 'filters': [{'id': 'handedness', 'selected_values':
-            ['2']}, {'id': 'age', 'selected_range': {'lower': 18, 'upper': 19}}]}].
+        body (CreateFilterSet):  Example: [{'workspace_id': '644aaabfaf6bbc363b9d47c6', 'name':
+            'Ambidextrous teenagers', 'filters': [{'id': 'handedness', 'selected_values': ['2']},
+            {'id': 'age', 'selected_range': {'lower': 18, 'upper': 19}}]}].
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -79,7 +81,7 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -93,7 +95,7 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    json_body: CreateFilterSet,
+    body: CreateFilterSet,
     authorization: str,
 ) -> Optional[CreateFilterSetResponse201]:
     """Create filter set
@@ -102,9 +104,9 @@ def sync(
 
     Args:
         authorization (str):
-        json_body (CreateFilterSet):  Example: [{'workspace_id': '644aaabfaf6bbc363b9d47c6',
-            'name': 'Ambidextrous teenagers', 'filters': [{'id': 'handedness', 'selected_values':
-            ['2']}, {'id': 'age', 'selected_range': {'lower': 18, 'upper': 19}}]}].
+        body (CreateFilterSet):  Example: [{'workspace_id': '644aaabfaf6bbc363b9d47c6', 'name':
+            'Ambidextrous teenagers', 'filters': [{'id': 'handedness', 'selected_values': ['2']},
+            {'id': 'age', 'selected_range': {'lower': 18, 'upper': 19}}]}].
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -116,7 +118,7 @@ def sync(
 
     return sync_detailed(
         client=client,
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     ).parsed
 
@@ -124,7 +126,7 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: CreateFilterSet,
+    body: CreateFilterSet,
     authorization: str,
 ) -> Response[CreateFilterSetResponse201]:
     """Create filter set
@@ -133,9 +135,9 @@ async def asyncio_detailed(
 
     Args:
         authorization (str):
-        json_body (CreateFilterSet):  Example: [{'workspace_id': '644aaabfaf6bbc363b9d47c6',
-            'name': 'Ambidextrous teenagers', 'filters': [{'id': 'handedness', 'selected_values':
-            ['2']}, {'id': 'age', 'selected_range': {'lower': 18, 'upper': 19}}]}].
+        body (CreateFilterSet):  Example: [{'workspace_id': '644aaabfaf6bbc363b9d47c6', 'name':
+            'Ambidextrous teenagers', 'filters': [{'id': 'handedness', 'selected_values': ['2']},
+            {'id': 'age', 'selected_range': {'lower': 18, 'upper': 19}}]}].
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -146,7 +148,7 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -158,7 +160,7 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    json_body: CreateFilterSet,
+    body: CreateFilterSet,
     authorization: str,
 ) -> Optional[CreateFilterSetResponse201]:
     """Create filter set
@@ -167,9 +169,9 @@ async def asyncio(
 
     Args:
         authorization (str):
-        json_body (CreateFilterSet):  Example: [{'workspace_id': '644aaabfaf6bbc363b9d47c6',
-            'name': 'Ambidextrous teenagers', 'filters': [{'id': 'handedness', 'selected_values':
-            ['2']}, {'id': 'age', 'selected_range': {'lower': 18, 'upper': 19}}]}].
+        body (CreateFilterSet):  Example: [{'workspace_id': '644aaabfaf6bbc363b9d47c6', 'name':
+            'Ambidextrous teenagers', 'filters': [{'id': 'handedness', 'selected_values': ['2']},
+            {'id': 'age', 'selected_range': {'lower': 18, 'upper': 19}}]}].
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -182,7 +184,7 @@ async def asyncio(
     return (
         await asyncio_detailed(
             client=client,
-            json_body=json_body,
+            body=body,
             authorization=authorization,
         )
     ).parsed

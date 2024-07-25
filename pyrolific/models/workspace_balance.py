@@ -1,24 +1,13 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from typing import Dict
-from ..types import UNSET, Unset
-
 if TYPE_CHECKING:
-    from ..models.workspace_balance_available_balance_breakdown import (
-        WorkspaceBalanceAvailableBalanceBreakdown,
-    )
-    from ..models.workspace_balance_balance_breakdown import (
-        WorkspaceBalanceBalanceBreakdown,
-    )
+    from ..models.workspace_balance_available_balance_breakdown import WorkspaceBalanceAvailableBalanceBreakdown
+    from ..models.workspace_balance_balance_breakdown import WorkspaceBalanceBalanceBreakdown
 
 
 T = TypeVar("T", bound="WorkspaceBalance")
@@ -41,33 +30,34 @@ class WorkspaceBalance:
             workspace into:
             - Funds available to pay to participants
             - Funds pre-paid to Prolific for our services
-            - Funds for any VAT applied to our service fees
+            - Funds for any VAT applied to our Platform fees
         available_balance (Union[Unset, int]): The remaining balance of your workspace which is available to spend,
             after removing funds assigned to already active studies, etc.
         available_balance_breakdown (Union[Unset, WorkspaceBalanceAvailableBalanceBreakdown]): A breakdown of the
             available balance of the workspace into:
             - Funds available to pay to participants
             - Funds pre-paid to Prolific for our services
-            - Funds for any VAT applied to our service fees
+            - Funds for any VAT applied to our Platform fees
     """
 
     currency_code: Union[Unset, str] = UNSET
     total_balance: Union[Unset, int] = UNSET
     balance_breakdown: Union[Unset, "WorkspaceBalanceBalanceBreakdown"] = UNSET
     available_balance: Union[Unset, int] = UNSET
-    available_balance_breakdown: Union[
-        Unset, "WorkspaceBalanceAvailableBalanceBreakdown"
-    ] = UNSET
+    available_balance_breakdown: Union[Unset, "WorkspaceBalanceAvailableBalanceBreakdown"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         currency_code = self.currency_code
+
         total_balance = self.total_balance
+
         balance_breakdown: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.balance_breakdown, Unset):
             balance_breakdown = self.balance_breakdown.to_dict()
 
         available_balance = self.available_balance
+
         available_balance_breakdown: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.available_balance_breakdown, Unset):
             available_balance_breakdown = self.available_balance_breakdown.to_dict()
@@ -90,12 +80,8 @@ class WorkspaceBalance:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.workspace_balance_available_balance_breakdown import (
-            WorkspaceBalanceAvailableBalanceBreakdown,
-        )
-        from ..models.workspace_balance_balance_breakdown import (
-            WorkspaceBalanceBalanceBreakdown,
-        )
+        from ..models.workspace_balance_available_balance_breakdown import WorkspaceBalanceAvailableBalanceBreakdown
+        from ..models.workspace_balance_balance_breakdown import WorkspaceBalanceBalanceBreakdown
 
         d = src_dict.copy()
         currency_code = d.pop("currency_code", UNSET)
@@ -107,23 +93,17 @@ class WorkspaceBalance:
         if isinstance(_balance_breakdown, Unset):
             balance_breakdown = UNSET
         else:
-            balance_breakdown = WorkspaceBalanceBalanceBreakdown.from_dict(
-                _balance_breakdown
-            )
+            balance_breakdown = WorkspaceBalanceBalanceBreakdown.from_dict(_balance_breakdown)
 
         available_balance = d.pop("available_balance", UNSET)
 
         _available_balance_breakdown = d.pop("available_balance_breakdown", UNSET)
-        available_balance_breakdown: Union[
-            Unset, WorkspaceBalanceAvailableBalanceBreakdown
-        ]
+        available_balance_breakdown: Union[Unset, WorkspaceBalanceAvailableBalanceBreakdown]
         if isinstance(_available_balance_breakdown, Unset):
             available_balance_breakdown = UNSET
         else:
-            available_balance_breakdown = (
-                WorkspaceBalanceAvailableBalanceBreakdown.from_dict(
-                    _available_balance_breakdown
-                )
+            available_balance_breakdown = WorkspaceBalanceAvailableBalanceBreakdown.from_dict(
+                _available_balance_breakdown
             )
 
         workspace_balance = cls(

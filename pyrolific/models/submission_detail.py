@@ -1,18 +1,10 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
-from typing import Union
 from ..models.submission_detail_status import SubmissionDetailStatus
-from typing import cast, List
 from ..types import UNSET, Unset
-
 
 T = TypeVar("T", bound="SubmissionDetail")
 
@@ -22,17 +14,18 @@ class SubmissionDetail:
     """
     Example:
         {'id': '625d4a831bcda2d59ac5a251', 'completed_at': datetime.datetime(2022, 4, 18, 11, 25, 2, 734000,
-            tzinfo=datetime.timezone.utc), 'entered_code': '8E8AC860', 'participant': '60bf9310e8dec401be6e9615',
-            'started_at': datetime.datetime(2022, 4, 18, 11, 24, 51, 395000, tzinfo=datetime.timezone.utc), 'status':
-            'APPROVED', 'study_id': '60aca280709ee40ec37d4885', 'bonus_payments': [1000, 2536]}
+            tzinfo=datetime.timezone(datetime.timedelta(0), 'Z')), 'entered_code': '8E8AC860', 'participant':
+            '60bf9310e8dec401be6e9615', 'started_at': datetime.datetime(2022, 4, 18, 11, 24, 51, 395000,
+            tzinfo=datetime.timezone(datetime.timedelta(0), 'Z')), 'status': 'APPROVED', 'study_id':
+            '60aca280709ee40ec37d4885', 'bonus_payments': [1000, 2536]}
 
     Attributes:
         id (str): The id of the submission
         started_at (str): The date and time that the user started the submission (UTC)
         status (SubmissionDetailStatus): The current status of the submission
         study_id (str): Study id.
-        completed_at (Union[Unset, None, str]): The time the submission was completed at.
-        entered_code (Union[Unset, None, str]): The completion code used by the participant to complete the study.
+        completed_at (Union[None, Unset, str]): The time the submission was completed at.
+        entered_code (Union[None, Unset, str]): The completion code used by the participant to complete the study.
         participant (Union[Unset, str]): Participant id.
         bonus_payments (Union[Unset, List[float]]): Bonus payments that have been paid on the submission. Returned in
             pence / cents.
@@ -42,21 +35,35 @@ class SubmissionDetail:
     started_at: str
     status: SubmissionDetailStatus
     study_id: str
-    completed_at: Union[Unset, None, str] = UNSET
-    entered_code: Union[Unset, None, str] = UNSET
+    completed_at: Union[None, Unset, str] = UNSET
+    entered_code: Union[None, Unset, str] = UNSET
     participant: Union[Unset, str] = UNSET
     bonus_payments: Union[Unset, List[float]] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         started_at = self.started_at
+
         status = self.status.value
 
         study_id = self.study_id
-        completed_at = self.completed_at
-        entered_code = self.entered_code
+
+        completed_at: Union[None, Unset, str]
+        if isinstance(self.completed_at, Unset):
+            completed_at = UNSET
+        else:
+            completed_at = self.completed_at
+
+        entered_code: Union[None, Unset, str]
+        if isinstance(self.entered_code, Unset):
+            entered_code = UNSET
+        else:
+            entered_code = self.entered_code
+
         participant = self.participant
+
         bonus_payments: Union[Unset, List[float]] = UNSET
         if not isinstance(self.bonus_payments, Unset):
             bonus_payments = self.bonus_payments
@@ -93,9 +100,23 @@ class SubmissionDetail:
 
         study_id = d.pop("study_id")
 
-        completed_at = d.pop("completed_at", UNSET)
+        def _parse_completed_at(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        entered_code = d.pop("entered_code", UNSET)
+        completed_at = _parse_completed_at(d.pop("completed_at", UNSET))
+
+        def _parse_entered_code(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        entered_code = _parse_entered_code(d.pop("entered_code", UNSET))
 
         participant = d.pop("participant", UNSET)
 

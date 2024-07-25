@@ -1,24 +1,13 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.select_filter_list_attributes_data_type import SelectFilterListAttributesDataType
 from ..types import UNSET, Unset
-
-from typing import Union
-from ..models.select_filter_list_attributes_data_type import (
-    SelectFilterListAttributesDataType,
-)
-from ..types import UNSET, Unset
-from typing import Dict
 
 if TYPE_CHECKING:
-    from ..models.select_filter_list_attributes_choices import (
-        SelectFilterListAttributesChoices,
-    )
+    from ..models.select_filter_list_attributes_choices import SelectFilterListAttributesChoices
 
 
 T = TypeVar("T", bound="SelectFilterListAttributes")
@@ -61,9 +50,7 @@ class SelectFilterListAttributes:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.select_filter_list_attributes_choices import (
-            SelectFilterListAttributesChoices,
-        )
+        from ..models.select_filter_list_attributes_choices import SelectFilterListAttributesChoices
 
         d = src_dict.copy()
         _choices = d.pop("choices", UNSET)

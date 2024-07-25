@@ -3,38 +3,36 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
-from ...types import UNSET, Unset
-from typing import Union
+from ...client import AuthenticatedClient, Client
 from ...models.send_bulk_message import SendBulkMessage
-from typing import Dict
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     *,
-    json_body: SendBulkMessage,
+    body: SendBulkMessage,
     authorization: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     if not isinstance(authorization, Unset):
         headers["Authorization"] = authorization
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/api/v1/messages/bulk/",
-        "json": json_json_body,
-        "headers": headers,
     }
 
+    _body = body.to_dict()
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Any]:
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
+
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
     if response.status_code == HTTPStatus.NO_CONTENT:
         return None
     if client.raise_on_unexpected_status:
@@ -43,9 +41,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Any]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -57,7 +53,7 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: SendBulkMessage,
+    body: SendBulkMessage,
     authorization: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
     """Send a message to multiple participants
@@ -66,7 +62,7 @@ def sync_detailed(
 
     Args:
         authorization (Union[Unset, str]):
-        json_body (SendBulkMessage):
+        body (SendBulkMessage):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -77,7 +73,7 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 
@@ -91,7 +87,7 @@ def sync_detailed(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: SendBulkMessage,
+    body: SendBulkMessage,
     authorization: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
     """Send a message to multiple participants
@@ -100,7 +96,7 @@ async def asyncio_detailed(
 
     Args:
         authorization (Union[Unset, str]):
-        json_body (SendBulkMessage):
+        body (SendBulkMessage):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -111,7 +107,7 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         authorization=authorization,
     )
 

@@ -1,52 +1,48 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
-from typing import Union
-from ..types import UNSET, Unset
-
-
-T = TypeVar("T", bound="CloneFilterSetJsonBody")
+T = TypeVar("T", bound="RequestSubmissionReturnBody")
 
 
 @_attrs_define
-class CloneFilterSetJsonBody:
+class RequestSubmissionReturnBody:
     """
+    Example:
+        {'request_return_reasons': ['Withdrew consent.', 'Did not finish study.']}
+
     Attributes:
-        new_name (Union[Unset, str]): A new name for the cloned filter set.
+        request_return_reasons (List[str]):
     """
 
-    new_name: Union[Unset, str] = UNSET
+    request_return_reasons: List[str]
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        new_name = self.new_name
+        request_return_reasons = self.request_return_reasons
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
-        if new_name is not UNSET:
-            field_dict["new_name"] = new_name
+        field_dict.update(
+            {
+                "request_return_reasons": request_return_reasons,
+            }
+        )
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        new_name = d.pop("new_name", UNSET)
+        request_return_reasons = cast(List[str], d.pop("request_return_reasons"))
 
-        clone_filter_set_json_body = cls(
-            new_name=new_name,
+        request_submission_return_body = cls(
+            request_return_reasons=request_return_reasons,
         )
 
-        clone_filter_set_json_body.additional_properties = d
-        return clone_filter_set_json_body
+        request_submission_return_body.additional_properties = d
+        return request_submission_return_body
 
     @property
     def additional_keys(self) -> List[str]:

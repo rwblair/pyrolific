@@ -1,17 +1,9 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import Union
-from typing import List
-from ..types import UNSET, Unset
-from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.workspace_user import WorkspaceUser
@@ -36,7 +28,7 @@ class Project:
         owner (Union[Unset, str]): User id of the creator of the project. It is created by Prolific.
         users (Union[Unset, List['WorkspaceUser']]): Data for all users who have access to this project
         workspace (Union[Unset, str]): Id of the workspace this project is in. This is created by Prolific.
-        naivety_distribution_rate (Union[Unset, None, float]): The rate at which the studies within this project are
+        naivety_distribution_rate (Union[None, Unset, float]): The rate at which the studies within this project are
             distributed.
     """
 
@@ -46,24 +38,32 @@ class Project:
     owner: Union[Unset, str] = UNSET
     users: Union[Unset, List["WorkspaceUser"]] = UNSET
     workspace: Union[Unset, str] = UNSET
-    naivety_distribution_rate: Union[Unset, None, float] = UNSET
+    naivety_distribution_rate: Union[None, Unset, float] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         title = self.title
+
         description = self.description
+
         owner = self.owner
+
         users: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.users, Unset):
             users = []
             for users_item_data in self.users:
                 users_item = users_item_data.to_dict()
-
                 users.append(users_item)
 
         workspace = self.workspace
-        naivety_distribution_rate = self.naivety_distribution_rate
+
+        naivety_distribution_rate: Union[None, Unset, float]
+        if isinstance(self.naivety_distribution_rate, Unset):
+            naivety_distribution_rate = UNSET
+        else:
+            naivety_distribution_rate = self.naivety_distribution_rate
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -108,7 +108,14 @@ class Project:
 
         workspace = d.pop("workspace", UNSET)
 
-        naivety_distribution_rate = d.pop("naivety_distribution_rate", UNSET)
+        def _parse_naivety_distribution_rate(data: object) -> Union[None, Unset, float]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, float], data)
+
+        naivety_distribution_rate = _parse_naivety_distribution_rate(d.pop("naivety_distribution_rate", UNSET))
 
         project = cls(
             id=id,

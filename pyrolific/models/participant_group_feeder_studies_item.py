@@ -1,17 +1,9 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import Union
-from typing import List
-from ..types import UNSET, Unset
-from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.participant_group_feeder_studies_item_feeder_completion_codes_item import (
@@ -38,24 +30,23 @@ class ParticipantGroupFeederStudiesItem:
     name: Union[Unset, str] = UNSET
     internal_name: Union[Unset, str] = UNSET
     status: Union[Unset, str] = UNSET
-    feeder_completion_codes: Union[
-        Unset, List["ParticipantGroupFeederStudiesItemFeederCompletionCodesItem"]
-    ] = UNSET
+    feeder_completion_codes: Union[Unset, List["ParticipantGroupFeederStudiesItemFeederCompletionCodesItem"]] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         name = self.name
+
         internal_name = self.internal_name
+
         status = self.status
+
         feeder_completion_codes: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.feeder_completion_codes, Unset):
             feeder_completion_codes = []
             for feeder_completion_codes_item_data in self.feeder_completion_codes:
-                feeder_completion_codes_item = (
-                    feeder_completion_codes_item_data.to_dict()
-                )
-
+                feeder_completion_codes_item = feeder_completion_codes_item_data.to_dict()
                 feeder_completion_codes.append(feeder_completion_codes_item)
 
         field_dict: Dict[str, Any] = {}
@@ -92,10 +83,8 @@ class ParticipantGroupFeederStudiesItem:
         feeder_completion_codes = []
         _feeder_completion_codes = d.pop("feeder_completion_codes", UNSET)
         for feeder_completion_codes_item_data in _feeder_completion_codes or []:
-            feeder_completion_codes_item = (
-                ParticipantGroupFeederStudiesItemFeederCompletionCodesItem.from_dict(
-                    feeder_completion_codes_item_data
-                )
+            feeder_completion_codes_item = ParticipantGroupFeederStudiesItemFeederCompletionCodesItem.from_dict(
+                feeder_completion_codes_item_data
             )
 
             feeder_completion_codes.append(feeder_completion_codes_item)

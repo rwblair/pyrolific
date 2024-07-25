@@ -3,30 +3,26 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
-from ...types import UNSET, Unset
-from typing import Union
+from ...client import AuthenticatedClient, Client
 from ...models.subscription_event_list import SubscriptionEventList
-from typing import Optional
-from typing import Dict
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     subscription_id: str,
     *,
-    offset: Union[Unset, None, int] = 0,
-    limit: Union[Unset, None, int] = 100,
-    status: Union[Unset, None, str] = UNSET,
-    resource_id: Union[Unset, None, str] = UNSET,
+    offset: Union[Unset, int] = 0,
+    limit: Union[Unset, int] = 100,
+    status: Union[Unset, str] = UNSET,
+    resource_id: Union[Unset, str] = UNSET,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
     params: Dict[str, Any] = {}
+
     params["offset"] = offset
 
     params["limit"] = limit
@@ -37,14 +33,14 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/api/v1/hooks/subscriptions/{subscription_id}/events/".format(
-            subscription_id=subscription_id,
-        ),
+        "url": f"/api/v1/hooks/subscriptions/{subscription_id}/events/",
         "params": params,
-        "headers": headers,
     }
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -75,10 +71,10 @@ def sync_detailed(
     subscription_id: str,
     *,
     client: AuthenticatedClient,
-    offset: Union[Unset, None, int] = 0,
-    limit: Union[Unset, None, int] = 100,
-    status: Union[Unset, None, str] = UNSET,
-    resource_id: Union[Unset, None, str] = UNSET,
+    offset: Union[Unset, int] = 0,
+    limit: Union[Unset, int] = 100,
+    status: Union[Unset, str] = UNSET,
+    resource_id: Union[Unset, str] = UNSET,
     authorization: str,
 ) -> Response[SubscriptionEventList]:
     """Get subscription events
@@ -87,10 +83,10 @@ def sync_detailed(
 
     Args:
         subscription_id (str):
-        offset (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):  Default: 100.
-        status (Union[Unset, None, str]):
-        resource_id (Union[Unset, None, str]):
+        offset (Union[Unset, int]):  Default: 0.
+        limit (Union[Unset, int]):  Default: 100.
+        status (Union[Unset, str]):
+        resource_id (Union[Unset, str]):
         authorization (str):
 
     Raises:
@@ -121,10 +117,10 @@ def sync(
     subscription_id: str,
     *,
     client: AuthenticatedClient,
-    offset: Union[Unset, None, int] = 0,
-    limit: Union[Unset, None, int] = 100,
-    status: Union[Unset, None, str] = UNSET,
-    resource_id: Union[Unset, None, str] = UNSET,
+    offset: Union[Unset, int] = 0,
+    limit: Union[Unset, int] = 100,
+    status: Union[Unset, str] = UNSET,
+    resource_id: Union[Unset, str] = UNSET,
     authorization: str,
 ) -> Optional[SubscriptionEventList]:
     """Get subscription events
@@ -133,10 +129,10 @@ def sync(
 
     Args:
         subscription_id (str):
-        offset (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):  Default: 100.
-        status (Union[Unset, None, str]):
-        resource_id (Union[Unset, None, str]):
+        offset (Union[Unset, int]):  Default: 0.
+        limit (Union[Unset, int]):  Default: 100.
+        status (Union[Unset, str]):
+        resource_id (Union[Unset, str]):
         authorization (str):
 
     Raises:
@@ -162,10 +158,10 @@ async def asyncio_detailed(
     subscription_id: str,
     *,
     client: AuthenticatedClient,
-    offset: Union[Unset, None, int] = 0,
-    limit: Union[Unset, None, int] = 100,
-    status: Union[Unset, None, str] = UNSET,
-    resource_id: Union[Unset, None, str] = UNSET,
+    offset: Union[Unset, int] = 0,
+    limit: Union[Unset, int] = 100,
+    status: Union[Unset, str] = UNSET,
+    resource_id: Union[Unset, str] = UNSET,
     authorization: str,
 ) -> Response[SubscriptionEventList]:
     """Get subscription events
@@ -174,10 +170,10 @@ async def asyncio_detailed(
 
     Args:
         subscription_id (str):
-        offset (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):  Default: 100.
-        status (Union[Unset, None, str]):
-        resource_id (Union[Unset, None, str]):
+        offset (Union[Unset, int]):  Default: 0.
+        limit (Union[Unset, int]):  Default: 100.
+        status (Union[Unset, str]):
+        resource_id (Union[Unset, str]):
         authorization (str):
 
     Raises:
@@ -206,10 +202,10 @@ async def asyncio(
     subscription_id: str,
     *,
     client: AuthenticatedClient,
-    offset: Union[Unset, None, int] = 0,
-    limit: Union[Unset, None, int] = 100,
-    status: Union[Unset, None, str] = UNSET,
-    resource_id: Union[Unset, None, str] = UNSET,
+    offset: Union[Unset, int] = 0,
+    limit: Union[Unset, int] = 100,
+    status: Union[Unset, str] = UNSET,
+    resource_id: Union[Unset, str] = UNSET,
     authorization: str,
 ) -> Optional[SubscriptionEventList]:
     """Get subscription events
@@ -218,10 +214,10 @@ async def asyncio(
 
     Args:
         subscription_id (str):
-        offset (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):  Default: 100.
-        status (Union[Unset, None, str]):
-        resource_id (Union[Unset, None, str]):
+        offset (Union[Unset, int]):  Default: 0.
+        limit (Union[Unset, int]):  Default: 100.
+        status (Union[Unset, str]):
+        resource_id (Union[Unset, str]):
         authorization (str):
 
     Raises:

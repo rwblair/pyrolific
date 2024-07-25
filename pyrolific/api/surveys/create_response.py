@@ -3,34 +3,35 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
-from ...models.response_out import ResponseOut
+from ...client import AuthenticatedClient, Client
 from ...models.response_in import ResponseIn
-from typing import Dict
+from ...models.response_out import ResponseOut
+from ...types import Response
 
 
 def _get_kwargs(
     survey_id: str,
     *,
-    json_body: ResponseIn,
+    body: ResponseIn,
 ) -> Dict[str, Any]:
-    json_json_body = json_body.to_dict()
+    headers: Dict[str, Any] = {}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/api/v1/surveys/{survey_id}/responses/".format(
-            survey_id=survey_id,
-        ),
-        "json": json_json_body,
+        "url": f"/api/v1/surveys/{survey_id}/responses/",
     }
 
+    _body = body.to_dict()
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[ResponseOut]:
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
+
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[ResponseOut]:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = ResponseOut.from_dict(response.json())
 
@@ -41,9 +42,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[ResponseOut]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[ResponseOut]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -56,7 +55,7 @@ def sync_detailed(
     survey_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: ResponseIn,
+    body: ResponseIn,
 ) -> Response[ResponseOut]:
     """Create response
 
@@ -64,7 +63,7 @@ def sync_detailed(
 
     Args:
         survey_id (str):
-        json_body (ResponseIn): The model used to create a `Response`.
+        body (ResponseIn): The model used to create a `Response`.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -76,7 +75,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         survey_id=survey_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -90,7 +89,7 @@ def sync(
     survey_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: ResponseIn,
+    body: ResponseIn,
 ) -> Optional[ResponseOut]:
     """Create response
 
@@ -98,7 +97,7 @@ def sync(
 
     Args:
         survey_id (str):
-        json_body (ResponseIn): The model used to create a `Response`.
+        body (ResponseIn): The model used to create a `Response`.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -111,7 +110,7 @@ def sync(
     return sync_detailed(
         survey_id=survey_id,
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
@@ -119,7 +118,7 @@ async def asyncio_detailed(
     survey_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: ResponseIn,
+    body: ResponseIn,
 ) -> Response[ResponseOut]:
     """Create response
 
@@ -127,7 +126,7 @@ async def asyncio_detailed(
 
     Args:
         survey_id (str):
-        json_body (ResponseIn): The model used to create a `Response`.
+        body (ResponseIn): The model used to create a `Response`.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -139,7 +138,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         survey_id=survey_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -151,7 +150,7 @@ async def asyncio(
     survey_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: ResponseIn,
+    body: ResponseIn,
 ) -> Optional[ResponseOut]:
     """Create response
 
@@ -159,7 +158,7 @@ async def asyncio(
 
     Args:
         survey_id (str):
-        json_body (ResponseIn): The model used to create a `Response`.
+        body (ResponseIn): The model used to create a `Response`.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -173,6 +172,6 @@ async def asyncio(
         await asyncio_detailed(
             survey_id=survey_id,
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

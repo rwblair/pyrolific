@@ -3,14 +3,10 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
-from ...models.mutually_exclusive_study_collections_response import (
-    MutuallyExclusiveStudyCollectionsResponse,
-)
-from typing import Dict
+from ...client import AuthenticatedClient, Client
+from ...models.mutually_exclusive_study_collections_response import MutuallyExclusiveStudyCollectionsResponse
+from ...types import UNSET, Response
 
 
 def _get_kwargs(
@@ -18,29 +14,30 @@ def _get_kwargs(
     project_id: str,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
     params: Dict[str, Any] = {}
+
     params["project_id"] = project_id
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/api/v1/study-collections/mutually-exclusive/",
         "params": params,
-        "headers": headers,
     }
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[MutuallyExclusiveStudyCollectionsResponse]:
     if response.status_code == HTTPStatus.OK:
-        response_200 = MutuallyExclusiveStudyCollectionsResponse.from_dict(
-            response.json()
-        )
+        response_200 = MutuallyExclusiveStudyCollectionsResponse.from_dict(response.json())
 
         return response_200
     if client.raise_on_unexpected_status:

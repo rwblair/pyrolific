@@ -1,30 +1,17 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from typing import Union
-from typing import List
-from ..types import UNSET, Unset
-from typing import Dict
-
 if TYPE_CHECKING:
-    from ..models.range_filter_list_detailed_response import (
-        RangeFilterListDetailedResponse,
-    )
-    from ..models.select_filter_list_detailed_response import (
-        SelectFilterListDetailedResponse,
-    )
-    from ..models.range_filter_list_response import RangeFilterListResponse
-    from ..models.filter_list_meta import FilterListMeta
-    from ..models.select_filter_list_response import SelectFilterListResponse
     from ..models.filter_list_links import FilterListLinks
+    from ..models.filter_list_meta import FilterListMeta
+    from ..models.range_filter_list_detailed_response import RangeFilterListDetailedResponse
+    from ..models.range_filter_list_response import RangeFilterListResponse
+    from ..models.select_filter_list_detailed_response import SelectFilterListDetailedResponse
+    from ..models.select_filter_list_response import SelectFilterListResponse
 
 
 T = TypeVar("T", bound="FilterList")
@@ -56,10 +43,8 @@ class FilterList:
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        from ..models.select_filter_list_detailed_response import (
-            SelectFilterListDetailedResponse,
-        )
         from ..models.range_filter_list_response import RangeFilterListResponse
+        from ..models.select_filter_list_detailed_response import SelectFilterListDetailedResponse
         from ..models.select_filter_list_response import SelectFilterListResponse
 
         results: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -67,16 +52,12 @@ class FilterList:
             results = []
             for results_item_data in self.results:
                 results_item: Dict[str, Any]
-
                 if isinstance(results_item_data, SelectFilterListResponse):
                     results_item = results_item_data.to_dict()
-
                 elif isinstance(results_item_data, SelectFilterListDetailedResponse):
                     results_item = results_item_data.to_dict()
-
                 elif isinstance(results_item_data, RangeFilterListResponse):
                     results_item = results_item_data.to_dict()
-
                 else:
                     results_item = results_item_data.to_dict()
 
@@ -104,16 +85,12 @@ class FilterList:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.range_filter_list_detailed_response import (
-            RangeFilterListDetailedResponse,
-        )
-        from ..models.select_filter_list_detailed_response import (
-            SelectFilterListDetailedResponse,
-        )
-        from ..models.range_filter_list_response import RangeFilterListResponse
-        from ..models.filter_list_meta import FilterListMeta
-        from ..models.select_filter_list_response import SelectFilterListResponse
         from ..models.filter_list_links import FilterListLinks
+        from ..models.filter_list_meta import FilterListMeta
+        from ..models.range_filter_list_detailed_response import RangeFilterListDetailedResponse
+        from ..models.range_filter_list_response import RangeFilterListResponse
+        from ..models.select_filter_list_detailed_response import SelectFilterListDetailedResponse
+        from ..models.select_filter_list_response import SelectFilterListResponse
 
         d = src_dict.copy()
         results = []
@@ -139,9 +116,7 @@ class FilterList:
                 try:
                     if not isinstance(data, dict):
                         raise TypeError()
-                    results_item_type_1 = SelectFilterListDetailedResponse.from_dict(
-                        data
-                    )
+                    results_item_type_1 = SelectFilterListDetailedResponse.from_dict(data)
 
                     return results_item_type_1
                 except:  # noqa: E722

@@ -1,19 +1,12 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+import datetime
+from typing import Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
-from ..types import UNSET, Unset
-
-from typing import Union
-import datetime
-from ..models.submission_short_status import SubmissionShortStatus
-from ..types import UNSET, Unset
 from dateutil.parser import isoparse
 
+from ..models.submission_short_status import SubmissionShortStatus
+from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SubmissionShort")
 
@@ -23,8 +16,8 @@ class SubmissionShort:
     """
     Example:
         {'id': '60d9aadeb86739de712faee0', 'participant_id': '60bf9310e8dec401be6e9615', 'started_at':
-            datetime.datetime(2021, 5, 20, 11, 3, 0, 457000, tzinfo=datetime.timezone.utc), 'status': 'ACTIVE',
-            'study_code': 'ABC123'}
+            datetime.datetime(2021, 5, 20, 11, 3, 0, 457000, tzinfo=datetime.timezone(datetime.timedelta(0), 'Z')),
+            'status': 'ACTIVE', 'study_code': 'ABC123'}
 
     Attributes:
         id (str): Submission id.
@@ -32,8 +25,8 @@ class SubmissionShort:
         status (SubmissionShortStatus): Status of the submission.
         started_at (datetime.datetime): Date started
         has_siblings (bool): Whether or not the submission has sibling submissions (sharing the same study).
-        completed_at (Union[Unset, None, datetime.datetime]): Date completed
-        study_code (Union[Unset, None, str]): The completion code used by the participant to complete the study.
+        completed_at (Union[None, Unset, datetime.datetime]): Date completed
+        study_code (Union[None, Unset, str]): The completion code used by the participant to complete the study.
     """
 
     id: str
@@ -41,23 +34,34 @@ class SubmissionShort:
     status: SubmissionShortStatus
     started_at: datetime.datetime
     has_siblings: bool
-    completed_at: Union[Unset, None, datetime.datetime] = UNSET
-    study_code: Union[Unset, None, str] = UNSET
+    completed_at: Union[None, Unset, datetime.datetime] = UNSET
+    study_code: Union[None, Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         participant_id = self.participant_id
+
         status = self.status.value
 
         started_at = self.started_at.isoformat()
 
         has_siblings = self.has_siblings
-        completed_at: Union[Unset, None, str] = UNSET
-        if not isinstance(self.completed_at, Unset):
-            completed_at = self.completed_at.isoformat() if self.completed_at else None
 
-        study_code = self.study_code
+        completed_at: Union[None, Unset, str]
+        if isinstance(self.completed_at, Unset):
+            completed_at = UNSET
+        elif isinstance(self.completed_at, datetime.datetime):
+            completed_at = self.completed_at.isoformat()
+        else:
+            completed_at = self.completed_at
+
+        study_code: Union[None, Unset, str]
+        if isinstance(self.study_code, Unset):
+            study_code = UNSET
+        else:
+            study_code = self.study_code
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -90,16 +94,31 @@ class SubmissionShort:
 
         has_siblings = d.pop("has_siblings")
 
-        _completed_at = d.pop("completed_at", UNSET)
-        completed_at: Union[Unset, None, datetime.datetime]
-        if _completed_at is None:
-            completed_at = None
-        elif isinstance(_completed_at, Unset):
-            completed_at = UNSET
-        else:
-            completed_at = isoparse(_completed_at)
+        def _parse_completed_at(data: object) -> Union[None, Unset, datetime.datetime]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                completed_at_type_0 = isoparse(data)
 
-        study_code = d.pop("study_code", UNSET)
+                return completed_at_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, datetime.datetime], data)
+
+        completed_at = _parse_completed_at(d.pop("completed_at", UNSET))
+
+        def _parse_study_code(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        study_code = _parse_study_code(d.pop("study_code", UNSET))
 
         submission_short = cls(
             id=id,

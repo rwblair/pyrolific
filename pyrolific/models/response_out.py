@@ -1,23 +1,15 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+import datetime
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
-from ..types import UNSET, Unset
-
-from typing import Union
-import datetime
-from typing import List
-from ..types import UNSET, Unset
 from dateutil.parser import isoparse
-from typing import Dict
+
+from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.section import Section
     from ..models.question_response import QuestionResponse
+    from ..models.section import Section
 
 
 T = TypeVar("T", bound="ResponseOut")
@@ -50,8 +42,11 @@ class ResponseOut:
 
     def to_dict(self) -> Dict[str, Any]:
         participant_id = self.participant_id
+
         submission_id = self.submission_id
+
         field_id = self.field_id
+
         date_created: Union[Unset, str] = UNSET
         if not isinstance(self.date_created, Unset):
             date_created = self.date_created.isoformat()
@@ -65,7 +60,6 @@ class ResponseOut:
             sections = []
             for sections_item_data in self.sections:
                 sections_item = sections_item_data.to_dict()
-
                 sections.append(sections_item)
 
         questions: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -73,7 +67,6 @@ class ResponseOut:
             questions = []
             for questions_item_data in self.questions:
                 questions_item = questions_item_data.to_dict()
-
                 questions.append(questions_item)
 
         field_dict: Dict[str, Any] = {}
@@ -99,8 +92,8 @@ class ResponseOut:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.section import Section
         from ..models.question_response import QuestionResponse
+        from ..models.section import Section
 
         d = src_dict.copy()
         participant_id = d.pop("participant_id")

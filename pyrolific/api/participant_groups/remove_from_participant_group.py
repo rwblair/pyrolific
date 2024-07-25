@@ -3,31 +3,32 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
+from ...models.participant_group_membership_list_response import ParticipantGroupMembershipListResponse
 from ...models.participant_id_list import ParticipantIDList
-from typing import Dict
-from ...models.participant_group_membership_list_response import (
-    ParticipantGroupMembershipListResponse,
-)
+from ...types import Response
 
 
 def _get_kwargs(
     id: str,
     *,
-    json_body: ParticipantIDList,
+    body: ParticipantIDList,
 ) -> Dict[str, Any]:
-    json_json_body = json_body.to_dict()
+    headers: Dict[str, Any] = {}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "delete",
-        "url": "/api/v1/participant-groups/{id}/participants/".format(
-            id=id,
-        ),
-        "json": json_json_body,
+        "url": f"/api/v1/participant-groups/{id}/participants/",
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -58,7 +59,7 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: ParticipantIDList,
+    body: ParticipantIDList,
 ) -> Response[ParticipantGroupMembershipListResponse]:
     """Remove participants from a participant group
 
@@ -67,7 +68,7 @@ def sync_detailed(
 
     Args:
         id (str):
-        json_body (ParticipantIDList):
+        body (ParticipantIDList):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -79,7 +80,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -93,7 +94,7 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: ParticipantIDList,
+    body: ParticipantIDList,
 ) -> Optional[ParticipantGroupMembershipListResponse]:
     """Remove participants from a participant group
 
@@ -102,7 +103,7 @@ def sync(
 
     Args:
         id (str):
-        json_body (ParticipantIDList):
+        body (ParticipantIDList):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -115,7 +116,7 @@ def sync(
     return sync_detailed(
         id=id,
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
@@ -123,7 +124,7 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: ParticipantIDList,
+    body: ParticipantIDList,
 ) -> Response[ParticipantGroupMembershipListResponse]:
     """Remove participants from a participant group
 
@@ -132,7 +133,7 @@ async def asyncio_detailed(
 
     Args:
         id (str):
-        json_body (ParticipantIDList):
+        body (ParticipantIDList):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -144,7 +145,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -156,7 +157,7 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-    json_body: ParticipantIDList,
+    body: ParticipantIDList,
 ) -> Optional[ParticipantGroupMembershipListResponse]:
     """Remove participants from a participant group
 
@@ -165,7 +166,7 @@ async def asyncio(
 
     Args:
         id (str):
-        json_body (ParticipantIDList):
+        body (ParticipantIDList):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -179,6 +180,6 @@ async def asyncio(
         await asyncio_detailed(
             id=id,
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

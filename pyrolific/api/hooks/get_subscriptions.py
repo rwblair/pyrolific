@@ -3,39 +3,37 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
-from ...types import UNSET, Unset
-from typing import Union
+from ...client import AuthenticatedClient, Client
 from ...models.subscription_list import SubscriptionList
-from typing import Optional
-from typing import Dict
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     *,
-    is_enabled: Union[Unset, None, bool] = UNSET,
-    workspace_id: Union[Unset, None, str] = UNSET,
+    is_enabled: Union[Unset, bool] = UNSET,
+    workspace_id: Union[Unset, str] = UNSET,
     authorization: str,
 ) -> Dict[str, Any]:
-    headers = {}
+    headers: Dict[str, Any] = {}
     headers["Authorization"] = authorization
 
     params: Dict[str, Any] = {}
+
     params["is_enabled"] = is_enabled
 
     params["workspace_id"] = workspace_id
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/api/v1/hooks/subscriptions/",
         "params": params,
-        "headers": headers,
     }
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -65,8 +63,8 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    is_enabled: Union[Unset, None, bool] = UNSET,
-    workspace_id: Union[Unset, None, str] = UNSET,
+    is_enabled: Union[Unset, bool] = UNSET,
+    workspace_id: Union[Unset, str] = UNSET,
     authorization: str,
 ) -> Response[SubscriptionList]:
     """List all subscriptions
@@ -74,8 +72,8 @@ def sync_detailed(
      A view of all subscriptions you have created.
 
     Args:
-        is_enabled (Union[Unset, None, bool]):
-        workspace_id (Union[Unset, None, str]):
+        is_enabled (Union[Unset, bool]):
+        workspace_id (Union[Unset, str]):
         authorization (str):
 
     Raises:
@@ -102,8 +100,8 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    is_enabled: Union[Unset, None, bool] = UNSET,
-    workspace_id: Union[Unset, None, str] = UNSET,
+    is_enabled: Union[Unset, bool] = UNSET,
+    workspace_id: Union[Unset, str] = UNSET,
     authorization: str,
 ) -> Optional[SubscriptionList]:
     """List all subscriptions
@@ -111,8 +109,8 @@ def sync(
      A view of all subscriptions you have created.
 
     Args:
-        is_enabled (Union[Unset, None, bool]):
-        workspace_id (Union[Unset, None, str]):
+        is_enabled (Union[Unset, bool]):
+        workspace_id (Union[Unset, str]):
         authorization (str):
 
     Raises:
@@ -134,8 +132,8 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    is_enabled: Union[Unset, None, bool] = UNSET,
-    workspace_id: Union[Unset, None, str] = UNSET,
+    is_enabled: Union[Unset, bool] = UNSET,
+    workspace_id: Union[Unset, str] = UNSET,
     authorization: str,
 ) -> Response[SubscriptionList]:
     """List all subscriptions
@@ -143,8 +141,8 @@ async def asyncio_detailed(
      A view of all subscriptions you have created.
 
     Args:
-        is_enabled (Union[Unset, None, bool]):
-        workspace_id (Union[Unset, None, str]):
+        is_enabled (Union[Unset, bool]):
+        workspace_id (Union[Unset, str]):
         authorization (str):
 
     Raises:
@@ -169,8 +167,8 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    is_enabled: Union[Unset, None, bool] = UNSET,
-    workspace_id: Union[Unset, None, str] = UNSET,
+    is_enabled: Union[Unset, bool] = UNSET,
+    workspace_id: Union[Unset, str] = UNSET,
     authorization: str,
 ) -> Optional[SubscriptionList]:
     """List all subscriptions
@@ -178,8 +176,8 @@ async def asyncio(
      A view of all subscriptions you have created.
 
     Args:
-        is_enabled (Union[Unset, None, bool]):
-        workspace_id (Union[Unset, None, str]):
+        is_enabled (Union[Unset, bool]):
+        workspace_id (Union[Unset, str]):
         authorization (str):
 
     Raises:

@@ -1,20 +1,13 @@
-from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
-
-from typing import List
-
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
-from typing import Union
 from ..models.subscription_event_status import SubscriptionEventStatus
 from ..types import UNSET, Unset
-from typing import Dict
 
 if TYPE_CHECKING:
-    from ..models.subscription_event_payload import SubscriptionEventPayload
+    from ..models.subscription_event_payload_type_0 import SubscriptionEventPayloadType0
 
 
 T = TypeVar("T", bound="SubscriptionEvent")
@@ -32,7 +25,8 @@ class SubscriptionEvent:
         status (Union[Unset, SubscriptionEventStatus]): The status of the event. Will be `FAILED` if the `target_url`
             response is not 2xx.
         target_url (Union[Unset, str]): The URL where the event payload is sent.
-        payload (Union[Unset, None, SubscriptionEventPayload]): The event payload that was sent to the target url.
+        payload (Union['SubscriptionEventPayloadType0', None, Unset]): The event payload that was sent to the target
+            url.
     """
 
     id: Union[Unset, str] = UNSET
@@ -42,23 +36,35 @@ class SubscriptionEvent:
     resource_id: Union[Unset, str] = UNSET
     status: Union[Unset, SubscriptionEventStatus] = UNSET
     target_url: Union[Unset, str] = UNSET
-    payload: Union[Unset, None, "SubscriptionEventPayload"] = UNSET
+    payload: Union["SubscriptionEventPayloadType0", None, Unset] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.subscription_event_payload_type_0 import SubscriptionEventPayloadType0
+
         id = self.id
+
         datetime_created = self.datetime_created
+
         datetime_updated = self.datetime_updated
+
         event_type = self.event_type
+
         resource_id = self.resource_id
+
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
             status = self.status.value
 
         target_url = self.target_url
-        payload: Union[Unset, None, Dict[str, Any]] = UNSET
-        if not isinstance(self.payload, Unset):
-            payload = self.payload.to_dict() if self.payload else None
+
+        payload: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.payload, Unset):
+            payload = UNSET
+        elif isinstance(self.payload, SubscriptionEventPayloadType0):
+            payload = self.payload.to_dict()
+        else:
+            payload = self.payload
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -84,7 +90,7 @@ class SubscriptionEvent:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.subscription_event_payload import SubscriptionEventPayload
+        from ..models.subscription_event_payload_type_0 import SubscriptionEventPayloadType0
 
         d = src_dict.copy()
         id = d.pop("id", UNSET)
@@ -106,14 +112,22 @@ class SubscriptionEvent:
 
         target_url = d.pop("target_url", UNSET)
 
-        _payload = d.pop("payload", UNSET)
-        payload: Union[Unset, None, SubscriptionEventPayload]
-        if _payload is None:
-            payload = None
-        elif isinstance(_payload, Unset):
-            payload = UNSET
-        else:
-            payload = SubscriptionEventPayload.from_dict(_payload)
+        def _parse_payload(data: object) -> Union["SubscriptionEventPayloadType0", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                payload_type_0 = SubscriptionEventPayloadType0.from_dict(data)
+
+                return payload_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union["SubscriptionEventPayloadType0", None, Unset], data)
+
+        payload = _parse_payload(d.pop("payload", UNSET))
 
         subscription_event = cls(
             id=id,

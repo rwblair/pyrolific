@@ -3840,12 +3840,14 @@ paths:
             schema:
               type: object
               required:
-                - workspace_id
                 - name
               properties:
                 workspace_id:
                   type: string
-                  description: The id of the workspace to create the participant group in
+                  description: The id of the workspace to create the participant group in. Either a workspace or organisation ID must be specified.
+                organisation_id:
+                  type: string
+                  description: The id of the organisation to create the participant group in. Either a workspace or organisation ID must be specified.
                 name:
                   type: string
                   description: The name of the participant group
@@ -4310,7 +4312,11 @@ paths:
         - name: workspace_id
           in: query
           description: ID of the workspace to get filter sets for.
-          required: true
+          schema:
+            type: string
+        - name: organisation_id
+          in: query
+          description: ID of the organisation to get filter sets for.
           schema:
             type: string
       responses:
@@ -4353,7 +4359,7 @@ paths:
                   filters:
                     - filter_id: handedness
                       selected_values:
-                        - "2"
+                        - "1"
                     - filter_id: age
                       selected_range:
                         lower: 19
@@ -5596,9 +5602,9 @@ components:
               - sensitive
               - explicit
           description: |-
-            Allow researchers to define content warnings for their study
+            Allow researchers to define content warnings for their study.
 
-            We plan to make this information available to participants for easier self-selection. At present these options are mutually exclusive and only a single option can be selected, however in the future available warnings will expand.
+            At present these options are mutually exclusive and only a single option can be selected, however in the future available warnings will expand.
 
         metadata:
           type: string
@@ -6731,7 +6737,12 @@ components:
         workspace_id:
           type: string
           nullable: true
-          description: The id of the workspace the participant group belongs to
+          description: The id of the workspace the participant group belongs to. A participant group can only belong to either a workspace or an organisation.
+          example: 5e9b9c9b0f9c9a0001b1ca2f
+        organisation_id:
+          type: string
+          nullable: true
+          description: The id of the organisation the participant group belongs to. A participant group can only belong to either a workspace or an organisation.
           example: 5e9b9c9b0f9c9a0001b1ca2f
         description:
           type: string
@@ -7227,6 +7238,9 @@ components:
             workspace_id:
               type: string
               description: ID of the workspace where the filter set can be used.
+            organisation_id:
+              type: string
+              description: ID of the organisation where the filter set can be used.
             name:
               type: string
               description: Name of the filter set.
@@ -7267,6 +7281,11 @@ components:
             workspace_id:
               type: string
               description: ID of the workspace where the filter set can be used.
+              nullable: true
+            organisation_id:
+              type: string
+              description: ID of the workspace where the filter set can be used.
+              nullable: true
             name:
               type: string
               description: Name of the filter set.
@@ -7314,7 +7333,6 @@ components:
       type: object
       required:
         - filters
-        - workspace_id
       properties:
         filters:
           type: array
@@ -7335,6 +7353,10 @@ components:
 
             If you do not specify a workspace ID, we will use the current workspace ID of the user making the request.
             Your eligibility count may not be accurate if you do not specify a workspace ID.
+        organisation_id:
+          type: string
+          description: |-
+            The ID of the workspace you will be creating a filterset in.
 
     RequirementsCount:
       required:

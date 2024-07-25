@@ -1,17 +1,9 @@
-from typing import Any, Dict, Type, TypeVar
-
-from typing import List
-
+from typing import Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
-
-from typing import cast, Union
-from typing import Union
-from ..types import UNSET, Unset
-
 
 T = TypeVar("T", bound="RangeFilterSelectedRange")
 
@@ -44,14 +36,12 @@ class RangeFilterSelectedRange:
         lower: Union[Unset, int, str]
         if isinstance(self.lower, Unset):
             lower = UNSET
-
         else:
             lower = self.lower
 
         upper: Union[Unset, int, str]
         if isinstance(self.upper, Unset):
             upper = UNSET
-
         else:
             upper = self.upper
 
