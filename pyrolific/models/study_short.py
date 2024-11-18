@@ -1,4 +1,4 @@
-from typing import Any, Dict, Type, TypeVar
+from typing import Any, Dict, Type, TypeVar, cast
 
 from typing import List
 
@@ -38,9 +38,9 @@ class StudyShort:
         reward (Union[Unset, float]): How much are you going to pay the participants in cents. We use the currency of
             your account
         total_cost (Union[Unset, float]): Total cost of the study including fees
-        published_at (Union[Unset, None, datetime.datetime]): Date time when the study was published.
-        publish_at (Union[Unset, None, datetime.datetime]): Date time when the study was scheduled to be published.
-        date_created (Union[Unset, datetime.datetime]): Date time when the study was created
+        published_at (Union[Unset, None, str]): Date time when the study was published.
+        publish_at (Union[Unset, None, str]): Date time when the study was scheduled to be published.
+        date_created (Union[Unset, str]): Date time when the study was created
     """
 
     id: str
@@ -54,8 +54,8 @@ class StudyShort:
     reward: Union[Unset, float] = UNSET
     total_cost: Union[Unset, float] = UNSET
     published_at: Union[Unset, None, datetime.datetime] = UNSET
-    publish_at: Union[Unset, None, datetime.datetime] = UNSET
-    date_created: Union[Unset, datetime.datetime] = UNSET
+    publish_at: Union[Unset, None, str] = UNSET
+    date_created: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -77,15 +77,15 @@ class StudyShort:
         total_cost = self.total_cost
         published_at: Union[Unset, None, str] = UNSET
         if not isinstance(self.published_at, Unset):
-            published_at = self.published_at.isoformat() if self.published_at else None
+            published_at = self.published_at if self.published_at else None
 
         publish_at: Union[Unset, None, str] = UNSET
         if not isinstance(self.publish_at, Unset):
-            publish_at = self.publish_at.isoformat() if self.publish_at else None
+            publish_at = self.publish_at if self.publish_at else None
 
         date_created: Union[Unset, str] = UNSET
         if not isinstance(self.date_created, Unset):
-            date_created = self.date_created.isoformat()
+            date_created = self.date_created
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -154,29 +154,38 @@ class StudyShort:
         total_cost = d.pop("total_cost", UNSET)
 
         _published_at = d.pop("published_at", UNSET)
-        published_at: Union[Unset, None, datetime.datetime]
+        published_at: Union[Unset, None, str]
         if _published_at is None:
             published_at = None
         elif isinstance(_published_at, Unset):
             published_at = UNSET
         else:
-            published_at = isoparse(_published_at)
+            try:
+                published_at = isoparse(_published_at)
+            except:
+                published_at = cast(Union[None, Unset, str], _published_at)
 
         _publish_at = d.pop("publish_at", UNSET)
-        publish_at: Union[Unset, None, datetime.datetime]
+        publish_at: Union[Unset, None, str]
         if _publish_at is None:
             publish_at = None
         elif isinstance(_publish_at, Unset):
             publish_at = UNSET
         else:
-            publish_at = isoparse(_publish_at)
+            try:
+                publish_at = isoparse(_publish_at)
+            except:
+                publish_at = cast(Union[None, Unset, str], _publish_at)
 
         _date_created = d.pop("date_created", UNSET)
-        date_created: Union[Unset, datetime.datetime]
+        date_created: Union[Unset, str]
         if isinstance(_date_created, Unset):
             date_created = UNSET
         else:
-            date_created = isoparse(_date_created)
+            try:
+                date_created = isoparse(_date_created)
+            except:
+                date_created = cast(Union[None, Unset, str], _date_created)
 
         study_short = cls(
             id=id,
