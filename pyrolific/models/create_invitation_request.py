@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,7 +14,7 @@ class CreateInvitationRequest:
     """
     Attributes:
         association (Union[Unset, str]): The ID of the workspace to which the users are being invited.
-        emails (Union[Unset, List[str]]): An array of email addresses of the users to invite.
+        emails (Union[Unset, list[str]]): An array of email addresses of the users to invite.
         role (Union[Unset, CreateInvitationRequestRole]): The role that the invited users will have in the workspace or
             project. This can be one of the following:
             - "WORKSPACE_ADMIN": The user will have administrative rights in the workspace. They can manage settings, invite
@@ -25,14 +25,14 @@ class CreateInvitationRequest:
     """
 
     association: Union[Unset, str] = UNSET
-    emails: Union[Unset, List[str]] = UNSET
+    emails: Union[Unset, list[str]] = UNSET
     role: Union[Unset, CreateInvitationRequestRole] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         association = self.association
 
-        emails: Union[Unset, List[str]] = UNSET
+        emails: Union[Unset, list[str]] = UNSET
         if not isinstance(self.emails, Unset):
             emails = self.emails
 
@@ -40,7 +40,7 @@ class CreateInvitationRequest:
         if not isinstance(self.role, Unset):
             role = self.role.value
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if association is not UNSET:
@@ -53,11 +53,11 @@ class CreateInvitationRequest:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         association = d.pop("association", UNSET)
 
-        emails = cast(List[str], d.pop("emails", UNSET))
+        emails = cast(list[str], d.pop("emails", UNSET))
 
         _role = d.pop("role", UNSET)
         role: Union[Unset, CreateInvitationRequestRole]
@@ -76,7 +76,7 @@ class CreateInvitationRequest:
         return create_invitation_request
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

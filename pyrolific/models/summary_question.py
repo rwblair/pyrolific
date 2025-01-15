@@ -1,4 +1,5 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,32 +19,34 @@ class SummaryQuestion:
 
     Attributes:
         question (str): The title of the question.
-        question_id (Union[Unset, str]): The question ID.
+        question_id (Union[Unset, UUID]): The question ID.
         total_answers (Union[Unset, int]): The total number of answered responses for a given question. Default: 0.
-        answers (Union[Unset, List['SummaryAnswer']]): A list of aggregated answer information.
+        answers (Union[Unset, list['SummaryAnswer']]): A list of aggregated answer information.
     """
 
     question: str
-    question_id: Union[Unset, str] = UNSET
+    question_id: Union[Unset, UUID] = UNSET
     total_answers: Union[Unset, int] = 0
-    answers: Union[Unset, List["SummaryAnswer"]] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    answers: Union[Unset, list["SummaryAnswer"]] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         question = self.question
 
-        question_id = self.question_id
+        question_id: Union[Unset, str] = UNSET
+        if not isinstance(self.question_id, Unset):
+            question_id = str(self.question_id)
 
         total_answers = self.total_answers
 
-        answers: Union[Unset, List[Dict[str, Any]]] = UNSET
+        answers: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.answers, Unset):
             answers = []
             for answers_item_data in self.answers:
                 answers_item = answers_item_data.to_dict()
                 answers.append(answers_item)
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -60,13 +63,18 @@ class SummaryQuestion:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.summary_answer import SummaryAnswer
 
         d = src_dict.copy()
         question = d.pop("question")
 
-        question_id = d.pop("question_id", UNSET)
+        _question_id = d.pop("question_id", UNSET)
+        question_id: Union[Unset, UUID]
+        if isinstance(_question_id, Unset):
+            question_id = UNSET
+        else:
+            question_id = UUID(_question_id)
 
         total_answers = d.pop("total_answers", UNSET)
 
@@ -88,7 +96,7 @@ class SummaryQuestion:
         return summary_question
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +10,7 @@ from ..types import UNSET, Unset
 if TYPE_CHECKING:
     from ..models.add_to_participant_group import AddToParticipantGroup
     from ..models.automatically_approve import AutomaticallyApprove
+    from ..models.dynamic_payment import DynamicPayment
     from ..models.manually_review import ManuallyReview
     from ..models.remove_from_participant_group import RemoveFromParticipantGroup
     from ..models.request_return import RequestReturn
@@ -35,7 +36,7 @@ class BaseStudyCompletionCodesItem:
             The code must be unique within the study.
         code_type (BaseStudyCompletionCodesItemCodeType): A name for your code to make it easier to understand its
             intention. Either use one of the predefined options or any other free text.
-        actions (List[Union['AddToParticipantGroup', 'AutomaticallyApprove', 'ManuallyReview',
+        actions (list[Union['AddToParticipantGroup', 'AutomaticallyApprove', 'DynamicPayment', 'ManuallyReview',
             'RemoveFromParticipantGroup', 'RequestReturn']]): The actions that will be completed automatically when the
             submission is completed with this code.
 
@@ -47,23 +48,25 @@ class BaseStudyCompletionCodesItem:
 
     code: Union[None, str]
     code_type: BaseStudyCompletionCodesItemCodeType
-    actions: List[
+    actions: list[
         Union[
             "AddToParticipantGroup",
             "AutomaticallyApprove",
+            "DynamicPayment",
             "ManuallyReview",
             "RemoveFromParticipantGroup",
             "RequestReturn",
         ]
     ]
     actor: Union[Unset, BaseStudyCompletionCodesItemActor] = BaseStudyCompletionCodesItemActor.PARTICIPANT
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         from ..models.add_to_participant_group import AddToParticipantGroup
         from ..models.automatically_approve import AutomaticallyApprove
         from ..models.manually_review import ManuallyReview
         from ..models.remove_from_participant_group import RemoveFromParticipantGroup
+        from ..models.request_return import RequestReturn
 
         code: Union[None, str]
         code = self.code
@@ -72,7 +75,7 @@ class BaseStudyCompletionCodesItem:
 
         actions = []
         for actions_item_data in self.actions:
-            actions_item: Dict[str, Any]
+            actions_item: dict[str, Any]
             if isinstance(actions_item_data, AutomaticallyApprove):
                 actions_item = actions_item_data.to_dict()
             elif isinstance(actions_item_data, AddToParticipantGroup):
@@ -80,6 +83,8 @@ class BaseStudyCompletionCodesItem:
             elif isinstance(actions_item_data, RemoveFromParticipantGroup):
                 actions_item = actions_item_data.to_dict()
             elif isinstance(actions_item_data, ManuallyReview):
+                actions_item = actions_item_data.to_dict()
+            elif isinstance(actions_item_data, RequestReturn):
                 actions_item = actions_item_data.to_dict()
             else:
                 actions_item = actions_item_data.to_dict()
@@ -90,7 +95,7 @@ class BaseStudyCompletionCodesItem:
         if not isinstance(self.actor, Unset):
             actor = self.actor.value
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -105,9 +110,10 @@ class BaseStudyCompletionCodesItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.add_to_participant_group import AddToParticipantGroup
         from ..models.automatically_approve import AutomaticallyApprove
+        from ..models.dynamic_payment import DynamicPayment
         from ..models.manually_review import ManuallyReview
         from ..models.remove_from_participant_group import RemoveFromParticipantGroup
         from ..models.request_return import RequestReturn
@@ -132,6 +138,7 @@ class BaseStudyCompletionCodesItem:
             ) -> Union[
                 "AddToParticipantGroup",
                 "AutomaticallyApprove",
+                "DynamicPayment",
                 "ManuallyReview",
                 "RemoveFromParticipantGroup",
                 "RequestReturn",
@@ -168,11 +175,19 @@ class BaseStudyCompletionCodesItem:
                     return actions_item_type_3
                 except:  # noqa: E722
                     pass
+                try:
+                    if not isinstance(data, dict):
+                        raise TypeError()
+                    actions_item_type_4 = RequestReturn.from_dict(data)
+
+                    return actions_item_type_4
+                except:  # noqa: E722
+                    pass
                 if not isinstance(data, dict):
                     raise TypeError()
-                actions_item_type_4 = RequestReturn.from_dict(data)
+                actions_item_type_5 = DynamicPayment.from_dict(data)
 
-                return actions_item_type_4
+                return actions_item_type_5
 
             actions_item = _parse_actions_item(actions_item_data)
 
@@ -196,7 +211,7 @@ class BaseStudyCompletionCodesItem:
         return base_study_completion_codes_item
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

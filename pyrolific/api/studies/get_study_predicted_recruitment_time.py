@@ -1,11 +1,11 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.study_predicted_recruitment_time import StudyPredictedRecruitmentTime
+from ...models.study_predicted_recruitment_time_response import StudyPredictedRecruitmentTimeResponse
 from ...types import Response
 
 
@@ -13,11 +13,11 @@ def _get_kwargs(
     study_id: str,
     *,
     authorization: str,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
         "url": f"/api/v1/studies/{study_id}/predicted-recruitment-time/",
     }
@@ -28,9 +28,9 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[StudyPredictedRecruitmentTime]:
-    if response.status_code == HTTPStatus.OK:
-        response_200 = StudyPredictedRecruitmentTime.from_dict(response.json())
+) -> Optional[StudyPredictedRecruitmentTimeResponse]:
+    if response.status_code == 200:
+        response_200 = StudyPredictedRecruitmentTimeResponse.from_dict(response.json())
 
         return response_200
     if client.raise_on_unexpected_status:
@@ -41,7 +41,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[StudyPredictedRecruitmentTime]:
+) -> Response[StudyPredictedRecruitmentTimeResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -55,8 +55,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     authorization: str,
-) -> Response[StudyPredictedRecruitmentTime]:
-    """Show Study predicted reqruitment time
+) -> Response[StudyPredictedRecruitmentTimeResponse]:
+    """Show Study predicted recruitment time
 
      Returns the predicted recruitment time for the study if it was published right now, based on a
     machine learning model.
@@ -73,7 +73,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[StudyPredictedRecruitmentTime]
+        Response[StudyPredictedRecruitmentTimeResponse]
     """
 
     kwargs = _get_kwargs(
@@ -93,8 +93,8 @@ def sync(
     *,
     client: AuthenticatedClient,
     authorization: str,
-) -> Optional[StudyPredictedRecruitmentTime]:
-    """Show Study predicted reqruitment time
+) -> Optional[StudyPredictedRecruitmentTimeResponse]:
+    """Show Study predicted recruitment time
 
      Returns the predicted recruitment time for the study if it was published right now, based on a
     machine learning model.
@@ -111,7 +111,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        StudyPredictedRecruitmentTime
+        StudyPredictedRecruitmentTimeResponse
     """
 
     return sync_detailed(
@@ -126,8 +126,8 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     authorization: str,
-) -> Response[StudyPredictedRecruitmentTime]:
-    """Show Study predicted reqruitment time
+) -> Response[StudyPredictedRecruitmentTimeResponse]:
+    """Show Study predicted recruitment time
 
      Returns the predicted recruitment time for the study if it was published right now, based on a
     machine learning model.
@@ -144,7 +144,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[StudyPredictedRecruitmentTime]
+        Response[StudyPredictedRecruitmentTimeResponse]
     """
 
     kwargs = _get_kwargs(
@@ -162,8 +162,8 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     authorization: str,
-) -> Optional[StudyPredictedRecruitmentTime]:
-    """Show Study predicted reqruitment time
+) -> Optional[StudyPredictedRecruitmentTimeResponse]:
+    """Show Study predicted recruitment time
 
      Returns the predicted recruitment time for the study if it was published right now, based on a
     machine learning model.
@@ -180,7 +180,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        StudyPredictedRecruitmentTime
+        StudyPredictedRecruitmentTimeResponse
     """
 
     return (

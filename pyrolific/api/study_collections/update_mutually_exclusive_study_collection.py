@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -14,11 +14,11 @@ def _get_kwargs(
     *,
     body: MutuallyExclusiveStudyCollectionUpdate,
     authorization: str,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "patch",
         "url": f"/api/v1/study-collections/mutually-exclusive/{id}/",
     }
@@ -35,7 +35,7 @@ def _get_kwargs(
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[MutuallyExclusiveStudyCollectionUpdate]:
-    if response.status_code == HTTPStatus.OK:
+    if response.status_code == 200:
         response_200 = MutuallyExclusiveStudyCollectionUpdate.from_dict(response.json())
 
         return response_200

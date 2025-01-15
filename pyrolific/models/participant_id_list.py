@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -12,18 +12,18 @@ T = TypeVar("T", bound="ParticipantIDList")
 class ParticipantIDList:
     """
     Attributes:
-        participant_ids (Union[Unset, List[str]]):
+        participant_ids (Union[Unset, list[str]]):
     """
 
-    participant_ids: Union[Unset, List[str]] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    participant_ids: Union[Unset, list[str]] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
-        participant_ids: Union[Unset, List[str]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        participant_ids: Union[Unset, list[str]] = UNSET
         if not isinstance(self.participant_ids, Unset):
             participant_ids = self.participant_ids
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if participant_ids is not UNSET:
@@ -32,9 +32,9 @@ class ParticipantIDList:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
-        participant_ids = cast(List[str], d.pop("participant_ids", UNSET))
+        participant_ids = cast(list[str], d.pop("participant_ids", UNSET))
 
         participant_id_list = cls(
             participant_ids=participant_ids,
@@ -44,7 +44,7 @@ class ParticipantIDList:
         return participant_id_list
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

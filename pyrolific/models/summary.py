@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -24,24 +24,24 @@ class Summary:
 
     Attributes:
         survey_id (str): The survey ID.
-        questions (Union[Unset, List['SummaryQuestion']]): A list of questions for the given survey.
+        questions (Union[Unset, list['SummaryQuestion']]): A list of questions for the given survey.
     """
 
     survey_id: str
-    questions: Union[Unset, List["SummaryQuestion"]] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    questions: Union[Unset, list["SummaryQuestion"]] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         survey_id = self.survey_id
 
-        questions: Union[Unset, List[Dict[str, Any]]] = UNSET
+        questions: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.questions, Unset):
             questions = []
             for questions_item_data in self.questions:
                 questions_item = questions_item_data.to_dict()
                 questions.append(questions_item)
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -54,7 +54,7 @@ class Summary:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.summary_question import SummaryQuestion
 
         d = src_dict.copy()
@@ -76,7 +76,7 @@ class Summary:
         return summary
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -1,4 +1,5 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,23 +18,23 @@ class Section:
     This is more of a long term thing, but helps if we add now.
 
         Attributes:
-            questions (List['QuestionResponse']): The questions for a given section.
-            section_id (str): The section ID.
+            questions (list['QuestionResponse']): The questions for a given section.
+            section_id (UUID): The section ID.
     """
 
-    questions: List["QuestionResponse"]
-    section_id: str
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    questions: list["QuestionResponse"]
+    section_id: UUID
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         questions = []
         for questions_item_data in self.questions:
             questions_item = questions_item_data.to_dict()
             questions.append(questions_item)
 
-        section_id = self.section_id
+        section_id = str(self.section_id)
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -45,7 +46,7 @@ class Section:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.question_response import QuestionResponse
 
         d = src_dict.copy()
@@ -56,7 +57,7 @@ class Section:
 
             questions.append(questions_item)
 
-        section_id = d.pop("section_id")
+        section_id = UUID(d.pop("section_id"))
 
         section = cls(
             questions=questions,
@@ -67,7 +68,7 @@ class Section:
         return section
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

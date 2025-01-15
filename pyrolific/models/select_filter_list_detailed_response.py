@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -22,7 +22,7 @@ class SelectFilterListDetailedResponse:
             filter was created.
         title (Union[Unset, str]): The title of the filter.
         description (Union[Unset, str]): A description of the filter.
-        type (Union[Unset, FilterListAttributesType]): The filter type.
+        type_ (Union[Unset, FilterListAttributesType]): The filter type.
         question (Union[Unset, str]): The question asked of participants to generate this filter.
         choices (Union[Unset, SelectFilterListAttributesChoices]): An object containing all the filter's possible
             responses as key-value pairs, with sequential integer IDs or database ObjectIDs as the keys and the text of the
@@ -39,14 +39,14 @@ class SelectFilterListDetailedResponse:
         subcategory (Union[None, Unset, str]): The sub-category the filter is displayed in in the prescreening modal.
         display_order (Union[None, Unset, int]): The order in which the filter is displayed within its sub-category in
             the prescreening modal.
-        tags (Union[List[str], None, Unset]): Some additional tags that can be used to display the filter in a specific
+        tags (Union[None, Unset, list[str]]): Some additional tags that can be used to display the filter in a specific
             way, e.g. recommended, new, expiring.
     """
 
     filter_id: Union[Unset, str] = UNSET
     title: Union[Unset, str] = UNSET
     description: Union[Unset, str] = UNSET
-    type: Union[Unset, FilterListAttributesType] = UNSET
+    type_: Union[Unset, FilterListAttributesType] = UNSET
     question: Union[Unset, str] = UNSET
     choices: Union[Unset, "SelectFilterListAttributesChoices"] = UNSET
     data_type: Union[Unset, SelectFilterListAttributesDataType] = UNSET
@@ -55,23 +55,23 @@ class SelectFilterListDetailedResponse:
     category: Union[None, Unset, str] = UNSET
     subcategory: Union[None, Unset, str] = UNSET
     display_order: Union[None, Unset, int] = UNSET
-    tags: Union[List[str], None, Unset] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    tags: Union[None, Unset, list[str]] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         filter_id = self.filter_id
 
         title = self.title
 
         description = self.description
 
-        type: Union[Unset, str] = UNSET
-        if not isinstance(self.type, Unset):
-            type = self.type.value
+        type_: Union[Unset, str] = UNSET
+        if not isinstance(self.type_, Unset):
+            type_ = self.type_.value
 
         question = self.question
 
-        choices: Union[Unset, Dict[str, Any]] = UNSET
+        choices: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.choices, Unset):
             choices = self.choices.to_dict()
 
@@ -109,7 +109,7 @@ class SelectFilterListDetailedResponse:
         else:
             display_order = self.display_order
 
-        tags: Union[List[str], None, Unset]
+        tags: Union[None, Unset, list[str]]
         if isinstance(self.tags, Unset):
             tags = UNSET
         elif isinstance(self.tags, list):
@@ -118,7 +118,7 @@ class SelectFilterListDetailedResponse:
         else:
             tags = self.tags
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if filter_id is not UNSET:
@@ -127,8 +127,8 @@ class SelectFilterListDetailedResponse:
             field_dict["title"] = title
         if description is not UNSET:
             field_dict["description"] = description
-        if type is not UNSET:
-            field_dict["type"] = type
+        if type_ is not UNSET:
+            field_dict["type"] = type_
         if question is not UNSET:
             field_dict["question"] = question
         if choices is not UNSET:
@@ -151,7 +151,7 @@ class SelectFilterListDetailedResponse:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.select_filter_list_attributes_choices import SelectFilterListAttributesChoices
 
         d = src_dict.copy()
@@ -161,12 +161,12 @@ class SelectFilterListDetailedResponse:
 
         description = d.pop("description", UNSET)
 
-        _type = d.pop("type", UNSET)
-        type: Union[Unset, FilterListAttributesType]
-        if isinstance(_type, Unset):
-            type = UNSET
+        _type_ = d.pop("type", UNSET)
+        type_: Union[Unset, FilterListAttributesType]
+        if isinstance(_type_, Unset):
+            type_ = UNSET
         else:
-            type = FilterListAttributesType(_type)
+            type_ = FilterListAttributesType(_type_)
 
         question = d.pop("question", UNSET)
 
@@ -229,7 +229,7 @@ class SelectFilterListDetailedResponse:
 
         display_order = _parse_display_order(d.pop("display_order", UNSET))
 
-        def _parse_tags(data: object) -> Union[List[str], None, Unset]:
+        def _parse_tags(data: object) -> Union[None, Unset, list[str]]:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -237,12 +237,12 @@ class SelectFilterListDetailedResponse:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                tags_type_0 = cast(List[str], data)
+                tags_type_0 = cast(list[str], data)
 
                 return tags_type_0
             except:  # noqa: E722
                 pass
-            return cast(Union[List[str], None, Unset], data)
+            return cast(Union[None, Unset, list[str]], data)
 
         tags = _parse_tags(d.pop("tags", UNSET))
 
@@ -250,7 +250,7 @@ class SelectFilterListDetailedResponse:
             filter_id=filter_id,
             title=title,
             description=description,
-            type=type,
+            type_=type_,
             question=question,
             choices=choices,
             data_type=data_type,
@@ -266,7 +266,7 @@ class SelectFilterListDetailedResponse:
         return select_filter_list_detailed_response
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

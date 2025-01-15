@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -15,13 +15,13 @@ def _get_kwargs(
     *,
     body: BulkScreenOutRequest,
     authorization: str,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": f"/api/v1/submissions/bulk-screen-out/{id}/",
+        "url": f"/api/v1/studies/{id}/screen-out-submissions/",
     }
 
     _body = body.to_dict()
@@ -36,7 +36,7 @@ def _get_kwargs(
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[BulkScreenOutSubmissionsResponse202]:
-    if response.status_code == HTTPStatus.ACCEPTED:
+    if response.status_code == 202:
         response_202 = BulkScreenOutSubmissionsResponse202.from_dict(response.json())
 
         return response_202
@@ -66,7 +66,8 @@ def sync_detailed(
 ) -> Response[BulkScreenOutSubmissionsResponse202]:
     """Bulk screen out submissions
 
-     This endpoint is designed to be used as part of a custom screening study.
+     This endpoint is designed to be used as part of a custom screening study (a study that has been
+    created with `'is_custom_screening:true'`).
     If a participant has taken part in a study where you have asked screening questions
     and has not met your screening requirements, this endpoint allows you to screen out
     multiple participants at once.
@@ -116,7 +117,8 @@ def sync(
 ) -> Optional[BulkScreenOutSubmissionsResponse202]:
     """Bulk screen out submissions
 
-     This endpoint is designed to be used as part of a custom screening study.
+     This endpoint is designed to be used as part of a custom screening study (a study that has been
+    created with `'is_custom_screening:true'`).
     If a participant has taken part in a study where you have asked screening questions
     and has not met your screening requirements, this endpoint allows you to screen out
     multiple participants at once.
@@ -161,7 +163,8 @@ async def asyncio_detailed(
 ) -> Response[BulkScreenOutSubmissionsResponse202]:
     """Bulk screen out submissions
 
-     This endpoint is designed to be used as part of a custom screening study.
+     This endpoint is designed to be used as part of a custom screening study (a study that has been
+    created with `'is_custom_screening:true'`).
     If a participant has taken part in a study where you have asked screening questions
     and has not met your screening requirements, this endpoint allows you to screen out
     multiple participants at once.
@@ -209,7 +212,8 @@ async def asyncio(
 ) -> Optional[BulkScreenOutSubmissionsResponse202]:
     """Bulk screen out submissions
 
-     This endpoint is designed to be used as part of a custom screening study.
+     This endpoint is designed to be used as part of a custom screening study (a study that has been
+    created with `'is_custom_screening:true'`).
     If a participant has taken part in a study where you have asked screening questions
     and has not met your screening requirements, this endpoint allows you to screen out
     multiple participants at once.

@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -16,21 +16,21 @@ T = TypeVar("T", bound="FilterSetList")
 class FilterSetList:
     """
     Attributes:
-        results (Union[Unset, List['FilterSet']]): List of filter sets.
+        results (Union[Unset, list['FilterSet']]): List of filter sets.
     """
 
-    results: Union[Unset, List["FilterSet"]] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    results: Union[Unset, list["FilterSet"]] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
-        results: Union[Unset, List[Dict[str, Any]]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        results: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.results, Unset):
             results = []
             for results_item_data in self.results:
                 results_item = results_item_data.to_dict()
                 results.append(results_item)
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if results is not UNSET:
@@ -39,7 +39,7 @@ class FilterSetList:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.filter_set import FilterSet
 
         d = src_dict.copy()
@@ -58,7 +58,7 @@ class FilterSetList:
         return filter_set_list
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

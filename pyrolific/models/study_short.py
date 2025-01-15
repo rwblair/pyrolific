@@ -1,5 +1,5 @@
 import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -49,9 +49,9 @@ class StudyShort:
     published_at: Union[None, Unset, datetime.datetime] = UNSET
     publish_at: Union[None, Unset, datetime.datetime] = UNSET
     date_created: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         name = self.name
@@ -100,7 +100,7 @@ class StudyShort:
         if not isinstance(self.date_created, Unset):
             date_created = self.date_created.isoformat()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -134,7 +134,7 @@ class StudyShort:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         id = d.pop("id")
 
@@ -234,7 +234,7 @@ class StudyShort:
         return study_short
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

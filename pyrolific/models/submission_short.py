@@ -1,5 +1,5 @@
 import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -27,6 +27,8 @@ class SubmissionShort:
         has_siblings (bool): Whether or not the submission has sibling submissions (sharing the same study).
         completed_at (Union[None, Unset, datetime.datetime]): Date completed
         study_code (Union[None, Unset, str]): The completion code used by the participant to complete the study.
+        return_requested (Union[None, Unset, datetime.datetime]): The date and time when a return request for the
+            submission was made.
     """
 
     id: str
@@ -36,9 +38,10 @@ class SubmissionShort:
     has_siblings: bool
     completed_at: Union[None, Unset, datetime.datetime] = UNSET
     study_code: Union[None, Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    return_requested: Union[None, Unset, datetime.datetime] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         participant_id = self.participant_id
@@ -63,7 +66,15 @@ class SubmissionShort:
         else:
             study_code = self.study_code
 
-        field_dict: Dict[str, Any] = {}
+        return_requested: Union[None, Unset, str]
+        if isinstance(self.return_requested, Unset):
+            return_requested = UNSET
+        elif isinstance(self.return_requested, datetime.datetime):
+            return_requested = self.return_requested.isoformat()
+        else:
+            return_requested = self.return_requested
+
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -78,11 +89,13 @@ class SubmissionShort:
             field_dict["completed_at"] = completed_at
         if study_code is not UNSET:
             field_dict["study_code"] = study_code
+        if return_requested is not UNSET:
+            field_dict["return_requested"] = return_requested
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         id = d.pop("id")
 
@@ -120,6 +133,23 @@ class SubmissionShort:
 
         study_code = _parse_study_code(d.pop("study_code", UNSET))
 
+        def _parse_return_requested(data: object) -> Union[None, Unset, datetime.datetime]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                return_requested_type_0 = isoparse(data)
+
+                return return_requested_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, datetime.datetime], data)
+
+        return_requested = _parse_return_requested(d.pop("return_requested", UNSET))
+
         submission_short = cls(
             id=id,
             participant_id=participant_id,
@@ -128,13 +158,14 @@ class SubmissionShort:
             has_siblings=has_siblings,
             completed_at=completed_at,
             study_code=study_code,
+            return_requested=return_requested,
         )
 
         submission_short.additional_properties = d
         return submission_short
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

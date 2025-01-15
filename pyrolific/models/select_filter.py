@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,7 +17,7 @@ class SelectFilter:
     r"""
     Attributes:
         filter_id (str): ID of the "select" type filter.
-        selected_values (List[str]): This schema applies for filters of the `select` type, as defined in the [filter
+        selected_values (list[str]): This schema applies for filters of the `select` type, as defined in the [filter
             list response](\#tag/Filters/paths/~1api~1v1~1filters~1/get).
 
             Array of IDs matching the response IDs, from the `select` filter's `choices` (see response linked above).
@@ -30,20 +30,20 @@ class SelectFilter:
     """
 
     filter_id: str
-    selected_values: List[str]
+    selected_values: list[str]
     weightings: Union[Unset, "SelectFilterWeightings"] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         filter_id = self.filter_id
 
         selected_values = self.selected_values
 
-        weightings: Union[Unset, Dict[str, Any]] = UNSET
+        weightings: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.weightings, Unset):
             weightings = self.weightings.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -57,13 +57,13 @@ class SelectFilter:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.select_filter_weightings import SelectFilterWeightings
 
         d = src_dict.copy()
         filter_id = d.pop("filter_id")
 
-        selected_values = cast(List[str], d.pop("selected_values"))
+        selected_values = cast(list[str], d.pop("selected_values"))
 
         _weightings = d.pop("weightings", UNSET)
         weightings: Union[Unset, SelectFilterWeightings]
@@ -82,7 +82,7 @@ class SelectFilter:
         return select_filter
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -1,4 +1,5 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, TypeVar, Union
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,19 +15,21 @@ class AnswerOption:
 
     Attributes:
         value (str): The answer option value that can be selected. Example: Potato.
-        id (Union[Unset, str]):
+        id (Union[Unset, UUID]):
     """
 
     value: str
-    id: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    id: Union[Unset, UUID] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         value = self.value
 
-        id = self.id
+        id: Union[Unset, str] = UNSET
+        if not isinstance(self.id, Unset):
+            id = str(self.id)
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -39,11 +42,16 @@ class AnswerOption:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         value = d.pop("value")
 
-        id = d.pop("id", UNSET)
+        _id = d.pop("id", UNSET)
+        id: Union[Unset, UUID]
+        if isinstance(_id, Unset):
+            id = UNSET
+        else:
+            id = UUID(_id)
 
         answer_option = cls(
             value=value,
@@ -54,7 +62,7 @@ class AnswerOption:
         return answer_option
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -20,37 +20,37 @@ class ResponseIn:
     Attributes:
         participant_id (str): The Prolific participant ID. Example: 62908f0b98a55b36ac68b992.
         submission_id (str): The Prolific submission ID. Example: 62908f0b98a55b36ac68b992.
-        sections (Union[Unset, List['Section']]): An array of sections from the survey, otherwise use `questions`.
-        questions (Union[Unset, List['QuestionResponse']]): An array of questions from the survey, otherwise use
+        sections (Union[Unset, list['Section']]): An array of sections from the survey, otherwise use `questions`.
+        questions (Union[Unset, list['QuestionResponse']]): An array of questions from the survey, otherwise use
             `sections`.
     """
 
     participant_id: str
     submission_id: str
-    sections: Union[Unset, List["Section"]] = UNSET
-    questions: Union[Unset, List["QuestionResponse"]] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    sections: Union[Unset, list["Section"]] = UNSET
+    questions: Union[Unset, list["QuestionResponse"]] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         participant_id = self.participant_id
 
         submission_id = self.submission_id
 
-        sections: Union[Unset, List[Dict[str, Any]]] = UNSET
+        sections: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.sections, Unset):
             sections = []
             for sections_item_data in self.sections:
                 sections_item = sections_item_data.to_dict()
                 sections.append(sections_item)
 
-        questions: Union[Unset, List[Dict[str, Any]]] = UNSET
+        questions: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.questions, Unset):
             questions = []
             for questions_item_data in self.questions:
                 questions_item = questions_item_data.to_dict()
                 questions.append(questions_item)
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -66,7 +66,7 @@ class ResponseIn:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.question_response import QuestionResponse
         from ..models.section import Section
 
@@ -100,7 +100,7 @@ class ResponseIn:
         return response_in
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

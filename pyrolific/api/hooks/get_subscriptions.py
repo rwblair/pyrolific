@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -14,11 +14,11 @@ def _get_kwargs(
     is_enabled: Union[Unset, bool] = UNSET,
     workspace_id: Union[Unset, str] = UNSET,
     authorization: str,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    params: Dict[str, Any] = {}
+    params: dict[str, Any] = {}
 
     params["is_enabled"] = is_enabled
 
@@ -26,7 +26,7 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
         "url": "/api/v1/hooks/subscriptions/",
         "params": params,
@@ -39,7 +39,7 @@ def _get_kwargs(
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[SubscriptionList]:
-    if response.status_code == HTTPStatus.OK:
+    if response.status_code == 200:
         response_200 = SubscriptionList.from_dict(response.json())
 
         return response_200

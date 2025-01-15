@@ -1,7 +1,9 @@
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+import datetime
+from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
+from dateutil.parser import isoparse
 
 from ..models.submission_detail_status import SubmissionDetailStatus
 from ..types import UNSET, Unset
@@ -27,8 +29,10 @@ class SubmissionDetail:
         completed_at (Union[None, Unset, str]): The time the submission was completed at.
         entered_code (Union[None, Unset, str]): The completion code used by the participant to complete the study.
         participant (Union[Unset, str]): Participant id.
-        bonus_payments (Union[Unset, List[float]]): Bonus payments that have been paid on the submission. Returned in
+        bonus_payments (Union[Unset, list[float]]): Bonus payments that have been paid on the submission. Returned in
             pence / cents.
+        return_requested (Union[None, Unset, datetime.datetime]): The date and time when a return request for the
+            submission was made.
     """
 
     id: str
@@ -38,10 +42,11 @@ class SubmissionDetail:
     completed_at: Union[None, Unset, str] = UNSET
     entered_code: Union[None, Unset, str] = UNSET
     participant: Union[Unset, str] = UNSET
-    bonus_payments: Union[Unset, List[float]] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    bonus_payments: Union[Unset, list[float]] = UNSET
+    return_requested: Union[None, Unset, datetime.datetime] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         started_at = self.started_at
@@ -64,11 +69,19 @@ class SubmissionDetail:
 
         participant = self.participant
 
-        bonus_payments: Union[Unset, List[float]] = UNSET
+        bonus_payments: Union[Unset, list[float]] = UNSET
         if not isinstance(self.bonus_payments, Unset):
             bonus_payments = self.bonus_payments
 
-        field_dict: Dict[str, Any] = {}
+        return_requested: Union[None, Unset, str]
+        if isinstance(self.return_requested, Unset):
+            return_requested = UNSET
+        elif isinstance(self.return_requested, datetime.datetime):
+            return_requested = self.return_requested.isoformat()
+        else:
+            return_requested = self.return_requested
+
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -86,11 +99,13 @@ class SubmissionDetail:
             field_dict["participant"] = participant
         if bonus_payments is not UNSET:
             field_dict["bonus_payments"] = bonus_payments
+        if return_requested is not UNSET:
+            field_dict["return_requested"] = return_requested
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         id = d.pop("id")
 
@@ -120,7 +135,24 @@ class SubmissionDetail:
 
         participant = d.pop("participant", UNSET)
 
-        bonus_payments = cast(List[float], d.pop("bonus_payments", UNSET))
+        bonus_payments = cast(list[float], d.pop("bonus_payments", UNSET))
+
+        def _parse_return_requested(data: object) -> Union[None, Unset, datetime.datetime]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                return_requested_type_0 = isoparse(data)
+
+                return return_requested_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, datetime.datetime], data)
+
+        return_requested = _parse_return_requested(d.pop("return_requested", UNSET))
 
         submission_detail = cls(
             id=id,
@@ -131,13 +163,14 @@ class SubmissionDetail:
             entered_code=entered_code,
             participant=participant,
             bonus_payments=bonus_payments,
+            return_requested=return_requested,
         )
 
         submission_detail.additional_properties = d
         return submission_detail
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -1,5 +1,5 @@
 import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -23,7 +23,7 @@ class Message:
         sent_at (datetime.datetime): Date time when message was sent
         channel_id (str): The channel ID, for linking back to a thread in the Prolific app. Example:
             d45c8a5e812ff990fc6546beaf888c9820f4c184f7200a45d900cf0f321f7f38.
-        type (Union[Unset, str]): Will only me message for now
+        type_ (Union[Unset, str]): Will only me message for now
         data (Union[Unset, MessageData]): Metadata for a message
     """
 
@@ -31,11 +31,11 @@ class Message:
     body: str
     sent_at: datetime.datetime
     channel_id: str
-    type: Union[Unset, str] = UNSET
+    type_: Union[Unset, str] = UNSET
     data: Union[Unset, "MessageData"] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         sender_id = self.sender_id
 
         body = self.body
@@ -44,13 +44,13 @@ class Message:
 
         channel_id = self.channel_id
 
-        type = self.type
+        type_ = self.type_
 
-        data: Union[Unset, Dict[str, Any]] = UNSET
+        data: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.data, Unset):
             data = self.data.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -60,15 +60,15 @@ class Message:
                 "channel_id": channel_id,
             }
         )
-        if type is not UNSET:
-            field_dict["type"] = type
+        if type_ is not UNSET:
+            field_dict["type"] = type_
         if data is not UNSET:
             field_dict["data"] = data
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.message_data import MessageData
 
         d = src_dict.copy()
@@ -80,7 +80,7 @@ class Message:
 
         channel_id = d.pop("channel_id")
 
-        type = d.pop("type", UNSET)
+        type_ = d.pop("type", UNSET)
 
         _data = d.pop("data", UNSET)
         data: Union[Unset, MessageData]
@@ -94,7 +94,7 @@ class Message:
             body=body,
             sent_at=sent_at,
             channel_id=channel_id,
-            type=type,
+            type_=type_,
             data=data,
         )
 
@@ -102,7 +102,7 @@ class Message:
         return message
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -21,7 +21,7 @@ T = TypeVar("T", bound="FilterList")
 class FilterList:
     """
     Attributes:
-        results (Union[Unset, List[Union['RangeFilterListDetailedResponse', 'RangeFilterListResponse',
+        results (Union[Unset, list[Union['RangeFilterListDetailedResponse', 'RangeFilterListResponse',
             'SelectFilterListDetailedResponse', 'SelectFilterListResponse']]]):
         field_links (Union[Unset, FilterListLinks]):
         meta (Union[Unset, FilterListMeta]):
@@ -29,7 +29,7 @@ class FilterList:
 
     results: Union[
         Unset,
-        List[
+        list[
             Union[
                 "RangeFilterListDetailedResponse",
                 "RangeFilterListResponse",
@@ -40,18 +40,18 @@ class FilterList:
     ] = UNSET
     field_links: Union[Unset, "FilterListLinks"] = UNSET
     meta: Union[Unset, "FilterListMeta"] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         from ..models.range_filter_list_response import RangeFilterListResponse
         from ..models.select_filter_list_detailed_response import SelectFilterListDetailedResponse
         from ..models.select_filter_list_response import SelectFilterListResponse
 
-        results: Union[Unset, List[Dict[str, Any]]] = UNSET
+        results: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.results, Unset):
             results = []
             for results_item_data in self.results:
-                results_item: Dict[str, Any]
+                results_item: dict[str, Any]
                 if isinstance(results_item_data, SelectFilterListResponse):
                     results_item = results_item_data.to_dict()
                 elif isinstance(results_item_data, SelectFilterListDetailedResponse):
@@ -63,15 +63,15 @@ class FilterList:
 
                 results.append(results_item)
 
-        field_links: Union[Unset, Dict[str, Any]] = UNSET
+        field_links: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.field_links, Unset):
             field_links = self.field_links.to_dict()
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
+        meta: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.meta, Unset):
             meta = self.meta.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if results is not UNSET:
@@ -84,7 +84,7 @@ class FilterList:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.filter_list_links import FilterListLinks
         from ..models.filter_list_meta import FilterListMeta
         from ..models.range_filter_list_detailed_response import RangeFilterListDetailedResponse
@@ -163,7 +163,7 @@ class FilterList:
         return filter_list
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

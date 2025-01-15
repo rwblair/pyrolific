@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -14,11 +14,11 @@ def _get_kwargs(
     *,
     method: Union[Unset, ExportStudyMethod] = UNSET,
     authorization: str,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    params: Dict[str, Any] = {}
+    params: dict[str, Any] = {}
 
     json_method: Union[Unset, str] = UNSET
     if not isinstance(method, Unset):
@@ -28,7 +28,7 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
         "url": f"/api/v1/studies/{id}/export/",
         "params": params,
@@ -39,7 +39,7 @@ def _get_kwargs(
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[str]:
-    if response.status_code == HTTPStatus.OK:
+    if response.status_code == 200:
         response_200 = response.text
         return response_200
     if client.raise_on_unexpected_status:
@@ -101,8 +101,8 @@ def sync_detailed(
       * ISO 8601 formatted
     * Completion code ('entered code')
 
-    Learn more on [Exporting Prolific demographic data](https://researcher-help.prolific.com/hc/en-
-    gb/articles/360009391633-Exporting-Prolific-demographic-data).
+    Learn more on [Exporting Prolific demographic data](https://researcher-
+    help.prolific.com/en/article/b2943f).
 
     Args:
         id (str):
@@ -174,8 +174,8 @@ def sync(
       * ISO 8601 formatted
     * Completion code ('entered code')
 
-    Learn more on [Exporting Prolific demographic data](https://researcher-help.prolific.com/hc/en-
-    gb/articles/360009391633-Exporting-Prolific-demographic-data).
+    Learn more on [Exporting Prolific demographic data](https://researcher-
+    help.prolific.com/en/article/b2943f).
 
     Args:
         id (str):
@@ -242,8 +242,8 @@ async def asyncio_detailed(
       * ISO 8601 formatted
     * Completion code ('entered code')
 
-    Learn more on [Exporting Prolific demographic data](https://researcher-help.prolific.com/hc/en-
-    gb/articles/360009391633-Exporting-Prolific-demographic-data).
+    Learn more on [Exporting Prolific demographic data](https://researcher-
+    help.prolific.com/en/article/b2943f).
 
     Args:
         id (str):
@@ -313,8 +313,8 @@ async def asyncio(
       * ISO 8601 formatted
     * Completion code ('entered code')
 
-    Learn more on [Exporting Prolific demographic data](https://researcher-help.prolific.com/hc/en-
-    gb/articles/360009391633-Exporting-Prolific-demographic-data).
+    Learn more on [Exporting Prolific demographic data](https://researcher-
+    help.prolific.com/en/article/b2943f).
 
     Args:
         id (str):

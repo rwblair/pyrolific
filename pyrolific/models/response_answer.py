@@ -1,4 +1,5 @@
-from typing import Any, Dict, List, Type, TypeVar
+from typing import Any, TypeVar
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -11,20 +12,20 @@ class ResponseAnswer:
     """Responsible for defining a response to a question
 
     Attributes:
-        answer_id (str): The answer ID.
+        answer_id (UUID): The answer ID.
         value (str): The answer option value selected. Example: Potato.
     """
 
-    answer_id: str
+    answer_id: UUID
     value: str
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
-        answer_id = self.answer_id
+    def to_dict(self) -> dict[str, Any]:
+        answer_id = str(self.answer_id)
 
         value = self.value
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -36,9 +37,9 @@ class ResponseAnswer:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
-        answer_id = d.pop("answer_id")
+        answer_id = UUID(d.pop("answer_id"))
 
         value = d.pop("value")
 
@@ -51,7 +52,7 @@ class ResponseAnswer:
         return response_answer
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

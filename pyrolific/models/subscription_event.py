@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -37,9 +37,9 @@ class SubscriptionEvent:
     status: Union[Unset, SubscriptionEventStatus] = UNSET
     target_url: Union[Unset, str] = UNSET
     payload: Union["SubscriptionEventPayloadType0", None, Unset] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         from ..models.subscription_event_payload_type_0 import SubscriptionEventPayloadType0
 
         id = self.id
@@ -58,7 +58,7 @@ class SubscriptionEvent:
 
         target_url = self.target_url
 
-        payload: Union[Dict[str, Any], None, Unset]
+        payload: Union[None, Unset, dict[str, Any]]
         if isinstance(self.payload, Unset):
             payload = UNSET
         elif isinstance(self.payload, SubscriptionEventPayloadType0):
@@ -66,7 +66,7 @@ class SubscriptionEvent:
         else:
             payload = self.payload
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if id is not UNSET:
@@ -89,7 +89,7 @@ class SubscriptionEvent:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.subscription_event_payload_type_0 import SubscriptionEventPayloadType0
 
         d = src_dict.copy()
@@ -144,7 +144,7 @@ class SubscriptionEvent:
         return subscription_event
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

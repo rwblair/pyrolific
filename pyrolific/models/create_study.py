@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -44,7 +44,7 @@ class CreateStudy:
             your analysis.
 
             Use 'not_required' if you don't need to record them
-        completion_codes (Union[Unset, List['BaseStudyCompletionCodesItem']]): Specify at least one completion code for
+        completion_codes (Union[Unset, list['BaseStudyCompletionCodesItem']]): Specify at least one completion code for
             your study. A participant will enter one of these codes when they complete your study.
 
             Each code must be unique within a study.
@@ -61,16 +61,17 @@ class CreateStudy:
             the estimated time
         reward (Union[Unset, float]): How much are you going to pay the participants in cents. We
             use the currency of your account.
-        device_compatibility (Union[Unset, List[BaseStudyDeviceCompatibilityItem]]): Add all devices that participants
+        device_compatibility (Union[Unset, list[BaseStudyDeviceCompatibilityItem]]): Add all devices that participants
             can use.
             You can include one or more options.
 
             An empty array indicates that all options are available.
-        peripheral_requirements (Union[Unset, List[BaseStudyPeripheralRequirementsItem]]): Add all requirements that
+        peripheral_requirements (Union[Unset, list[BaseStudyPeripheralRequirementsItem]]): Add all requirements that
             participants have to meet.
 
             An empty array indicates that there are no extra peripheral requirements.
-        filters (Union[List[Union['RangeFilter', 'SelectFilter']], None, Unset]): Array of filters.
+        is_custom_screening (Union[Unset, bool]): Whether or not this study includes a custom screening. Default: False.
+        filters (Union[None, Unset, list[Union['RangeFilter', 'SelectFilter']]]): Array of filters.
 
             Use empty array for "Everyone"
         filter_set_id (Union[None, Unset, str]): The ID of a filter set, from which filters for the study will be taken.
@@ -97,13 +98,13 @@ class CreateStudy:
 
             Configuration related to study submissions. The purpose of this field is to capture any configuration options
             that impact the submissions made by participants in a study.
-        study_labels (Union[Unset, List[BaseStudyStudyLabelsItem]]): This field allows you to tag studies with
+        study_labels (Union[Unset, list[BaseStudyStudyLabelsItem]]): This field allows you to tag studies with
             information about the type/topic of the study and the kind of work involved in completing it.
 
             We plan to make this information available to participants for easier self-selection. At present these options
             are mutually exclusive and only a single option can be selected, however in the future available categories will
             expand.
-        content_warnings (Union[Unset, List[BaseStudyContentWarningsItem]]): Allow researchers to define content
+        content_warnings (Union[Unset, list[BaseStudyContentWarningsItem]]): Allow researchers to define content
             warnings for their study.
 
             At present these options are mutually exclusive and only a single option can be selected, however in the future
@@ -118,7 +119,7 @@ class CreateStudy:
 
               - `123345` - An ID from your system, that helps with linkage when returning the study.
               - `{ \"id\": \"45\", \"type\": \"finance\"}` - Some JSON that you want to store.
-        access_details (Union[List['AccessDetail'], None, Unset]): Array of access_details, which integrates with
+        access_details (Union[None, Unset, list['AccessDetail']]): Array of access_details, which integrates with
             taskflow.
 
             While this field is nullable, you must provide one of `access_details` or `external_study_url`.
@@ -132,27 +133,28 @@ class CreateStudy:
     description: Union[Unset, str] = UNSET
     external_study_url: Union[Unset, str] = UNSET
     prolific_id_option: Union[Unset, BaseStudyProlificIdOption] = UNSET
-    completion_codes: Union[Unset, List["BaseStudyCompletionCodesItem"]] = UNSET
+    completion_codes: Union[Unset, list["BaseStudyCompletionCodesItem"]] = UNSET
     total_available_places: Union[Unset, float] = UNSET
     estimated_completion_time: Union[Unset, float] = UNSET
     maximum_allowed_time: Union[Unset, float] = UNSET
     reward: Union[Unset, float] = UNSET
-    device_compatibility: Union[Unset, List[BaseStudyDeviceCompatibilityItem]] = UNSET
-    peripheral_requirements: Union[Unset, List[BaseStudyPeripheralRequirementsItem]] = UNSET
-    filters: Union[List[Union["RangeFilter", "SelectFilter"]], None, Unset] = UNSET
+    device_compatibility: Union[Unset, list[BaseStudyDeviceCompatibilityItem]] = UNSET
+    peripheral_requirements: Union[Unset, list[BaseStudyPeripheralRequirementsItem]] = UNSET
+    is_custom_screening: Union[Unset, bool] = False
+    filters: Union[None, Unset, list[Union["RangeFilter", "SelectFilter"]]] = UNSET
     filter_set_id: Union[None, Unset, str] = UNSET
     filter_set_version: Union[None, Unset, int] = UNSET
     naivety_distribution_rate: Union[None, Unset, float] = UNSET
     project: Union[Unset, str] = UNSET
     submissions_config: Union[Unset, "BaseStudySubmissionsConfig"] = UNSET
-    study_labels: Union[Unset, List[BaseStudyStudyLabelsItem]] = UNSET
-    content_warnings: Union[Unset, List[BaseStudyContentWarningsItem]] = UNSET
+    study_labels: Union[Unset, list[BaseStudyStudyLabelsItem]] = UNSET
+    content_warnings: Union[Unset, list[BaseStudyContentWarningsItem]] = UNSET
     content_warning_details: Union[Unset, str] = UNSET
     metadata: Union[None, Unset, str] = UNSET
-    access_details: Union[List["AccessDetail"], None, Unset] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    access_details: Union[None, Unset, list["AccessDetail"]] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         from ..models.select_filter import SelectFilter
 
         name = self.name
@@ -171,7 +173,7 @@ class CreateStudy:
         if not isinstance(self.prolific_id_option, Unset):
             prolific_id_option = self.prolific_id_option.value
 
-        completion_codes: Union[Unset, List[Dict[str, Any]]] = UNSET
+        completion_codes: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.completion_codes, Unset):
             completion_codes = []
             for completion_codes_item_data in self.completion_codes:
@@ -186,27 +188,29 @@ class CreateStudy:
 
         reward = self.reward
 
-        device_compatibility: Union[Unset, List[str]] = UNSET
+        device_compatibility: Union[Unset, list[str]] = UNSET
         if not isinstance(self.device_compatibility, Unset):
             device_compatibility = []
             for device_compatibility_item_data in self.device_compatibility:
                 device_compatibility_item = device_compatibility_item_data.value
                 device_compatibility.append(device_compatibility_item)
 
-        peripheral_requirements: Union[Unset, List[str]] = UNSET
+        peripheral_requirements: Union[Unset, list[str]] = UNSET
         if not isinstance(self.peripheral_requirements, Unset):
             peripheral_requirements = []
             for peripheral_requirements_item_data in self.peripheral_requirements:
                 peripheral_requirements_item = peripheral_requirements_item_data.value
                 peripheral_requirements.append(peripheral_requirements_item)
 
-        filters: Union[List[Dict[str, Any]], None, Unset]
+        is_custom_screening = self.is_custom_screening
+
+        filters: Union[None, Unset, list[dict[str, Any]]]
         if isinstance(self.filters, Unset):
             filters = UNSET
         elif isinstance(self.filters, list):
             filters = []
             for filters_type_0_item_data in self.filters:
-                filters_type_0_item: Dict[str, Any]
+                filters_type_0_item: dict[str, Any]
                 if isinstance(filters_type_0_item_data, SelectFilter):
                     filters_type_0_item = filters_type_0_item_data.to_dict()
                 else:
@@ -237,18 +241,18 @@ class CreateStudy:
 
         project = self.project
 
-        submissions_config: Union[Unset, Dict[str, Any]] = UNSET
+        submissions_config: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.submissions_config, Unset):
             submissions_config = self.submissions_config.to_dict()
 
-        study_labels: Union[Unset, List[str]] = UNSET
+        study_labels: Union[Unset, list[str]] = UNSET
         if not isinstance(self.study_labels, Unset):
             study_labels = []
             for study_labels_item_data in self.study_labels:
                 study_labels_item = study_labels_item_data.value
                 study_labels.append(study_labels_item)
 
-        content_warnings: Union[Unset, List[str]] = UNSET
+        content_warnings: Union[Unset, list[str]] = UNSET
         if not isinstance(self.content_warnings, Unset):
             content_warnings = []
             for content_warnings_item_data in self.content_warnings:
@@ -263,7 +267,7 @@ class CreateStudy:
         else:
             metadata = self.metadata
 
-        access_details: Union[List[Dict[str, Any]], None, Unset]
+        access_details: Union[None, Unset, list[dict[str, Any]]]
         if isinstance(self.access_details, Unset):
             access_details = UNSET
         elif isinstance(self.access_details, list):
@@ -275,7 +279,7 @@ class CreateStudy:
         else:
             access_details = self.access_details
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if name is not UNSET:
@@ -302,6 +306,8 @@ class CreateStudy:
             field_dict["device_compatibility"] = device_compatibility
         if peripheral_requirements is not UNSET:
             field_dict["peripheral_requirements"] = peripheral_requirements
+        if is_custom_screening is not UNSET:
+            field_dict["is_custom_screening"] = is_custom_screening
         if filters is not UNSET:
             field_dict["filters"] = filters
         if filter_set_id is not UNSET:
@@ -328,7 +334,7 @@ class CreateStudy:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.access_detail import AccessDetail
         from ..models.base_study_completion_codes_item import BaseStudyCompletionCodesItem
         from ..models.base_study_submissions_config import BaseStudySubmissionsConfig
@@ -387,7 +393,9 @@ class CreateStudy:
 
             peripheral_requirements.append(peripheral_requirements_item)
 
-        def _parse_filters(data: object) -> Union[List[Union["RangeFilter", "SelectFilter"]], None, Unset]:
+        is_custom_screening = d.pop("is_custom_screening", UNSET)
+
+        def _parse_filters(data: object) -> Union[None, Unset, list[Union["RangeFilter", "SelectFilter"]]]:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -421,7 +429,7 @@ class CreateStudy:
                 return filters_type_0
             except:  # noqa: E722
                 pass
-            return cast(Union[List[Union["RangeFilter", "SelectFilter"]], None, Unset], data)
+            return cast(Union[None, Unset, list[Union["RangeFilter", "SelectFilter"]]], data)
 
         filters = _parse_filters(d.pop("filters", UNSET))
 
@@ -486,7 +494,7 @@ class CreateStudy:
 
         metadata = _parse_metadata(d.pop("metadata", UNSET))
 
-        def _parse_access_details(data: object) -> Union[List["AccessDetail"], None, Unset]:
+        def _parse_access_details(data: object) -> Union[None, Unset, list["AccessDetail"]]:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -504,7 +512,7 @@ class CreateStudy:
                 return access_details_type_0
             except:  # noqa: E722
                 pass
-            return cast(Union[List["AccessDetail"], None, Unset], data)
+            return cast(Union[None, Unset, list["AccessDetail"]], data)
 
         access_details = _parse_access_details(d.pop("access_details", UNSET))
 
@@ -521,6 +529,7 @@ class CreateStudy:
             reward=reward,
             device_compatibility=device_compatibility,
             peripheral_requirements=peripheral_requirements,
+            is_custom_screening=is_custom_screening,
             filters=filters,
             filter_set_id=filter_set_id,
             filter_set_version=filter_set_version,
@@ -538,7 +547,7 @@ class CreateStudy:
         return create_study
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

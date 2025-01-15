@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -27,8 +27,8 @@ class Workspace:
         title (str): Name of workspace
         description (Union[Unset, str]): What is this workspace used for
         owner (Union[Unset, str]): Workspace id. It is created by Prolific.
-        users (Union[Unset, List['WorkspaceUser']]): Data for a user related to a workspace
-        projects (Union[Unset, List['ProjectShort']]): Data for a project related to a workspace
+        users (Union[Unset, list['WorkspaceUser']]): Data for a user related to a workspace
+        projects (Union[Unset, list['ProjectShort']]): Data for a project related to a workspace
         wallet (Union[Unset, str]): Wallet tied to workspace
         naivety_distribution_rate (Union[None, Unset, float]): The rate at which the studies within this workspace are
             distributed.
@@ -38,13 +38,13 @@ class Workspace:
     title: str
     description: Union[Unset, str] = UNSET
     owner: Union[Unset, str] = UNSET
-    users: Union[Unset, List["WorkspaceUser"]] = UNSET
-    projects: Union[Unset, List["ProjectShort"]] = UNSET
+    users: Union[Unset, list["WorkspaceUser"]] = UNSET
+    projects: Union[Unset, list["ProjectShort"]] = UNSET
     wallet: Union[Unset, str] = UNSET
     naivety_distribution_rate: Union[None, Unset, float] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         title = self.title
@@ -53,14 +53,14 @@ class Workspace:
 
         owner = self.owner
 
-        users: Union[Unset, List[Dict[str, Any]]] = UNSET
+        users: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.users, Unset):
             users = []
             for users_item_data in self.users:
                 users_item = users_item_data.to_dict()
                 users.append(users_item)
 
-        projects: Union[Unset, List[Dict[str, Any]]] = UNSET
+        projects: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.projects, Unset):
             projects = []
             for projects_item_data in self.projects:
@@ -75,7 +75,7 @@ class Workspace:
         else:
             naivety_distribution_rate = self.naivety_distribution_rate
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -99,7 +99,7 @@ class Workspace:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.project_short import ProjectShort
         from ..models.workspace_user import WorkspaceUser
 
@@ -152,7 +152,7 @@ class Workspace:
         return workspace
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

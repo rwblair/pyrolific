@@ -1,4 +1,5 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,27 +16,27 @@ class QuestionResponse:
     """Responsible for defining an answer to a survey question
 
     Attributes:
-        answers (List['ResponseAnswer']): The answers selected.
-        question_id (str): The question ID.
+        answers (list['ResponseAnswer']): The answers selected.
+        question_id (UUID): The question ID.
         question_title (str): The title of the survey question.
     """
 
-    answers: List["ResponseAnswer"]
-    question_id: str
+    answers: list["ResponseAnswer"]
+    question_id: UUID
     question_title: str
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         answers = []
         for answers_item_data in self.answers:
             answers_item = answers_item_data.to_dict()
             answers.append(answers_item)
 
-        question_id = self.question_id
+        question_id = str(self.question_id)
 
         question_title = self.question_title
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -48,7 +49,7 @@ class QuestionResponse:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.response_answer import ResponseAnswer
 
         d = src_dict.copy()
@@ -59,7 +60,7 @@ class QuestionResponse:
 
             answers.append(answers_item)
 
-        question_id = d.pop("question_id")
+        question_id = UUID(d.pop("question_id"))
 
         question_title = d.pop("question_title")
 
@@ -73,7 +74,7 @@ class QuestionResponse:
         return question_response
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

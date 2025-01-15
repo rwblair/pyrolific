@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -25,7 +25,7 @@ class WorkspaceShort:
         title (str): Name of workspace
         description (Union[Unset, str]): What is this workspace used for
         owner (Union[Unset, str]): User id of the creator of the workspace. It is created by Prolific.
-        users (Union[Unset, List['WorkspaceUser']]): Data for all users who have access to this workspace
+        users (Union[Unset, list['WorkspaceUser']]): Data for all users who have access to this workspace
         naivety_distribution_rate (Union[None, Unset, float]): The rate at which the studies within this project are
             distributed.
     """
@@ -34,11 +34,11 @@ class WorkspaceShort:
     title: str
     description: Union[Unset, str] = UNSET
     owner: Union[Unset, str] = UNSET
-    users: Union[Unset, List["WorkspaceUser"]] = UNSET
+    users: Union[Unset, list["WorkspaceUser"]] = UNSET
     naivety_distribution_rate: Union[None, Unset, float] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         title = self.title
@@ -47,7 +47,7 @@ class WorkspaceShort:
 
         owner = self.owner
 
-        users: Union[Unset, List[Dict[str, Any]]] = UNSET
+        users: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.users, Unset):
             users = []
             for users_item_data in self.users:
@@ -60,7 +60,7 @@ class WorkspaceShort:
         else:
             naivety_distribution_rate = self.naivety_distribution_rate
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -80,7 +80,7 @@ class WorkspaceShort:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.workspace_user import WorkspaceUser
 
         d = src_dict.copy()
@@ -121,7 +121,7 @@ class WorkspaceShort:
         return workspace_short
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

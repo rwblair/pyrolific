@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -15,11 +15,11 @@ def _get_kwargs(
     *,
     body: BaseStudy,
     authorization: str,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "patch",
         "url": f"/api/v1/studies/{id}/",
     }
@@ -34,7 +34,7 @@ def _get_kwargs(
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Study]:
-    if response.status_code == HTTPStatus.OK:
+    if response.status_code == 200:
         response_200 = Study.from_dict(response.json())
 
         return response_200
@@ -68,7 +68,7 @@ def sync_detailed(
     - internal_name: Internal name of the study, not shown to participants
     - total_available_places: Only increasing is allowed. A completed study will become active again and
     resume recruiting of participants. For more information, check the [guide](https://researcher-
-    help.prolific.com/hc/en-gb/articles/360009222553)
+    help.prolific.com/en/article/ea1755)
     - access_details: Sending an access_detail will add a new task and increase overall study places by
     the number in the total_allocation field. Sending both access_details and total_available_places
     will increase places on existing URLs by the number specified on the access_detail.
@@ -114,7 +114,7 @@ def sync(
     - internal_name: Internal name of the study, not shown to participants
     - total_available_places: Only increasing is allowed. A completed study will become active again and
     resume recruiting of participants. For more information, check the [guide](https://researcher-
-    help.prolific.com/hc/en-gb/articles/360009222553)
+    help.prolific.com/en/article/ea1755)
     - access_details: Sending an access_detail will add a new task and increase overall study places by
     the number in the total_allocation field. Sending both access_details and total_available_places
     will increase places on existing URLs by the number specified on the access_detail.
@@ -155,7 +155,7 @@ async def asyncio_detailed(
     - internal_name: Internal name of the study, not shown to participants
     - total_available_places: Only increasing is allowed. A completed study will become active again and
     resume recruiting of participants. For more information, check the [guide](https://researcher-
-    help.prolific.com/hc/en-gb/articles/360009222553)
+    help.prolific.com/en/article/ea1755)
     - access_details: Sending an access_detail will add a new task and increase overall study places by
     the number in the total_allocation field. Sending both access_details and total_available_places
     will increase places on existing URLs by the number specified on the access_detail.
@@ -199,7 +199,7 @@ async def asyncio(
     - internal_name: Internal name of the study, not shown to participants
     - total_available_places: Only increasing is allowed. A completed study will become active again and
     resume recruiting of participants. For more information, check the [guide](https://researcher-
-    help.prolific.com/hc/en-gb/articles/360009222553)
+    help.prolific.com/en/article/ea1755)
     - access_details: Sending an access_detail will add a new task and increase overall study places by
     the number in the total_allocation field. Sending both access_details and total_available_places
     will increase places on existing URLs by the number specified on the access_detail.

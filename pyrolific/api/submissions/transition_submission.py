@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -15,11 +15,11 @@ def _get_kwargs(
     *,
     body: SubmissionTransition,
     authorization: str,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "post",
         "url": f"/api/v1/submissions/{id}/transition/",
     }
@@ -34,7 +34,7 @@ def _get_kwargs(
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Submission]:
-    if response.status_code == HTTPStatus.OK:
+    if response.status_code == 200:
         response_200 = Submission.from_dict(response.json())
 
         return response_200
@@ -62,8 +62,8 @@ def sync_detailed(
 ) -> Response[Submission]:
     """Approve or reject a submission
 
-     Transition a submission to `APPROVED`, `REJECTED` or `AWAITING_REVIEW`. Once the status is changed,
-    it can not be restored to its previous value.
+     Transition a submission to `APPROVED`, `REJECTED`, `PARTIALLY APPROVED` or `AWAITING_REVIEW`. Once
+    the status is changed, it can not be restored to its previous value.
 
     Note this endpoint is idempotent, so if you make the same request twice, the second request will be
     ignored.
@@ -103,8 +103,8 @@ def sync(
 ) -> Optional[Submission]:
     """Approve or reject a submission
 
-     Transition a submission to `APPROVED`, `REJECTED` or `AWAITING_REVIEW`. Once the status is changed,
-    it can not be restored to its previous value.
+     Transition a submission to `APPROVED`, `REJECTED`, `PARTIALLY APPROVED` or `AWAITING_REVIEW`. Once
+    the status is changed, it can not be restored to its previous value.
 
     Note this endpoint is idempotent, so if you make the same request twice, the second request will be
     ignored.
@@ -139,8 +139,8 @@ async def asyncio_detailed(
 ) -> Response[Submission]:
     """Approve or reject a submission
 
-     Transition a submission to `APPROVED`, `REJECTED` or `AWAITING_REVIEW`. Once the status is changed,
-    it can not be restored to its previous value.
+     Transition a submission to `APPROVED`, `REJECTED`, `PARTIALLY APPROVED` or `AWAITING_REVIEW`. Once
+    the status is changed, it can not be restored to its previous value.
 
     Note this endpoint is idempotent, so if you make the same request twice, the second request will be
     ignored.
@@ -178,8 +178,8 @@ async def asyncio(
 ) -> Optional[Submission]:
     """Approve or reject a submission
 
-     Transition a submission to `APPROVED`, `REJECTED` or `AWAITING_REVIEW`. Once the status is changed,
-    it can not be restored to its previous value.
+     Transition a submission to `APPROVED`, `REJECTED`, `PARTIALLY APPROVED` or `AWAITING_REVIEW`. Once
+    the status is changed, it can not be restored to its previous value.
 
     Note this endpoint is idempotent, so if you make the same request twice, the second request will be
     ignored.

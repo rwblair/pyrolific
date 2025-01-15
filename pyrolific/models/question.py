@@ -1,4 +1,5 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,9 +19,9 @@ class Question:
     """Responsible for defining a question within a survey.
 
     Attributes:
-        answers (List['AnswerOption']): An array of answer options for a question.
+        answers (list['AnswerOption']): An array of answer options for a question.
         title (str): The question title. Example: What is your favourite root vegetable?.
-        type (QuestionType): Responsible for articulating the question type. At the moment we have:
+        type_ (QuestionType): Responsible for articulating the question type. At the moment we have:
 
             - single answer
             - multiple answer
@@ -28,16 +29,16 @@ class Question:
             Args:
                 str (_type_): The type of question.
                 Enum (_type_): The class to define an enum.
-        id (Union[Unset, str]):
+        id (Union[Unset, UUID]):
     """
 
-    answers: List["AnswerOption"]
+    answers: list["AnswerOption"]
     title: str
-    type: QuestionType
-    id: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    type_: QuestionType
+    id: Union[Unset, UUID] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         answers = []
         for answers_item_data in self.answers:
             answers_item = answers_item_data.to_dict()
@@ -45,17 +46,19 @@ class Question:
 
         title = self.title
 
-        type = self.type.value
+        type_ = self.type_.value
 
-        id = self.id
+        id: Union[Unset, str] = UNSET
+        if not isinstance(self.id, Unset):
+            id = str(self.id)
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
                 "answers": answers,
                 "title": title,
-                "type": type,
+                "type": type_,
             }
         )
         if id is not UNSET:
@@ -64,7 +67,7 @@ class Question:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.answer_option import AnswerOption
 
         d = src_dict.copy()
@@ -77,14 +80,19 @@ class Question:
 
         title = d.pop("title")
 
-        type = QuestionType(d.pop("type"))
+        type_ = QuestionType(d.pop("type"))
 
-        id = d.pop("id", UNSET)
+        _id = d.pop("id", UNSET)
+        id: Union[Unset, UUID]
+        if isinstance(_id, Unset):
+            id = UNSET
+        else:
+            id = UUID(_id)
 
         question = cls(
             answers=answers,
             title=title,
-            type=type,
+            type_=type_,
             id=id,
         )
 
@@ -92,7 +100,7 @@ class Question:
         return question
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

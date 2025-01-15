@@ -1,12 +1,11 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.get_participant_groups_active import GetParticipantGroupsActive
-from ...models.participant_group_list_response import ParticipantGroupListResponse
 from ...models.project_id import ProjectID
 from ...models.workspace_id import WorkspaceID
 from ...types import UNSET, Response, Unset
@@ -16,8 +15,8 @@ def _get_kwargs(
     *,
     active: Union[Unset, GetParticipantGroupsActive] = UNSET,
     filter_: Union["ProjectID", "WorkspaceID"],
-) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    params: dict[str, Any] = {}
 
     json_active: Union[Unset, str] = UNSET
     if not isinstance(active, Unset):
@@ -25,7 +24,7 @@ def _get_kwargs(
 
     params["active"] = json_active
 
-    json_filter_: Dict[str, Any]
+    json_filter_: dict[str, Any]
     if isinstance(filter_, WorkspaceID):
         json_filter_ = filter_.to_dict()
     else:
@@ -35,7 +34,7 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
         "url": "/api/v1/participant-groups/",
         "params": params,
@@ -44,22 +43,14 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[ParticipantGroupListResponse]:
-    if response.status_code == HTTPStatus.OK:
-        response_200 = ParticipantGroupListResponse.from_dict(response.json())
-
-        return response_200
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[ParticipantGroupListResponse]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -73,7 +64,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     active: Union[Unset, GetParticipantGroupsActive] = UNSET,
     filter_: Union["ProjectID", "WorkspaceID"],
-) -> Response[ParticipantGroupListResponse]:
+) -> Response[Any]:
     """Get a list of all participant groups within a project or workspace
 
     Args:
@@ -85,7 +76,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[ParticipantGroupListResponse]
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -100,39 +91,12 @@ def sync_detailed(
     return _build_response(client=client, response=response)
 
 
-def sync(
-    *,
-    client: AuthenticatedClient,
-    active: Union[Unset, GetParticipantGroupsActive] = UNSET,
-    filter_: Union["ProjectID", "WorkspaceID"],
-) -> Optional[ParticipantGroupListResponse]:
-    """Get a list of all participant groups within a project or workspace
-
-    Args:
-        active (Union[Unset, GetParticipantGroupsActive]):
-        filter_ (Union['ProjectID', 'WorkspaceID']):
-
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
-
-    Returns:
-        ParticipantGroupListResponse
-    """
-
-    return sync_detailed(
-        client=client,
-        active=active,
-        filter_=filter_,
-    ).parsed
-
-
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     active: Union[Unset, GetParticipantGroupsActive] = UNSET,
     filter_: Union["ProjectID", "WorkspaceID"],
-) -> Response[ParticipantGroupListResponse]:
+) -> Response[Any]:
     """Get a list of all participant groups within a project or workspace
 
     Args:
@@ -144,7 +108,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[ParticipantGroupListResponse]
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -155,32 +119,3 @@ async def asyncio_detailed(
     response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
-
-
-async def asyncio(
-    *,
-    client: AuthenticatedClient,
-    active: Union[Unset, GetParticipantGroupsActive] = UNSET,
-    filter_: Union["ProjectID", "WorkspaceID"],
-) -> Optional[ParticipantGroupListResponse]:
-    """Get a list of all participant groups within a project or workspace
-
-    Args:
-        active (Union[Unset, GetParticipantGroupsActive]):
-        filter_ (Union['ProjectID', 'WorkspaceID']):
-
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
-
-    Returns:
-        ParticipantGroupListResponse
-    """
-
-    return (
-        await asyncio_detailed(
-            client=client,
-            active=active,
-            filter_=filter_,
-        )
-    ).parsed

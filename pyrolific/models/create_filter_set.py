@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -24,17 +24,17 @@ class CreateFilterSet:
         workspace_id (Union[Unset, str]): ID of the workspace where the filter set can be used.
         organisation_id (Union[Unset, str]): ID of the organisation where the filter set can be used.
         name (Union[Unset, str]): Name of the filter set.
-        filters (Union[Unset, List[Union['RangeFilter', 'SelectFilter']]]): List of all filters contained in the filter
+        filters (Union[Unset, list[Union['RangeFilter', 'SelectFilter']]]): List of all filters contained in the filter
             set.
     """
 
     workspace_id: Union[Unset, str] = UNSET
     organisation_id: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
-    filters: Union[Unset, List[Union["RangeFilter", "SelectFilter"]]] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    filters: Union[Unset, list[Union["RangeFilter", "SelectFilter"]]] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         from ..models.select_filter import SelectFilter
 
         workspace_id = self.workspace_id
@@ -43,11 +43,11 @@ class CreateFilterSet:
 
         name = self.name
 
-        filters: Union[Unset, List[Dict[str, Any]]] = UNSET
+        filters: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.filters, Unset):
             filters = []
             for filters_item_data in self.filters:
-                filters_item: Dict[str, Any]
+                filters_item: dict[str, Any]
                 if isinstance(filters_item_data, SelectFilter):
                     filters_item = filters_item_data.to_dict()
                 else:
@@ -55,7 +55,7 @@ class CreateFilterSet:
 
                 filters.append(filters_item)
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if workspace_id is not UNSET:
@@ -70,7 +70,7 @@ class CreateFilterSet:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.range_filter import RangeFilter
         from ..models.select_filter import SelectFilter
 
@@ -115,7 +115,7 @@ class CreateFilterSet:
         return create_filter_set
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

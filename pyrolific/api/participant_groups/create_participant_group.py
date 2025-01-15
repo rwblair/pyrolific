@@ -1,22 +1,21 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.create_participant_group_body import CreateParticipantGroupBody
-from ...models.participant_group import ParticipantGroup
 from ...types import Response
 
 
 def _get_kwargs(
     *,
     body: CreateParticipantGroupBody,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "post",
         "url": "/api/v1/participant-groups/",
     }
@@ -30,22 +29,14 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[ParticipantGroup]:
-    if response.status_code == HTTPStatus.CREATED:
-        response_201 = ParticipantGroup.from_dict(response.json())
-
-        return response_201
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[ParticipantGroup]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -58,7 +49,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateParticipantGroupBody,
-) -> Response[ParticipantGroup]:
+) -> Response[Any]:
     """Create a new participant group within a workspace
 
     Args:
@@ -69,7 +60,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[ParticipantGroup]
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -83,35 +74,11 @@ def sync_detailed(
     return _build_response(client=client, response=response)
 
 
-def sync(
-    *,
-    client: AuthenticatedClient,
-    body: CreateParticipantGroupBody,
-) -> Optional[ParticipantGroup]:
-    """Create a new participant group within a workspace
-
-    Args:
-        body (CreateParticipantGroupBody):
-
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
-
-    Returns:
-        ParticipantGroup
-    """
-
-    return sync_detailed(
-        client=client,
-        body=body,
-    ).parsed
-
-
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateParticipantGroupBody,
-) -> Response[ParticipantGroup]:
+) -> Response[Any]:
     """Create a new participant group within a workspace
 
     Args:
@@ -122,7 +89,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[ParticipantGroup]
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -132,29 +99,3 @@ async def asyncio_detailed(
     response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
-
-
-async def asyncio(
-    *,
-    client: AuthenticatedClient,
-    body: CreateParticipantGroupBody,
-) -> Optional[ParticipantGroup]:
-    """Create a new participant group within a workspace
-
-    Args:
-        body (CreateParticipantGroupBody):
-
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
-
-    Returns:
-        ParticipantGroup
-    """
-
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed

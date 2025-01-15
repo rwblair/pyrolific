@@ -1,15 +1,15 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-T = TypeVar("T", bound="StudyPredictedRecruitmentTime")
+T = TypeVar("T", bound="StudyPredictedRecruitmentTimeResponse")
 
 
 @_attrs_define
-class StudyPredictedRecruitmentTime:
+class StudyPredictedRecruitmentTimeResponse:
     """
     Attributes:
         precise_recruitment_time_hours (Union[Unset, float]): The predicted recruitment time in hours Example: 2.13.
@@ -30,9 +30,9 @@ class StudyPredictedRecruitmentTime:
     upper_bound_hours: Union[Unset, float] = UNSET
     display_string: Union[Unset, str] = UNSET
     limit_at: Union[Unset, float] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         precise_recruitment_time_hours = self.precise_recruitment_time_hours
 
         lower_bound_hours = self.lower_bound_hours
@@ -43,7 +43,7 @@ class StudyPredictedRecruitmentTime:
 
         limit_at = self.limit_at
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if precise_recruitment_time_hours is not UNSET:
@@ -60,7 +60,7 @@ class StudyPredictedRecruitmentTime:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         precise_recruitment_time_hours = d.pop("precise_recruitment_time_hours", UNSET)
 
@@ -72,7 +72,7 @@ class StudyPredictedRecruitmentTime:
 
         limit_at = d.pop("limit_at", UNSET)
 
-        study_predicted_recruitment_time = cls(
+        study_predicted_recruitment_time_response = cls(
             precise_recruitment_time_hours=precise_recruitment_time_hours,
             lower_bound_hours=lower_bound_hours,
             upper_bound_hours=upper_bound_hours,
@@ -80,11 +80,11 @@ class StudyPredictedRecruitmentTime:
             limit_at=limit_at,
         )
 
-        study_predicted_recruitment_time.additional_properties = d
-        return study_predicted_recruitment_time
+        study_predicted_recruitment_time_response.additional_properties = d
+        return study_predicted_recruitment_time_response
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

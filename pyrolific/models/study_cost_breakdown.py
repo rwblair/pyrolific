@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -24,22 +24,22 @@ class StudyCostBreakdown:
     rewards: Union[Unset, "AmountAndCurrency"] = UNSET
     fees: Union[Unset, "AmountAndCurrency"] = UNSET
     tax: Union[Unset, "AmountAndCurrency"] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
-        rewards: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        rewards: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.rewards, Unset):
             rewards = self.rewards.to_dict()
 
-        fees: Union[Unset, Dict[str, Any]] = UNSET
+        fees: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.fees, Unset):
             fees = self.fees.to_dict()
 
-        tax: Union[Unset, Dict[str, Any]] = UNSET
+        tax: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.tax, Unset):
             tax = self.tax.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if rewards is not UNSET:
@@ -52,7 +52,7 @@ class StudyCostBreakdown:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.amount_and_currency import AmountAndCurrency
 
         d = src_dict.copy()
@@ -87,7 +87,7 @@ class StudyCostBreakdown:
         return study_cost_breakdown
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

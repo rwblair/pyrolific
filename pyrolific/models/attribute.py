@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,8 +17,8 @@ T = TypeVar("T", bound="Attribute")
 class Attribute:
     """
     Attributes:
-        value (Union['AttributeValueType0Type0', List[Union['AttributeValueType1Type0ItemType1', str]], None, bool,
-            float, str]): Attribute value. It can be null, a number, a date or a boolean depending on the type of
+        value (Union['AttributeValueType0Type0', None, bool, float, list[Union['AttributeValueType1Type0ItemType1',
+            str]], str]): Attribute value. It can be null, a number, a date or a boolean depending on the type of
             requirement.
             For boolean values, there is no need to specify all false (non selected) options. Example: true.
         index (Union[Unset, float]): Attribute index. It is mandatory for some type of requirements,
@@ -28,23 +28,23 @@ class Attribute:
     """
 
     value: Union[
-        "AttributeValueType0Type0", List[Union["AttributeValueType1Type0ItemType1", str]], None, bool, float, str
+        "AttributeValueType0Type0", None, bool, float, list[Union["AttributeValueType1Type0ItemType1", str]], str
     ]
     index: Union[Unset, float] = UNSET
     name: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         from ..models.attribute_value_type_0_type_0 import AttributeValueType0Type0
         from ..models.attribute_value_type_1_type_0_item_type_1 import AttributeValueType1Type0ItemType1
 
-        value: Union[Dict[str, Any], List[Union[Dict[str, Any], str]], None, bool, float, str]
+        value: Union[None, bool, dict[str, Any], float, list[Union[dict[str, Any], str]], str]
         if isinstance(self.value, AttributeValueType0Type0):
             value = self.value.to_dict()
         elif isinstance(self.value, list):
             value = []
             for value_type_1_type_0_item_data in self.value:
-                value_type_1_type_0_item: Union[Dict[str, Any], str]
+                value_type_1_type_0_item: Union[dict[str, Any], str]
                 if isinstance(value_type_1_type_0_item_data, AttributeValueType1Type0ItemType1):
                     value_type_1_type_0_item = value_type_1_type_0_item_data.to_dict()
                 else:
@@ -58,7 +58,7 @@ class Attribute:
 
         name = self.name
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -73,7 +73,7 @@ class Attribute:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.attribute_value_type_0_type_0 import AttributeValueType0Type0
         from ..models.attribute_value_type_1_type_0_item_type_1 import AttributeValueType1Type0ItemType1
 
@@ -82,7 +82,7 @@ class Attribute:
         def _parse_value(
             data: object,
         ) -> Union[
-            "AttributeValueType0Type0", List[Union["AttributeValueType1Type0ItemType1", str]], None, bool, float, str
+            "AttributeValueType0Type0", None, bool, float, list[Union["AttributeValueType1Type0ItemType1", str]], str
         ]:
             if data is None:
                 return data
@@ -124,10 +124,10 @@ class Attribute:
             return cast(
                 Union[
                     "AttributeValueType0Type0",
-                    List[Union["AttributeValueType1Type0ItemType1", str]],
                     None,
                     bool,
                     float,
+                    list[Union["AttributeValueType1Type0ItemType1", str]],
                     str,
                 ],
                 data,
@@ -149,7 +149,7 @@ class Attribute:
         return attribute
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

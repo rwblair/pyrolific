@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,31 +17,31 @@ class FilterListAttributes:
             filter was created.
         title (Union[Unset, str]): The title of the filter.
         description (Union[Unset, str]): A description of the filter.
-        type (Union[Unset, FilterListAttributesType]): The filter type.
+        type_ (Union[Unset, FilterListAttributesType]): The filter type.
         question (Union[Unset, str]): The question asked of participants to generate this filter.
     """
 
     filter_id: Union[Unset, str] = UNSET
     title: Union[Unset, str] = UNSET
     description: Union[Unset, str] = UNSET
-    type: Union[Unset, FilterListAttributesType] = UNSET
+    type_: Union[Unset, FilterListAttributesType] = UNSET
     question: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         filter_id = self.filter_id
 
         title = self.title
 
         description = self.description
 
-        type: Union[Unset, str] = UNSET
-        if not isinstance(self.type, Unset):
-            type = self.type.value
+        type_: Union[Unset, str] = UNSET
+        if not isinstance(self.type_, Unset):
+            type_ = self.type_.value
 
         question = self.question
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if filter_id is not UNSET:
@@ -50,15 +50,15 @@ class FilterListAttributes:
             field_dict["title"] = title
         if description is not UNSET:
             field_dict["description"] = description
-        if type is not UNSET:
-            field_dict["type"] = type
+        if type_ is not UNSET:
+            field_dict["type"] = type_
         if question is not UNSET:
             field_dict["question"] = question
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         filter_id = d.pop("filter_id", UNSET)
 
@@ -66,12 +66,12 @@ class FilterListAttributes:
 
         description = d.pop("description", UNSET)
 
-        _type = d.pop("type", UNSET)
-        type: Union[Unset, FilterListAttributesType]
-        if isinstance(_type, Unset):
-            type = UNSET
+        _type_ = d.pop("type", UNSET)
+        type_: Union[Unset, FilterListAttributesType]
+        if isinstance(_type_, Unset):
+            type_ = UNSET
         else:
-            type = FilterListAttributesType(_type)
+            type_ = FilterListAttributesType(_type_)
 
         question = d.pop("question", UNSET)
 
@@ -79,7 +79,7 @@ class FilterListAttributes:
             filter_id=filter_id,
             title=title,
             description=description,
-            type=type,
+            type_=type_,
             question=question,
         )
 
@@ -87,7 +87,7 @@ class FilterListAttributes:
         return filter_list_attributes
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

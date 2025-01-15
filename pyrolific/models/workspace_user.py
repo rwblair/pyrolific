@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,27 +15,27 @@ class WorkspaceUser:
         id (str): Id of user
         name (Union[Unset, str]): Name of user
         email (Union[Unset, str]): email of user
-        roles (Union[Unset, List[str]]): User roles in workspace
+        roles (Union[Unset, list[str]]): User roles in workspace
     """
 
     id: str
     name: Union[Unset, str] = UNSET
     email: Union[Unset, str] = UNSET
-    roles: Union[Unset, List[str]] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    roles: Union[Unset, list[str]] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         name = self.name
 
         email = self.email
 
-        roles: Union[Unset, List[str]] = UNSET
+        roles: Union[Unset, list[str]] = UNSET
         if not isinstance(self.roles, Unset):
             roles = self.roles
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -52,7 +52,7 @@ class WorkspaceUser:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         id = d.pop("id")
 
@@ -60,7 +60,7 @@ class WorkspaceUser:
 
         email = d.pop("email", UNSET)
 
-        roles = cast(List[str], d.pop("roles", UNSET))
+        roles = cast(list[str], d.pop("roles", UNSET))
 
         workspace_user = cls(
             id=id,
@@ -73,7 +73,7 @@ class WorkspaceUser:
         return workspace_user
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

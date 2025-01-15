@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -12,11 +12,11 @@ def _get_kwargs(
     id: str,
     *,
     authorization: str,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
     headers["Authorization"] = authorization
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "post",
         "url": f"/api/v1/bulk-bonus-payments/{id}/pay/",
     }
@@ -26,7 +26,7 @@ def _get_kwargs(
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[str]:
-    if response.status_code == HTTPStatus.ACCEPTED:
+    if response.status_code == 202:
         response_202 = cast(str, response.json())
         return response_202
     if client.raise_on_unexpected_status:

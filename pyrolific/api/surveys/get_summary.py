@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -11,8 +11,8 @@ from ...types import Response
 
 def _get_kwargs(
     survey_id: str,
-) -> Dict[str, Any]:
-    _kwargs: Dict[str, Any] = {
+) -> dict[str, Any]:
+    _kwargs: dict[str, Any] = {
         "method": "get",
         "url": f"/api/v1/surveys/{survey_id}/responses/summary/",
     }
@@ -21,7 +21,7 @@ def _get_kwargs(
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Summary]:
-    if response.status_code == HTTPStatus.OK:
+    if response.status_code == 200:
         response_200 = Summary.from_dict(response.json())
 
         return response_200

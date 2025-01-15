@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -45,24 +45,24 @@ class WorkspaceBalance:
     balance_breakdown: Union[Unset, "WorkspaceBalanceBalanceBreakdown"] = UNSET
     available_balance: Union[Unset, int] = UNSET
     available_balance_breakdown: Union[Unset, "WorkspaceBalanceAvailableBalanceBreakdown"] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         currency_code = self.currency_code
 
         total_balance = self.total_balance
 
-        balance_breakdown: Union[Unset, Dict[str, Any]] = UNSET
+        balance_breakdown: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.balance_breakdown, Unset):
             balance_breakdown = self.balance_breakdown.to_dict()
 
         available_balance = self.available_balance
 
-        available_balance_breakdown: Union[Unset, Dict[str, Any]] = UNSET
+        available_balance_breakdown: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.available_balance_breakdown, Unset):
             available_balance_breakdown = self.available_balance_breakdown.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if currency_code is not UNSET:
@@ -79,7 +79,7 @@ class WorkspaceBalance:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.workspace_balance_available_balance_breakdown import WorkspaceBalanceAvailableBalanceBreakdown
         from ..models.workspace_balance_balance_breakdown import WorkspaceBalanceBalanceBreakdown
 
@@ -118,7 +118,7 @@ class WorkspaceBalance:
         return workspace_balance
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

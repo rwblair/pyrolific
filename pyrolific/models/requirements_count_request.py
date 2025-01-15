@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,7 +17,7 @@ T = TypeVar("T", bound="RequirementsCountRequest")
 class RequirementsCountRequest:
     """
     Attributes:
-        filters (List[Union['RangeFilter', 'SelectFilter']]): List of filters to apply to the count. This parameter uses
+        filters (list[Union['RangeFilter', 'SelectFilter']]): List of filters to apply to the count. This parameter uses
             the new, simplified
             filters schema for interacting with eligibility.
         workspace_id (Union[Unset, str]): The ID of the workspace you will be creating a study in.
@@ -30,17 +30,17 @@ class RequirementsCountRequest:
         organisation_id (Union[Unset, str]): The ID of the workspace you will be creating a filterset in.
     """
 
-    filters: List[Union["RangeFilter", "SelectFilter"]]
+    filters: list[Union["RangeFilter", "SelectFilter"]]
     workspace_id: Union[Unset, str] = UNSET
     organisation_id: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         from ..models.select_filter import SelectFilter
 
         filters = []
         for filters_item_data in self.filters:
-            filters_item: Dict[str, Any]
+            filters_item: dict[str, Any]
             if isinstance(filters_item_data, SelectFilter):
                 filters_item = filters_item_data.to_dict()
             else:
@@ -52,7 +52,7 @@ class RequirementsCountRequest:
 
         organisation_id = self.organisation_id
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -67,7 +67,7 @@ class RequirementsCountRequest:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.range_filter import RangeFilter
         from ..models.select_filter import SelectFilter
 
@@ -109,7 +109,7 @@ class RequirementsCountRequest:
         return requirements_count_request
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

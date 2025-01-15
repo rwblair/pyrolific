@@ -8,7 +8,6 @@ class StudyShortStatus(str, Enum):
     PAUSED = "PAUSED"
     SCHEDULED = "SCHEDULED"
     UNPUBLISHED = "UNPUBLISHED"
-    PUBLISHING = "PUBLISHING"
 
     def __str__(self) -> str:
         return str(self.value)

@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,17 +18,17 @@ class Requirement:
     """
     Attributes:
         field_cls (str): Type of requirement Example: SelectAnswerEligibilityRequirement.
-        attributes (List['Attribute']): Attributes defining the requirement. Its values will depend
+        attributes (list['Attribute']): Attributes defining the requirement. Its values will depend
             on the type of requirement
         query (Union[Unset, RequirementQuery]):
     """
 
     field_cls: str
-    attributes: List["Attribute"]
+    attributes: list["Attribute"]
     query: Union[Unset, "RequirementQuery"] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         field_cls = self.field_cls
 
         attributes = []
@@ -36,11 +36,11 @@ class Requirement:
             attributes_item = attributes_item_data.to_dict()
             attributes.append(attributes_item)
 
-        query: Union[Unset, Dict[str, Any]] = UNSET
+        query: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.query, Unset):
             query = self.query.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -54,7 +54,7 @@ class Requirement:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.attribute import Attribute
         from ..models.requirement_query import RequirementQuery
 
@@ -85,7 +85,7 @@ class Requirement:
         return requirement
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

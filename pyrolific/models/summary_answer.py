@@ -1,4 +1,5 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, TypeVar, Union
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,23 +15,25 @@ class SummaryAnswer:
 
     Attributes:
         answer (str): The answer selected.
-        answer_id (Union[Unset, str]): The answer ID.
+        answer_id (Union[Unset, UUID]): The answer ID.
         count (Union[Unset, int]): The count of how many times this answer was used in a response. Default: 0.
     """
 
     answer: str
-    answer_id: Union[Unset, str] = UNSET
+    answer_id: Union[Unset, UUID] = UNSET
     count: Union[Unset, int] = 0
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         answer = self.answer
 
-        answer_id = self.answer_id
+        answer_id: Union[Unset, str] = UNSET
+        if not isinstance(self.answer_id, Unset):
+            answer_id = str(self.answer_id)
 
         count = self.count
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -45,11 +48,16 @@ class SummaryAnswer:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         answer = d.pop("answer")
 
-        answer_id = d.pop("answer_id", UNSET)
+        _answer_id = d.pop("answer_id", UNSET)
+        answer_id: Union[Unset, UUID]
+        if isinstance(_answer_id, Unset):
+            answer_id = UNSET
+        else:
+            answer_id = UUID(_answer_id)
 
         count = d.pop("count", UNSET)
 
@@ -63,7 +71,7 @@ class SummaryAnswer:
         return summary_answer
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -1,5 +1,5 @@
 import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,17 +18,17 @@ class ReturnRequestedResponse:
         id (Union[Unset, str]): the database id of the submission instance
         status (Union[Unset, ReturnRequestedResponseStatus]): The current status of the submission
         participant (Union[Unset, str]): The participant who took part in the study.
-        return_requested (Union[None, Unset, datetime.datetime]): The date and time when a request was made to return a
-            submission.
+        return_requested (Union[None, Unset, datetime.datetime]): The date and time when a return request for the
+            submission was made.
     """
 
     id: Union[Unset, str] = UNSET
     status: Union[Unset, ReturnRequestedResponseStatus] = UNSET
     participant: Union[Unset, str] = UNSET
     return_requested: Union[None, Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         status: Union[Unset, str] = UNSET
@@ -45,7 +45,7 @@ class ReturnRequestedResponse:
         else:
             return_requested = self.return_requested
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if id is not UNSET:
@@ -60,7 +60,7 @@ class ReturnRequestedResponse:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         id = d.pop("id", UNSET)
 
@@ -101,7 +101,7 @@ class ReturnRequestedResponse:
         return return_requested_response
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

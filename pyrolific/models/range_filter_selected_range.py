@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -30,9 +30,9 @@ class RangeFilterSelectedRange:
 
     lower: Union[Unset, int, str] = UNSET
     upper: Union[Unset, int, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         lower: Union[Unset, int, str]
         if isinstance(self.lower, Unset):
             lower = UNSET
@@ -45,7 +45,7 @@ class RangeFilterSelectedRange:
         else:
             upper = self.upper
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if lower is not UNSET:
@@ -56,7 +56,7 @@ class RangeFilterSelectedRange:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
 
         def _parse_lower(data: object) -> Union[Unset, int, str]:
@@ -82,7 +82,7 @@ class RangeFilterSelectedRange:
         return range_filter_selected_range
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:
